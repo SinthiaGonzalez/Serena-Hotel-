@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
-import keanu from "../../public/keanu.jpg";
+import keanu from "../../../public/keanu.jpg";
 import {
   Navbar,
   MobileNav,
@@ -233,7 +234,7 @@ const NavBarHome = () => {
   }, []);
 
   return (
-    <Navbar className="bg-[#1D2828] opacity-85 mx-auto rounded-xs max-w-screen-3xl p-7 lg:pl-10 border-0">
+    <Navbar className="bg-verde opacity-85 mx-auto rounded-xs max-w-screen-3xl p-7 lg:pl-10 border-0">
       <div className="relative mx-auto flex items-center justify-between text-blanco">
         <Typography
           as="a"
@@ -254,9 +255,9 @@ const NavBarHome = () => {
         >
           <Bars2Icon className="h-6 w-6" />
         </IconButton>
-        <Button size="sm" variant="text">
+        {/* <Button size="sm" variant="text">
           <span className="text-blanco">INICIAR SESIÒN</span>
-        </Button>
+        </Button> */}
 
         <ProfileMenu />
       </div>
