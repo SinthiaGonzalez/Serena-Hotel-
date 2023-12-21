@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import keanu from "../../public/keanu.jpg";
+import keanu from "../../../public/keanu.jpg";
 import {
   Navbar,
   MobileNav,

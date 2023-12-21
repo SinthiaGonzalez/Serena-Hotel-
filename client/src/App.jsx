@@ -1,10 +1,13 @@
 import "./App.css";
-import NavBarHome from "./Componentes/NavBarHome.jsx";
+import LandingPage from "./Componentes/LandingPage/LandingPage.jsx";
+import { Route, Routes } from "react-router-dom";
 
 const App = () => {
   return (
     <>
-      <NavBarHome />
+      <Route>
+        <Routes path="/" element={<LandingPage />} />
+      </Route>
     </>
   );
 };
