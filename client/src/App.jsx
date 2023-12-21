@@ -5,9 +5,9 @@ import { Route, Routes } from "react-router-dom";
 const App = () => {
   return (
     <>
-      <Route>
-        <Routes path="/" element={<LandingPage />} />
-      </Route>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+      </Routes>
     </>
   );
 };
