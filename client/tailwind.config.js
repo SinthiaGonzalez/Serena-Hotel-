@@ -1,12 +1,18 @@
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+// eslint-disable-next-line no-undef
+const withMT = require("@material-tailwind/react/utils/withMT");
+// eslint-disable-next-line no-undef
+module.exports = withMT({
+  content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        naranja: "#FF3D00",
+        blanco: "#FFFFFF",
+        negro: "#000000",
+        verde: "#1D2828",
+        gris: "#3E4747",
+      },
+    },
   },
   plugins: [],
-}
-
+});

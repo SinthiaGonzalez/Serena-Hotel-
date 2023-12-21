@@ -1,11 +1,12 @@
 import "./App.css";
+import NavBarHome from "./Componentes/NavBarHome.jsx";
 
-function App() {
+const App = () => {
   return (
-    <div>
-      <h1 className="text-red-500">Grupo 8 henrry </h1>
-    </div>
+    <>
+      <NavBarHome />
+    </>
   );
-}
+};
 
 export default App;
