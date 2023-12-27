@@ -4,20 +4,20 @@ import { Link } from "react-router-dom";
 
 const SITEMAP = [
   {
-    title: "Serena Hotel",
+    titulo: "Serena Hotel",
     links: [
       "Inicio", "Experiecias", "Servicios", "Comentarios", "Galería de Fotos",
     ],
   },
   {
-    title: "Explora",
+    titulo: "Explora",
     links: ["Acerca de Serena", "Habitaciones", "Contactenos"],
   },
   {
-    title: "Contacto",
+    titulo: "Contacto",
     links: [
       {
-        type: "icon",
+        tipo: "icon",
         info: [
           "Perito Moreno 2014, San Martin de Los Andes, Argentina ", "+ 54 9 11 1018-1222", "info@serenahotel.com"],
         icono: ["location_on", "call", "mail"],
@@ -25,10 +25,10 @@ const SITEMAP = [
     ],
   },
   {
-    title: "Ubicación",
+    titulo: "Ubicación",
     links: [
       {
-        type: "map",
+        tipo: "map",
         url: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3122918.3815859854!2d-71.3363202!3d-40.1484094!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x96110e784f65279f%3A0xf704891ecbb3cb94!2sSerena%20Casas%20de%20Monta%C3%B1a%20Apart%20Hotel!5e0!3m2!1ses-419!2sus!4v1703256744168!5m2!1ses-419!2sus",
       },
     ],
@@ -64,16 +64,16 @@ const currentYear = new Date().getFullYear();
 const Footer = () => {
   return (
     <footer className="relative w-full">
-      <div className="mx-auto w-full max-w-7xl px-8">
+      <div className="mx-auto w-full  px-20">
         <div className="mx-auto grid w-full grid-cols-1 gap-8 py-10 md:grid-cols-2 lg:grid-cols-4">
-          {SITEMAP.map(({ title, links }, key) => (
+          {SITEMAP.map(({ titulo, links }, key) => (
             <div key={key} className="w-full">
               <Typography
                 variant="small"
                 color="blanco"
                 className="mb-4 font-bold uppercase"
               >
-                {title}
+                {titulo}
               </Typography>
 
               <ul className="space-y-1">
@@ -86,7 +86,7 @@ const Footer = () => {
                     className="font-normal"
                   >
 
-                    {link.type === "icon" &&
+                    {link.tipo === "icon" &&
                     link.icono.length === link.info.length ? (
                       <>
                         {link.icono.map((icon, index) => (
@@ -100,10 +100,10 @@ const Footer = () => {
                           </div>
                         ))}
                       </>
-                    ) : link.type === "map" ? (
+                    ) : link.tipo === "map" ? (
                       <iframe
                         src={link.url}
-                        title="Google Maps"
+                        titulo="Google Maps"
                         width="100%"
                         height="200"
                         style={{ border: 0 }}
@@ -114,7 +114,7 @@ const Footer = () => {
                         // En esta parte hay configurar cuando este terminado el Home, que al seleccionar una de las opciones de Serena Hotel, nos lleve a esa parte de la misma pagina.
                         // Ya quedo configurado para que cuando se seleccione una opcion de Explora, nos redireccione a la view correspondiente, asi que deberia tener el mismo nombre.
                         <Link
-                        to={title === "Explora" ? `/explora/${link.toLowerCase()}` : `#${title.toLowerCase()}`}
+                        to={titulo === "Explora" ? `/explora/${link.toLowerCase()}` : `#${titulo.toLowerCase()}`}
                         className="inline-block py-1 pr-2 transition-transform hover:scale-105"
                       >
                         {link}
