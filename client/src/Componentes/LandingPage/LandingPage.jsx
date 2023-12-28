@@ -10,8 +10,8 @@ const LandingPage = () => {
       <NavBarHome />
       {/* <Error404/> */}
       <Experiencias/>
-      <Servicios/>
       <SobreSerenaLanding/>
+      <Servicios/>
       <GaleriaDeFotos/>
       <Footer />
     </>
