@@ -4,16 +4,17 @@ import Footer from "../Footer/Footer";
 import Experiencias from "../Experiencias/Experiencias";
 import SobreSerenaLanding from "../SobreSerenaLanding/SobreSerenaLanding";
 import Servicios from "../Servicios/Servicios";
+import BarraInformacion from "../BarraInformacion/BarraInformacion";
 const LandingPage = () => {
   return (
     <>
       <NavBarHome />
-      {/* <Error404/> */}
       <Experiencias/>
       <SobreSerenaLanding/>
+      <BarraInformacion/>
       <Servicios/>
       <GaleriaDeFotos/>
-      <Footer />
+      <Footer/>
     </>
   );
 };
