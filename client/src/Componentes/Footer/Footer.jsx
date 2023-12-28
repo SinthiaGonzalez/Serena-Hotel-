@@ -5,21 +5,22 @@ import { Link } from "react-router-dom";
 const SITEMAP = [
   {
     titulo: "Serena Hotel",
-    links: [
-      "Inicio", "Experiecias", "Servicios", "Comentarios", "Galería de Fotos",
-    ],
+    links: ["Experiecias", "Servicios", "Comentarios", "Galería de Fotos"],
   },
   {
     titulo: "Explora",
-    links: ["Acerca de Serena", "Habitaciones", "Contactenos"],
+    links: [
+      {nombre:"Inicio", ruta:""},
+      {nombre:"Acerca de Serena", ruta:"acercadeserena"},
+      {nombre:"Habitaciones", ruta:"habitaciones"},
+      {nombre:"Contactenos", ruta:"contactenos"}
+    ]
   },
   {
     titulo: "Contacto",
     links: [
       {
-        tipo: "icon",
-        info: [
-          "Perito Moreno 2014, San Martin de Los Andes, Argentina ", "+ 54 9 11 1018-1222", "info@serenahotel.com"],
+        info: ["Perito Moreno 2014, SMA, Argentina ", "+ 54 9 11 1018-1222", "info@serenahotel.com"],
         icono: ["location_on", "call", "mail"],
       },
     ],
@@ -28,7 +29,6 @@ const SITEMAP = [
     titulo: "Ubicación",
     links: [
       {
-        tipo: "map",
         url: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3122918.3815859854!2d-71.3363202!3d-40.1484094!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x96110e784f65279f%3A0xf704891ecbb3cb94!2sSerena%20Casas%20de%20Monta%C3%B1a%20Apart%20Hotel!5e0!3m2!1ses-419!2sus!4v1703256744168!5m2!1ses-419!2sus",
       },
     ],
@@ -78,16 +78,35 @@ const Footer = () => {
 
               <ul className="space-y-1">
                 {links.map((link, key) => (
-                  
                   <Typography
                     key={key}
                     as="li"
                     color="blanco"
                     className="font-normal"
                   >
+                    {
+                      titulo === "Serena Hotel" ? (
+                        // En esta parte hay que configurar cuando este terminado el Home, que al seleccionar una de las opciones de Serena Hotel, nos lleve a esa parte de la misma pagina.
+                        // Ya quedo configurado para que cuando se seleccione una opción de Explora, nos redireccione a la view correspondiente, así que debería tener el mismo nombre.
+                          <Link
+                            to={`#${link.toLowerCase()}`}
+                            className="inline-block py-1 pr-2 transition-transform hover:scale-105"
+                          >
+                            {link}
+                          </Link>
+                      ) : 
 
-                    {link.tipo === "icon" &&
-                    link.icono.length === link.info.length ? (
+                      titulo === "Explora" ? (
+                        
+                          <Link
+                            to={`/${link.ruta}`}
+                            className="inline-block py-1 pr-2 transition-transform hover:scale-105"
+                          >
+                            {link.nombre}
+                          </Link>
+                      ) :
+                    
+                    titulo === "Contacto" ? (
                       <>
                         {link.icono.map((icon, index) => (
                           <div key={index} className="flex items-center">
@@ -100,26 +119,20 @@ const Footer = () => {
                           </div>
                         ))}
                       </>
-                    ) : link.tipo === "map" ? (
+                    ) : 
+                    
+                    titulo === "Ubicación" ? (
                       <iframe
                         src={link.url}
-                        titulo="Google Maps"
+                        title="Google Maps"
                         width="100%"
                         height="200"
                         style={{ border: 0 }}
                         allowFullScreen=""
                         loading="lazy"
                       ></iframe>
-                    ) : (
-                        // En esta parte hay configurar cuando este terminado el Home, que al seleccionar una de las opciones de Serena Hotel, nos lleve a esa parte de la misma pagina.
-                        // Ya quedo configurado para que cuando se seleccione una opcion de Explora, nos redireccione a la view correspondiente, asi que deberia tener el mismo nombre.
-                        <Link
-                        to={titulo === "Explora" ? `/explora/${link.toLowerCase()}` : `#${titulo.toLowerCase()}`}
-                        className="inline-block py-1 pr-2 transition-transform hover:scale-105"
-                      >
-                        {link}
-                      </Link>
-                    )}
+                    ) : null}
+                    
                   </Typography>
                 ))}
               </ul>

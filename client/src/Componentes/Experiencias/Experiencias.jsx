@@ -32,7 +32,7 @@ const Experiencias = () => {
       </div>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 ml-20 mr-20">
         {data.map(({ titulo, descripcion, imagen }, index) => (
-          <div key={index} className="mb-4 lg:ml-20 lg:mr-20">
+          <div key={index} className="mb-4 xl:ml-20 xl:mr-20">
             <img
               className="h-90 w-full max-w-full rounded-lg object-cover object-center mb-4"
               src={imagen}
