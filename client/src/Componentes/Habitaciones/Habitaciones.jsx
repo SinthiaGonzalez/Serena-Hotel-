@@ -1,7 +1,3 @@
-import NavBarHome from "../NavBarHome/NavBarHome";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { getHabitaciones } from "../../redux/actions/actions";
 import {
   Select,
   Option,
@@ -13,13 +9,24 @@ import {
   ListItemPrefix,
   Typography,
 } from "@material-tailwind/react";
+
+import NavBarHome from "../NavBarHome/NavBarHome";
+
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getHabitaciones } from "../../redux/actions/actions";
 import CardsShopHabitaciones from "../Cards/Cards";
+
 const Habitaciones = () => {
-  const habitacionesShop = useSelector((state) => state.habitaciones);
+
   const dispatch = useDispatch();
+  const habitacionesShop = useSelector((state) => state.habitaciones);
+
   useEffect(() => {
     dispatch(getHabitaciones());
   }, [dispatch]);
+
+  console.log("estoy en habitaciones");
   console.log(habitacionesShop);
   return (
     <>
