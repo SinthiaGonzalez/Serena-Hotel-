@@ -3,7 +3,7 @@ import React from "react";
 import keanu from "../../../public/keanu.jpg";
 import {
   Navbar,
-  MobileNav,
+  Collapse,
   Typography,
   Button,
   Menu,
@@ -145,8 +145,8 @@ function NavListMenu() {
       <Menu allowHover open={isMenuOpen} handler={setIsMenuOpen}>
         <MenuHandler>
           <Typography as="a" href="#" variant="small" className="font-normal">
-            <MenuItem className="hidden items-center gap-2 font-medium text-blue-gray-900 lg:flex lg:rounded-full">
-              <Square3Stack3DIcon className="h-[18px] w-[18px] text-blue-gray-500" />{" "}
+            <MenuItem className="hidden items-center gap-2 font-medium text-blanco lg:flex lg:rounded-full">
+              <Square3Stack3DIcon className="h-[18px] w-[18px] text-blanco" />{" "}
               Pages{" "}
               <ChevronDownIcon
                 strokeWidth={2}
@@ -171,9 +171,8 @@ function NavListMenu() {
           </ul>
         </MenuList>
       </Menu>
-      <MenuItem className="flex items-center gap-2 font-medium text-blue-gray-900 lg:hidden">
-        <Square3Stack3DIcon className="h-[18px] w-[18px] text-blue-gray-500" />{" "}
-        Pages{" "}
+      <MenuItem className="flex items-center gap-2 font-medium text-blanco lg:hidden">
+        <Square3Stack3DIcon className="h-[18px] w-[18px] text-blanco" /> Pages{" "}
       </MenuItem>
       <ul className="ml-6 flex w-full flex-col gap-1 lg:hidden">
         {renderItems}
@@ -187,14 +186,17 @@ const navListItems = [
   {
     label: "ACERCA DE",
     icon: UserCircleIcon,
+    href: "#",
   },
   {
     label: "HABITACIONES",
     icon: CubeTransparentIcon,
+    href: "/habitaciones",
   },
   {
     label: "CONTACTENOS",
     icon: CodeBracketSquareIcon,
+    href: "#",
   },
 ];
 
@@ -202,18 +204,18 @@ function NavList() {
   return (
     <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
       {/* <NavListMenu /> */}
-      {navListItems.map(({ label, icon }, key) => (
+      {navListItems.map(({ label, icon, href }, key) => (
         <Typography
           key={label}
           as="a"
-          href="#"
+          href={href}
           variant="small"
           color="gray"
           className="font-medium text-blanco"
         >
           <MenuItem className="flex items-center gap-2 lg:rounded-10">
             {React.createElement(icon, { className: "h-[18px] w-[18px]" })}{" "}
-            <span className="text-blanco-900"> {label}</span>
+            <span className="text-blanco"> {label}</span>
           </MenuItem>
         </Typography>
       ))}
@@ -238,7 +240,7 @@ const NavBarHome = () => {
       <div className="relative mx-auto flex items-center justify-between text-blanco">
         <Typography
           as="a"
-          href="#"
+          href="/"
           className="mr-4 ml-2 cursor-pointer py-1.5 font-medium"
         >
           SERENA HOTEL
@@ -248,7 +250,7 @@ const NavBarHome = () => {
         </div>
         <IconButton
           size="sm"
-          color="blue-gray"
+          color="white"
           variant="text"
           onClick={toggleIsNavOpen}
           className="ml-auto mr-2 lg:hidden"
@@ -261,9 +263,9 @@ const NavBarHome = () => {
 
         <ProfileMenu />
       </div>
-      <MobileNav open={isNavOpen} className="overflow-scroll">
+      <Collapse open={isNavOpen} className="overflow-scroll">
         <NavList />
-      </MobileNav>
+      </Collapse>
     </Navbar>
   );
 };

@@ -1,27 +1,24 @@
 const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
-  sequelize.define("Habitaciones", {
+  sequelize.define("Reservas", {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       allowNull: true,
       primaryKey: true,
     },
-    nombre: {
-      type: DataTypes.STRING,
+    fecha_entrada: {
+      type: DataTypes.DATE,
       allowNull: false,
     },
-    precio: {
-      type: DataTypes.INTEGER,
+    fecha_salida: {
+      type: DataTypes.DATE,
       allowNull: false,
     },
-    imagen: {
-      type: DataTypes.STRING,
+    estado: {
+      type: DataTypes.BOOLEAN,
       allowNull: false,
-    },
-    servico: {
-      type: DataTypes.JSONB,
-      defaultValue: [],
+      defaultValue: false,
     },
   });
 };

@@ -1,4 +1,4 @@
-import GaleriaDeFotos from "../GaleriaDeFotos/GaleriaDeFotos"
+import GaleriaDeFotos from "../GaleriaDeFotos/GaleriaDeFotos";
 import Footer from "../Footer/Footer";
 import Experiencias from "../Experiencias/Experiencias";
 import SobreSerenaLanding from "../SobreSerenaLanding/SobreSerenaLanding";
@@ -8,13 +8,13 @@ import Home from "../Home/Home";
 const LandingPage = () => {
   return (
     <>
-      <Home/>
-      <Experiencias/>
-      <SobreSerenaLanding/>
-      <BarraInformacion/>
-      <Servicios/>
-      <GaleriaDeFotos/>
-      <Footer/>
+      <Home />
+      <Experiencias />
+      <SobreSerenaLanding />
+      <BarraInformacion />
+      <Servicios />
+      <GaleriaDeFotos />
+      <Footer />
     </>
   );
 };
