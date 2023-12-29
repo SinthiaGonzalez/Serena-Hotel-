@@ -17,13 +17,18 @@ const CardShopHabitaciones = ({ id, nombre, precio, imagen, servicios }) => {
           </div>
 
           <div className="inline-flex flex-wrap items-center gap-3 mt-8 group">
-            <span className="material-symbols-outlined cursor-pointer rounded-full border border-verde bg-gray-900/5 p-3 text-blanco transition-colors hover:border-blanco hover:bg-gray-900/10 hover:!opacity-100 group-hover:opacity-70">
-              {servicios.map}
-            </span>
+            {servicios.map(({ icono, descripcion }) => (
+              <div>
+                <span className="material-symbols-outlined cursor-pointer rounded-full border border-verde bg-gray-900/5 p-3 text-blanco transition-colors hover:border-blanco hover:bg-gray-900/10 hover:!opacity-100 group-hover:opacity-70">
+                  {icono}
+                </span>
+                <p>{descripcion}</p>
+              </div>
+            ))}
           </div>
         </div>
         <div className="p-6 pt-3">
-          <p>`${precio}/Noche`</p>
+          <p>${precio}/Noche</p>
           <button
             className="block w-full mb-4 select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all  focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
             type="button"

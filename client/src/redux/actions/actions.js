@@ -1,14 +1,16 @@
 import axios from "axios";
-export const getHabitaciones = async () => {
-  console.log("entra");
-  try {
-    const data = await axios.get("/habitaciones");
-    console.log(data);
-    return {
-      type: "GET_HABITACIONES",
-      payload: data,
-    };
-  } catch (error) {
-    console.log(error);
-  }
-};
+
+export function getHabitaciones() {
+  console.log("estoy en actions")
+  return async function(dispatch) {
+    try {
+      const habitaciones = await axios.get('/habitaciones');
+      return dispatch({
+        type: 'GET_HABITACIONES',
+        payload: habitaciones.data
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}

@@ -6,7 +6,7 @@ const getHabitaciones = async (req, res) => {
         nombre: "Habitación Bosque Sagrado",
         precio: 159,
         servicios: [
-          { icono: "door", descripcion: "1 cuarto" },
+          { icono: "sensor_door", descripcion: "1 cuarto" },
           { icono: "person", descripcion: "2 personas" },
           { icono: "bed", descripcion: "Queen" },
           { icono: "home", descripcion: "20 m²" },
@@ -18,7 +18,7 @@ const getHabitaciones = async (req, res) => {
         nombre: "Habitación Elegancia Natural",
         precio: 159,
         servicios: [
-          { icono: "door", descripcion: "1 cuarto" },
+          { icono: "sensor_door", descripcion: "1 cuarto" },
           { icono: "person", descripcion: "2 personas" },
           { icono: "bed", descripcion: "Queen" },
           { icono: "home", descripcion: "20 m²" },
@@ -30,7 +30,7 @@ const getHabitaciones = async (req, res) => {
         nombre: "Habitación Roble Real",
         precio: 159,
         servicios: [
-          { icono: "door", descripcion: "1 cuarto" },
+          { icono: "sensor_door", descripcion: "1 cuarto" },
           { icono: "person", descripcion: "2 personas" },
           { icono: "bed", descripcion: "Queen" },
           { icono: "home", descripcion: "20 m²" },
@@ -42,7 +42,7 @@ const getHabitaciones = async (req, res) => {
         nombre: "Habitación Serenidad Verde",
         precio: 159,
         servicios: [
-          { icono: "door", descripcion: "1 cuarto" },
+          { icono: "sensor_door", descripcion: "1 cuarto" },
           { icono: "person", descripcion: "2 personas" },
           { icono: "bed", descripcion: "Queen" },
           { icono: "home", descripcion: "20 m²" },
@@ -54,7 +54,7 @@ const getHabitaciones = async (req, res) => {
         nombre: "Habitación Tranquilidad Natural",
         precio: 159,
         servicios: [
-          { icono: "door", descripcion: "1 cuarto" },
+          { icono: "sensor_door", descripcion: "1 cuarto" },
           { icono: "person", descripcion: "2 personas" },
           { icono: "bed", descripcion: "Queen" },
           { icono: "home", descripcion: "20 m²" },
@@ -66,7 +66,7 @@ const getHabitaciones = async (req, res) => {
         nombre: "Habitación Tronco de Ensueño",
         precio: 159,
         servicios: [
-          { icono: "door", descripcion: "1 cuarto" },
+          { icono: "sensor_door", descripcion: "1 cuarto" },
           { icono: "person", descripcion: "2 personas" },
           { icono: "bed", descripcion: "Queen" },
           { icono: "home", descripcion: "20 m²" },
@@ -79,7 +79,7 @@ const getHabitaciones = async (req, res) => {
         nombre: "Suite Bosque Encantado",
         precio: 199,
         servicios: [
-          { icono: "door", descripcion: "1 cuarto" },
+          { icono: "sensor_door", descripcion: "1 cuarto" },
           { icono: "person", descripcion: "2 personas" },
           { icono: "bed", descripcion: "Queen Size" },
           { icono: "home", descripcion: "30 m²" },
@@ -91,7 +91,7 @@ const getHabitaciones = async (req, res) => {
         nombre: "Suite Naturaleza Exquisita",
         precio: 199,
         servicios: [
-          { icono: "door", descripcion: "1 cuarto" },
+          { icono: "sensor_door", descripcion: "1 cuarto" },
           { icono: "person", descripcion: "2 personas" },
           { icono: "bed", descripcion: "Queen Size" },
           { icono: "home", descripcion: "30 m²" },
@@ -103,7 +103,7 @@ const getHabitaciones = async (req, res) => {
         nombre: "Suite Ámbar Arbórea",
         precio: 199,
         servicios: [
-          { icono: "door", descripcion: "1 cuarto" },
+          { icono: "sensor_door", descripcion: "1 cuarto" },
           { icono: "person", descripcion: "2 personas" },
           { icono: "bed", descripcion: "Queen Size" },
           { icono: "home", descripcion: "30 m²" },
@@ -115,7 +115,7 @@ const getHabitaciones = async (req, res) => {
         nombre: "Suite Armonía Boscosa",
         precio: 199,
         servicios: [
-          { icono: "door", descripcion: "1 cuarto" },
+          { icono: "sensor_door", descripcion: "1 cuarto" },
           { icono: "person", descripcion: "2 personas" },
           { icono: "bed", descripcion: "Queen Size" },
           { icono: "home", descripcion: "30 m²" },
@@ -127,7 +127,7 @@ const getHabitaciones = async (req, res) => {
         nombre: "Suite Aurora Verde",
         precio: 249,
         servicios: [
-          { icono: "door", descripcion: "1 cuarto" },
+          { icono: "sensor_door", descripcion: "1 cuarto" },
           { icono: "person", descripcion: "3 personas" },
           { icono: "bed", descripcion: "Queen Size" },
           { icono: "home", descripcion: "35 m²" },
@@ -139,7 +139,7 @@ const getHabitaciones = async (req, res) => {
         nombre: "Suite Respiro del Bosque",
         precio: 249,
         servicios: [
-          { icono: "door", descripcion: "1 cuarto" },
+          { icono: "sensor_door", descripcion: "1 cuarto" },
           { icono: "person", descripcion: "3 personas" },
           { icono: "bed", descripcion: "Queen Size" },
           { icono: "home", descripcion: "35 m²" },
@@ -152,7 +152,7 @@ const getHabitaciones = async (req, res) => {
         nombre: "Refugio Bosque Silencioso",
         precio: 299,
         servicios: [
-          { icono: "door", descripcion: "2 cuarto" },
+          { icono: "sensor_door", descripcion: "2 cuarto" },
           { icono: "person", descripcion: "4 personas" },
           { icono: "bed", descripcion: "King" },
           { icono: "home", descripcion: "45 m²" },
@@ -164,7 +164,7 @@ const getHabitaciones = async (req, res) => {
         nombre: "Refugio Bosque Místico",
         precio: 299,
         servicios: [
-          { icono: "door", descripcion: "2 cuarto" },
+          { icono: "sensor_door", descripcion: "2 cuarto" },
           { icono: "person", descripcion: "4 personas" },
           { icono: "bed", descripcion: "King" },
           { icono: "home", descripcion: "45 m²" },
@@ -176,7 +176,7 @@ const getHabitaciones = async (req, res) => {
         nombre: "Refugio Bosque Sereno",
         precio: 299,
         servicios: [
-          { icono: "door", descripcion: "2 cuarto" },
+          { icono: "sensor_door", descripcion: "2 cuarto" },
           { icono: "person", descripcion: "4 personas" },
           { icono: "bed", descripcion: "King" },
           { icono: "home", descripcion: "45 m²" },
@@ -188,7 +188,7 @@ const getHabitaciones = async (req, res) => {
         nombre: "Refugio Bosque Esmeralda",
         precio: 399,
         servicios: [
-          { icono: "door", descripcion: "3 cuarto" },
+          { icono: "sensor_door", descripcion: "3 cuarto" },
           { icono: "person", descripcion: "6 personas" },
           { icono: "bed", descripcion: "King" },
           { icono: "home", descripcion: "60 m²" },
@@ -200,7 +200,7 @@ const getHabitaciones = async (req, res) => {
         nombre: "Refugio Bosque Dorado",
         precio: 399,
         servicios: [
-          { icono: "door", descripcion: "3 cuarto" },
+          { icono: "sensor_door", descripcion: "3 cuarto" },
           { icono: "person", descripcion: "6 personas" },
           { icono: "bed", descripcion: "King" },
           { icono: "home", descripcion: "60 m²" },
@@ -212,7 +212,7 @@ const getHabitaciones = async (req, res) => {
         nombre: "Alojamiento Forestal",
         precio: 599,
         servicios: [
-          { icono: "door", descripcion: "4 cuarto" },
+          { icono: "sensor_door", descripcion: "4 cuarto" },
           { icono: "person", descripcion: "8 personas" },
           { icono: "bed", descripcion: "King Size" },
           { icono: "home", descripcion: "120 m²" },
@@ -224,7 +224,7 @@ const getHabitaciones = async (req, res) => {
         nombre: "Alojamiento Verde Lodge",
         precio: 599,
         servicios: [
-          { icono: "door", descripcion: "4 cuarto" },
+          { icono: "sensor_door", descripcion: "4 cuarto" },
           { icono: "person", descripcion: "8 personas" },
           { icono: "bed", descripcion: "King Size" },
           { icono: "home", descripcion: "120 m²" },
@@ -236,7 +236,7 @@ const getHabitaciones = async (req, res) => {
         nombre: "Alojamiento Tranquilo del Roble",
         precio: 599,
         servicios: [
-          { icono: "door", descripcion: "4 cuarto" },
+          { icono: "sensor_door", descripcion: "4 cuarto" },
           { icono: "person", descripcion: "8 personas" },
           { icono: "bed", descripcion: "King Size" },
           { icono: "home", descripcion: "120 m²" },
