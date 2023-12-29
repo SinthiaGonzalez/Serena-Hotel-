@@ -1,12 +1,20 @@
 import NavBarHome from "../NavBarHome/NavBarHome";
-import NavBarAdmin from "../NavBarAdmin/NavBarAdmin";
-import NavbarClient from "../NavbarClient/NavbarClient";
+import GaleriaDeFotos from "../GaleriaDeFotos/GaleriaDeFotos";
+import Footer from "../Footer/Footer";
+import Experiencias from "../Experiencias/Experiencias";
+import SobreSerenaLanding from "../SobreSerenaLanding/SobreSerenaLanding";
+import Servicios from "../Servicios/Servicios";
+import BarraInformacion from "../BarraInformacion/BarraInformacion";
 const LandingPage = () => {
   return (
     <>
       <NavBarHome />
-      <NavbarClient />
-      <NavBarAdmin />
+      <Experiencias />
+      <SobreSerenaLanding />
+      <BarraInformacion />
+      <Servicios />
+      <GaleriaDeFotos />
+      <Footer />
     </>
   );
 };
