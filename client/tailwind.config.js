@@ -12,6 +12,7 @@ module.exports = withMT({
         verde: "#1D2828",
         gris: "#3E4747",
         orange: "#FFFFFF",
+        white: "#FFFFFF",
       },
     },
   },

@@ -1,7 +1,7 @@
 import CardShopHabitaciones from "../CardShopHabitaciones/CardShopHabitaciones";
 const CardsShopHabitaciones = ({ habitacionesShop }) => {
   return (
-    <div>
+    <div className="flex flex-col gap-4 mx-8 w-full">
       {habitacionesShop.map(({ id, nombre, imagen, precio, servicios }) => {
         return (
           <CardShopHabitaciones
