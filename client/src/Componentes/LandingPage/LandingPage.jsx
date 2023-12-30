@@ -5,6 +5,7 @@ import SobreSerenaLanding from "../SobreSerenaLanding/SobreSerenaLanding";
 import Servicios from "../Servicios/Servicios";
 import BarraInformacion from "../BarraInformacion/BarraInformacion";
 import Home from "../Home/Home";
+import CardsHome from "../CardsHome/CardsHome";
 const LandingPage = () => {
   return (
     <>
@@ -13,6 +14,7 @@ const LandingPage = () => {
       <SobreSerenaLanding />
       <BarraInformacion />
       <Servicios />
+      <CardsHome />
       <GaleriaDeFotos />
       <Footer />
     </>

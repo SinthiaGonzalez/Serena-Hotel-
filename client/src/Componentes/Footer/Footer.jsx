@@ -1,7 +1,6 @@
 import { Typography } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 
-
 const SITEMAP = [
   {
     titulo: "Serena Hotel",
@@ -10,17 +9,21 @@ const SITEMAP = [
   {
     titulo: "Explora",
     links: [
-      {nombre:"Inicio", ruta:""},
-      {nombre:"Acerca de Serena", ruta:"acercadeserena"},
-      {nombre:"Habitaciones", ruta:"habitaciones"},
-      {nombre:"Contactenos", ruta:"contactenos"}
-    ]
+      { nombre: "Inicio", ruta: "" },
+      { nombre: "Acerca de Serena", ruta: "acercadeserena" },
+      { nombre: "Habitaciones", ruta: "habitaciones" },
+      { nombre: "Contactenos", ruta: "contactenos" },
+    ],
   },
   {
     titulo: "Contacto",
     links: [
       {
-        info: ["Perito Moreno 2014, SMA, Argentina ", "+ 54 9 11 1018-1222", "info@serenahotel.com"],
+        info: [
+          "Perito Moreno 2014, SMA, Argentina ",
+          "+ 54 9 11 1018-1222",
+          "info@serenahotel.com",
+        ],
         icono: ["location_on", "call", "mail"],
       },
     ],
@@ -48,8 +51,8 @@ const ICONOSREDSOCIAL = [
   },
   {
     icono:
-    "M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z",
-      // "M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84",
+      "M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z",
+    // "M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84",
     link: "https://twitter.com/",
   },
   {
@@ -70,7 +73,7 @@ const Footer = () => {
             <div key={key} className="w-full">
               <Typography
                 variant="small"
-                color="blanco"
+                color="orange"
                 className="mb-4 font-bold uppercase"
               >
                 {titulo}
@@ -81,47 +84,42 @@ const Footer = () => {
                   <Typography
                     key={key}
                     as="li"
-                    color="blanco"
+                    color="orange"
                     className="font-normal"
                   >
-                    {
-                      titulo === "Serena Hotel" ? (
-                        // En esta parte hay que configurar cuando este terminado el Home, que al seleccionar una de las opciones de Serena Hotel, nos lleve a esa parte de la misma pagina.
-                        // Ya quedo configurado para que cuando se seleccione una opción de Explora, nos redireccione a la view correspondiente, así que debería tener el mismo nombre.
-                          <Link
-                            to={`#${link.toLowerCase()}`}
-                            className="inline-block py-1 pr-2 transition-transform hover:scale-105"
-                          >
-                            {link}
-                          </Link>
-                      ) : 
-
-                      titulo === "Explora" ? (
-                        
-                          <Link
-                            to={`/${link.ruta}`}
-                            className="inline-block py-1 pr-2 transition-transform hover:scale-105"
-                          >
-                            {link.nombre}
-                          </Link>
-                      ) :
-                    
-                    titulo === "Contacto" ? (
+                    {titulo === "Serena Hotel" ? (
+                      // En esta parte hay que configurar cuando este terminado el Home, que al seleccionar una de las opciones de Serena Hotel, nos lleve a esa parte de la misma pagina.
+                      // Ya quedo configurado para que cuando se seleccione una opción de Explora, nos redireccione a la view correspondiente, así que debería tener el mismo nombre.
+                      <Link
+                        to={`#${link.toLowerCase()}`}
+                        className="inline-block py-1 pr-2 transition-transform hover:scale-105"
+                      >
+                        {link}
+                      </Link>
+                    ) : titulo === "Explora" ? (
+                      <Link
+                        to={`/${link.ruta}`}
+                        className="inline-block py-1 pr-2 transition-transform hover:scale-105"
+                      >
+                        {link.nombre}
+                      </Link>
+                    ) : titulo === "Contacto" ? (
                       <>
                         {link.icono.map((icon, index) => (
                           <div key={index} className="flex items-center">
                             <span className="material-symbols-outlined">
                               {icon}
                             </span>
-                            <Typography color="blanco" className="block ml-2 inline-block py-1 pr-2">
+                            <Typography
+                              color="orange"
+                              className="block ml-2 inline-block py-1 pr-2"
+                            >
                               {link.info[index]}
                             </Typography>
                           </div>
                         ))}
                       </>
-                    ) : 
-                    
-                    titulo === "Ubicación" ? (
+                    ) : titulo === "Ubicación" ? (
                       <iframe
                         src={link.url}
                         title="Google Maps"
@@ -132,7 +130,6 @@ const Footer = () => {
                         loading="lazy"
                       ></iframe>
                     ) : null}
-                    
                   </Typography>
                 ))}
               </ul>
@@ -160,7 +157,7 @@ const Footer = () => {
                   viewBox="0 0 24 24"
                   aria-hidden="true"
                 >
-                  <path fill-rule="evenodd" d={red.icono} clip-rule="evenodd" />
+                  <path fillRule="evenodd" d={red.icono} clipRule="evenodd" />
                 </svg>
               </Typography>
             ))}
