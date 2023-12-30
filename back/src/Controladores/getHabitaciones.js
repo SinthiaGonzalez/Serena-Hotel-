@@ -7,7 +7,7 @@ const getHabitaciones = async (req, res) => {
         precio: 159,
         servicios: [
           { icono: "sensor_door", descripcion: "1 cuarto" },
-          { icono: "person", descripcion: "2 personas" },
+          { icono: "person", descripcion: "2 pers" },
           { icono: "bed", descripcion: "Queen" },
           { icono: "home", descripcion: "20 m²" },
           { icono: "local_bar", descripcion: "Minibar" },
@@ -19,7 +19,7 @@ const getHabitaciones = async (req, res) => {
         precio: 159,
         servicios: [
           { icono: "sensor_door", descripcion: "1 cuarto" },
-          { icono: "person", descripcion: "2 personas" },
+          { icono: "person", descripcion: "2 pers" },
           { icono: "bed", descripcion: "Queen" },
           { icono: "home", descripcion: "20 m²" },
           { icono: "local_bar", descripcion: "Minibar" },
@@ -31,7 +31,7 @@ const getHabitaciones = async (req, res) => {
         precio: 159,
         servicios: [
           { icono: "sensor_door", descripcion: "1 cuarto" },
-          { icono: "person", descripcion: "2 personas" },
+          { icono: "person", descripcion: "2 pers" },
           { icono: "bed", descripcion: "Queen" },
           { icono: "home", descripcion: "20 m²" },
           { icono: "local_bar", descripcion: "Minibar" },
@@ -43,7 +43,7 @@ const getHabitaciones = async (req, res) => {
         precio: 159,
         servicios: [
           { icono: "sensor_door", descripcion: "1 cuarto" },
-          { icono: "person", descripcion: "2 personas" },
+          { icono: "person", descripcion: "2 pers" },
           { icono: "bed", descripcion: "Queen" },
           { icono: "home", descripcion: "20 m²" },
           { icono: "local_bar", descripcion: "Minibar" },
@@ -55,7 +55,7 @@ const getHabitaciones = async (req, res) => {
         precio: 159,
         servicios: [
           { icono: "sensor_door", descripcion: "1 cuarto" },
-          { icono: "person", descripcion: "2 personas" },
+          { icono: "person", descripcion: "2 pers" },
           { icono: "bed", descripcion: "Queen" },
           { icono: "home", descripcion: "20 m²" },
           { icono: "local_bar", descripcion: "Minibar" },
@@ -67,7 +67,7 @@ const getHabitaciones = async (req, res) => {
         precio: 159,
         servicios: [
           { icono: "sensor_door", descripcion: "1 cuarto" },
-          { icono: "person", descripcion: "2 personas" },
+          { icono: "person", descripcion: "2 pers" },
           { icono: "bed", descripcion: "Queen" },
           { icono: "home", descripcion: "20 m²" },
           { icono: "local_bar", descripcion: "Minibar" },
@@ -80,7 +80,7 @@ const getHabitaciones = async (req, res) => {
         precio: 199,
         servicios: [
           { icono: "sensor_door", descripcion: "1 cuarto" },
-          { icono: "person", descripcion: "2 personas" },
+          { icono: "person", descripcion: "2 pers" },
           { icono: "bed", descripcion: "Queen Size" },
           { icono: "home", descripcion: "30 m²" },
           { icono: "local_bar", descripcion: "Minibar" },
@@ -92,7 +92,7 @@ const getHabitaciones = async (req, res) => {
         precio: 199,
         servicios: [
           { icono: "sensor_door", descripcion: "1 cuarto" },
-          { icono: "person", descripcion: "2 personas" },
+          { icono: "person", descripcion: "2 pers" },
           { icono: "bed", descripcion: "Queen Size" },
           { icono: "home", descripcion: "30 m²" },
           { icono: "local_bar", descripcion: "Minibar" },
@@ -104,7 +104,7 @@ const getHabitaciones = async (req, res) => {
         precio: 199,
         servicios: [
           { icono: "sensor_door", descripcion: "1 cuarto" },
-          { icono: "person", descripcion: "2 personas" },
+          { icono: "person", descripcion: "2 pers" },
           { icono: "bed", descripcion: "Queen Size" },
           { icono: "home", descripcion: "30 m²" },
           { icono: "local_bar", descripcion: "Minibar" },
@@ -116,7 +116,7 @@ const getHabitaciones = async (req, res) => {
         precio: 199,
         servicios: [
           { icono: "sensor_door", descripcion: "1 cuarto" },
-          { icono: "person", descripcion: "2 personas" },
+          { icono: "person", descripcion: "2 pers" },
           { icono: "bed", descripcion: "Queen Size" },
           { icono: "home", descripcion: "30 m²" },
           { icono: "local_bar", descripcion: "Minibar" },
@@ -128,7 +128,7 @@ const getHabitaciones = async (req, res) => {
         precio: 249,
         servicios: [
           { icono: "sensor_door", descripcion: "1 cuarto" },
-          { icono: "person", descripcion: "3 personas" },
+          { icono: "person", descripcion: "3 pers" },
           { icono: "bed", descripcion: "Queen Size" },
           { icono: "home", descripcion: "35 m²" },
           { icono: "local_bar", descripcion: "Minibar" },
@@ -140,7 +140,7 @@ const getHabitaciones = async (req, res) => {
         precio: 249,
         servicios: [
           { icono: "sensor_door", descripcion: "1 cuarto" },
-          { icono: "person", descripcion: "3 personas" },
+          { icono: "person", descripcion: "3 pers" },
           { icono: "bed", descripcion: "Queen Size" },
           { icono: "home", descripcion: "35 m²" },
           { icono: "local_bar", descripcion: "Minibar" },
@@ -153,7 +153,7 @@ const getHabitaciones = async (req, res) => {
         precio: 299,
         servicios: [
           { icono: "sensor_door", descripcion: "2 cuarto" },
-          { icono: "person", descripcion: "4 personas" },
+          { icono: "person", descripcion: "4 pers" },
           { icono: "bed", descripcion: "King" },
           { icono: "home", descripcion: "45 m²" },
           { icono: "local_bar", descripcion: "Minibar" },
@@ -165,7 +165,7 @@ const getHabitaciones = async (req, res) => {
         precio: 299,
         servicios: [
           { icono: "sensor_door", descripcion: "2 cuarto" },
-          { icono: "person", descripcion: "4 personas" },
+          { icono: "person", descripcion: "4 pers" },
           { icono: "bed", descripcion: "King" },
           { icono: "home", descripcion: "45 m²" },
           { icono: "local_bar", descripcion: "Minibar" },
@@ -177,7 +177,7 @@ const getHabitaciones = async (req, res) => {
         precio: 299,
         servicios: [
           { icono: "sensor_door", descripcion: "2 cuarto" },
-          { icono: "person", descripcion: "4 personas" },
+          { icono: "person", descripcion: "4 pers" },
           { icono: "bed", descripcion: "King" },
           { icono: "home", descripcion: "45 m²" },
           { icono: "local_bar", descripcion: "Minibar" },
@@ -189,7 +189,7 @@ const getHabitaciones = async (req, res) => {
         precio: 399,
         servicios: [
           { icono: "sensor_door", descripcion: "3 cuarto" },
-          { icono: "person", descripcion: "6 personas" },
+          { icono: "person", descripcion: "6 pers" },
           { icono: "bed", descripcion: "King" },
           { icono: "home", descripcion: "60 m²" },
           { icono: "local_bar", descripcion: "Minibar" },
@@ -201,7 +201,7 @@ const getHabitaciones = async (req, res) => {
         precio: 399,
         servicios: [
           { icono: "sensor_door", descripcion: "3 cuarto" },
-          { icono: "person", descripcion: "6 personas" },
+          { icono: "person", descripcion: "6 pers" },
           { icono: "bed", descripcion: "King" },
           { icono: "home", descripcion: "60 m²" },
           { icono: "local_bar", descripcion: "Minibar" },
@@ -213,7 +213,7 @@ const getHabitaciones = async (req, res) => {
         precio: 599,
         servicios: [
           { icono: "sensor_door", descripcion: "4 cuarto" },
-          { icono: "person", descripcion: "8 personas" },
+          { icono: "person", descripcion: "8 pers" },
           { icono: "bed", descripcion: "King Size" },
           { icono: "home", descripcion: "120 m²" },
           { icono: "local_bar", descripcion: "Minibar" },
@@ -225,7 +225,7 @@ const getHabitaciones = async (req, res) => {
         precio: 599,
         servicios: [
           { icono: "sensor_door", descripcion: "4 cuarto" },
-          { icono: "person", descripcion: "8 personas" },
+          { icono: "person", descripcion: "8 pers" },
           { icono: "bed", descripcion: "King Size" },
           { icono: "home", descripcion: "120 m²" },
           { icono: "local_bar", descripcion: "Minibar" },
@@ -237,7 +237,7 @@ const getHabitaciones = async (req, res) => {
         precio: 599,
         servicios: [
           { icono: "sensor_door", descripcion: "4 cuarto" },
-          { icono: "person", descripcion: "8 personas" },
+          { icono: "person", descripcion: "8 pers" },
           { icono: "bed", descripcion: "King Size" },
           { icono: "home", descripcion: "120 m²" },
           { icono: "local_bar", descripcion: "Minibar" },

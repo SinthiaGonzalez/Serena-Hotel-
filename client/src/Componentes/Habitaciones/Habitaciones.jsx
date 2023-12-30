@@ -15,13 +15,11 @@ import NavBarHome from "../NavBarHome/NavBarHome";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getHabitaciones } from "../../redux/actions/actions";
-import CardsShopHabitaciones from "../Cards/Cards";
+import CardsShopHabitaciones from "../CardsShopHabitaciones/CardsShopHabitaciones";
 
 const Habitaciones = () => {
-
   const dispatch = useDispatch();
   const habitacionesShop = useSelector((state) => state.habitaciones);
-
   useEffect(() => {
     dispatch(getHabitaciones());
   }, [dispatch]);
@@ -31,9 +29,9 @@ const Habitaciones = () => {
   return (
     <>
       <NavBarHome />
-      <div className="flex bg-blanco p-5 h-screen">
-        <div className="bg-verde w-72 rounded-xl">
-          <div className="w-72 p-2">
+      <div className="flex flex-row bg-blanco py-7 h-full">
+        <div className="ml-8 bg-verde  w-2/5 rounded-xl">
+          <div className="w-full p-4 ">
             <Input
               type="email"
               color="white"
@@ -41,14 +39,17 @@ const Habitaciones = () => {
               label="BUSCAR:"
             />
           </div>
-          <div className="w-72 p-2">
-            <Select color="orange" label="ORDENAR:">
-              <Option>A-Z</Option>
-              <Option>Z-A</Option>
-            </Select>
+          <div className="flex flex-col w-full p-4 ">
+            <select
+              id="countries"
+              className="bg-verde w-full p-2 border border-gray-300 text-blanco text-sm rounded-lg "
+            >
+              <option selected>ORDENAR:</option>
+              <option value="US">United States</option>
+              <option value="CA">Canada</option>
+            </select>
           </div>
-
-          <Card className="w-72 bg-verde rounded-xs">
+          <Card className="w-72 bg-verde rounded-xs w-full p-4 ">
             <List>
               <ListItem className="p-0">
                 <label
