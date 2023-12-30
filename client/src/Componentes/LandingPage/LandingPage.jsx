@@ -6,6 +6,9 @@ const LandingPage = () => {
   return (
     <>
       <NavBarHome />
+      <ShoppingCartCard />
+      <GaleriaDeFotos />
+      <Footer />
     </>
   );
 };
