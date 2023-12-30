@@ -10,8 +10,14 @@ const reducer = (state = initialState, action) => {
         ...state,
         usuarios: action.payload,
       };
-    default:
-      return { state };
+      
+    case "GET_HABITACIONES":
+      return {
+        ...state,
+        habitaciones: action.payload,
+      };
+
+      default: return state;
   }
 };
 export default reducer;
