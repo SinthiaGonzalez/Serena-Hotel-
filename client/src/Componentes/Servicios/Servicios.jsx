@@ -77,7 +77,9 @@ const Servicios = () => {
             <span className="material-symbols-outlined text-5xl mb-2">
               {servicio.icono}
             </span>
-            <h3 className="text-xl font-inter text-center mb-2">{servicio.titulo}</h3>
+            <h3 className="text-xl font-inter text-center mb-2">
+              {servicio.titulo}
+            </h3>
             <p className="text-sm font-inter text-center">
               {servicio.descripcion}
             </p>

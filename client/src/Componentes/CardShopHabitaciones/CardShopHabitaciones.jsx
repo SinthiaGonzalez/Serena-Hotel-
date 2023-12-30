@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-const CardShopHabitaciones = ({ id, nombre, precio, imagen, servicios }) => {
+const CardShopHabitaciones = ({ id, nombre, precio, servicios }) => {
   return (
     <>
       <div
