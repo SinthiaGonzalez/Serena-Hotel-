@@ -1,11 +1,9 @@
 require("dotenv").config();
 const { YOUR_ACCESS_TOKEN } = process.env;
 const { MercadoPagoConfig, Preference } = require   ('mercadopago');
-
-const client = new MercadoPagoConfig({ accessToken: YOUR_ACCESS_TOKEN });// se crea en la pagina de mercado pago
-
-        
+       
 const CreatePreferenceMP = async (req, res) => {
+  const client = new MercadoPagoConfig({ accessToken: YOUR_ACCESS_TOKEN });
   try {
     const body = {
       items: [
@@ -27,7 +25,6 @@ const CreatePreferenceMP = async (req, res) => {
 
     const preference = new Preference(client);
     const result = await preference.create({ body });
-    console.log('Resultado de MercadoPago:', result.id);
     res.json({ id: result.id });
   } catch (error) {
     res.status(500).send('Error al crear la preferencia');
