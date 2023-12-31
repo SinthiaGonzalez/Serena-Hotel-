@@ -1,34 +1,37 @@
 import { Typography } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 
-
 const SITEMAP = [
   {
-    title: "Serena Hotel",
+    titulo: "Serena Hotel",
+    links: ["Experiecias", "Servicios", "Comentarios", "Galería de Fotos"],
+  },
+  {
+    titulo: "Explora",
     links: [
-      "Inicio", "Experiecias", "Servicios", "Comentarios", "Galería de Fotos",
+      { nombre: "Inicio", ruta: "" },
+      { nombre: "Acerca de Serena", ruta: "acercadeserena" },
+      { nombre: "Habitaciones", ruta: "habitaciones" },
+      { nombre: "Contactenos", ruta: "contactenos" },
     ],
   },
   {
-    title: "Explora",
-    links: ["Acerca de Serena", "Habitaciones", "Contactenos"],
-  },
-  {
-    title: "Contacto",
+    titulo: "Contacto",
     links: [
       {
-        type: "icon",
         info: [
-          "Perito Moreno 2014, San Martin de Los Andes, Argentina ", "+ 54 9 11 1018-1222", "info@serenahotel.com"],
+          "Perito Moreno 2014, SMA, Argentina ",
+          "+ 54 9 11 1018-1222",
+          "info@serenahotel.com",
+        ],
         icono: ["location_on", "call", "mail"],
       },
     ],
   },
   {
-    title: "Ubicación",
+    titulo: "Ubicación",
     links: [
       {
-        type: "map",
         url: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3122918.3815859854!2d-71.3363202!3d-40.1484094!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x96110e784f65279f%3A0xf704891ecbb3cb94!2sSerena%20Casas%20de%20Monta%C3%B1a%20Apart%20Hotel!5e0!3m2!1ses-419!2sus!4v1703256744168!5m2!1ses-419!2sus",
       },
     ],
@@ -48,8 +51,8 @@ const ICONOSREDSOCIAL = [
   },
   {
     icono:
-    "M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z",
-      // "M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84",
+      "M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z",
+    // "M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84",
     link: "https://twitter.com/",
   },
   {
@@ -64,43 +67,59 @@ const currentYear = new Date().getFullYear();
 const Footer = () => {
   return (
     <footer className="relative w-full">
-      <div className="mx-auto w-full max-w-7xl px-8">
+      <div className="mx-auto w-full  px-20">
         <div className="mx-auto grid w-full grid-cols-1 gap-8 py-10 md:grid-cols-2 lg:grid-cols-4">
-          {SITEMAP.map(({ title, links }, key) => (
+          {SITEMAP.map(({ titulo, links }, key) => (
             <div key={key} className="w-full">
               <Typography
                 variant="small"
-                color="blanco"
+                color="orange"
                 className="mb-4 font-bold uppercase"
               >
-                {title}
+                {titulo}
               </Typography>
 
               <ul className="space-y-1">
                 {links.map((link, key) => (
-                  
                   <Typography
                     key={key}
                     as="li"
-                    color="blanco"
+                    color="orange"
                     className="font-normal"
                   >
-
-                    {link.type === "icon" &&
-                    link.icono.length === link.info.length ? (
+                    {titulo === "Serena Hotel" ? (
+                      // En esta parte hay que configurar cuando este terminado el Home, que al seleccionar una de las opciones de Serena Hotel, nos lleve a esa parte de la misma pagina.
+                      // Ya quedo configurado para que cuando se seleccione una opción de Explora, nos redireccione a la view correspondiente, así que debería tener el mismo nombre.
+                      <Link
+                        to={`#${link.toLowerCase()}`}
+                        className="inline-block py-1 pr-2 transition-transform hover:scale-105"
+                      >
+                        {link}
+                      </Link>
+                    ) : titulo === "Explora" ? (
+                      <Link
+                        to={`/${link.ruta}`}
+                        className="inline-block py-1 pr-2 transition-transform hover:scale-105"
+                      >
+                        {link.nombre}
+                      </Link>
+                    ) : titulo === "Contacto" ? (
                       <>
                         {link.icono.map((icon, index) => (
                           <div key={index} className="flex items-center">
                             <span className="material-symbols-outlined">
                               {icon}
                             </span>
-                            <Typography color="blanco" className="block ml-2 inline-block py-1 pr-2">
+                            <Typography
+                              color="orange"
+                              className="block ml-2 inline-block py-1 pr-2"
+                            >
                               {link.info[index]}
                             </Typography>
                           </div>
                         ))}
                       </>
-                    ) : link.type === "map" ? (
+                    ) : titulo === "Ubicación" ? (
                       <iframe
                         src={link.url}
                         title="Google Maps"
@@ -110,16 +129,7 @@ const Footer = () => {
                         allowFullScreen=""
                         loading="lazy"
                       ></iframe>
-                    ) : (
-                        // En esta parte hay configurar cuando este terminado el Home, que al seleccionar una de las opciones de Serena Hotel, nos lleve a esa parte de la misma pagina.
-                        // Ya quedo configurado para que cuando se seleccione una opcion de Explora, nos redireccione a la view correspondiente, asi que deberia tener el mismo nombre.
-                        <Link
-                        to={title === "Explora" ? `/explora/${link.toLowerCase()}` : `#${title.toLowerCase()}`}
-                        className="inline-block py-1 pr-2 transition-transform hover:scale-105"
-                      >
-                        {link}
-                      </Link>
-                    )}
+                    ) : null}
                   </Typography>
                 ))}
               </ul>
@@ -147,7 +157,7 @@ const Footer = () => {
                   viewBox="0 0 24 24"
                   aria-hidden="true"
                 >
-                  <path fill-rule="evenodd" d={red.icono} clip-rule="evenodd" />
+                  <path fillRule="evenodd" d={red.icono} clipRule="evenodd" />
                 </svg>
               </Typography>
             ))}
