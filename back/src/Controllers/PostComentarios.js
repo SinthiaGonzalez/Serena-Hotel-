@@ -2,19 +2,20 @@ const { Comentario } = require('../db');
 
 const CreateComentario = async (req, res) => {
   try {
-    const { nombre, contenido, puntuacion } = req.body;
+    const { imagen, nombre, contenido, puntuacion } = req.body;
 
-    if (!nombre || !contenido || !puntuacion) {
+    if (!imagen || !nombre || !contenido || !puntuacion) {
       return res.status(400).json({ error: 'Faltan campos requeridos' });
     }
 
     const newcomentario = await Comentario.create({
+      imagen,
       nombre,
       contenido,
       puntuacion
     });
 
-    return res.status(201).json({ message: 'Comentario creado exitosamente', newcomentario });
+    return res.status(201).json( newcomentario );
 
   } catch (error) {
     console.log(error);

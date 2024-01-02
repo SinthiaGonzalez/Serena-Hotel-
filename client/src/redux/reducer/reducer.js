@@ -1,4 +1,4 @@
-import { GET_COMENTARIOS } from "../Actions/actions-types";
+import { GET_COMENTARIOS, ELIMINAR_COMENTARIO } from "../Actions/actions-types";
 
 const initialState = {
   habitaciones: [],
@@ -8,7 +8,6 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
-  const num_comentarios = 2; // Define num_comentarios within the reducer function
   switch (action.type) {
     case "GET_USERS":
       return {
@@ -19,12 +18,21 @@ const reducer = (state = initialState, action) => {
     case GET_COMENTARIOS:
       return {
         ...state,
-        comentarios: [action.payload].splice(0, num_comentarios),
+        comentarios: action.payload, // Actualizar los comentarios directamente sin usar splice
         AllComentsBackUp: action.payload,
       };
 
+    case ELIMINAR_COMENTARIO:
+      const updatedComentarios = state.comentarios.filter(
+        (comentario) => comentario.id !== action.payload
+      );
+      return {
+        ...state,
+        comentarios: updatedComentarios,
+      };
+
     default:
-      return state; // Return state directly without wrapping it in an object
+      return state;
   }
 };
 

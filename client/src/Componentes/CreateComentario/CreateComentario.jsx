@@ -9,12 +9,14 @@ const CreateComentPage = () => {
   const dispatch = useDispatch();
 
   const handleStarHover = (value) => {
-    setRating(value);
+    if (rating === 0) {
+      setRating(value); 
+    }
   };
-
+  
   const handleStarClick = (value) => {
-    setRating(value);
-    console.log("Calificación seleccionada:", value);
+    setRating(value); // Siempre actualiza el estado al hacer clic en una estrella
+    console.log("Puntuación seleccionada:", value);
   };
 
   const handleGoToLanding = () => {
@@ -23,17 +25,17 @@ const CreateComentPage = () => {
 
   // Información del usuario autenticado (simulada)
   const user = {
-    name: "Nombre de Usuario",
-    image: "url_de_la_imagen",
+    name: "sergio",
+    image: "https://media.tycsports.com/files/2022/06/14/440410/las-20-mejores-fotos-de-perfil-para-tu-cuenta-de-free-fire_w416.webp",
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const comentario = {
-      nombre: user.name, // Llenar automáticamente con el nombre del usuario autenticado
+      imagen: "https://media.tycsports.com/files/2022/06/14/440410/las-20-mejores-fotos-de-perfil-para-tu-cuenta-de-free-fire_w416.webp",
+      nombre: "juan carlos",
       contenido: e.target.comentarios.value,
-      fecha: new Date().toISOString(), // Agregar la fecha automáticamente
-      puntuacion: rating, // Usar la calificación seleccionada
+      puntuacion: rating,
     };
     dispatch(postComent(comentario));
     // Restablecer el estado del formulario después de enviarlo
@@ -42,44 +44,41 @@ const CreateComentPage = () => {
 
   return (
     <div
-className="bg-cover bg-center h-screen flex justify-center items-center"
-style={{
-  backgroundImage:
-    'url("https://img.freepik.com/fotos-premium/vista-aerea-sobre-bosque-montana-niebla-neblina-paisaje-forestal-generativo-ai_751108-4026.jpg")',
-}}
+  className="bg-cover bg-center h-screen flex justify-center items-center"
+  style={{
+    backgroundImage:
+      'url("https://img.freepik.com/fotos-premium/vista-aerea-sobre-bosque-montana-niebla-neblina-paisaje-forestal-generativo-ai_751108-4026.jpg")',
+  }}
 >
-{/* Espacio para el nombre del usuario encima de las estrellas */}
-{user && (
-  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 m-4 text-white">
-    <span>{user.name}</span>
-  </div>
-)}
+  {/* Espacio para la imagen del usuario y las estrellas */}
+  {user && (
+    <div className="absolute top-1/4 left-2/2 transform -translate-x-1/2 -translate-y-1/2 m-4 flex items-center">
+      <span className="text-white mr-2" style={{ marginBottom: "50%", position: "relative", left: "50%", transform: "translateX(-50%)" }}>{user.name}</span>
+      <img
+        src={user.image}
+        alt="Imagen de perfil"
+        className="w-10 h-10 rounded-full mr-2"
+        style={{ marginBottom: "30%" }} // Mover la imagen un poco más arriba
+      />
+      {[1, 2, 3, 4, 5].map((star) => (
+        <span
+          key={star}
+          className={
+            star <= rating
+              ? "text-gold cursor-pointer text-4xl"
+              : "text-gray cursor-pointer text-4xl"
+          }
+          onMouseEnter={() => handleStarHover(star)}
+          onMouseLeave={() => handleStarHover(0)}
+          onClick={() => handleStarClick(star)}
+          style={{ marginBottom: "30%" }} // Mover las estrellas un poco más arriba
+        >
+          {star <= rating ? "★" : "☆"}
+        </span>
+      ))}
+    </div>
+  )}
 
-{/* Espacio para la imagen del usuario al lado de las estrellas */}
-{user && (
-  <div className="absolute top-1/4 left-1/4 transform -translate-x-1/2 -translate-y-1/2 m-4 flex items-center">
-    <img
-      src={user.image}
-      alt="Imagen de perfil"
-      className="w-10 h-10 rounded-full mr-2"
-    />
-    {[1, 2, 3, 4, 5].map((star) => (
-      <span
-        key={star}
-        className={
-          star <= rating
-            ? "text-gold cursor-pointer text-4xl"
-            : "text-gray cursor-pointer text-4xl"
-        }
-        onMouseEnter={() => handleStarHover(star)}
-        onMouseLeave={() => handleStarHover(0)}
-        onClick={() => handleStarClick(star)}
-      >
-        {star <= rating ? "★" : "☆"}
-      </span>
-    ))}
-  </div>
-)} 
       <button
         className="absolute top-0 left-10 m-4 p-0 bg-transparent"
         onClick={handleGoToLanding}
@@ -88,11 +87,15 @@ style={{
         <span className="text-[#FF3D00] text-6xl">&#8592;</span>
       </button>
 
-      <form className="w-80 max-w-600px text-center flex flex-col items-center" onSubmit={handleSubmit}>
+      <form
+        className="w-80 max-w-600px text-center flex flex-col items-center"
+        onSubmit={handleSubmit}
+      >
         <textarea
           name="comentarios"
           placeholder="Déjanos tu comentario aquí"
           className="h-40 w-full bg-gray-300 resize-none p-2"
+          style={{ color: "black" }}
         />
 
         <div className="flex items-center justify-center mt-4">
@@ -106,6 +109,8 @@ style={{
 };
 
 export default CreateComentPage;
+
+
 
 
 // import { useAuth } from "auth"; // Importa el paquete de autenticación "auth"

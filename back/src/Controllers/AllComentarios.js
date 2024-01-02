@@ -8,7 +8,7 @@ const TodosLosComentarios= async ()=>{
 
 return ComentariosTotal
     } catch (error) {
-        return res.status(500).json({ error: error.message });
+       return ({ error: error.message });
     }
 
 }

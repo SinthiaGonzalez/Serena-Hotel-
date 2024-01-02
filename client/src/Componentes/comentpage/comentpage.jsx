@@ -1,29 +1,35 @@
-// ComentPage.js
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllcomentarios } from "../../redux/Actions/actions";
+import { getAllcomentarios, eliminarComentario } from "../../redux/Actions/actions";
+import CardComent from "./cardComent/cardcoment";
+import { Link } from "react-router-dom";
 
 const ComentPage = () => {
   const dispatch = useDispatch();
-  const comments = useSelector((state) => state.comentarios);
+  const comentarios = useSelector((state) => state.comentarios);
 
   useEffect(() => {
     dispatch(getAllcomentarios());
   }, [dispatch]);
 
+  const handleEliminarComentario = (id) => {
+    dispatch(eliminarComentario(id));
+  };
+
   return (
-    <div className="p-4 bg-gray-900 text-white rounded-md">
-      <h1 className="text-2xl font-bold mb-8 ml-12 mt-16">COMENTARIOS</h1>
-      {comments.map((comment) => (
-        <div
-          key={comment.id}
-          className="bg-blue-900 p-20 mb-8 rounded-lg"
-          style={{ backgroundColor: "#1D2828" }}
-        >
-          <h3 className="text-xl font-bold mb-2">{comment.title}</h3>
-          <p className="text-lg">{comment.body}</p>
-        </div>
-      ))}
+    <div style={{ backgroundColor: "#1D2828", padding: "20px" }}>
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <div style={{ width: "4px", height: "100%", backgroundColor: "white" }}></div>
+        <h1 style={{ color: "white", fontSize: "2rem", fontWeight: "bold", marginLeft: "12px", marginTop: "16px" }}>COMENTARIOS</h1>
+        <Link to="/comentar" style={{ marginLeft: "auto" }}>
+          <button style={{ color: "white", backgroundColor: "#FF3D00", border: "2px solid #FF3D00", borderRadius: "4px", cursor: "pointer", padding: "8px 16px" }}>Dejar comentario</button>
+        </Link>
+      </div>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
+        {comentarios && comentarios.map((comentario, index) => (
+          <CardComent key={index} comentario={comentario} onDelete={handleEliminarComentario} />
+        ))}
+      </div>
     </div>
   );
 };
