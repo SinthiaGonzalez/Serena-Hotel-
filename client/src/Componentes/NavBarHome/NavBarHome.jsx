@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
+import { Link } from "react-router-dom";
 import keanu from "../../../public/keanu.jpg";
 import { useState } from "react";
 import {
@@ -21,7 +22,7 @@ import {
   RocketLaunchIcon,
   Bars2Icon,
 } from "@heroicons/react/24/solid";
-
+import AddShoppingCart from "../cardCarrito/cardAñadirCarrito";
 // profile menu component
 const profileMenuItems = [
   {
@@ -231,6 +232,7 @@ const NavBarHome = () => {
               <p className="text-blanco text-xm">TUS COMPRAS</p>
             </div>
             <div className="flex flex-col gap-2">
+              <AddShoppingCart />
               <div className="flex flex-row justify-between">
                 <p>Sub Total</p>
                 <p>$300</p>
@@ -243,6 +245,7 @@ const NavBarHome = () => {
               >
                 SEGUIR COMPRANDO
               </Button>
+              <Link to="/pasareladePago">
               <Button
                 className="bg-naranja cursor-pointer"
                 size="sm"
@@ -251,6 +254,8 @@ const NavBarHome = () => {
               >
                 PAGAR
               </Button>
+              </Link>
+
             </div>
           </div>
         )}

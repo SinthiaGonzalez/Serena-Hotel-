@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-const CardShopHabitaciones = ({ id, nombre, precio, servicios }) => {
+const CardShopHabitaciones = ({ id, nombre, precio, servicios,handlerAddToCart }) => {
   return (
     <>
       <div
@@ -35,6 +35,7 @@ const CardShopHabitaciones = ({ id, nombre, precio, servicios }) => {
           <button
             className="block w-full mb-4 select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all  focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
             type="button"
+            onClick={() => handlerAddToCart(id)}
           >
             AÑADIR AL CARRITO
           </button>

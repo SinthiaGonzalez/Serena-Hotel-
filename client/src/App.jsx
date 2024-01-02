@@ -3,6 +3,7 @@ import LandingPage from "./Componentes/LandingPage/LandingPage.jsx";
 import Error404 from "./Componentes/Error 404/Error404.jsx";
 import { Route, Routes } from "react-router-dom";
 import Habitaciones from "./Componentes/Habitaciones/Habitaciones.jsx";
+import PasareladePago from "./Componentes/Pasarela-de-Pago/PasareladePago.jsx";
 
 // Esta linea de codigo hace que por default todos los requerimientos en axios se hagan a esta ruta en el back
 // Luego nos va a servir para hacer el Deploy del front
@@ -23,6 +24,7 @@ const App = () => {
         <Route path="*" element={<Error404 />} />
         <Route path="/admin" element={<DashBoarAdmin />} />
         <Route path="/cliente" element={<DashBoarCliente />} />
+        <Route path="/pasareladePago" element={<PasareladePago />} />
       </Routes>
     </>
   );
