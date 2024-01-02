@@ -1,7 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
-
 initMercadoPago("TEST-2b768ecd-5730-478d-a83c-0dd708098ca3");
 import createPreference from './PostPreferenceMercadopago';
 import { useState } from 'react';
@@ -31,9 +30,6 @@ const ShoppingCartCard = () => {
                 <div>
                 {preferenceid && <Wallet  initialization={{ preferenceId: preferenceid, locale: "es-AR", }} />}
                 </div>
-               
-
-             
                 <button
                     className="bg-red-500 text-white p-2 mt-2 hover:bg-red-600 transition duration-300"
                     onClick={() => onDelete(product)}>
