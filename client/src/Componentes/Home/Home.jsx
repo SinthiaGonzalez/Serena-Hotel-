@@ -1,4 +1,6 @@
 import NavBarHome from "../NavBarHome/NavBarHome";
+import { Link } from 'react-router-dom';
+
 
 const Home = () => {
   return (
@@ -16,10 +18,12 @@ const Home = () => {
       <div className="flex items-center justify-center h-60">
         <div className=" transform -translate-x-1/2 bottom-1/2 w-1/2 bg-naranja h-0.5"></div>
 
-        {/* <Link to="/habitaciones"> // Hay que activar el link para cuando la view de habitaciones este armada*/}
-        <button className="absolute bg-naranja text-white px-4 py-2 rounded-lg">
+        <Link
+          to="/habitaciones"
+          className="absolute bg-naranja text-white px-4 py-2 rounded-lg transition-transform hover:scale-105"
+        >
           RESERVAR
-        </button>
+        </Link>
       </div>
     </div>
   );

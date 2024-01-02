@@ -57,7 +57,7 @@ const Servicios = () => {
           <div className="h-30 border-l-4 border-gray-400 text-left p-4 mb-10">
             <span className="text-3xl font-inter block">SERVICIOS</span>
           </div>
-
+  
           <div>
             <p className="font-inter mb-6 ml-4">
               Escapa del bullicio de la vida urbana y sumérgete en la
@@ -72,7 +72,7 @@ const Servicios = () => {
         {servicios.map((servicio, index) => (
           <div
             key={index}
-            className="flex flex-col items-center justify-center p-4 border border-gray-300 rounded-lg xl:ml-[20px] xl:mr-[20px]"
+            className="flex flex-col items-center justify-center p-4 border border-gray-300 rounded-lg xl:ml-[20px] xl:mr-[20px] transition-transform transform hover:scale-105"
           >
             <span className="material-symbols-outlined text-5xl mb-2">
               {servicio.icono}
@@ -86,6 +86,7 @@ const Servicios = () => {
       </div>
     </div>
   );
+  
 };
 
 export default Servicios;
