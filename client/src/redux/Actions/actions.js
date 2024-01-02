@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { GET_COMENTARIOS, ELIMINAR_COMENTARIO } from './actions-types';
 
+
 export function postComent(state) {
   return async function (dispatch) {
     try {
