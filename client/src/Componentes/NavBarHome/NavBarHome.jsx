@@ -162,7 +162,7 @@ const NavBarHome = () => {
 
   return (
     <Navbar className="bg-verde opacity-85 mx-auto rounded-xs max-w-screen-3xl p-7 lg:pl-10 border-0">
-      <div className="relative mx-auto flex items-center justify-between text-blanco">
+      <div className="relative mx-auto flex items-center justify-between text-white">
         <Typography
           as="a"
           href="/"
@@ -207,6 +207,7 @@ const NavBarHome = () => {
           <ProfileMenu />
         </div>
       </div>
+      
       <Collapse open={isNavOpen} className="overflow-scroll">
         <NavList />
       </Collapse>

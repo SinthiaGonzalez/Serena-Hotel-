@@ -15,7 +15,7 @@ const Error404 = () => {
       <div className="Error404 relative">
         <div className="flex flex-row justify-center text-naranja text-[300px] font-bold font-inter mt-14">
           <div className="hidden md:block lg:block xl:block">4</div>
-          <div className="perchero relative items-center justify-center mt-20 hover:scale-110">
+          <div className="perchero relative items-center justify-center mt-20">
             <svg
               width="350"
               height="450"
