@@ -3,7 +3,7 @@ import { GET_COMENTARIOS, ELIMINAR_COMENTARIO } from "../actions/actions-types";
 const initialState = {
   habitaciones: [],
   usuarios: [],
-  preferenceIdMP: ["213"],
+  preferenceIdMP: [],
   carrito: [],
    comentarios: [],
   AllComentsBackUp: [],
