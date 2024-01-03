@@ -1,6 +1,7 @@
 const { Router } = require('express');// importamos el metodo Router 
 const {CreatePreferenceMP} = require('../Controladores/postProductMP');// importamos el metodo CreatePreferenceMP del archivo postProductMP.js
 const { getHabitaciones } = require("../Controladores/getHabitaciones");
+const { postHabitaciones } = require("../Controladores/postHabitaciones");
 const router = Router(); // importamos el metodo Router de express para poder crear rutas
 
 
@@ -11,4 +12,6 @@ router.get('/', (req, res) => {
 router.post('/mercadopago/create_preference', CreatePreferenceMP);
 
 router.get("/habitaciones", getHabitaciones);
+
+router.post('/post/habitaciones', postHabitaciones)
 module.exports = router;
