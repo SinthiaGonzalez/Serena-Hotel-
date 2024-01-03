@@ -1,7 +1,7 @@
 const initialState = {
   habitaciones: [],
   usuarios: [],
-  preferenceIdMP: ["213"],
+  preferenceIdMP: [],
   carrito: [],
 };
 

@@ -14,7 +14,7 @@ const ShoppingCartCard = () => {
             setpreferenceid(id);
         }
     };
-
+console.log(preferenceid ,"soy el id de mercado pago")
     let name = "Serena Hotel";
     let price = "1000";
     let image = "https://picsum.photos/200";
