@@ -1,13 +1,24 @@
+import React from "react";
+
 const Error404 = () => {
   return (
-    <div className="items-center justify-center">
-      <div className="Error404">
-        <div className="flex flex-row justify-center items-center text-naranja text-[400px] font-bold font-inter">
-          4
-          <div>
+    <div
+      className="flex items-center justify-center h-screen text-white text-center"
+      style={{
+        backgroundImage:
+          'url("https://i.postimg.cc/3xxjwxft/selena-hotel-1.png")',
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        overflow: "hidden",
+      }}
+    >
+      <div className="Error404 relative">
+        <div className="flex flex-row justify-center text-naranja text-[300px] font-bold font-inter mt-14">
+          <div className="hidden md:block lg:block xl:block">4</div>
+          <div className="perchero relative items-center justify-center mt-20 hover:scale-110">
             <svg
-              width="328"
-              height="709"
+              width="350"
+              height="450"
               viewBox="0 0 328 709"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -21,20 +32,22 @@ const Error404 = () => {
                 fill="white"
               />
             </svg>
-            <div className="w-auto h-20 left-[100px] top-[100px] absolute text-center z-[1]">
-              <span className="text-blanco text-3xl font-bold font-['Inter']">
+            <div className="absolute text-center items-center justify-center z-[1] flex flex-col top-1/2 mt-8">
+              <span className="text-blanco text-3xl font-bold font-Inter mb-4">
                 Oops!
               </span>
-              <span className="text-blanco text-2xl font-bold font-['Inter']">
+              <span className="text-blanco text-lg font-bold font-Inter mx-24 mb-4">
                 Parece que tocaste en la puerta equivocada.
               </span>
-              <div className="Rectangle80 w-[286px] h-[57px] left-[585px] top-[862px] absolute bg-zinc-100" />
-              <div className="VolverAlHotel w-[286px] h-[18px] left-[120px] top-[550px] absolute text-center text-naranja text-2xl font-black font-['Inter'] leading-[19px]">
+              <a
+                href="/"
+                className="block w-[205px] h-[36px] text-center text-naranja text-xl font-bold font-inter leading-[35px] bg-blanco hover:uppercase hover:shadow-md hover:shadow-naranja "
+              >
                 VOLVER AL HOTEL
-              </div>
+              </a>
             </div>
           </div>
-          4
+          <div className="hidden md:block lg:block xl:block">4</div>
         </div>
       </div>
     </div>

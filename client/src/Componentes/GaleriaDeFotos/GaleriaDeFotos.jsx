@@ -44,7 +44,10 @@ const GaleriaDeFotos = () => {
       </div>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ml-4 mr-8">
         {data.map(({ imageLink }, index) => (
-          <div key={index} className="mb-0">
+          <div
+            key={index}
+            className="mb-0 overflow-hidden transition-transform transform hover:scale-105"
+          >
             <img
               className="h-40 w-full max-w-full rounded-lg object-cover object-center"
               src={imageLink}
