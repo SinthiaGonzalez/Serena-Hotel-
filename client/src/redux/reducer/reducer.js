@@ -3,7 +3,9 @@ import { GET_COMENTARIOS, ELIMINAR_COMENTARIO } from "../actions/actions-types";
 const initialState = {
   habitaciones: [],
   usuarios: [],
-  comentarios: [],
+  preferenceIdMP: ["213"],
+  carrito: [],
+   comentarios: [],
   AllComentsBackUp: [],
 };
 
@@ -14,8 +16,27 @@ const reducer = (state = initialState, action) => {
         ...state,
         usuarios: action.payload,
       };
-
-    case GET_COMENTARIOS:
+    case "GET_HABITACIONES":
+      return {
+        ...state,
+        habitaciones: action.payload,
+      };
+    case "CREATE_PREFERENCE_MERCADOPAGO_ID":
+      return {
+        ...state,
+        preferenceIdMP: action.payload,
+      };
+    case "ADD_TO_CART":
+      const habitacionToAdd = state.habitaciones.find(habitacion => habitacion.id === action.payload);
+      if (habitacionToAdd) {
+        return {
+          ...state,
+          carrito: [...state.carrito, habitacionToAdd],
+        };
+      } else {
+        return state;
+      }
+       case GET_COMENTARIOS:
       return {
         ...state,
         comentarios: action.payload, // Actualizar los comentarios directamente sin usar splice
@@ -31,8 +52,8 @@ const reducer = (state = initialState, action) => {
         comentarios: updatedComentarios,
       };
 
-    default:
-      return state;
+      default: return state;
+
   }
 };
 
