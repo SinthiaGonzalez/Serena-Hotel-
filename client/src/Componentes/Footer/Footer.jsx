@@ -66,7 +66,7 @@ const currentYear = new Date().getFullYear();
 
 const Footer = () => {
   return (
-    <footer className="relative w-full">
+    <footer className="relative w-full bg-verde">
       <div className="mx-auto w-full  px-20">
         <div className="mx-auto grid w-full grid-cols-1 gap-8 py-10 md:grid-cols-2 lg:grid-cols-4">
           {SITEMAP.map(({ titulo, links }, key) => (
@@ -123,8 +123,8 @@ const Footer = () => {
                       <iframe
                         src={link.url}
                         title="Google Maps"
-                        width="100%"
-                        height="200"
+                        width="90%"
+                        height="160"
                         style={{ border: 0 }}
                         allowFullScreen=""
                         loading="lazy"
