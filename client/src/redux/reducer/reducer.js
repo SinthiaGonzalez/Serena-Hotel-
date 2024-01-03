@@ -1,4 +1,4 @@
-import { GET_COMENTARIOS, ELIMINAR_COMENTARIO } from "../Actions/actions-types";
+import { GET_COMENTARIOS, ELIMINAR_COMENTARIO } from "../actions/actions-types";
 
 const initialState = {
   habitaciones: [],

@@ -12,6 +12,18 @@ export function postComent(state) {
     }
   }
 }
+export function postUsuario(state) {
+  return async function (dispatch) {
+    try {
+      await axios.post("/usuario", state);
+      console.log('log de action', state);
+      alert('se creo el usuario exitosamente');
+    } catch (error) {
+      alert(error);
+    }
+  }
+}
+
 
 export function getAllcomentarios() {
   return async function (dispatch) {
