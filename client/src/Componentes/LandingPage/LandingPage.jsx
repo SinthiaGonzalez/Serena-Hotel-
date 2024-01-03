@@ -9,6 +9,7 @@ import Servicios from "../Servicios/Servicios";
 import BarraInformacion from "../BarraInformacion/BarraInformacion";
 import Home from "../Home/Home";
 import CardsHome from "../CardsHome/CardsHome";
+import ImagenSeparadoraConBoton from "../ImagenSeparadoraConBoton/ImagenSeparadoraConBoton";
 const LandingPage = () => {
   return (
     <>
@@ -17,9 +18,8 @@ const LandingPage = () => {
       <SobreSerenaLanding />
       <BarraInformacion />
       <Servicios />
+      <ImagenSeparadoraConBoton/>
       <CardsHome />
-      <GaleriaDeFotos />
-      <NavBarHome />
       <ShoppingCartCard />
       <ShoppingCartCard1 />
       <GaleriaDeFotos />
