@@ -1,26 +1,33 @@
+import { Link } from "react-router-dom";
+
 const SobreSerenaLanding = () => {
   return (
-    <div className="mt-4 mb-8 ml-4">
+    <div className="mb-16 ml-4">
       <div className="flex flex-col lg:flex-row items-center mb-8 ml-6 mr-8">
         <div className="w-full lg:w-1/2 mb-8 lg:mb-0 lg:mr-4">
-          <div className="h-30 border-l-4 border-gray-400 text-left p-4 mb-10">
-            <span className="text-3xl font-inter block">Sobre</span>
-            <span className="text-3xl font-inter">Serena Hotel</span>
+          <div className="h-30 border-l-4 border-negro text-left p-4 mb-10">
+            <span className="text-3xl font-inter font-medium block text-negro">Sobre</span>
+            <span className="text-3xl font-inter font-medium text-negro">Serena Hotel</span>
           </div>
 
           <div>
-            <p className="font-inter mb-6 ml-4">
+            <p className="font-inter mb-6 ml-4 text-negro">
               Descubre la armonía de exuberantes paisajes y disfruta de una
               experiencia única, donde la hospitalidad se combina con la belleza
               natural. Con ubicación privilegiada, Serena Hotel es tu escapada
               perfecta para renovar el espíritu y recargar energías.
             </p>
+
             
-            {/* <Link to="/acercadeserena"> // Hay que activar el link para cuando la view de acerca de nosotros este armada*/} 
-              <button className="bg-naranja text-white px-4 py-2 ml-4">
-                VER MÁS
-              </button>
-            {/* </Link> */}
+            <div className="ml-4 transition-transform hover:scale-105">
+
+            <Link
+              to="/acercadeserena"
+              className="bg-naranja text-white px-4 py-2 rounded-lg "
+            >
+              VER MÁS
+            </Link>
+            </div>
           </div>
         </div>
 

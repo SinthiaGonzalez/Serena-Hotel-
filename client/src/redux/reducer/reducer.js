@@ -1,8 +1,10 @@
 const initialState = {
   habitaciones: [],
   usuarios: [],
-  preferenceIdMP: ["213"],
+  preferenceIdMP: [],
   carrito: [],
+   comentarios: [],
+  AllComentsBackUp: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -12,7 +14,6 @@ const reducer = (state = initialState, action) => {
         ...state,
         usuarios: action.payload,
       };
-      
     case "GET_HABITACIONES":
       return {
         ...state,
@@ -33,8 +34,25 @@ const reducer = (state = initialState, action) => {
       } else {
         return state;
       }
+       case "GET_COMENTARIOS":
+      return {
+        ...state,
+        comentarios: action.payload, // Actualizar los comentarios directamente sin usar splice
+        AllComentsBackUp: action.payload,
+      };
+
+    case "ELIMINAR_COMENTARIO":
+      const updatedComentarios = state.comentarios.filter(
+        (comentario) => comentario.id !== action.payload
+      );
+      return {
+        ...state,
+        comentarios: updatedComentarios,
+      };
 
       default: return state;
+
   }
 };
+
 export default reducer;

@@ -54,25 +54,25 @@ const Servicios = () => {
     <div className="mt-16 mb-16 ml-4">
       <div className="flex flex-col lg:flex-row items-center mb-8 ml-6 mr-8">
         <div className="w-full lg:w-1/2 lg:mb-0 lg:mr-4">
-          <div className="h-30 border-l-4 border-gray-400 text-left p-4 mb-10">
-            <span className="text-3xl font-inter block">SERVICIOS</span>
+          <div className="h-30 border-l-4 border-negro text-left p-4 mb-10">
+            <span className="text-3xl text-negro font-inter font-medium block">SERVICIOS</span>
           </div>
-
+  
           <div>
-            <p className="font-inter mb-6 ml-4">
+            <p className="font-inter mb-6 ml-4 text-negro">
               Escapa del bullicio de la vida urbana y sumérgete en la
               tranquilidad de la naturaleza en Serene Hotel. Ubicado en medio de
               exuberante vegetación.
             </p>
           </div>
         </div>
-        <div className="h-px bg-blanco w-1/3 lg:w-1/2 mt-[-40px] hidden lg:block xl:block"></div>
+        <div className="h-px bg-negro w-1/3 lg:w-1/2 mt-[-40px] hidden lg:block xl:block"></div>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 ml-5 mr-5 md:ml-5 md:mr-5 lg:ml-10 lg:mr-10 xl:ml-28 xl:mr-28">
         {servicios.map((servicio, index) => (
           <div
             key={index}
-            className="flex flex-col items-center justify-center p-4 border border-gray-300 rounded-lg xl:ml-[20px] xl:mr-[20px]"
+            className="flex flex-col items-center justify-center p-4 border border-verde bg-verde rounded-lg xl:ml-[20px] xl:mr-[20px] transition-transform transform hover:scale-105"
           >
             <span className="material-symbols-outlined text-5xl mb-2">
               {servicio.icono}
@@ -88,6 +88,7 @@ const Servicios = () => {
       </div>
     </div>
   );
+  
 };
 
 export default Servicios;

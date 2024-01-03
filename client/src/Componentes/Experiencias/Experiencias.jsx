@@ -24,8 +24,8 @@ const Experiencias = () => {
   return (
     <div className="mt-4 mb-20 ml-4">
       <div className="flex items-center mb-8 ml-6">
-        <div className="h-30 border-l-4 border-gray-400">
-          <span className="text-3xl font-inter block mb-2 ml-4">
+        <div className="h-30 border-l-4 border-negro">
+          <span className="text-3xl text-negro font-inter font-medium block mb-2 ml-4">
             Experiencias
           </span>
         </div>
@@ -38,8 +38,8 @@ const Experiencias = () => {
               src={imagen}
               alt={`gallery-photo-${index}`}
             />
-            <div className="text-lg  text-center font-bold mb-1">{titulo}</div>
-            <div className="text-sm text-center">{descripcion}</div>
+            <div className="text-lg  text-center font-bold text-negro mb-1">{titulo}</div>
+            <div className="text-sm text-center text-negro">{descripcion}</div>
           </div>
         ))}
       </div>
