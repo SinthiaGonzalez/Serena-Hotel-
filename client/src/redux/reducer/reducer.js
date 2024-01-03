@@ -1,5 +1,3 @@
-import { GET_COMENTARIOS, ELIMINAR_COMENTARIO } from "../actions/actions-types";
-
 const initialState = {
   habitaciones: [],
   usuarios: [],
@@ -36,14 +34,14 @@ const reducer = (state = initialState, action) => {
       } else {
         return state;
       }
-       case GET_COMENTARIOS:
+       case "GET_COMENTARIOS":
       return {
         ...state,
         comentarios: action.payload, // Actualizar los comentarios directamente sin usar splice
         AllComentsBackUp: action.payload,
       };
 
-    case ELIMINAR_COMENTARIO:
+    case "ELIMINAR_COMENTARIO":
       const updatedComentarios = state.comentarios.filter(
         (comentario) => comentario.id !== action.payload
       );
