@@ -23,5 +23,9 @@ module.exports = (sequelize) => {
       type: DataTypes.JSONB,
       defaultValue: [],
     },
+    descripcion: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    }
   });
 };
