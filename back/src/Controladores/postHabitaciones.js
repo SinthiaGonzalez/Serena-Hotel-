@@ -3,12 +3,11 @@ const { Habitaciones } = require("../db.js");
 
 
 
-const postHabitaciones = async (req, res) => {
-    try {
-        const { nombre, precio, imagen, servicios} = req.body;
+const postHabitaciones = async ( nombre, precio, imagen, servicios) => {
+
         console.log("aqui",nombre,precio,imagen,servicios);
         if (!nombre || !precio || !imagen || !servicios) {
-            return res.status(400).send('faltan datos')
+            return 'faltan datos'
         }
         const [habitacion, creado] = await Habitaciones.findOrCreate({
             where: { nombre },
@@ -16,11 +15,8 @@ const postHabitaciones = async (req, res) => {
           });
         
           if (!creado) {
-            return "El perro ya existe";
+            return "La habitacion ya existe";
           }
-        return res.status(200).json(habitacion);
-    } catch (error) {
-        return res.status(500).json({ message: error.message });
-    }
+        return habitacion;
 }
 module.exports = { postHabitaciones };

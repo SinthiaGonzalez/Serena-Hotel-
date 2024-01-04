@@ -1,4 +1,4 @@
-const { ActualizarComentario } = require('../Controllers/ActualizarComentarios');
+const { ActualizarComentario } = require('../Controladores/ActualizarComentarios');
 
 const ActualizarComentarioHandler = async (req, res) => {
   try {
