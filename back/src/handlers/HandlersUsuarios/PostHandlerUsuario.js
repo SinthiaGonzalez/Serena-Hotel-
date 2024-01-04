@@ -1,5 +1,4 @@
-const {CreateUsuario}= require ('../../Controllers/controllers_Usuaruios/PostUsuario')
-
+const {CreateUsuario}= require ('../..//Controladores/controllers_Usuaruios/PostUsuario')
 const HandlerPostUsuario = async (req, res) => {
     try {
       const newUser = await CreateUsuario(req, res);

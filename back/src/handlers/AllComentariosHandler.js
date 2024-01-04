@@ -1,4 +1,4 @@
-const { TodosLosComentarios } = require('../Controllers/AllComentarios');
+const { TodosLosComentarios } = require('../Controladores/AllComentarios');
 
 const AllComentariosdHandler = async (req, res) => {
   try {

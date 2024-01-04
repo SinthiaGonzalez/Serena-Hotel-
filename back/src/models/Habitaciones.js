@@ -19,9 +19,13 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    servico: {
+    servicios: {
       type: DataTypes.JSONB,
       defaultValue: [],
     },
+    descripcion: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    }
   });
 };
