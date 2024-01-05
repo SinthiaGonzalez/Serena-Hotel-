@@ -1,5 +1,5 @@
 const express = require('express');
-const { CreateComentario } = require('../Controllers/PostComentarios');
+const { CreateComentario } = require('../Controladores/PostComentarios');
 const {AllComentariosdHandler}= require ('../handlers/AllComentariosHandler')
 const {ActualizarComentarioHandler}= require('../handlers/ActualizarComentarioHnadler')
 const {EliminarComentariosHandler}= require ('../handlers/EliminarComentaiosHandler')
@@ -12,6 +12,7 @@ const {
   addHabitacionToCarrito,
   getCarrito,
 } = require("../Controladores/carritoControlador");
+const { postHabitacionHandler } = require("../handlers/HabitacionHandler");
 const router = express.Router(); // importamos el metodo Router de express para poder crear rutas
 
 
