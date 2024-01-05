@@ -11,6 +11,7 @@ import Home from "../Home/Home";
 import ComentPage from "../comentpage/comentpage";
 import CardsHome from "../CardsHome/CardsHome";
 import ImagenSeparadoraConBoton from "../ImagenSeparadoraConBoton/ImagenSeparadoraConBoton";
+import Contactenos from "../Contactenos/Contactenos";
 const LandingPage = () => {
   return (
     <>
@@ -26,6 +27,7 @@ const LandingPage = () => {
       <ShoppingCartCard1 />
       <ComentPage/>
       <GaleriaDeFotos />
+      <Contactenos/>
       <Footer />
     </>
   );

@@ -38,8 +38,8 @@ const GaleriaDeFotos = () => {
     <div className="mt-4 mb-8 ml-4">
       <div className="flex items-center mb-8 ml-6">
         <div className="h-30 border-l-4 border-negro">
-          <span className="text-3xl font-inter font-medium block mb-2 ml-4 text-negro">Galeria De</span>
-          <span className="text-3xl font-inter font-medium ml-4 text-negro">Fotos</span>
+          <span className="text-3xl font-inter font-medium block mb-2 ml-4 text-negro">GALERIA DE</span>
+          <span className="text-3xl font-inter font-medium ml-4 text-negro">FOTOS</span>
         </div>
       </div>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ml-4 mr-8">

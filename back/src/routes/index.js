@@ -7,6 +7,7 @@ const {EliminarComentariosHandler}= require ('../handlers/EliminarComentaiosHand
 const {HandlerPostUsuario}= require('../handlers/HandlersUsuarios/PostHandlerUsuario')
 const {CreatePreferenceMP} = require('../Controladores/postProductMP');// importamos el metodo CreatePreferenceMP del archivo postProductMP.js
 const { getHabitaciones } = require("../Controladores/getHabitaciones");
+const { EnvioMailContactenos } = require('../handlers/EnvioMailContactenos');
 
 const router = express.Router();
 
@@ -24,4 +25,9 @@ router.post('/mercadopago/create_preference', CreatePreferenceMP);
 
 router.get("/habitaciones", getHabitaciones);
 
+router.post('/contactenos', EnvioMailContactenos);
+
+
 module.exports = router;
+
+
