@@ -1,4 +1,4 @@
-const { EliminarComentario } = require('../Controllers/EliminarComentarios');
+const { EliminarComentario } = require('../Controladores/EliminarComentarios');
 
 const EliminarComentariosHandler = async (req, res) => {
   try {

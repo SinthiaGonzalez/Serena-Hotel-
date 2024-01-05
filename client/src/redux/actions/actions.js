@@ -1,6 +1,44 @@
 import axios from 'axios';
-import { GET_COMENTARIOS,ELIMINAR_COMENTARIO } from './actions-types';
 
+export function getHabitaciones() {
+  console.log("estoy en actions")
+  return async function(dispatch) {
+    try {
+      const habitaciones = await axios.get('/habitaciones');
+      return dispatch({
+        type: 'GET_HABITACIONES',
+        payload: habitaciones.data
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+// creamos la action que crea la preferenciaId de mercadopago
+export function createPreferenceMercadopagoId(data) {
+  return async function(dispatch) {
+    try {
+      const preference = await axios.post("mercadopago/create_preference", data);
+      return dispatch({
+        type: 'CREATE_PREFERENCE_MERCADOPAGO_ID',
+        payload: preference.data
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+// creamos la action añade las habitaciones al carrito de compras
+export function addToCart(id) {
+  return {
+    type: "ADD_TO_CART",
+    payload: id
+  };
+}
+
+// creamos la action que elimina del acarrito las habitaciones seleccionadas
 
 export function postComent(state) {
   return async function (dispatch) {
@@ -31,7 +69,7 @@ export function getAllcomentarios() {
       const response = await axios.get("/comentarios");
       if (response.status === 200) {
         dispatch({
-          type: GET_COMENTARIOS,
+          type: "GET_COMENTARIOS",
           payload: response.data
         });
       }
@@ -48,7 +86,7 @@ export function eliminarComentario(id) {
       console.log('log de actions', response);
       if (response.status === 200) {
         dispatch({
-          type: ELIMINAR_COMENTARIO,
+          type: "ELIMINAR_COMENTARIO",
           payload: id,
         });
         alert('Comentario eliminado exitosamente');
@@ -57,4 +95,35 @@ export function eliminarComentario(id) {
       alert(error.message);
     }
   };
+}
+
+
+export function enviarConsulta(formData) {
+  return async function(dispatch) {
+    try {
+      const response = await axios.post('/contactenos', formData);
+      console.log('Respuesta del servidor:', response.data);
+    } catch (error) {
+      console.error('Error al enviar la consulta:', error);
+    }
+  };
+}
+
+export function crearHabitacion (habitacionData) {
+  console.log({habitacionData})
+  return async (dispatch) => {
+      try {
+          const response = await axios.post('http://localhost:3001/post/habitaciones', habitacionData)
+          console.log(response.data);
+          alert('Creado con exito')
+          dispatch ({
+              type:"CREAR_HABITACION",
+              payload: response.data,
+          });
+      } catch (error) {
+          console.log(error);
+          alert(error.message);
+          
+      }
+  }
 }

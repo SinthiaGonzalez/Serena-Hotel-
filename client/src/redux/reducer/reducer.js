@@ -1,12 +1,11 @@
-import { GET_COMENTARIOS, ELIMINAR_COMENTARIO } from "../actions/actions-types";
-
 const initialState = {
   habitaciones: [],
   usuarios: [],
-  preferenceIdMP: ["213"],
+  preferenceIdMP: [],
   carrito: [],
    comentarios: [],
   AllComentsBackUp: [],
+  nuevaHabitacion: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -36,14 +35,14 @@ const reducer = (state = initialState, action) => {
       } else {
         return state;
       }
-       case GET_COMENTARIOS:
+       case "GET_COMENTARIOS":
       return {
         ...state,
         comentarios: action.payload, // Actualizar los comentarios directamente sin usar splice
         AllComentsBackUp: action.payload,
       };
 
-    case ELIMINAR_COMENTARIO:
+    case "ELIMINAR_COMENTARIO":
       const updatedComentarios = state.comentarios.filter(
         (comentario) => comentario.id !== action.payload
       );
@@ -53,6 +52,9 @@ const reducer = (state = initialState, action) => {
       };
 
       default: return state;
+
+      case "CREAR_HABITACION":
+    return { ...state, nuevaHabitacion: [...state.nuevaHabitacion, action.payload], habitaciones: [...state.habitaciones, action.payload] }  
 
   }
 };
