@@ -1,4 +1,4 @@
-const { CreateComentario } = require('../Controllers/PostComentarios');
+const { CreateComentario } = require('../Controladores/PostComentarios');
 
 const HandlerPostComentarios = async (req, res) => {
   try {

@@ -96,3 +96,35 @@ export function eliminarComentario(id) {
     }
   };
 }
+
+
+export function enviarConsulta(formData) {
+  return async function(dispatch) {
+    try {
+      const response = await axios.post('/contactenos', formData);
+      console.log('Respuesta del servidor:', response.data);
+    } catch (error) {
+      console.error('Error al enviar la consulta:', error);
+    }
+  };
+}
+
+export function crearHabitacion (habitacionData) {
+  console.log({habitacionData})
+  return async (dispatch) => {
+      try {
+          const response = await axios.post('http://localhost:3001/post/habitaciones', habitacionData)
+          console.log(response.data);
+          alert('Creado con exito')
+          dispatch ({
+              type:"CREAR_HABITACION",
+              payload: response.data,
+          });
+      } catch (error) {
+          console.log(error);
+          alert(error.message);
+          
+      }
+  }
+}
+
