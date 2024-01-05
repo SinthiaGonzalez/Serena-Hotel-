@@ -15,16 +15,18 @@ const CreateHabitacion = () => {
     const [habitacionData, setHabitacionData] = useState({
         nombre: '',
         precio: 0,
-        imagen: '',
-        servicios: [],
+        imagen: [],
+        servicios: [
+              { icono: "sensor_door", descripcion: "" },
+              { icono: "person", descripcion: "" },
+              { icono: "bed", descripcion: "" },
+              { icono: "home", descripcion: "" },
+              { icono: "local_bar", descripcion: "" },
+              { icono: "wifi", descripcion: "" },
+            ],
         descripcion: '',
     });
 console.log({habitacionData})
-
-    const [servicios, setServicios] = useState({
-        icono:"",
-        descripcion:""
-    })
 
 
   const handleBlur = fieldName => {
