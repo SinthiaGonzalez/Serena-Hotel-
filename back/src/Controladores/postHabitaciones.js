@@ -1,5 +1,6 @@
 const Sequelize = require("sequelize");
 const { Habitaciones } = require("../db.js");
+const cloudinary = require("../utils/cloudinary");
 
 const postHabitaciones = async (
   nombre,
@@ -9,17 +10,34 @@ const postHabitaciones = async (
   descripcion
 ) => {
   console.log("aqui", nombre, precio, imagen, servicios, descripcion);
+
+  const result = [];
+  for (let i = 0; i < imagen.length; i++) {
+    result[i] = await cloudinary.uploader.upload(imagen[i], {
+      folder: "habitaciones",
+    });
+  }
   if (!nombre || !precio || !imagen || !servicios || !descripcion) {
     return "faltan datos";
   }
-  const [habitacion, creado] = await Habitaciones.findOrCreate({
-    where: { nombre },
-    defaults: { precio, imagen, servicios, descripcion },
-  });
-
-  if (!creado) {
-    return "La habitacion ya existe";
+  const prueba = await Habitaciones.findOne({ where: { nombre: nombre } });
+  if (prueba) return "La habitacion ya existe";
+  else {
+    arrayImagen = [];
+    for (let x = 0; x < imagen.length; x++) {
+      arrayImagen[x] = {
+        public_id: result[x].public_id,
+        url: result[x].secure_url,
+      };
+    }
+    const habitacion = await Habitaciones.create({
+      nombre,
+      precio,
+      imagen: arrayImagen,
+      servicios,
+      descripcion,
+    });
+    return habitacion;
   }
-  return habitacion;
 };
 module.exports = { postHabitaciones };
