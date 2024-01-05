@@ -26,6 +26,6 @@ module.exports = (sequelize) => {
     descripcion: {
       type: DataTypes.STRING,
       allowNull: false,
-    }
+    },
   });
 };
