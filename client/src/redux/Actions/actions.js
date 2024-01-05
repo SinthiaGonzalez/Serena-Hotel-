@@ -97,6 +97,26 @@ export function eliminarComentario(id) {
   };
 }
 
+export function crearHabitacion (habitacionData) {
+  console.log({habitacionData})
+  return async (dispatch) => {
+      try {
+          const response = await axios.post('http://localhost:3001/post/habitaciones', habitacionData)
+          console.log(response.data);
+          alert('Creado con exito')
+          dispatch ({
+              type:"CREAR_HABITACION",
+              payload: response.data,
+          });
+      } catch (error) {
+          console.log(error);
+          alert(error.message);
+          
+      }
+  }
+}
+
+
 
 export function enviarConsulta(formData) {
   return async function(dispatch) {

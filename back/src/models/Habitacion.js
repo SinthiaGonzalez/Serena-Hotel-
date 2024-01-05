@@ -16,12 +16,17 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     imagen: {
-      type: DataTypes.STRING,
+      type: DataTypes.JSONB,
       allowNull: false,
+      defaultValue: []
     },
-    servico: {
+    servicios: {
       type: DataTypes.JSONB,
       defaultValue: [],
+    },
+    descripcion: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
   });
 };

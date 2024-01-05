@@ -5,6 +5,7 @@ const initialState = {
   carrito: [],
    comentarios: [],
   AllComentsBackUp: [],
+  nuevaHabitacion: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -51,6 +52,9 @@ const reducer = (state = initialState, action) => {
       };
 
       default: return state;
+
+      case "CREAR_HABITACION":
+    return { ...state, nuevaHabitacion: [...state.nuevaHabitacion, action.payload], habitaciones: [...state.habitaciones, action.payload] }  
 
   }
 };
