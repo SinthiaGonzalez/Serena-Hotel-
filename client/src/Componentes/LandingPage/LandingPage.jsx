@@ -1,6 +1,4 @@
-
 import ShoppingCartCard1 from "../cardCarrito/Card-Shop-Cart";
-import ShoppingCartCard from "../cardCarrito/CardCarrito";
 import GaleriaDeFotos from "../GaleriaDeFotos/GaleriaDeFotos"
 import Footer from "../Footer/Footer";
 import Experiencias from "../Experiencias/Experiencias";
@@ -14,7 +12,6 @@ import ImagenSeparadoraConBoton from "../ImagenSeparadoraConBoton/ImagenSeparado
 const LandingPage = () => {
   return (
     <>
-
       <Home />
       <Experiencias />
       <SobreSerenaLanding />
@@ -22,7 +19,6 @@ const LandingPage = () => {
       <Servicios />
       <ImagenSeparadoraConBoton/>
       <CardsHome />
-      <ShoppingCartCard />
       <ShoppingCartCard1 />
       <ComentPage/>
       <GaleriaDeFotos />
