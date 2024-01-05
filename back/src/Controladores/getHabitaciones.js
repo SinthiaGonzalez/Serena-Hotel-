@@ -285,8 +285,6 @@ const getHabitaciones = async () => {
     //   },
     // ];
     const habitaciones = Habitaciones.findAll()
-
-
     return habitaciones;
   
 };
