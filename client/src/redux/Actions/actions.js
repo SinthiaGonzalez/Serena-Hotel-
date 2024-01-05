@@ -97,6 +97,18 @@ export function eliminarComentario(id) {
   };
 }
 
+
+export function enviarConsulta(formData) {
+  return async function(dispatch) {
+    try {
+      const response = await axios.post('/contactenos', formData);
+      console.log('Respuesta del servidor:', response.data);
+    } catch (error) {
+      console.error('Error al enviar la consulta:', error);
+    }
+  };
+}
+
 export function crearHabitacion (habitacionData) {
   console.log({habitacionData})
   return async (dispatch) => {

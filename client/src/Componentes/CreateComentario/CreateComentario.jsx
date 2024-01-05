@@ -47,6 +47,7 @@ const CreateComentPage = () => {
   className="bg-cover bg-center h-screen flex justify-center items-center"
   style={{
     backgroundImage:
+      // 'url("https://cf.bstatic.com/xdata/images/hotel/max1024x768/283384657.jpg?k=82f12511a23fc911e79146601860d7ae7b9839f37af39918d1312edd9d98efee&o=&hp=1")',
       'url("https://img.freepik.com/fotos-premium/vista-aerea-sobre-bosque-montana-niebla-neblina-paisaje-forestal-generativo-ai_751108-4026.jpg")',
   }}
 >

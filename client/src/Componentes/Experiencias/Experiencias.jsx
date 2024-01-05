@@ -26,7 +26,7 @@ const Experiencias = () => {
       <div className="flex items-center mb-8 ml-6">
         <div className="h-30 border-l-4 border-negro">
           <span className="text-3xl text-negro font-inter font-medium block mb-2 ml-4">
-            Experiencias
+            EXPERIENCIAS
           </span>
         </div>
       </div>
