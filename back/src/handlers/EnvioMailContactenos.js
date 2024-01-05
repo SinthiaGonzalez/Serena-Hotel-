@@ -40,7 +40,7 @@ const EnvioMailContactenos = async (req, res) => {
     // Configuración del correo
     const mailOptions = {
       from: `${correo}`,
-      to: "sinthiafgonzalez@gmail.com",
+      to: "famularifranco@gmail.com",
       subject: "Consulta del formulario de contacto",
       text: `
       Nombre: ${nombre}
