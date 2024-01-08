@@ -6,8 +6,8 @@ const SobreSerenaLanding = () => {
       <div className="flex flex-col lg:flex-row items-center mb-8 ml-6 mr-8">
         <div className="w-full lg:w-1/2 mb-8 lg:mb-0 lg:mr-4">
           <div className="h-30 border-l-4 border-negro text-left p-4 mb-10">
-            <span className="text-3xl font-inter font-medium block text-negro">Sobre</span>
-            <span className="text-3xl font-inter font-medium text-negro">Serena Hotel</span>
+            <span className="text-3xl font-inter font-medium block text-negro">SOBRE</span>
+            <span className="text-3xl font-inter font-medium text-negro">SERENA HOTEL</span>
           </div>
 
           <div>
