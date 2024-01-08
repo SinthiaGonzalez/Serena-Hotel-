@@ -1,4 +1,8 @@
 import React from "react";
+import {
+  MagnifyingGlassIcon,
+  AdjustmentsVerticalIcon,
+} from "@heroicons/react/24/solid";
 
 export const PerfilUsuario2 = () => {
   return (
@@ -6,12 +10,14 @@ export const PerfilUsuario2 = () => {
       <div className="bg-verde p-8 rounded-md">
         <div className="mb-4 flex items-center justify-center">
           <div className="flex items-center">
+            <MagnifyingGlassIcon width={20} className="mr-1" />
             <input
               type="text"
               placeholder="Buscar..."
               className="bg-white p-2 rounded-md mr-4"
             />
 
+            <AdjustmentsVerticalIcon width={20} className="mr-1" />
             <select className="bg-white p-2 rounded-md">
               <option value="filtro1">Filtro 1</option>
               <option value="filtro2">Filtro 2</option>

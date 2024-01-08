@@ -12,7 +12,7 @@ import axios from "axios";
 import AcercaDeSerena from "./Componentes/AcercaDeSerena/AcercaDeSerena.jsx";
 import DashBoarAdmin from "./Componentes/DashBoarAdmin/DashBoarAdmin.jsx";
 import DashBoarCliente from "./Componentes/DashboarCliente/DashCliente.jsx";
-import { PerfilUsuario2 } from "./Componentes/PerfilUsuario/PerfilUsuario2.jsx";
+import { Perfilusuario1 } from "./Componentes/PerfilUsuario/PerfilUsuario.jsx";
 // Esta linea de codigo hace que por default todos los requerimientos en axios se hagan a esta ruta en el back
 // Luego nos va a servir para hacer el Deploy del front
 axios.defaults.baseURL = "http://localhost:3001/";
@@ -32,7 +32,7 @@ const App = () => {
         <Route path="/comentarios" element={<ComentPage />} />
         <Route path="/comentar" element={<CreateComentPage />} />
         <Route path="/usuario" element={<CreateUsuario />} />
-        <Route path="/perfilUsuario" element={<PerfilUsuario2 />} />
+        <Route path="/perfilUsuario" element={<Perfilusuario1 />} />
       </Routes>
     </>
   );
