@@ -5,8 +5,10 @@ const RenderCardDesarrolladores = () => {
       id: 1,
       nombre: "Megan Fox",
       ocupacion: "Full Stack Web Developer",
-      imagen: "https://biografiacorta.net/wp-content/uploads/2022/01/Actress-Megan-Fox-1024x1024.jpg",
-      imagenFondo: "https://www.elagoradiario.com/wp-content/uploads/2021/10/siberia-bosques.jpg",
+      imagen:
+        "https://biografiacorta.net/wp-content/uploads/2022/01/Actress-Megan-Fox-1024x1024.jpg",
+      imagenFondo:
+        "https://www.elagoradiario.com/wp-content/uploads/2021/10/siberia-bosques.jpg",
       github: "",
       linkedin: "",
     },
@@ -14,7 +16,8 @@ const RenderCardDesarrolladores = () => {
       id: 2,
       nombre: "Chris Hemsworth",
       ocupacion: "Software Engineer",
-      imagen: "https://e00-expansion.uecdn.es/assets/multimedia/imagenes/2021/02/25/16142565944318.jpg",
+      imagen:
+        "https://e00-expansion.uecdn.es/assets/multimedia/imagenes/2021/02/25/16142565944318.jpg",
       imagenFondo: "https://www.w3schools.com/w3images/nature.jpg",
       github: "https://github.com/chrishemsworth",
       linkedin: "https://www.linkedin.com/in/chrishemsworth/",
@@ -23,7 +26,8 @@ const RenderCardDesarrolladores = () => {
       id: 3,
       nombre: "Emma Watson",
       ocupacion: "UI/UX Designer",
-      imagen: "https://www.americatv.com.pe/cinescape/wp-content/uploads/2016/04/137095.jpg",
+      imagen:
+        "https://www.americatv.com.pe/cinescape/wp-content/uploads/2016/04/137095.jpg",
       imagenFondo: "https://www.w3schools.com/w3images/mountains.jpg",
       github: "https://github.com/emmawatson",
       linkedin: "https://www.linkedin.com/in/emmawatson/",
@@ -32,7 +36,8 @@ const RenderCardDesarrolladores = () => {
       id: 4,
       nombre: "Henrry Cavill",
       ocupacion: "Mobile App Developer",
-      imagen: "https://alchetron.com/cdn/henry-cavill-857dbe8e-5b78-4b38-8c18-ed6f6c601a4-resize-750.jpeg",
+      imagen:
+        "https://alchetron.com/cdn/henry-cavill-857dbe8e-5b78-4b38-8c18-ed6f6c601a4-resize-750.jpeg",
       imagenFondo: "https://www.w3schools.com/w3images/forest.jpg",
       github: "https://github.com/tomhardy",
       linkedin: "https://www.linkedin.com/in/tomhardy/",
@@ -41,7 +46,8 @@ const RenderCardDesarrolladores = () => {
       id: 5,
       nombre: "Natalie Portman",
       ocupacion: "Data Scientist",
-      imagen: "https://resize-public.ladmedia.fr/img/var/public/storage/images/toutes-les-photos/natalie-portman-au-lendemain-de-l-annonce-de-son-divorce-l-actrice-refuse-de-participer-a-un-emblematique-evenement-en-france-1782162/47799683-1-fre-FR/Natalie-Portman-au-lendemain-de-l-annonce-de-son-divorce-l-actrice-refuse-de-participer-a-un-emblematique-evenement-en-France.jpg",
+      imagen:
+        "https://resize-public.ladmedia.fr/img/var/public/storage/images/toutes-les-photos/natalie-portman-au-lendemain-de-l-annonce-de-son-divorce-l-actrice-refuse-de-participer-a-un-emblematique-evenement-en-france-1782162/47799683-1-fre-FR/Natalie-Portman-au-lendemain-de-l-annonce-de-son-divorce-l-actrice-refuse-de-participer-a-un-emblematique-evenement-en-France.jpg",
       imagenFondo: "https://www.w3schools.com/w3images/forest.jpg",
       github: "https://github.com/natalieportman",
       linkedin: "https://www.linkedin.com/in/natalieportman/",
@@ -57,18 +63,22 @@ const RenderCardDesarrolladores = () => {
     },
     {
       id: 7,
-      nombre: "Scarlett Johansson",
+      nombre: "Franco Famulari",
       ocupacion: "Frontend Developer",
-      imagen: "https://s.libertaddigital.com/2020/05/08/1920/1080/fit/scarlett-johansson-0805.jpg",
-      imagenFondo: "https://www.w3schools.com/w3images/nature.jpg",
-      github: "https://github.com/scarlettjohansson",
-      linkedin: "https://www.linkedin.com/in/scarlettjohansson/",
+      imagen:
+        "https://i.postimg.cc/7hMsC92d/Foto-CV.png",
+      imagenFondo: 
+      // "https://media.licdn.com/dms/image/D4D16AQGk-cCBF__NWg/profile-displaybackgroundimage-shrink_350_1400/0/1701354141186?e=1709769600&v=beta&t=GVYo2zgaUGiszypZJGH13tRC8Pl5XeA6hfNb63bDpr8",
+      "https://www.w3schools.com/w3images/nature.jpg",
+      github: "https://github.com/Francofamu",
+      linkedin: "https://www.linkedin.com/in/franco-famulari-25b2b9127/",
     },
     {
       id: 8,
       nombre: "Harry Potther",
       ocupacion: "Cybersecurity Analyst",
-      imagen: "https://zeleb.publico.es/wp-content/uploads/2023/07/DL_a02094016-1.jpg",
+      imagen:
+        "https://zeleb.publico.es/wp-content/uploads/2023/07/DL_a02094016-1.jpg",
       imagenFondo: "https://www.w3schools.com/w3images/forest.jpg",
       github: "https://github.com/idriselba",
       linkedin: "https://www.linkedin.com/in/idriselba/",
@@ -76,28 +86,45 @@ const RenderCardDesarrolladores = () => {
   ];
 
   return (
-    <div className=" bg-whithe h-auto" >
-
-      <div className="h-30 border-l-4 border-negro ml-3">
-        <span className="text-3xl text-negro font-inter font-medium block ml-4">
-          Desarrolladores
-        </span>
-      </div>
-      <div className="flex flex-wrap bg-blue-gray-500 justify-center">
-        {developers.map((developer) => (
-          <CardDesarrolladores
-            key={developer.id}
-            nombre={developer.nombre}
-            ocupacion={developer.ocupacion}
-            imagen={developer.imagen}
-            imagenFondo={developer.imagenFondo}
-            github={developer.github}
-            linkedin={developer.linkedin}
-          />
-        ))}
-      </div>
-
+    <div className="grid grid-cols-2 md:grid-cols-4  ml-5 mr-5 md:ml-5 md:mr-5 lg:ml-10 lg:mr-10 xl:ml-28 xl:mr-28">
+      {developers.map((developer) => (
+        <CardDesarrolladores
+          key={developer.id}
+          nombre={developer.nombre}
+          ocupacion={developer.ocupacion}
+          imagen={developer.imagen}
+          imagenFondo={developer.imagenFondo}
+          github={developer.github}
+          linkedin={developer.linkedin}
+        />
+      ))}
     </div>
   );
 };
+
+//   return (
+//     <div className=" bg-whithe h-auto" >
+
+//       <div className="h-30 border-l-4 border-negro ml-3">
+//         <span className="text-3xl text-negro font-inter font-medium block ml-4">
+//           Desarrolladores
+//         </span>
+//       </div>
+//       <div className="flex flex-wrap bg-blue-gray-500 justify-center">
+//         {developers.map((developer) => (
+//           <CardDesarrolladores
+//             key={developer.id}
+//             nombre={developer.nombre}
+//             ocupacion={developer.ocupacion}
+//             imagen={developer.imagen}
+//             imagenFondo={developer.imagenFondo}
+//             github={developer.github}
+//             linkedin={developer.linkedin}
+//           />
+//         ))}
+//       </div>
+
+//     </div>
+//   );
+// };
 export default RenderCardDesarrolladores;
