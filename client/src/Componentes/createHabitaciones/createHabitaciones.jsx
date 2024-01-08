@@ -68,6 +68,12 @@ console.log({habitacionData})
     dispatch(crearHabitacion(habitacionData));
     } else  alert('Validation errors:', errors);
 };
+
+const handleChangeServicio = (index, event) => {
+  const updatedServicios = [...habitacionData.servicios]; 
+  updatedServicios[index].descripcion = event.target.value; 
+  setHabitacionData({ ...habitacionData, servicios: updatedServicios }); 
+};
   return (
     
     
