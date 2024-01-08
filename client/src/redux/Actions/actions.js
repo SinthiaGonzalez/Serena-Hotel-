@@ -38,7 +38,7 @@ export function addToCart(id) {
   };
 }
 
-// creamos la action que elimina del acarrito las habitaciones seleccionadas
+// creamos la action que elimina del acarrito las habitaciones
 
 export function postComent(state) {
   return async function (dispatch) {
