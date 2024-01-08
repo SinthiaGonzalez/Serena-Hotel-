@@ -4,8 +4,8 @@ const SobreNosotros = () => {
       <div className="mx-4 lg:ml-20 lg:mr-20 bg-verde">
         <div className="flex flex-col lg:flex-row items-center mb-8">
           <div className="w-full lg:w-1/2 ">
-            <div className="bg-434C4C p-6 rounded-lg w-4/5 h-auto">
-              <span className="text-2xl font-inter block mb-16 ml-12">
+            <div className="p-6 rounded-lg w-4/5 h-auto -mt-24" style={{ backgroundColor: 'rgba(29, 40, 40, 0.7)'}}>
+              <span className="text-2xl font-inter block mb-24 ml-12">
                 SERENA HOTEL
               </span>
               <p className="font-inter xl:mb-6 ml-8">

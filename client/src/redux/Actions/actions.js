@@ -38,7 +38,7 @@ export function addToCart(id) {
   };
 }
 
-// creamos la action que elimina del acarrito las habitaciones seleccionadas
+// creamos la action que elimina del acarrito las habitaciones
 
 export function postComent(state) {
   return async function (dispatch) {
@@ -93,6 +93,18 @@ export function eliminarComentario(id) {
       }
     } catch (error) {
       alert(error.message);
+    }
+  };
+}
+
+
+export function enviarConsulta(formData) {
+  return async function(dispatch) {
+    try {
+      const response = await axios.post('/contactenos', formData);
+      console.log('Respuesta del servidor:', response.data);
+    } catch (error) {
+      console.error('Error al enviar la consulta:', error);
     }
   };
 }

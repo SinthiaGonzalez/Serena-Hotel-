@@ -1,0 +1,13 @@
+{
+  "web": {
+    "client_id": "170585267274-b3omd7gue8h8qugrbmqh7k8f2lti41pm.apps.googleusercontent.com",
+    "project_id": "serena-hotel-410221",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_secret": "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",
+    "redirect_uris": ["https://developers.google.com/oauthplayground"],
+    "refresh_token":"1//04a0HzpFWVPVKCgYIARAAGAQSNwF-L9Ir5y56KvmRKwi11EQEw6xqxd_F2xlCpR18B_DzYILU0hxwf5ihU03pSQ9M5x6gfL9btug",
+    "access_token": "ya29.a0AfB_byAX12mkf56E6zo9Q9MBNhKhI-Bkk6B45UUwaaX65hzORKF8k-6E9chEDFzROMuZ-I2s1FBAdmwKupIQaO_njQ_3iBI4DDLGbuHp5UB_9WL1MQMjiubmtx2joFa9cpOZh8AZaFqYC2N6drzZGvdvgeeEKB6nO0nqaCgYKAeoSARASFQHGX2MiSiK3d755qOEdJqlTfZLzPg0171"
+  }
+}
