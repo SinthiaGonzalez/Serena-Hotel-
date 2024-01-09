@@ -61,7 +61,7 @@ function ProfileMenu() {
           />
         </Button>
       </MenuHandler>
-      <MenuList className="flex text-lg text-blanco bg-verde border-0 w-60 flex flex-col items-center p-1">
+      <MenuList className="text-lg text-white bg-verde border-0 w-60 flex flex-col items-center p-1">
         <p className="p-1 font-medium focus:outline-none">Perfil</p>
         <img
           className="h-36 w-36 object-cover rounded-full focus:outline-none"
@@ -75,7 +75,7 @@ function ProfileMenu() {
             <MenuItem
               key={label}
               onClick={closeMenu}
-              className="border-0 flex flex-row items-center my-1 justify-center gap-2 rounded-xm focus:bg-naranja focus:text-blanco"
+              className="border-0 flex flex-row items-center my-1 justify-center gap-2 rounded-xm focus:bg-naranja focus:text-white"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -130,13 +130,13 @@ function NavList() {
         >
           <MenuItem
             className={`focus:bg-naranja flex items-center gap-2 lg:rounded-10 hover:bg-naranja ${
-              location.pathname === href ? "bg-naranja text-blanco" : ""
+              location.pathname === href ? "bg-naranja text-white" : ""
             }`}
           >
             <svg xmlns={xmlns} height="16" width="20" viewBox="0 0 640 512">
               <path fill="#ffffff" d={d} />
             </svg>
-            <span className="text-blanco"> {label}</span>
+            <span className="text-white"> {label}</span>
           </MenuItem>
         </Typography>
       ))}
@@ -224,13 +224,13 @@ const NavBarHome = () => {
                   height="16"
                   width="12"
                   viewBox="0 0 384 512"
-                  className="transition-transform duration-300 ease-in-out transform fill-current text-blanco hover:fill-current hover:text-naranja"
+                  className="transition-transform duration-300 ease-in-out transform fill-current text-white hover:fill-current hover:text-naranja"
                 >
                   <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
                 </svg>
               </button>
 
-              <p className="text-blanco text-xm">TUS COMPRAS</p>
+              <p className="text-white text-xm">TUS COMPRAS</p>
             </div>
             <div className="flex flex-col gap-2">
               <AddShoppingCart />
