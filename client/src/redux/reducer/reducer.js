@@ -49,6 +49,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         comentarios: updatedComentarios,
       };
+  //     case "POST_USUARIO":
+  // console.log('Estado después de la acción:', action.payload);
+  // return {
+  //   ...state,
+  //   usuarios: [...state.usuarios, action.payload],
+  // };
 
       default: return state;
 

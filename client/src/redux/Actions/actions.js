@@ -83,7 +83,7 @@ export function eliminarComentario(id) {
   return async function (dispatch) {
     try {
       const response = await axios.delete(`/comentario/${id}`);
-      console.log('log de actions', response);
+      
       if (response.status === 200) {
         dispatch({
           type: "ELIMINAR_COMENTARIO",
