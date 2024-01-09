@@ -97,7 +97,7 @@ const CrearHabitacion = () => {
   useEffect(() => {
     // Actualiza el estado submitDisabled en función de los errores y la completitud de los campos
     setSubmitDisabled(Object.keys(errors).length > 0 || isSubmitDisabled());
-  }, [errors, habitacionData]);
+  }, [errors, habitacionData, isSubmitDisabled]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -8,7 +8,7 @@ const GraficosAdmin = () => {
         labels: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dec"],
         datasets: [
             {
-                label: "Ganancia",
+                label: "Ganancias",
                 data: [100,200,300,400,500,600,700,800,900,1000,1100,1200]
             }
         ]
