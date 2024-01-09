@@ -1,5 +1,6 @@
 import { Typography } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
+import { Link as ScrollToPositionLink, scroller } from "react-scroll";
 
 const SITEMAP = [
   {
@@ -87,16 +88,27 @@ const Footer = () => {
                     color="orange"
                     className="font-normal"
                   >
-                    {titulo === "Serena Hotel" ? (
-                      // En esta parte hay que configurar cuando este terminado el Home, que al seleccionar una de las opciones de Serena Hotel, nos lleve a esa parte de la misma pagina.
-                      // Ya quedo configurado para que cuando se seleccione una opción de Explora, nos redireccione a la view correspondiente, así que debería tener el mismo nombre.
-                      <Link
-                        to={`#${link.toLowerCase()}`}
+                    {
+                    titulo === "Serena Hotel" ? (
+                      <ScrollToPositionLink
+                        to={link.toLowerCase()}
+                        spy={true}
+                        smooth={true}
+                        offset={-70} // Adjust this offset value
+                        duration={500}
                         className="inline-block py-1 pr-2 transition-transform hover:scale-105"
+                        onClick={() =>
+                          scroller.scrollTo(link.toLowerCase(), {
+                            smooth: true,
+                            offset: -70,
+                            duration: 500,
+                          })
+                        }
                       >
                         {link}
-                      </Link>
-                    ) : titulo === "Explora" ? (
+                      </ScrollToPositionLink>
+                    ) : 
+                    titulo === "Explora" ? (
                       <Link
                         to={`/${link.ruta}`}
                         className="inline-block py-1 pr-2 transition-transform hover:scale-105"
@@ -169,4 +181,3 @@ const Footer = () => {
 };
 
 export default Footer;
-
