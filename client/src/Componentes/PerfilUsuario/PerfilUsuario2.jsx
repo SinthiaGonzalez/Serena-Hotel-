@@ -4,6 +4,7 @@ import {
   AdjustmentsVerticalIcon,
 } from "@heroicons/react/24/solid";
 
+//a
 export const PerfilUsuario2 = () => {
   return (
     <div className="h-[100vh] flex flex-col items-center justify-center">
