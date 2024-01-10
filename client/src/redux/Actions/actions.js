@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export function getHabitaciones() {
   console.log("estoy en actions")
-  return async function(dispatch) {
+  return async function (dispatch) {
     try {
       const habitaciones = await axios.get('/habitaciones');
       return dispatch({
@@ -17,7 +17,7 @@ export function getHabitaciones() {
 
 // creamos la action que crea la preferenciaId de mercadopago
 export function createPreferenceMercadopagoId() {
-  return async function(dispatch) {
+  return async function (dispatch) {
     try {
       const preference = await axios.post("mercadopago/create_preference", data);
       return dispatch({
@@ -99,7 +99,7 @@ export function eliminarComentario(id) {
 
 
 export function enviarConsulta(formData) {
-  return async function(dispatch) {
+  return async function (dispatch) {
     try {
       const response = await axios.post('/contactenos', formData);
       console.log('Respuesta del servidor:', response.data);
@@ -109,22 +109,53 @@ export function enviarConsulta(formData) {
   };
 }
 
-export function crearHabitacion (habitacionData) {
-  console.log({habitacionData})
+export function crearHabitacion(habitacionData) {
+  console.log({ habitacionData })
   return async (dispatch) => {
-      try {
-          const response = await axios.post('http://localhost:3001/post/habitaciones', habitacionData)
-          console.log(response.data);
-          alert('Creado con exito')
-          dispatch ({
-              type:"CREAR_HABITACION",
-              payload: response.data,
-          });
-      } catch (error) {
-          console.log(error);
-          alert(error.message);
-          
-      }
+    try {
+      const response = await axios.post('http://localhost:3001/post/habitaciones', habitacionData)
+      console.log(response.data);
+      alert('Creado con exito')
+      dispatch({
+        type: "CREAR_HABITACION",
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+      alert(error.message);
+
+    }
   }
 }
 
+//creamos la action de los filtros y ordenamiento
+export function fiteryOrder(filtrosdata) {
+  console.log("aca estan los datos del", filtrosdata);
+  let ascodesc = filtrosdata;
+  let nombre = "nombre";
+  let personas = "";
+  if (filtrosdata === "mayor" || filtrosdata === "menor") {
+    nombre = "precio";
+    if (filtrosdata === "mayor") {
+      ascodesc = "desc";
+    }
+    if (filtrosdata === "menor") {
+      ascodesc = "asc";
+    }
+  }
+  return async function (dispatch) {
+
+    try {
+     
+      const response = await axios.get(`/ordenamientos&filtros?ordenarPor=${nombre}&direccion=${ascodesc}&filtroPersonas=${personas}`);
+      console.log("Aquí está la respuesta de la API:", response.data);
+
+      dispatch({
+        type: "FILTER_ORDER_BY_ASC_DESC",
+        payload: response.data 
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+}
