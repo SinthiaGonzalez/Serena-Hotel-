@@ -7,9 +7,11 @@ const postHabitaciones = async (
   precio,
   imagenes,
   servicios,
-  descripcion
+  descripcion,
+  estado
 ) => {
-  console.log("aqui", nombre, precio, imagenes, servicios, descripcion);
+  
+  console.log("aqui", nombre, precio, imagenes, servicios, descripcion, estado);
 
   const result = [];
   for (let i = 0; i < imagenes.length; i++) {
@@ -17,7 +19,7 @@ const postHabitaciones = async (
       folder: "habitaciones",
     });
   }
-  if (!nombre || !precio || !imagenes || !servicios || !descripcion) {
+  if (!nombre || !precio || !imagenes || !servicios || !descripcion || !estado) {
     return "faltan datos";
   }
   const prueba = await Habitaciones.findOne({ where: { nombre: nombre } });
@@ -36,6 +38,7 @@ const postHabitaciones = async (
       imagenes: arrayImagen,
       servicios,
       descripcion,
+      estado,
     });
     return habitacion;
   }

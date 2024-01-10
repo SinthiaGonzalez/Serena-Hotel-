@@ -16,7 +16,7 @@ export function getHabitaciones() {
 }
 
 // creamos la action que crea la preferenciaId de mercadopago
-export function createPreferenceMercadopagoId(data) {
+export function createPreferenceMercadopagoId() {
   return async function(dispatch) {
     try {
       const preference = await axios.post("mercadopago/create_preference", data);
