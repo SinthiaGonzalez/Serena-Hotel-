@@ -15,16 +15,35 @@ const CrearHabitacion = () => {
     precio: "",
     imagenes: [],
     servicios: [
-      { icono: "sensor_door", descripcion: "" },
-      { icono: "person", descripcion: "" },
-      { icono: "bed", descripcion: "" },
-      { icono: "home", descripcion: "" },
-      { icono: "local_bar", descripcion: "Minibar" },
-      { icono: "wifi", descripcion: "Wifi" },
+      {
+        "icono": "sensor_door",
+        "descripcion": ""
+      },
+      {
+        "icono": "person",
+        "descripcion": ""
+      },
+      {
+        "icono": "bed",
+        "descripcion": ""
+      },
+      {
+        "icono": "home",
+        "descripcion": ""
+      },
+      {
+        "icono": "local_bar",
+        "descripcion": "Minibar"
+      },
+      {
+        "icono": "wifi",
+        "descripcion": "WIFI"
+      }
     ],
-    // descripcion: "",
+    descripcion: "Habitacion comoda",
   });
   console.log({ habitacionData });
+  console.log(errors);
 
   const isSubmitDisabled = () => {
     // Verifica si hay algún campo obligatorio sin completar
@@ -32,6 +51,12 @@ const CrearHabitacion = () => {
       (value) => value === "" || (Array.isArray(value) && value.length === 0)
     );
   };
+
+  const handleChangeServicio = (index, event) => {
+    const updatedServicios = [...habitacionData.servicios]; // Create a copy of the servicios array
+    updatedServicios[index].descripcion = event.target.value; // Update the descripcion at the specified index
+    setHabitacionData({ ...habitacionData, servicios: updatedServicios }); // Update the state with the modified servicios array
+  };  
 
   const handleBlur = (fieldName) => {
     setTouchedFields({ ...touchedFields, [fieldName]: true });
@@ -174,7 +199,7 @@ const CrearHabitacion = () => {
                   </span>
                   <p className="text-blanco text-sm text-center">
                     {
-                      <select
+                      <select onChange={(event) =>handleChangeServicio(0, event)}
                         name="select"
                         className="ml-2 p-1 rounded-md text-blanco text-center w-[80px]"
                       >
@@ -195,7 +220,7 @@ const CrearHabitacion = () => {
                   </span>
                   <p className="text-blanco text-sm text-center">
                     {
-                      <select
+                      <select onChange={(event) =>handleChangeServicio(1, event)}
                         name="select"
                         className="ml-2 p-1 rounded-md text-blanco text-center w-[80px]"
                       >
@@ -221,7 +246,7 @@ const CrearHabitacion = () => {
                   </span>
                   <p className="text-blanco text-sm text-center">
                     {
-                      <select
+                      <select onChange={(event) =>handleChangeServicio(2, event)}
                         name="select"
                         className="ml-2 p-1 rounded-md text-blanco text-center w-[80px]"
                       >
@@ -243,7 +268,7 @@ const CrearHabitacion = () => {
                   </span>
                   <p className="text-blanco text-sm text-center">
                     {
-                      <input
+                      <input onChange={(event) =>handleChangeServicio(3,event)}
                         className="text-center w-[80px] mr-2 p-1 rounded-md"
                         type="number"
                         name="m2"

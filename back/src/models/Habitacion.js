@@ -15,7 +15,7 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    imagen: {
+    imagenes: {
       type: DataTypes.JSONB,
       allowNull: false,
       defaultValue: []
