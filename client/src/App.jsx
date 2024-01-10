@@ -11,8 +11,8 @@ import PasareladePago from "./Componentes/Pasarela-de-Pago/PasareladePago.jsx";
 import axios from "axios";
 import AcercaDeSerena from "./Componentes/AcercaDeSerena/AcercaDeSerena.jsx";
 import DashBoarAdmin from "./Componentes/DashBoarAdmin/DashBoarAdmin.jsx";
-import DashBoarCliente from "./Componentes/DashboarCliente/DashCliente.jsx";
-import { Perfilusuario1 } from "./Componentes/PerfilUsuario/PerfilUsuario.jsx";
+import DashBoardClienteReservas from "./Componentes/DashboarCliente/DashboardReservas.jsx";
+import DashBoardClientePerfil from "./Componentes/DashboarCliente/DashClientePerfil.jsx";
 // Esta linea de codigo hace que por default todos los requerimientos en axios se hagan a esta ruta en el back
 // Luego nos va a servir para hacer el Deploy del front
 axios.defaults.baseURL = "http://localhost:3001/";
@@ -27,12 +27,12 @@ const App = () => {
         {/* La siguiente ruta captura cualquier otra ruta y muestra el componente 404 */}
         <Route path="*" element={<Error404 />} />
         <Route path="/admin" element={<DashBoarAdmin />} />
-        <Route path="/cliente" element={<DashBoarCliente />} />
+        <Route path="/clienteReservas" element={<DashBoardClienteReservas />} />
+        <Route path="/ClientePerfil" element={<DashBoardClientePerfil />} />
         <Route path="/pasareladePago" element={<PasareladePago />} />
         <Route path="/comentarios" element={<ComentPage />} />
         <Route path="/comentar" element={<CreateComentPage />} />
         <Route path="/usuario" element={<CreateUsuario />} />
-        <Route path="/perfilUsuario" element={<Perfilusuario1 />} />
       </Routes>
     </>
   );
