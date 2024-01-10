@@ -19,8 +19,8 @@ const CreateHabitacion = () => {
       { icono: "person", descripcion: "" },
       { icono: "bed", descripcion: "" },
       { icono: "home", descripcion: "" },
-      { icono: "local_bar", descripcion: "" },
-      { icono: "wifi", descripcion: "" },
+      { icono: "local_bar", descripcion: "Minibar" },
+      { icono: "wifi", descripcion: "WIFI" },
     ],
     descripcion: "",
   });
@@ -121,3 +121,4 @@ const CreateHabitacion = () => {
   );
 };
 export default CreateHabitacion;
+

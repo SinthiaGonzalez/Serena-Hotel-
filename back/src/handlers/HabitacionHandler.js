@@ -2,13 +2,16 @@ const { getHabitaciones } = require("../Controladores/getHabitaciones");
 const { postHabitaciones } = require("../Controladores/postHabitaciones");
 const postHabitacionHandler = async (req, res) => {
   try {
-    const { nombre, precio, imagen, servicios, descripcion } = req.body;
+    
+    const { nombre, precio, imagenes, servicios, descripcion, estado } = req.body;
+
     const respuesta = await postHabitaciones(
       nombre,
       precio,
-      imagen,
+      imagenes,
       servicios,
-      descripcion
+      descripcion,
+      estado
     );
     res.status(200).json(respuesta);
   } catch (error) {

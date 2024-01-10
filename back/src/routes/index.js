@@ -1,19 +1,29 @@
-const express = require('express');
-const { CreateComentario } = require('../Controladores/PostComentarios');
-const {AllComentariosdHandler}= require ('../handlers/AllComentariosHandler')
-const {ActualizarComentarioHandler}= require('../handlers/ActualizarComentarioHnadler')
-const {EliminarComentariosHandler}= require ('../handlers/EliminarComentaiosHandler')
-const {HandlerPostUsuario}= require('../handlers/HandlersUsuarios/PostHandlerUsuario')
-const {getHandlerUsuarios}= require('../handlers/HandlersUsuarios/GetHandlerUsuarios')
-const {CreatePreferenceMP} = require('../Controladores/postProductMP');// importamos el metodo CreatePreferenceMP del archivo postProductMP.js
-const { getHabitaciones } = require("../Controladores/getHabitaciones");
-const { EnvioMailContactenos } = require('../handlers/EnvioMailContactenos');
+const express = require("express");
+const { CreateComentario } = require("../Controladores/PostComentarios");
+const { AllComentariosdHandler } = require("../handlers/AllComentariosHandler");
+const {
+  ActualizarComentarioHandler,
+} = require("../handlers/ActualizarComentarioHnadler");
+const {
+  EliminarComentariosHandler,
+} = require("../handlers/EliminarComentaiosHandler");
+const {
+  HandlerPostUsuario,
+} = require("../handlers/HandlersUsuarios/PostHandlerUsuario");
+const { CreatePreferenceMP } = require("../Controladores/postProductMP"); // importamos el metodo CreatePreferenceMP del archivo postProductMP.js
+
+const { EnvioMailContactenos } = require("../handlers/EnvioMailContactenos");
 const { getHabitacionHandler } = require("../handlers/HabitacionHandler");
 const {
   addHabitacionToCarrito,
   getCarrito,
 } = require("../Controladores/carritoControlador");
 const { postHabitacionHandler } = require("../handlers/HabitacionHandler");
+const { postReservasHandler } = require("../handlers/ReservasHandler");
+const { getReservas } = require("../Controladores/getReservas");
+const {
+  getOrdenamientosFiltrosHandler,
+} = require("../Controladores/getOrdenamientosFiltrosHandler");
 const { HandlerPostDesarrollador } = require('../handlers/HandlersDesarrolladores/PostHandlersDesarrolladores');
 const { GetHandlerDesarrolladores } = require('../handlers/HandlersDesarrolladores/GetHandlerDesarrolladores');
 const { EliminarDesarrolladorHandler } = require('../handlers/HandlersDesarrolladores/EliminarDesarrolladorHandler');
@@ -38,12 +48,13 @@ router.post("/mercadopago/create_preference", CreatePreferenceMP);
 
 router.get("/habitaciones", getHabitacionHandler);
 
-router.post('/contactenos', EnvioMailContactenos);
+router.post("/contactenos", EnvioMailContactenos);
 
 router.post("/post/habitaciones", postHabitacionHandler);
 router.post("/carrito", addHabitacionToCarrito);
 router.get("/carrito", getCarrito);
+router.post("/reservas", postReservasHandler);
+router.get("/reservas", getReservas);
 
+router.get("/ordenamientos&filtros", getOrdenamientosFiltrosHandler);
 module.exports = router;
-
-

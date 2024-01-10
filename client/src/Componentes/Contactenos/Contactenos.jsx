@@ -1,23 +1,24 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { enviarConsulta } from '../../redux/Actions/actions';
-import {  
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { enviarConsulta } from "../../redux/Actions/actions";
+import {
   Card,
   Input,
   Button,
   Typography,
   Textarea,
 } from "@material-tailwind/react";
+import NavBarHome from "../NavBarHome/NavBarHome";
+import Footer from "../Footer/Footer";
 
 const Contactenos = () => {
-
   const dispatch = useDispatch();
 
   const [infoFormulario, setInfoFormulario] = useState({
-    nombre: '',
-    correo: '',
-    telefono: '',
-    mensaje: '',
+    nombre: "",
+    correo: "",
+    telefono: "",
+    mensaje: "",
   });
 
   const handleChange = (e) => {
@@ -27,11 +28,20 @@ const Contactenos = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(enviarConsulta(infoFormulario));
+
+    // Borrar la información del formulario después de enviar
+    setInfoFormulario({
+      nombre: "",
+      correo: "",
+      telefono: "",
+      mensaje: "",
+    });
   };
 
   return (
     <div className="bg-verde">
-      <div className="ml-4 bg-verde">
+      <NavBarHome/>
+      <div className="my-10 ml-4 bg-verde">
         <div className="flex flex-col lg:flex-row items-center ml-6 mr-8">
           <div className="w-full lg:w-1/2 mt-8 mb-8 lg:mb-0 lg:mr-4">
             <div className="h-30 border-l-4 border-blanco text-left p-4 mb-10">
@@ -50,8 +60,15 @@ const Contactenos = () => {
                 estadía en medio de la naturaleza.
               </p>
 
-              <Card color="transparent" shadow={false} className="ml-6 md:ml-20 mb-20">
-                <form onSubmit={handleSubmit} className="mt-6 mb-2 w-80 max-w-screen-lg sm:w-96">
+              <Card
+                color="transparent"
+                shadow={false}
+                className="ml-6 md:ml-20 mb-20"
+              >
+                <form
+                  onSubmit={handleSubmit}
+                  className="mt-6 mb-2 w-80 max-w-screen-lg sm:w-96"
+                >
                   <div className="mb-1 flex flex-col gap-2">
                     <a className="font-inter font-medium text-blanco">
                       Nombre:
@@ -65,7 +82,8 @@ const Contactenos = () => {
                       onChange={handleChange}
                       className="font-inter text-blanco border-t-blanco focus:border-t-blanco"
                       labelProps={{
-                        className: "before:content-none after:content-none font-inter text-blanco",
+                        className:
+                          "before:content-none after:content-none font-inter text-blanco",
                       }}
                     />
 
@@ -105,6 +123,7 @@ const Contactenos = () => {
                       Mensaje:
                     </a>
                     <Textarea
+                      type="text"
                       name="mensaje"
                       placeholder="Mensaje"
                       value={infoFormulario.mensaje}
@@ -133,6 +152,7 @@ const Contactenos = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };
