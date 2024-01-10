@@ -14,6 +14,7 @@ import DashBoarAdminHabitaciones from "./Componentes/DashBoarAdminHabitaciones/D
 import DashBoarCliente from "./Componentes/DashboarCliente/DashCliente.jsx";
 import Contactenos from "./Componentes/Contactenos/Contactenos.jsx";
 import { Perfilusuario1 } from "./Componentes/PerfilUsuario/PerfilUsuario.jsx";
+import DashBoarAdminUpdate from "./Componentes/updateHabitacion/dashboardAdminUpdate.jsx";
 // Esta linea de codigo hace que por default todos los requerimientos en axios se hagan a esta ruta en el back
 // Luego nos va a servir para hacer el Deploy del front
 axios.defaults.baseURL = "http://localhost:3001/";
@@ -35,6 +36,7 @@ const App = () => {
         <Route path="/comentar" element={<CreateComentPage />} />
         <Route path="/usuario" element={<CreateUsuario />} />
         <Route path="/perfilUsuario" element={<Perfilusuario1 />} />
+        <Route path="/admin_habitaciones/update" element={<DashBoarAdminUpdate/>} />
       </Routes>
     </>
   );

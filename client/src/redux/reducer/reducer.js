@@ -6,6 +6,7 @@ const initialState = {
    comentarios: [],
   AllComentsBackUp: [],
   nuevaHabitacion: [],
+  habitacionActualizada: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -51,11 +52,13 @@ const reducer = (state = initialState, action) => {
         comentarios: updatedComentarios,
       };
 
-      default: return state;
-
       case "CREAR_HABITACION":
-    return { ...state, nuevaHabitacion: [...state.nuevaHabitacion, action.payload], habitaciones: [...state.habitaciones, action.payload] }  
+    return { ...state, nuevaHabitacion: [...state.nuevaHabitacion, action.payload], habitaciones: [...state.habitaciones, action.payload] }
+    
+    case "UPDATE_HABITACION":
+    return { ...state, habitacionActualizada: [...state.habitacionActualizada, action.payload] }  
 
+    default: return state;
   }
 };
 

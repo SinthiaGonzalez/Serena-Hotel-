@@ -23,6 +23,7 @@ const CreateHabitacion = () => {
       { icono: "wifi", descripcion: "WIFI" },
     ],
     descripcion: "",
+    estado: "Disponible"
   });
   console.log({ habitacionData });
 

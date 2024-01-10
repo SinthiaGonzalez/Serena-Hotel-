@@ -128,3 +128,22 @@ export function crearHabitacion (habitacionData) {
   }
 }
 
+export function updateHabitacion (habitacionData) {
+  console.log({habitacionData})
+  return async (dispatch) => {
+      try {
+          const response = await axios.put('http://localhost:3001/update/habitaciones', habitacionData)
+          console.log(response.data);
+          alert('Habitacion actualizada con exito')
+          dispatch ({
+              type:"UPDATE_HABITACION",
+              payload: response.data,
+          });
+      } catch (error) {
+          console.log(error);
+          alert(error.message);
+          
+      }
+  }
+}
+
