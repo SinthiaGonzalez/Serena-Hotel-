@@ -8,7 +8,6 @@ import BarraInformacion from "../BarraInformacion/BarraInformacion";
 import Home from "../Home/Home";
 import ComentPage from "../comentpage/comentpage";
 import CardsHome from "../CardsHome/CardsHome";
-import LoginCliente from "../LoginCliente/LoginCliente";
 import ImagenSeparadoraConBoton from "../ImagenSeparadoraConBoton/ImagenSeparadoraConBoton";
 import Contactenos from "../Contactenos/Contactenos";
 import ScrollToTop from "../../ScrollToTop";
