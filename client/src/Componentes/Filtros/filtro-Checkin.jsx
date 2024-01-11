@@ -1,15 +1,23 @@
-import {Input,Popover,PopoverHandler,PopoverContent,} from "@material-tailwind/react";
-  import { format } from "date-fns";
-  import { DayPicker } from "react-day-picker";
-  import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
-    import { useState } from "react";
-   
-const FechaSelectCheckin = () => {
-    const [checkin, setCheckin] = useState(new Date());
-    console.log("checkin ",format(checkin, "dd-MM-yyyy"));
-    //falta el handle en el onchange porque si no se imprime la fecha en el input cada que hago cambios o se refresca el componente
-    return(
-        <div className="p-4">
+import {
+  Input,
+  Popover,
+  PopoverHandler,
+  PopoverContent,
+} from "@material-tailwind/react";
+import { format } from "date-fns";
+import { DayPicker } from "react-day-picker";
+import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
+import { useState } from "react";
+
+const Checkin = ({ onCheckinChange }) => {
+  const [checkin, setCheckin] = useState(new Date());
+
+  const handleCheckinChange = (selectedDate) => {
+    setCheckin(selectedDate);
+    onCheckinChange(selectedDate);
+  };
+  return (
+    <div className="p-4 ">
       <Popover placement="bottom">
         <PopoverHandler>
           <Input
@@ -17,15 +25,17 @@ const FechaSelectCheckin = () => {
             color="white"
             onChange={() => null}
             value={checkin ? format(checkin, "dd-MM-yyyy") : ""}
+            className="cursor-pointer"
+            style={{ fontSize: "110%" }}
           />
         </PopoverHandler>
         <PopoverContent>
           <DayPicker
             mode="single"
             selected={checkin}
-            onSelect={setCheckin}
+            onSelect={handleCheckinChange}
             showOutsideDays
-            className="border-0"
+            className="border-0 "
             classNames={{
               caption: "flex justify-center py-2 mb-4 relative items-center",
               caption_label: "text-sm font-medium text-verde-900",
@@ -35,8 +45,8 @@ const FechaSelectCheckin = () => {
               nav_button_previous: "absolute left-1.5",
               nav_button_next: "absolute right-1.5",
               table: "w-full border-collapse",
-              head_row: "flex font-medium text-verde-900",
-              head_cell: "m-0.5 w-9 font-normal text-sm",
+              head_row: "flex font-medium  text-verde-900",
+              head_cell: "m-0.5 w-9 font-normal  text-sm",
               row: "flex w-full mt-2",
               cell: "text-gray-600 rounded-md h-9 w-9 text-center text-sm p-0 m-0.5 relative [&:has([aria-selected].day-range-end)]:rounded-r-md [&:has([aria-selected].day-outside)]:bg-gray-900/20 [&:has([aria-selected].day-outside)]:text-white [&:has([aria-selected])]:bg-gray-900/50 first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20",
               day: "h-9 w-9 p-0 font-normal",
@@ -61,7 +71,7 @@ const FechaSelectCheckin = () => {
         </PopoverContent>
       </Popover>
     </div>
-    );
+  );
 };
 
-export default FechaSelectCheckin;
+export default Checkin;

@@ -1,29 +1,51 @@
 const { Reservas, Habitaciones } = require("../db");
+const { Op } = require("sequelize");
 
 const getReservas = async (req, res) => {
   try {
-    const reservas = await Reservas.findAll({
-      include: "Habitaciones",
+    const { fecha_entrada, fecha_salida } = req.query;
+    console.log("Fechas:", fecha_entrada, fecha_salida);
+
+    const fechaEntrada = new Date(fecha_entrada);
+    const fechaSalida = new Date(fecha_salida);
+
+    console.log("Fechas convertidas:", fechaEntrada, fechaSalida);
+
+    const reservasSuperpuestas = await Reservas.findAll({
+      include: Habitaciones,
+      where: {
+        [Op.and]: [
+          {
+            fecha_entrada: {
+              [Op.lt]: fechaSalida,
+            },
+            fecha_salida: {
+              [Op.gt]: fechaEntrada,
+            },
+          },
+        ],
+      },
     });
 
-    // Mapear las reservas y añadir la propiedad "habitaciones" a cada una
-    const reservasConHabitaciones = await Promise.all(
-      reservas.map(async (reserva) => {
-        // Obtener las habitaciones asociadas a cada reserva
-        const habitacionesReserva = await reserva.getHabitaciones();
+    console.log("Reservas superpuestas:", reservasSuperpuestas);
 
-        // Crear un nuevo objeto de reserva con la propiedad "habitaciones"
-        const reservaConHabitaciones = {
-          ...reserva.toJSON(),
-          habitaciones: habitacionesReserva,
-        };
-
-        return reservaConHabitaciones;
-      })
+    const habitacionesReservadas = reservasSuperpuestas.flatMap((reserva) =>
+      reserva.Habitaciones.map((habitacion) => habitacion.id)
     );
 
-    res.status(200).json(reservasConHabitaciones);
+    console.log("Habitaciones reservadas:", habitacionesReservadas);
+
+    const todasLasHabitaciones = await Habitaciones.findAll();
+
+    const habitacionesDisponibles = todasLasHabitaciones.filter(
+      (habitacion) => !habitacionesReservadas.includes(habitacion.id)
+    );
+
+    console.log("Habitaciones disponibles:", habitacionesDisponibles);
+
+    res.status(200).json(habitacionesDisponibles);
   } catch (error) {
+    console.error("Error:", error);
     res.status(500).json({ error: error.message });
   }
 };

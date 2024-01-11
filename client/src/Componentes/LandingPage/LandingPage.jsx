@@ -8,9 +8,8 @@ import BarraInformacion from "../BarraInformacion/BarraInformacion";
 import Home from "../Home/Home";
 import ComentPage from "../comentpage/comentpage";
 import CardsHome from "../CardsHome/CardsHome";
-import LoginCliente from "../LoginCliente/LoginCliente";
 import ImagenSeparadoraConBoton from "../ImagenSeparadoraConBoton/ImagenSeparadoraConBoton";
-import Contactenos from "../Contactenos/Contactenos";
+import LoginCliente from "../LoginCliente/LoginCliente";
 import ScrollToTop from "../../ScrollToTop";
 
 const LandingPage = () => {
@@ -18,7 +17,7 @@ const LandingPage = () => {
     <>
       <ScrollToTop />
       <Home id="home" />
-      <LoginCliente id="loginCliente" />
+      {/* <LoginCliente id="loginCliente" /> */}
       <Experiencias id="experiencias" />
       <SobreSerenaLanding id="sobreSerena" />
       <BarraInformacion id="barraInformacion" />
