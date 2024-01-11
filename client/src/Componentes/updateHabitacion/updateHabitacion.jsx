@@ -160,7 +160,7 @@ const UpdateHabitacion = () => {
               ))}
             </div>
             <input
-              className="mt-2 w-full text-center"
+              className="mt-2 w-full text-center text-negro"
               type="text"
               name="imagen"
               placeholder="Imagen URL"
@@ -182,7 +182,7 @@ const UpdateHabitacion = () => {
           <div className="flex flex-col items-center w-4/8">
             <div className="block font-inter text-2xl font-bold text-blanco mb-16">
               <input
-                className="text-center"
+                className="text-center text-negro"
                 type="text"
                 name="nombre"
                 placeholder="Nombre"
@@ -202,7 +202,7 @@ const UpdateHabitacion = () => {
                     {
                       <select onChange={(event) =>handleChangeServicio(0, event)}
                         name="select"
-                        className="ml-2 p-1 rounded-md text-blanco text-center w-[80px]"
+                        className="ml-2 p-1 rounded-md text-negro text-center w-[80px]"
                       >
                         <option value="" selected>
                           Cuartos
@@ -223,7 +223,7 @@ const UpdateHabitacion = () => {
                     {
                       <select onChange={(event) =>handleChangeServicio(1, event)}
                         name="select"
-                        className="ml-2 p-1 rounded-md text-blanco text-center w-[80px]"
+                        className="ml-2 p-1 rounded-md text-negro text-center w-[80px]"
                       >
                         <option value="" selected>
                           Personas
@@ -249,7 +249,7 @@ const UpdateHabitacion = () => {
                     {
                       <select onChange={(event) =>handleChangeServicio(2, event)}
                         name="select"
-                        className="ml-2 p-1 rounded-md text-blanco text-center w-[80px]"
+                        className="ml-2 p-1 rounded-md text-negro text-center w-[80px]"
                       >
                         <option value="" selected>
                           Cama
@@ -267,7 +267,7 @@ const UpdateHabitacion = () => {
                   <span className="material-symbols-outlined p-3 text-blanco ">
                     home
                   </span>
-                  <p className="text-blanco text-sm text-center">
+                  <p className="text-negro text-sm text-center">
                     {
                       <input onChange={(event) =>handleChangeServicio(3,event)}
                         className="text-center w-[80px] mr-2 p-1 rounded-md"
@@ -301,7 +301,7 @@ const UpdateHabitacion = () => {
               $
               {
                 <input
-                  className="text-2xl font-bold text-blanco w-1/3 mx-4 text-center"
+                  className="text-2xl font-bold text-negro w-1/3 mx-4 text-center"
                   type="number"
                   name="precio"
                   placeholder="-"
@@ -335,7 +335,7 @@ const UpdateHabitacion = () => {
         </form>
       </div>
     </div>
-  );
+  )
 };
 
 export default UpdateHabitacion;
