@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import validation from "./validation";
+import validation from "../CrearHabitaciones/validation";
 import { useDispatch, useSelector } from "react-redux";
 import { crearHabitacion } from "../../redux/Actions/actions";
 

@@ -1,24 +1,30 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { postUsuario } from '../../redux/actions/actions';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faEnvelope, faPhone, faLock } from '@fortawesome/free-solid-svg-icons';
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { postUsuario } from "../../redux/actions/actions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faUser,
+  faEnvelope,
+  faPhone,
+  faLock,
+} from "@fortawesome/free-solid-svg-icons";
+import LoginTemplate from "../Login/Login";
 
 const CreateUsuario = () => {
   const dispatch = useDispatch();
 
   const [user, setUser] = useState({
-    name: '',
-    apellido: '',
-    email: '',
-    telefono: '',
-    contraseña: ''
+    name: "",
+    apellido: "",
+    email: "",
+    telefono: "",
+    contraseña: "",
   });
 
   const handleChange = (e) => {
     setUser({
       ...user,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -28,11 +34,12 @@ const CreateUsuario = () => {
       await dispatch(postUsuario(user));
       // Limpiar el formulario restableciendo el estado
       setUser({
-        name: '',
-        apellido: '',
-        email: '',
-        telefono: '',
-        contraseña: ''
+        name: "",
+        apellido: "",
+        email: "",
+        telefono: "",
+        contraseña: "",
+        confirmarContraseña: "",
       });
     } catch (error) {
       alert(error.message);
@@ -40,72 +47,202 @@ const CreateUsuario = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-white">
-      <form onSubmit={handleSubmit} className="w-1/3 rounded-lg p-8" style={{ backgroundColor: 'white' }}>
-        <h2 className="text-2xl mb-4">Crear Usuario</h2>
-        <div className="mb-4">
-          <label className="block text-gray-200 text-sm font-bold mb-2">
-            <FontAwesomeIcon icon={faUser} className="mr-2" />
-            <input
-              type="text"
-              name="name"
-              placeholder="Nombre"
-              value={user.name}
-              onChange={handleChange}
-              className="appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline bg-[#1D2828] text-white"
-            />
-          </label>
-          <label className="block text-gray-200 text-sm font-bold mb-2">
-            <FontAwesomeIcon icon={faUser} className="mr-2" />
-            <input
-              type="text"
-              name="apellido"
-              placeholder="Apellido"
-              value={user.apellido}
-              onChange={handleChange}
-              className="appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline bg-[#1D2828] text-white"
-            />
-          </label>
-          <label className="block text-gray-200 text-sm font-bold mb-2">
-            <FontAwesomeIcon icon={faEnvelope} className="mr-2" />
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={user.email}
-              onChange={handleChange}
-              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-[#1D2828] text-white"
-            />
-          </label>
-          <label className="block text-gray-200 text-sm font-bold mb-2">
-            <FontAwesomeIcon icon={faPhone} className="mr-2" />
-            <input
-              type="text"
-              name="telefono"
-              placeholder="Teléfono"
-              value={user.telefono}
-              onChange={handleChange}
-              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-[#1D2828] text-white"
-            />
-          </label>
-          <label className="block text-gray-200 text-sm font-bold mb-2">
-            <FontAwesomeIcon icon={faLock} className="mr-2" />
-            <input
-              type="password"
-              name="contraseña"
-              placeholder="Contraseña"
-              value={user.contraseña}
-              onChange={handleChange}
-              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-[#1D2828] text-white"
-            />
-          </label>
+    <div
+      className="relative bg-cover bg-center text-white text-center p-8 h-screen"
+      style={{
+        backgroundImage:
+          'url("https://i.postimg.cc/3xxjwxft/selena-hotel-1.png")',
+      }}
+    >
+      <div className="flex flex-col items-center justify-center h-full bg-blanco w-2/3 rounded-lg px-20 mx-[250px] ">
+        <div className="w-2/3 justify-center text-center rounded-lg">
+          <LoginTemplate />
         </div>
-        <button type="submit" className="bg-[#FF3D00] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-          REGISTRATE
-        </button>
-      </form>
+        <form onSubmit={handleSubmit} className="w-2/3">
+          <h2 className="text-2xl mb-4">Crear Usuario</h2>
+          <div className="mb-4">
+            <label className="block text-gray-200 text-sm font-bold mb-2">
+              <div className="flex flex-row h-11 bg-verde  relative rounded-lg mb-4">
+                <div className="items-center">
+                  <FontAwesomeIcon
+                    icon={faUser}
+                    className="w-[45px] h-7 p-2 border-r-4 border-naranja"
+                  />
+                </div>
+
+                <input
+                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
+                  type="text"
+                  name="name"
+                  placeholder="Nombre"
+                  value={user.name}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="flex flex-row h-11 bg-verde  relative rounded-lg mb-4">
+                <div className="items-center">
+                  <FontAwesomeIcon
+                    icon={faUser}
+                    className="w-[45px] h-7 p-2 border-r-4 border-naranja"
+                  />
+                </div>
+
+                <input
+                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
+                  type="text"
+                  name="apellido"
+                  placeholder="Apellido"
+                  value={user.apellido}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="flex flex-row h-11 bg-verde  relative rounded-lg mb-4">
+                <div className="items-center">
+                  <FontAwesomeIcon
+                    icon={faEnvelope}
+                    className="w-[45px] h-7 p-2 border-r-4 border-naranja"
+                  />
+                </div>
+
+                <input
+                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  value={user.email}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="flex flex-row h-11 bg-verde  relative rounded-lg mb-4">
+                <div className="items-center">
+                  <FontAwesomeIcon
+                    icon={faPhone}
+                    className="w-[45px] h-7 p-2 border-r-4 border-naranja"
+                  />
+                </div>
+
+                <input
+                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
+                  type="text"
+                  name="telefono"
+                  placeholder="Teléfono"
+                  value={user.telefono}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="flex flex-row h-11 bg-verde  relative rounded-lg mb-4">
+                <div className="items-center">
+                  <FontAwesomeIcon
+                    icon={faLock}
+                    className="w-[45px] h-7 p-2 border-r-4 border-naranja"
+                  />
+                </div>
+
+                <input
+                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
+                  type="password"
+                  name="contraseña"
+                  placeholder="Contraseña"
+                  value={user.contraseña}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="flex flex-row h-11 bg-verde  relative rounded-lg mb-4">
+                <div className="items-center">
+                  <FontAwesomeIcon
+                    icon={faLock}
+                    className="w-[45px] h-7 p-2 border-r-4 border-naranja"
+                  />
+                </div>
+
+                <input
+                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
+                  type="password"
+                  name="confirmarContraseña"
+                  placeholder="Confirmar Contraseña"
+                  value={user.confirmarContraseña}
+                  onChange={handleChange}
+                />
+              </div>
+            </label>
+          </div>
+          <button
+            className="w-2/4 mb-4 mt-4 select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-blanco transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
+            type="button"
+          >
+            REGISTRATE
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
 
 export default CreateUsuario;
+
+{
+  /* <FontAwesomeIcon icon={faUser} className="mr-2" />
+<input
+  type="text"
+  name="name"
+  placeholder="Nombre"
+  value={user.name}
+  onChange={handleChange}
+  className="appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline bg-[#1D2828] text-white"
+/> */
+}
+{
+  /* </label>
+<label className="block text-gray-200 text-sm font-bold mb-2">
+<FontAwesomeIcon icon={faUser} className="mr-2" />
+<input
+  type="text"
+  name="apellido"
+  placeholder="Apellido"
+  value={user.apellido}
+  onChange={handleChange}
+  className="appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline bg-[#1D2828] text-white"
+/> */
+}
+{
+  /* </label>
+<label className="block text-gray-200 text-sm font-bold mb-2">
+<FontAwesomeIcon icon={faEnvelope} className="mr-2" />
+<input
+  type="email"
+  name="email"
+  placeholder="Email"
+  value={user.email}
+  onChange={handleChange}
+  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-[#1D2828] text-white"
+/> */
+}
+{
+  /* </label>
+<label className="block text-gray-200 text-sm font-bold mb-2">
+<FontAwesomeIcon icon={faPhone} className="mr-2" />
+<input
+  type="text"
+  name="telefono"
+  placeholder="Teléfono"
+  value={user.telefono}
+  onChange={handleChange}
+  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-[#1D2828] text-white"
+/>
+</label>
+<label className="block text-gray-200 text-sm font-bold mb-2">
+<FontAwesomeIcon icon={faLock} className="mr-2" />
+<input
+  type="password"
+  name="contraseña"
+  placeholder="Contraseña"
+  value={user.contraseña}
+  onChange={handleChange}
+  className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-[#1D2828] text-white"
+/> */
+}
