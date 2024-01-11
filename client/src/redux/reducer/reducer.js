@@ -3,7 +3,7 @@ const initialState = {
   usuarios: [],
   preferenceIdMP: [],
   carrito: [],
-   comentarios: [],
+  comentarios: [],
   AllComentsBackUp: [],
   nuevaHabitacion: [],
 };
@@ -35,13 +35,12 @@ const reducer = (state = initialState, action) => {
       } else {
         return state;
       }
-       case "GET_COMENTARIOS":
+    case "GET_COMENTARIOS":
       return {
         ...state,
-        comentarios: action.payload, // Actualizar los comentarios directamente sin usar splice
+        comentarios: action.payload,
         AllComentsBackUp: action.payload,
       };
-
     case "ELIMINAR_COMENTARIO":
       const updatedComentarios = state.comentarios.filter(
         (comentario) => comentario.id !== action.payload
@@ -50,12 +49,19 @@ const reducer = (state = initialState, action) => {
         ...state,
         comentarios: updatedComentarios,
       };
-
-      default: return state;
-
-      case "CREAR_HABITACION":
-    return { ...state, nuevaHabitacion: [...state.nuevaHabitacion, action.payload], habitaciones: [...state.habitaciones, action.payload] }  
-
+    case "CREAR_HABITACION":
+      return {
+        ...state,
+        nuevaHabitacion: [...state.nuevaHabitacion, action.payload],
+        habitaciones: [...state.habitaciones, action.payload]
+      };
+      case "FILTER_ORDER_BY_ASC_DESC":
+        return {
+          ...state,
+          habitaciones: action.payload
+        };
+    default: 
+      return state;
   }
 };
 
