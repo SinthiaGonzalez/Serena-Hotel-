@@ -37,7 +37,7 @@ const NavBarCliente = () => {
           />
         </svg>
 
-        <a href="#" className="font-medium flex items-center">
+        <a href="/clienteReservas" className="font-medium flex items-center">
           RESERVAS
         </a>
       </Typography>
@@ -58,7 +58,7 @@ const NavBarCliente = () => {
             d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"
           />
         </svg>
-        <a href="#" className="font-medium flex items-center">
+        <a href="/ClientePerfil" className="font-medium flex items-center">
           USUARIO
         </a>
       </Typography>
@@ -70,7 +70,7 @@ const NavBarCliente = () => {
       <div className="container mx-auto flex items-center justify-between text-blanco">
         <Typography
           as="a"
-          href="#"
+          href="/"
           className="mr-4 text-blanco -cursor-pointer py-1.5 font-medium"
         >
           SERENA HOTEL

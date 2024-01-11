@@ -13,15 +13,9 @@ import {
   MenuList,
   MenuItem,
   Avatar,
-  Card,
   IconButton,
 } from "@material-tailwind/react";
-import {
-  Square3Stack3DIcon,
-  ChevronDownIcon,
-  RocketLaunchIcon,
-  Bars2Icon,
-} from "@heroicons/react/24/solid";
+import { ChevronDownIcon, Bars2Icon } from "@heroicons/react/24/solid";
 import AddShoppingCart from "../cardCarrito/cardAñadirCarrito";
 // profile menu component
 const profileMenuItems = [
@@ -70,7 +64,6 @@ function ProfileMenu() {
         />
         <p className="p-1 font-medium focus:outline-none">¡Hola,Keanu!</p>
         {profileMenuItems.map(({ label, d }, key) => {
-          // const isLastItem = key === profileMenuItems.length - 1;
           return (
             <MenuItem
               key={label}
@@ -125,8 +118,8 @@ function NavList() {
           as="a"
           href={href}
           variant="small"
-          color={`${location.pathname === href ? "blanco" : "gray"}`}
-          className="font-medium"
+          color={`${location.pathname === href ? "orange" : "gray"}`}
+          className="font-medium text-lg"
         >
           <MenuItem
             className={`focus:bg-naranja flex items-center gap-2 lg:rounded-10 hover:bg-naranja ${
@@ -161,12 +154,12 @@ const NavBarHome = () => {
   }, []);
 
   return (
-    <Navbar className="bg-verde opacity-85 mx-auto rounded-xs max-w-screen-3xl p-7 lg:pl-10 border-0">
+    <Navbar className="bg-verde  mx-auto rounded-xs max-w-screen-3xl p-7 lg:pl-10 border-0">
       <div className="relative mx-auto flex items-center justify-between text-white">
         <Typography
           as="a"
           href="/"
-          className="mr-4 ml-2 cursor-pointer py-1.5 font-medium"
+          className="mr-4 ml-2 cursor-pointer py-1.5 font-medium text-lg"
         >
           SERENA HOTEL
         </Typography>
@@ -182,9 +175,7 @@ const NavBarHome = () => {
         >
           <Bars2Icon className="h-6 w-6" />
         </IconButton>
-        {/* <Button size="sm" variant="text">
-          <span className="text-blanco">INICIAR SESIÒN</span>
-        </Button> */}
+
         <div className="flex flex-row items-center justify-center gap-4">
           <button
             onClick={toggleCart}
@@ -207,13 +198,13 @@ const NavBarHome = () => {
           <ProfileMenu />
         </div>
       </div>
-      
+
       <Collapse open={isNavOpen} className="overflow-scroll">
         <NavList />
       </Collapse>
       <div className="relative ">
         {isCartOpen && (
-          <div className="flex flex-col justify-between h-96 w-80 absolute top-12 right-0 bg-verde  p-6 rounded-md shadow-md">
+          <div className="flex flex-col justify-between h-96 w-80 absolute top-12 right-0  bg-verde p-6 rounded-md shadow-md">
             <div>
               <button
                 onClick={toggleCart}
@@ -247,16 +238,15 @@ const NavBarHome = () => {
                 SEGUIR COMPRANDO
               </Button>
               <Link to="/pasareladePago">
-              <Button
-                className="bg-naranja cursor-pointer"
-                size="sm"
-                color="orange"
-                variant="text"
-              >
-                PAGAR
-              </Button>
+                <Button
+                  className="bg-naranja cursor-pointer"
+                  size="sm"
+                  color="orange"
+                  variant="text"
+                >
+                  PAGAR
+                </Button>
               </Link>
-
             </div>
           </div>
         )}
