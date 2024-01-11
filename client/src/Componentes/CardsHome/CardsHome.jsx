@@ -1,7 +1,7 @@
 import CardHome from "../CardHome/CardHome";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getHabitaciones } from "../../redux/actions/actions";
+import { getHabitaciones } from "../../redux/Actions/actions";
 const CardsHome = () => {
   const dispatch = useDispatch();
   const habitacionesHome = useSelector((state) => state.habitaciones);
@@ -35,9 +35,9 @@ const CardsHome = () => {
       </div>
       <div className="pl-10 pr-6 py-10 bg-blanco mx-auto justify-center grid grid-cols-1 md:grid-cols-3 gap-2">
         {primerasTresHabitaciones.map(
-          ({ nombre, imagen, precio, servicios }) => (
+          ({ nombre, imagen, precio, servicios, id }) => (
             <CardHome
-              key={nombre}
+              key={id}
               imagen={imagen}
               nombre={nombre}
               precio={precio}

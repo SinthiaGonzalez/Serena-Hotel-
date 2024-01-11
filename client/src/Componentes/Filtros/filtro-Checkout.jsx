@@ -1,28 +1,38 @@
-import {Input,Popover,PopoverHandler,PopoverContent,} from "@material-tailwind/react";
-  import { format } from "date-fns";
-  import { DayPicker } from "react-day-picker";
-  import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
-    import { useState } from "react";
-const Checkout = () => {
-    const [checkout, setCheckout] = useState(new Date());
-    console.log("checkout ",format(checkout, "dd-MM-yyyy"));
-    //falta el handle en el onchange porque si no se imprime la fecha en el input cada que hago cambios o se refresca el componente
-    return(
-        <div className="p-4">
+import { useState } from "react";
+import {
+  Input,
+  Popover,
+  PopoverHandler,
+  PopoverContent,
+} from "@material-tailwind/react";
+import { format } from "date-fns";
+import { DayPicker } from "react-day-picker";
+import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
+
+const Checkout = ({ onCheckoutChange }) => {
+  const [checkout, setCheckout] = useState(new Date());
+
+  const handleCheckoutChange = (selectedDate) => {
+    setCheckout(selectedDate);
+    onCheckoutChange(selectedDate);
+  };
+  return (
+    <div className="p-4">
       <Popover placement="bottom">
         <PopoverHandler>
           <Input
-          color="white"
+            color="white"
             label="Check-out"
             onChange={() => null}
             value={checkout ? format(checkout, "dd-MM-yyyy") : ""}
+            className="cursor-pointer"
           />
         </PopoverHandler>
         <PopoverContent>
           <DayPicker
             mode="single"
             selected={checkout}
-            onSelect={setCheckout}
+            onSelect={handleCheckoutChange}
             showOutsideDays
             className="border-0"
             classNames={{
@@ -60,7 +70,7 @@ const Checkout = () => {
         </PopoverContent>
       </Popover>
     </div>
-    );
+  );
 };
 
 export default Checkout;
