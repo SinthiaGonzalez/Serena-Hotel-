@@ -26,6 +26,7 @@ const Checkout = ({ onCheckoutChange }) => {
             onChange={() => null}
             value={checkout ? format(checkout, "dd-MM-yyyy") : ""}
             className="cursor-pointer"
+            style={{ fontSize: "110%" }}
           />
         </PopoverHandler>
         <PopoverContent>
