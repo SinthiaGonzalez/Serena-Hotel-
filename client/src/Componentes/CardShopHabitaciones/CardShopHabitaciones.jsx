@@ -1,5 +1,11 @@
 /* eslint-disable react/prop-types */
-const CardShopHabitaciones = ({ id, nombre, precio, servicios,handlerAddToCart }) => {
+const CardShopHabitaciones = ({
+  id,
+  nombre,
+  precio,
+  servicios,
+  handlerAddToCart,
+}) => {
   return (
     <>
       <div
@@ -19,8 +25,8 @@ const CardShopHabitaciones = ({ id, nombre, precio, servicios,handlerAddToCart }
             {nombre}
           </h5>
           <div className="flex flex-row gap-4">
-            {servicios.map(({ icono, descripcion, i }) => (
-              <div key={i}>
+            {servicios.map(({ icono, descripcion }, index) => (
+              <div key={`${icono}-${descripcion}-${index}`}>
                 <span className="material-symbols-outlined cursor-pointer rounded-full border border-verde bg-gray-900/5 p-3 text-blanco transition-colors hover:border-blanco hover:bg-gray-900/10 hover:!opacity-100 group-hover:opacity-70">
                   {icono}
                 </span>

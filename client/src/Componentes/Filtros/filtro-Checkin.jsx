@@ -1,15 +1,23 @@
-import {Input,Popover,PopoverHandler,PopoverContent,} from "@material-tailwind/react";
-  import { format } from "date-fns";
-  import { DayPicker } from "react-day-picker";
-  import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
-    import { useState } from "react";
-   
-const FechaSelectCheckin = () => {
-    const [checkin, setCheckin] = useState(new Date());
-    console.log("checkin ",format(checkin, "dd-MM-yyyy"));
-    //falta el handle en el onchange porque si no se imprime la fecha en el input cada que hago cambios o se refresca el componente
-    return(
-        <div className="p-4">
+import {
+  Input,
+  Popover,
+  PopoverHandler,
+  PopoverContent,
+} from "@material-tailwind/react";
+import { format } from "date-fns";
+import { DayPicker } from "react-day-picker";
+import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
+import { useState } from "react";
+
+const Checkin = ({ onCheckinChange }) => {
+  const [checkin, setCheckin] = useState(new Date());
+
+  const handleCheckinChange = (selectedDate) => {
+    setCheckin(selectedDate);
+    onCheckinChange(selectedDate);
+  };
+  return (
+    <div className="p-4 ">
       <Popover placement="bottom">
         <PopoverHandler>
           <Input
@@ -17,13 +25,14 @@ const FechaSelectCheckin = () => {
             color="white"
             onChange={() => null}
             value={checkin ? format(checkin, "dd-MM-yyyy") : ""}
+            className="cursor-pointer"
           />
         </PopoverHandler>
         <PopoverContent>
           <DayPicker
             mode="single"
             selected={checkin}
-            onSelect={setCheckin}
+            onSelect={handleCheckinChange}
             showOutsideDays
             className="border-0"
             classNames={{
@@ -61,7 +70,7 @@ const FechaSelectCheckin = () => {
         </PopoverContent>
       </Popover>
     </div>
-    );
+  );
 };
 
-export default FechaSelectCheckin;
+export default Checkin;

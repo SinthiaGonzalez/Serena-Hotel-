@@ -6,6 +6,7 @@ const initialState = {
   comentarios: [],
   AllComentsBackUp: [],
   nuevaHabitacion: [],
+  reservas: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -26,7 +27,9 @@ const reducer = (state = initialState, action) => {
         preferenceIdMP: action.payload,
       };
     case "ADD_TO_CART":
-      const habitacionToAdd = state.habitaciones.find(habitacion => habitacion.id === action.payload);
+      const habitacionToAdd = state.habitaciones.find(
+        (habitacion) => habitacion.id === action.payload
+      );
       if (habitacionToAdd) {
         return {
           ...state,
@@ -53,14 +56,34 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         nuevaHabitacion: [...state.nuevaHabitacion, action.payload],
-        habitaciones: [...state.habitaciones, action.payload]
+        habitaciones: [...state.habitaciones, action.payload],
       };
-      case "FILTER_ORDER_BY_ASC_DESC":
-        return {
-          ...state,
-          habitaciones: action.payload
-        };
-    default: 
+    case "FILTER_ORDER_BY_ASC_DESC":
+      return {
+        ...state,
+        habitaciones: action.payload,
+      };
+    case "GET_HABITACIONES_ORDENAMIENTOS":
+      return {
+        ...state,
+        habitaciones: action.payload,
+      };
+    case "GET_HABITACIONES_FILTROS":
+      return {
+        ...state,
+        habitaciones: action.payload,
+      };
+    case "GET_HABITACIONES_FILTROS_PERSONAS":
+      return {
+        ...state,
+        habitaciones: action.payload,
+      };
+    case "GET_RESERVAS":
+      return {
+        ...state,
+        reservas: action.payload,
+      };
+    default:
       return state;
   }
 };

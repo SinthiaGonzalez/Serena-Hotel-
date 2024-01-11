@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import {
   Card,
   CardHeader,
@@ -24,8 +25,11 @@ const CardHome = ({ nombre, precio, servicios }) => {
         </div>
 
         <div className="group mt-8 inline-flex flex-wrap items-center gap-3">
-          {servicios.map(({ icono, descripcion, i }) => (
-            <Tooltip key={i} content={descripcion}>
+          {servicios.map(({ icono, descripcion, index }) => (
+            <Tooltip
+              key={`${icono}-${descripcion}-${index}`}
+              content={descripcion}
+            >
               <span className="material-symbols-outlined cursor-pointer rounded-full border border-verde bg-gray-900/5 p-3 text-blanco transition-colors hover:border-blanco hover:bg-gray-900/10 hover:!opacity-100 group-hover:opacity-70">
                 {icono}
               </span>
