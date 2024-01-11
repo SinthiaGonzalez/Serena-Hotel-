@@ -8,7 +8,6 @@ import {
   faPhone,
   faLock,
 } from "@fortawesome/free-solid-svg-icons";
-import LoginTemplate from "../Login/Login";
 
 const CreateUsuario = () => {
   const dispatch = useDispatch();
@@ -55,9 +54,6 @@ const CreateUsuario = () => {
       }}
     >
       <div className="flex flex-col items-center justify-center h-full bg-blanco w-2/3 rounded-lg px-20 mx-[250px] ">
-        <div className="w-2/3 justify-center text-center rounded-lg">
-          <LoginTemplate />
-        </div>
         <form onSubmit={handleSubmit} className="w-2/3">
           <h2 className="text-2xl mb-4">Crear Usuario</h2>
           <div className="mb-4">
