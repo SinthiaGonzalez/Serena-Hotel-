@@ -6,6 +6,10 @@ import LoginTemplate from "../Login/Login";
 const LoginCliente = () => {
   //https://www.material-tailwind.com/docs/html/card#login-card
   return (
+<<<<<<< HEAD
+=======
+
+>>>>>>> cd8f1afbe656ad4b9e0adb979f9df61207c7a57c
     <div
       className="relative bg-cover bg-center h-screen text-white text-center"
       style={{
@@ -26,6 +30,10 @@ const LoginCliente = () => {
           </a>
           <p className="flex mt-4 mb-10 font-inter text-3xl antialiased leading-normal text-center justify-center">
             Te damos la Bienvenida nuevamente!
+<<<<<<< HEAD
+=======
+
+>>>>>>> cd8f1afbe656ad4b9e0adb979f9df61207c7a57c
           </p>
 
           <div className="w-2/3 ml-[18%] justify-center text-center rounded-lg">

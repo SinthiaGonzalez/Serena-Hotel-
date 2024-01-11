@@ -52,6 +52,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         comentarios: updatedComentarios,
+<<<<<<< HEAD
       };     
 
     case "CREAR_HABITACION":
@@ -59,6 +60,12 @@ const reducer = (state = initialState, action) => {
       ...state, 
       nuevaHabitacion: [...state.nuevaHabitacion, action.payload], 
       habitaciones: [...state.habitaciones, action.payload] };
+=======
+      };
+
+    case "CREAR_HABITACION":
+      return { ...state, nuevaHabitacion: [...state.nuevaHabitacion, action.payload], habitaciones: [...state.habitaciones, action.payload] };
+>>>>>>> cd8f1afbe656ad4b9e0adb979f9df61207c7a57c
     
     case "GET_DEVS":     
       return {
@@ -66,6 +73,10 @@ const reducer = (state = initialState, action) => {
         developers: action.payload,                
       } 
     default: return state;
+<<<<<<< HEAD
+=======
+
+>>>>>>> cd8f1afbe656ad4b9e0adb979f9df61207c7a57c
     case "GET_HABITACIONES_ORDENAMIENTOS":
       return {
         ...state,
@@ -90,6 +101,10 @@ const reducer = (state = initialState, action) => {
         return { ...state, habitacionActualizada: [...state.habitacionActualizada, action.payload] }
     default:
       return state;
+<<<<<<< HEAD
+=======
+
+>>>>>>> cd8f1afbe656ad4b9e0adb979f9df61207c7a57c
   }
 };
 
