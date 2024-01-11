@@ -114,7 +114,7 @@ export function crearHabitacion(habitacionData) {
   return async (dispatch) => {
     try {
       const response = await axios.post(
-        "http://localhost:3001/post/habitaciones",
+        "/post/habitaciones",
         habitacionData
       );
       console.log(response.data);
@@ -208,3 +208,43 @@ export const getReservas = ({ fecha_entrada, fecha_salida }) => {
     }
   };
 };
+export function updateHabitacion (habitacionData) {
+  console.log({habitacionData})
+  return async (dispatch) => {
+      try {
+
+          const response = await axios.put('/update/habitaciones', habitacionData)
+
+          console.log(response.data);
+          alert('Habitacion actualizada con exito')
+          dispatch ({
+              type:"UPDATE_HABITACION",
+              payload: response.data,
+          });
+      } catch (error) {
+          console.log(error);
+          alert(error.message);
+          
+      }
+  }
+}
+
+
+export function getDevs(){
+  return async function(dispatch){ 
+      try{
+          const response = await axios("/desarrolladores");   
+          console.log("linea 135",response.data)       
+          return dispatch({
+              type: "GET_DEVS",      
+              payload: response.data, 
+          });      
+      }catch(error){
+          alert('Hubo un problema con el servidor. Comuniquese con el Administrador - Error: ' + error)
+          return 
+      }
+  }  
+}  
+
+
+

@@ -94,15 +94,16 @@ const Habitaciones = () => {
   return (
     <>
       <NavBarHome />
-      <div className="flex flex-row bg-white py-7 h-full">
-        <div className="ml-8 bg-verde w-2/5 rounded-xl">
+      <div className="flex flex-row bg-white py-7 h-screen">
+        <div className="ml-8 bg-verde w-2/5 rounded-xl ">
           <h2 className="text-3xl font-bold text-blanco p-4">Ordenamientos</h2>
 
           <div className="flex flex-col w-full p-4">
-            <h2 className="text-2xl font-bold text-blanco">Nombre</h2>
+            <h2 className="text-2xl font-bold text-blanco mb-2">Nombre</h2>
             <Select
               className="bg-verde w-full p-2 border border-gray-300 text-blanco text-sm rounded-lg"
               onChange={(value) => handleNombreChange(value, "nombre")}
+              style={{ fontSize: "110%" }}
             >
               <Option value="asc">A-Z</Option>
               <Option value="desc">Z-A</Option>
@@ -110,10 +111,11 @@ const Habitaciones = () => {
           </div>
 
           <div className="flex flex-col w-full p-4">
-            <h2 className="text-2xl font-bold text-blanco">Precio</h2>
+            <h2 className="text-2xl font-bold text-blanco mb-2">Precio</h2>
             <Select
               className="bg-verde w-full p-2 border border-gray-300 text-blanco text-sm rounded-lg"
               onChange={(value) => handlePrecioChange(value, "precio")}
+              style={{ fontSize: "110%" }}
             >
               <Option value="asc">menor precio</Option>
               <Option value="desc">mayor precio</Option>
@@ -127,7 +129,7 @@ const Habitaciones = () => {
           <h2 className="text-2xl font-bold text-blanco p-4">
             Cantidad de Personas
           </h2>
-          <Card className="w-full max-w-[24rem] ml-4">
+          <Card className="w-full max-w-[30rem] ml-4">
             <List className="flex-row">
               {[1, 2, 3].map((persona) => (
                 <ListItem key={persona} className="p-0">
@@ -159,7 +161,7 @@ const Habitaciones = () => {
               ))}
             </List>
           </Card>
-          <h2 className="text-2xl font-bold text-blanco p-4">
+          {/* <h2 className="text-2xl font-bold text-blanco p-4">
             Cantidad de Cuartos
           </h2>
           <Card className="w-full max-w-[24rem] ml-4">
@@ -193,7 +195,7 @@ const Habitaciones = () => {
                 </ListItem>
               ))}
             </List>
-          </Card>
+          </Card> */}
         </div>
         <CardsShopHabitaciones habitacionesShop={habitacionesShop} />
       </div>

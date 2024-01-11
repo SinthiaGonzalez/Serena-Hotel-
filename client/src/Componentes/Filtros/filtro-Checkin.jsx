@@ -26,6 +26,7 @@ const Checkin = ({ onCheckinChange }) => {
             onChange={() => null}
             value={checkin ? format(checkin, "dd-MM-yyyy") : ""}
             className="cursor-pointer"
+            style={{ fontSize: "110%" }}
           />
         </PopoverHandler>
         <PopoverContent>
@@ -34,7 +35,7 @@ const Checkin = ({ onCheckinChange }) => {
             selected={checkin}
             onSelect={handleCheckinChange}
             showOutsideDays
-            className="border-0"
+            className="border-0 "
             classNames={{
               caption: "flex justify-center py-2 mb-4 relative items-center",
               caption_label: "text-sm font-medium text-verde-900",
@@ -44,8 +45,8 @@ const Checkin = ({ onCheckinChange }) => {
               nav_button_previous: "absolute left-1.5",
               nav_button_next: "absolute right-1.5",
               table: "w-full border-collapse",
-              head_row: "flex font-medium text-verde-900",
-              head_cell: "m-0.5 w-9 font-normal text-sm",
+              head_row: "flex font-medium  text-verde-900",
+              head_cell: "m-0.5 w-9 font-normal  text-sm",
               row: "flex w-full mt-2",
               cell: "text-gray-600 rounded-md h-9 w-9 text-center text-sm p-0 m-0.5 relative [&:has([aria-selected].day-range-end)]:rounded-r-md [&:has([aria-selected].day-outside)]:bg-gray-900/20 [&:has([aria-selected].day-outside)]:text-white [&:has([aria-selected])]:bg-gray-900/50 first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20",
               day: "h-9 w-9 p-0 font-normal",
