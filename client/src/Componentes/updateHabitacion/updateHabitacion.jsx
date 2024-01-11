@@ -10,7 +10,7 @@ const UpdateHabitacion = () => {
   const [touchedFields, setTouchedFields] = useState({});
   const [isEmpty, setIsEmpty] = useState(true);
 
-  const [habitacionData, setHabitacionData] = useState({
+  const [nuevaDataHabitacion, setNuevaDataHabitacion] = useState({
     nombre: "",
     precio: "",
     imagenes: [],
@@ -43,46 +43,46 @@ const UpdateHabitacion = () => {
     descripcion: "Habitacion comoda",
     estado: "Disponible"
   });
-  console.log({ habitacionData });
+  console.log({ nuevaDataHabitacion });
   console.log(errors);
 
   const isSubmitDisabled = () => {
     // Verifica si hay algún campo obligatorio sin completar
-    return Object.values(habitacionData).some(
+    return Object.values(nuevaDataHabitacion).some(
       (value) => value === "" || (Array.isArray(value) && value.length === 0)
     );
   };
 
   const handleChangeServicio = (index, event) => {
-    const updatedServicios = [...habitacionData.servicios]; // Create a copy of the servicios array
+    const updatedServicios = [...nuevaDataHabitacion.servicios]; // Create a copy of the servicios array
     updatedServicios[index].descripcion = event.target.value; // Update the descripcion at the specified index
-    setHabitacionData({ ...habitacionData, servicios: updatedServicios }); // Update the state with the modified servicios array
+    setNuevaDataHabitacion({ ...nuevaDataHabitacion, servicios: updatedServicios }); // Update the state with the modified servicios array
   };  
 
   const handleBlur = (fieldName) => {
     setTouchedFields({ ...touchedFields, [fieldName]: true });
     
-    // Actualiza habitacionData con el campo específico que se ha tocado
-    setHabitacionData({
-      ...habitacionData,
-      [fieldName]: habitacionData[fieldName],
+    // Actualiza nuevaDataHabitacion con el campo específico que se ha tocado
+    setNuevaDataHabitacion({
+      ...nuevaDataHabitacion,
+      [fieldName]: nuevaDataHabitacion[fieldName],
     });
     
-    // Vuelve a validar con la actualización de habitacionData
-    setErrors(validation(habitacionData));
+    // Vuelve a validar con la actualización de nuevaDataHabitacion
+    setErrors(validation(nuevaDataHabitacion));
   };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    setHabitacionData({
-      ...habitacionData,
+    setNuevaDataHabitacion({
+      ...nuevaDataHabitacion,
       [name]: value,
     });
 
     setErrors(
       validation({
-        ...habitacionData,
+        ...nuevaDataHabitacion,
         [name]: value,
       })
     );
@@ -92,30 +92,30 @@ const UpdateHabitacion = () => {
 
   const handleImageSubmit = () => {
     // Verificar que haya una imagen antes de agregarla
-    if (habitacionData.imagen) {
-      const nuevasImagenes = [...habitacionData.imagenes];
+    if (nuevaDataHabitacion.imagen) {
+      const nuevasImagenes = [...nuevaDataHabitacion.imagenes];
 
       // Si ya hay 4 imágenes, reemplazar la última
       if (nuevasImagenes.length === 4) {
-        nuevasImagenes[3] = habitacionData.imagen;
+        nuevasImagenes[3] = nuevaDataHabitacion.imagen;
       } else {
         // Si no hay 4 imágenes, agregar la nueva imagen al final
-        nuevasImagenes.push(habitacionData.imagen);
+        nuevasImagenes.push(nuevaDataHabitacion.imagen);
       }
 
-      setHabitacionData({
-        ...habitacionData,
+      setNuevaDataHabitacion({
+        ...nuevaDataHabitacion,
         imagenes: nuevasImagenes,
       });
     }
   };
 
   const handleImageRemove = (index) => {
-    const nuevasImagenes = [...habitacionData.imagenes];
+    const nuevasImagenes = [...nuevaDataHabitacion.imagenes];
     nuevasImagenes.splice(index, 1);
 
-    setHabitacionData({
-      ...habitacionData,
+    setNuevaDataHabitacion({
+      ...nuevaDataHabitacion,
       imagenes: nuevasImagenes,
     });
   };
@@ -123,18 +123,18 @@ const UpdateHabitacion = () => {
   useEffect(() => {
     // Actualiza el estado submitDisabled en función de los errores y la completitud de los campos
     setSubmitDisabled(Object.keys(errors).length > 0 || isSubmitDisabled());
-  }, [errors, habitacionData, isSubmitDisabled]);
+  }, [errors, nuevaDataHabitacion, isSubmitDisabled]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (Object.keys(errors).length === 0) {
-      dispatch(updateHabitacion(habitacionData));
+      dispatch(updateHabitacion(nuevaDataHabitacion));
     } else {
       alert("Validation errors:", errors);
     }
   };
 
-  console.log(habitacionData)
+  console.log(nuevaDataHabitacion)
 
   return (
     <div className="flex justify-center items-center h-screen bg-blanco">
@@ -143,7 +143,7 @@ const UpdateHabitacion = () => {
         <form className="flex flex-row gap-20 mx-2 my-10" onSubmit={handleSubmit}>
           <div className="w-2/8">
             <div className="grid grid-cols-2 gap-4 ml-8">
-              {habitacionData.imagenes.map((imagen, index) => (
+              {nuevaDataHabitacion.imagenes.map((imagen, index) => (
                 <div key={index} className="relative">
                   <img
                     className="h-36 w-36 object-cover rounded-xl mb-4"
@@ -164,7 +164,7 @@ const UpdateHabitacion = () => {
               type="text"
               name="imagen"
               placeholder="Imagen URL"
-              value={habitacionData.imagen}
+              value={nuevaDataHabitacion.imagen}
               onChange={handleChange}
               onBlur={() => handleBlur("imagen")}
             />
@@ -318,7 +318,7 @@ const UpdateHabitacion = () => {
               type="submit"
               disabled={isSubmitDisabled()}
             >
-              Crear
+              Actualizar
             </button>
           </div>
 

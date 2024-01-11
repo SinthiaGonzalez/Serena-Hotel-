@@ -12,20 +12,39 @@ const CreateHabitacion = () => {
 
   const [habitacionData, setHabitacionData] = useState({
     nombre: "",
-    precio: 0,
-    imagen: [],
+    precio: "",
+    imagenes: [],
     servicios: [
-      { icono: "sensor_door", descripcion: "" },
-      { icono: "person", descripcion: "" },
-      { icono: "bed", descripcion: "" },
-      { icono: "home", descripcion: "" },
-      { icono: "local_bar", descripcion: "Minibar" },
-      { icono: "wifi", descripcion: "WIFI" },
+      {
+        "icono": "sensor_door",
+        "descripcion": ""
+      },
+      {
+        "icono": "person",
+        "descripcion": ""
+      },
+      {
+        "icono": "bed",
+        "descripcion": ""
+      },
+      {
+        "icono": "home",
+        "descripcion": ""
+      },
+      {
+        "icono": "local_bar",
+        "descripcion": "Minibar"
+      },
+      {
+        "icono": "wifi",
+        "descripcion": "WIFI"
+      }
     ],
-    descripcion: "",
+    descripcion: "prueba para ver",
     estado: "Disponible"
   });
   console.log({ habitacionData });
+  console.log("aqui", habitacionData.descripcion, habitacionData.estado);
 
   const handleBlur = (fieldName) => {
     setTouchedFields({ ...touchedFields, [fieldName]: true });

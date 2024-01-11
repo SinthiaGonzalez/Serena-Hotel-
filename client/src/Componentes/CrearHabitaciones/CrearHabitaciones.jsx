@@ -41,6 +41,7 @@ const CrearHabitacion = () => {
       }
     ],
     descripcion: "Habitacion comoda",
+    estado: "Disponible"
   });
   console.log({ habitacionData });
   console.log(errors);
