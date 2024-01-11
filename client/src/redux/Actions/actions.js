@@ -113,7 +113,7 @@ export function crearHabitacion (habitacionData) {
   console.log({habitacionData})
   return async (dispatch) => {
       try {
-          const response = await axios.post('http://localhost:3001/post/habitaciones', habitacionData)
+          const response = await axios.post('/post/habitaciones', habitacionData)
           console.log(response.data);
           alert('Creado con exito')
           dispatch ({
@@ -132,7 +132,7 @@ export function updateHabitacion (habitacionData) {
   console.log({habitacionData})
   return async (dispatch) => {
       try {
-          const response = await axios.put('http://localhost:3001/update/habitaciones', habitacionData)
+          const response = await axios.put('/update/habitaciones', habitacionData)
           console.log(response.data);
           alert('Habitacion actualizada con exito')
           dispatch ({
