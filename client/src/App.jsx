@@ -24,24 +24,29 @@ const App = () => {
   return (
     <>
       <Routes>
+        {/* Rutas de la Navbar Home y Creacion de Comentarios*/}
         <Route path="/" element={<LandingPage />} />
         <Route path="/habitaciones" element={<Habitaciones />} />
         <Route path="/acercadeserena" element={<AcercaDeSerena />} />
         <Route path="/contactenos" element={<Contactenos />} />
-        {/* La siguiente ruta captura cualquier otra ruta y muestra el componente 404 */}
-        <Route path="*" element={<Error404 />} />
+        <Route path="/comentarios" element={<ComentPage />} />
+
+        {/* Rutas de Logeo y Registrarse */}
+        <Route path="/logearse" element={<LoginCliente />} />
+        <Route path="/registrarse" element={<CreateUsuario />} />
+
+        {/* Rutas Dashboard Administrador */}
         <Route path="/admin" element={<DashBoarAdmin />} />
+        <Route path="/admin_habitaciones" element={<DashBoarAdminHabitaciones />}/>
+
+        {/* Rutas Dashboard Usuario */}
         <Route path="/clienteReservas" element={<DashBoardClienteReservas />} />
         <Route path="/ClientePerfil" element={<DashBoardClientePerfil />} />
-        <Route
-          path="/admin_habitaciones"
-          element={<DashBoarAdminHabitaciones />}
-        />
         <Route path="/pasareladePago" element={<PasareladePago />} />
-        <Route path="/comentarios" element={<ComentPage />} />
         <Route path="/comentar" element={<CreateComentPage />} />
-        <Route path="/usuario" element={<CreateUsuario />} />
-        <Route path="/loginCliente" element={<LoginCliente />} />
+        
+        {/* Ruta 404 */}
+        <Route path="*" element={<Error404 />} />
       </Routes>
     </>
   );

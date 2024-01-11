@@ -1,4 +1,5 @@
-const validation = (habitacionData)=>{
+
+const validation = (habitacionData) => {
     const errors = {}
   
     
@@ -22,9 +23,8 @@ const validation = (habitacionData)=>{
     errors.servicios = 'Debes elegir al menos un servicio';
   }
   
-  
-  
+
   return errors
-  }
-  
-  export default validation;
+}
+
+export default validation;

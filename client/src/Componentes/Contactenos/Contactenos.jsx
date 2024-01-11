@@ -10,6 +10,7 @@ import {
 } from "@material-tailwind/react";
 import NavBarHome from "../NavBarHome/NavBarHome";
 import Footer from "../Footer/Footer";
+import ScrollToTop from "../../ScrollToTop";
 
 const Contactenos = () => {
   const dispatch = useDispatch();
@@ -39,7 +40,9 @@ const Contactenos = () => {
   };
 
   return (
+    
     <div className="bg-verde">
+      <ScrollToTop />
       <NavBarHome/>
       <div className="my-10 ml-4 bg-verde">
         <div className="flex flex-col lg:flex-row items-center ml-6 mr-8">
