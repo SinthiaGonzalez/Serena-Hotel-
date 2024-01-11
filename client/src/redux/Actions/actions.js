@@ -212,7 +212,9 @@ export function updateHabitacion (habitacionData) {
   console.log({habitacionData})
   return async (dispatch) => {
       try {
+
           const response = await axios.put('/update/habitaciones', habitacionData)
+
           console.log(response.data);
           alert('Habitacion actualizada con exito')
           dispatch ({
@@ -226,3 +228,23 @@ export function updateHabitacion (habitacionData) {
       }
   }
 }
+
+
+export function getDevs(){
+  return async function(dispatch){ 
+      try{
+          const response = await axios("/desarrolladores");   
+          console.log("linea 135",response.data)       
+          return dispatch({
+              type: "GET_DEVS",      
+              payload: response.data, 
+          });      
+      }catch(error){
+          alert('Hubo un problema con el servidor. Comuniquese con el Administrador - Error: ' + error)
+          return 
+      }
+  }  
+}  
+
+
+

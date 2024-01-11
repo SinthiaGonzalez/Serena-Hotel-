@@ -2,16 +2,18 @@ const {Desarrollador}= require('../../db')
 
 const CreateDesarrollador = async (req, res) => {
     try {
-      const { name, image, linkedin, github } = req.body;
+      const { nombre, ocupacion, imagen, imagenFondo, linkedin, github } = req.body;
   
     
-      if (!name || !image || !linkedin || !github) {
+      if (!nombre || !ocupacion || !imagen || !imagenFondo || !linkedin || !github) {
         return res.status(400).json({ error: 'Faltan campos requeridos' });
       }
   
       const newDesarrollador = await Desarrollador.create({
-        name,
-        image,
+        nombre,
+        ocupacion,
+        imagen,
+        imagenFondo,
         linkedin,
         github,      
       });
