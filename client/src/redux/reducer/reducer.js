@@ -3,9 +3,10 @@ const initialState = {
   usuarios: [],
   preferenceIdMP: [],
   carrito: [],
-   comentarios: [],
+  comentarios: [],
   AllComentsBackUp: [],
   nuevaHabitacion: [],
+  developers: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -51,11 +52,17 @@ const reducer = (state = initialState, action) => {
         comentarios: updatedComentarios,
       };
 
-      default: return state;
+     
 
-      case "CREAR_HABITACION":
-    return { ...state, nuevaHabitacion: [...state.nuevaHabitacion, action.payload], habitaciones: [...state.habitaciones, action.payload] }  
-
+    case "CREAR_HABITACION":
+      return { ...state, nuevaHabitacion: [...state.nuevaHabitacion, action.payload], habitaciones: [...state.habitaciones, action.payload] };
+    
+    case "GET_DEVS":     
+      return {
+        ...state,
+        developers: action.payload,                
+      } 
+    default: return state;
   }
 };
 

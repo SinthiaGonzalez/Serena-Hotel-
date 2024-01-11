@@ -1,6 +1,17 @@
 import CardDesarrolladores from "./cardDesarrolladores";
+import { useDispatch, useSelector} from 'react-redux';
+import { getDevs } from "../../redux/Actions/actions";
+import { useEffect } from "react";
+
 const RenderCardDesarrolladores = () => {
-  const developers = [
+  const developers = useSelector((state) => state.developers);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getDevs());
+
+  }, []); 
+
+  /*const developers = [
     {
       id: 1,
       nombre: "Megan Fox",
@@ -65,11 +76,10 @@ const RenderCardDesarrolladores = () => {
       id: 7,
       nombre: "Franco Famulari",
       ocupacion: "Frontend Developer",
-      imagen:
-        "https://i.postimg.cc/7hMsC92d/Foto-CV.png",
-      imagenFondo: 
-      // "https://media.licdn.com/dms/image/D4D16AQGk-cCBF__NWg/profile-displaybackgroundimage-shrink_350_1400/0/1701354141186?e=1709769600&v=beta&t=GVYo2zgaUGiszypZJGH13tRC8Pl5XeA6hfNb63bDpr8",
-      "https://www.w3schools.com/w3images/nature.jpg",
+      imagen: "https://i.postimg.cc/7hMsC92d/Foto-CV.png",
+      imagenFondo:
+        // "https://media.licdn.com/dms/image/D4D16AQGk-cCBF__NWg/profile-displaybackgroundimage-shrink_350_1400/0/1701354141186?e=1709769600&v=beta&t=GVYo2zgaUGiszypZJGH13tRC8Pl5XeA6hfNb63bDpr8",
+        "https://www.w3schools.com/w3images/nature.jpg",
       github: "https://github.com/Francofamu",
       linkedin: "https://www.linkedin.com/in/franco-famulari-25b2b9127/",
     },
@@ -83,10 +93,10 @@ const RenderCardDesarrolladores = () => {
       github: "https://github.com/idriselba",
       linkedin: "https://www.linkedin.com/in/idriselba/",
     },
-  ];
+  ];*/
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4  ml-5 mr-5 md:ml-5 md:mr-5 lg:ml-10 lg:mr-10 xl:ml-28 xl:mr-28">
+    <div className="grid grid-cols-2 md:grid-cols-4 bg-white  ml-5 mr-5 md:ml-5 md:mr-5 lg:ml-10 lg:mr-10 xl:ml-28 xl:mr-28">
       {developers.map((developer) => (
         <CardDesarrolladores
           key={developer.id}
@@ -101,30 +111,4 @@ const RenderCardDesarrolladores = () => {
     </div>
   );
 };
-
-//   return (
-//     <div className=" bg-whithe h-auto" >
-
-//       <div className="h-30 border-l-4 border-negro ml-3">
-//         <span className="text-3xl text-negro font-inter font-medium block ml-4">
-//           Desarrolladores
-//         </span>
-//       </div>
-//       <div className="flex flex-wrap bg-blue-gray-500 justify-center">
-//         {developers.map((developer) => (
-//           <CardDesarrolladores
-//             key={developer.id}
-//             nombre={developer.nombre}
-//             ocupacion={developer.ocupacion}
-//             imagen={developer.imagen}
-//             imagenFondo={developer.imagenFondo}
-//             github={developer.github}
-//             linkedin={developer.linkedin}
-//           />
-//         ))}
-//       </div>
-
-//     </div>
-//   );
-// };
 export default RenderCardDesarrolladores;

@@ -5,8 +5,7 @@
 const LoginCliente = () => { //https://www.material-tailwind.com/docs/html/card#login-card
   return (
     <div  className="relative bg-cover bg-center h-screen text-white text-center mb-16" style={{
-      backgroundImage:
-        'url("https://i.postimg.cc/3xxjwxft/selena-hotel-1.png")', height:"auto", padding: "5% 8%", display:"flex", 
+      backgroundImage:'url("https://i.postimg.cc/3xxjwxft/selena-hotel-1.png")', height:"auto", padding: "5% 8%", display:"flex", 
     }}   
   >
       <div className="relative flex flex-col text-gray-700 bg-white shadow-md w-96 bg-clip-border" 

@@ -113,7 +113,7 @@ export function crearHabitacion (habitacionData) {
   console.log({habitacionData})
   return async (dispatch) => {
       try {
-          const response = await axios.post('http://localhost:3001/post/habitaciones', habitacionData)
+          const response = await axios.post('/post/habitaciones', habitacionData)
           console.log(response.data);
           alert('Creado con exito')
           dispatch ({
@@ -127,4 +127,21 @@ export function crearHabitacion (habitacionData) {
       }
   }
 }
+
+export function getDevs(){
+  return async function(dispatch){ 
+      try{
+          const response = await axios("/desarrolladores");   
+          console.log("linea 135",response.data)       
+          return dispatch({
+              type: "GET_DEVS",      
+              payload: response.data, 
+          });      
+      }catch(error){
+          alert('Hubo un problema con el servidor. Comuniquese con el Administrador - Error: ' + error)
+          return 
+      }
+  }  
+}  
+
 

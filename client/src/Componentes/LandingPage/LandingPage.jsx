@@ -17,7 +17,6 @@ const LandingPage = () => {
     <>
       <ScrollToTop />
       <Home id="home" />
-      <LoginCliente id="loginCliente" />
       <Experiencias id="experiencias" />
       <SobreSerenaLanding id="sobreSerena" />
       <BarraInformacion id="barraInformacion" />
