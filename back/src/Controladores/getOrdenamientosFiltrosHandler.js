@@ -3,8 +3,6 @@ const { Habitaciones } = require("../db");
 const getOrdenamientosFiltrosHandler = async (req, res) => {
   try {
     const { ordenarPor, direccion, filtroPersonas } = req.query;
-    console.log("Parámetros de ordenamiento:", req.query);
-    console.log("Parámetros direccion:", direccion);
 
     const ordenValido = ["nombre", "precio"].includes(ordenarPor);
     const direccionValida = ["asc", "desc"].includes(direccion.toLowerCase());
