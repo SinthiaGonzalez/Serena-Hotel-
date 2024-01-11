@@ -6,6 +6,7 @@ const initialState = {
   comentarios: [],
   AllComentsBackUp: [],
   nuevaHabitacion: [],
+  habitacionActualizada: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -78,6 +79,8 @@ const reducer = (state = initialState, action) => {
         ...state,
         habitaciones: action.payload,
       };
+      case "UPDATE_HABITACION":
+        return { ...state, habitacionActualizada: [...state.habitacionActualizada, action.payload] }
     default:
       return state;
   }

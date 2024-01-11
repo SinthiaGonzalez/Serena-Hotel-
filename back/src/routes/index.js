@@ -24,6 +24,7 @@ const { getReservas } = require("../Controladores/getReservas");
 const {
   getOrdenamientosFiltrosHandler,
 } = require("../Controladores/getOrdenamientosFiltrosHandler");
+
 const {
   HandlerPostDesarrollador,
 } = require("../handlers/HandlersDesarrolladores/PostHandlersDesarrolladores");
@@ -36,6 +37,7 @@ const {
 const {
   getHandlerUsuarios,
 } = require("../handlers/HandlersUsuarios/GetHandlerUsuarios");
+const { updateHabitacionHandler } = require("../handlers/HabitacionHandler");
 
 const router = express.Router(); // importamos el metodo Router de express para poder crear rutas
 
@@ -67,4 +69,6 @@ router.post("/reservas", postReservasHandler);
 router.get("/reservas", getReservas);
 
 router.get("/ordenamientos&filtros", getOrdenamientosFiltrosHandler);
+
+router.put("/update/habitaciones", updateHabitacionHandler);
 module.exports = router;

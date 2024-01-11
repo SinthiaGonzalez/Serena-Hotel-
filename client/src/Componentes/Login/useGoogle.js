@@ -1,4 +1,4 @@
-// import { gapi } from "gapi-script";
+import { gapi } from "gapi-script";
 import { useEffect } from "react";
 
 export const useGoogle = () => {
