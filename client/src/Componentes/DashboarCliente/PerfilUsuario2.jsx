@@ -83,3 +83,4 @@ export const PerfilUsuario2 = () => {
     </div>
   );
 };
+export default PerfilUsuario2;

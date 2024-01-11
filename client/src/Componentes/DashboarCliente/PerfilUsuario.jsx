@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { UserIcon, EnvelopeIcon, DevicePhoneMobileIcon, LockClosedIcon, LockOpenIcon} from "@heroicons/react/24/solid";
+import {
+  UserIcon,
+  EnvelopeIcon,
+  DevicePhoneMobileIcon,
+  LockClosedIcon,
+  LockOpenIcon,
+} from "@heroicons/react/24/solid";
 export const Perfilusuario1 = () => {
   return (
     <>
@@ -20,7 +26,7 @@ export const Perfilusuario1 = () => {
             </p>
           </div>
           <div className="mb-4 bg-white bg-opacity-25 p-2  flex items-center w-[600px]">
-          <div className="block text-white-600 text-sm font-medium pr-2 border-r-2 border-naranja w-1/2 text-center">
+            <div className="block text-white-600 text-sm font-medium pr-2 border-r-2 border-naranja w-1/2 text-center">
               <label className="flex items-center justify-center">
                 <UserIcon width={30} />
                 Apellido:
@@ -32,7 +38,7 @@ export const Perfilusuario1 = () => {
           </div>
 
           <div className="mb-4 bg-white bg-opacity-25 p-2  flex items-center w-[600px]">
-          <div className="block text-white-600 text-sm font-medium pr-2 border-r-2 border-naranja w-1/2 text-center">
+            <div className="block text-white-600 text-sm font-medium pr-2 border-r-2 border-naranja w-1/2 text-center">
               <label className="flex items-center justify-center">
                 <EnvelopeIcon width={30} />
                 Correo:
@@ -44,7 +50,7 @@ export const Perfilusuario1 = () => {
           </div>
 
           <div className="mb-4 bg-white bg-opacity-25 p-2  flex items-center w-[600px]">
-          <div className="block text-white-600 text-sm font-medium pr-2 border-r-2 border-naranja w-1/2 text-center">
+            <div className="block text-white-600 text-sm font-medium pr-2 border-r-2 border-naranja w-1/2 text-center">
               <label className="flex items-center justify-center">
                 <DevicePhoneMobileIcon width={30} />
                 Telefono:
@@ -54,7 +60,7 @@ export const Perfilusuario1 = () => {
           </div>
 
           <div className="mb-4 bg-white bg-opacity-25 p-2 flex items-center w-[600px]">
-          <div className="block text-white-600 text-sm font-medium pr-2 border-r-2 border-naranja w-1/2 text-center">
+            <div className="block text-white-600 text-sm font-medium pr-2 border-r-2 border-naranja w-1/2 text-center">
               <label className="flex items-center justify-center">
                 <LockClosedIcon width={30} />
                 Contraseña:
@@ -68,7 +74,7 @@ export const Perfilusuario1 = () => {
           </div>
 
           <div className="mb-4 bg-white bg-opacity-25 p-2 flex items-center w-[600px]">
-          <div className="block text-white-600 text-sm font-medium pr-2 border-r-2 border-naranja w-1/2 text-center">
+            <div className="block text-white-600 text-sm font-medium pr-2 border-r-2 border-naranja w-1/2 text-center">
               <label className="flex items-center justify-center">
                 <LockClosedIcon width={30} />
                 Repetir Contraseña:
@@ -97,3 +103,4 @@ export const Perfilusuario1 = () => {
     </>
   );
 };
+export default Perfilusuario1;

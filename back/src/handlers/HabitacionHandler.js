@@ -1,6 +1,7 @@
 const { getHabitaciones } = require("../Controladores/getHabitaciones");
 const { postHabitaciones } = require("../Controladores/postHabitaciones");
 const { EliminarHabitacion } = require("../Controladores/controllers_Usuaruios/EliminarHabitacion")
+const { updateHabitacion } = require("../Controladores/updateHabitacion");
 const postHabitacionHandler = async (req, res) => {
   try {
     
@@ -35,6 +36,24 @@ const eliminarHabitacionHandler = async (req, res) => {
     const respuesta = await EliminarHabitacion(id);
     return res.status(200).json({ mensaje: 'Habitación eliminada exitosamente' });
   } catch (error) {
+    res.status(400).json({ error: error.message });
+  }}
+
+const updateHabitacionHandler = async (req, res) => {
+  try {
+    
+    const { nombre, precio, imagenes, servicios, descripcion, estado } = req.body;
+
+    const respuesta = await updateHabitacion(
+      nombre,
+      precio,
+      imagenes,
+      servicios,
+      descripcion,
+      estado
+    );
+    res.status(200).json(respuesta);
+  } catch (error) {
     return res.status(500).json({ error: error.message });
   }
 };
@@ -42,5 +61,6 @@ const eliminarHabitacionHandler = async (req, res) => {
 module.exports = {
   getHabitacionHandler,
   postHabitacionHandler,
-  eliminarHabitacionHandler
+  eliminarHabitacionHandler,
+  updateHabitacionHandler
 };
