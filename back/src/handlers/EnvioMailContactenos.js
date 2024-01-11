@@ -27,7 +27,7 @@ const EnvioMailContactenos = async (req, res) => {
       service: "gmail",
       auth: {
         type: "OAuth2",
-        user: "famularifranco@gmail.com",
+        user: "serenahotel25@gmail.com",
         clientId: process.env.client_id,
         clientSecret: process.env.client_secret,
         refreshToken: process.env.refresh_token,
@@ -40,7 +40,7 @@ const EnvioMailContactenos = async (req, res) => {
     // Configuración del correo
     const mailOptions = {
       from: `${correo}`,
-      to: "famularifranco@gmail.com",
+      to: "serenahotel25@gmail.com",
       subject: "Consulta del formulario de contacto",
       text: `
       Nombre: ${nombre}
