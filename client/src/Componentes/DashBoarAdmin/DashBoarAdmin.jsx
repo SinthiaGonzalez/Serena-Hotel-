@@ -1,13 +1,13 @@
 import NavBarAdmin from "../NavBarAdmin/NavBarAdmin";
-import CreateHabitacion from "../createHabitaciones/createHabitaciones";
+import CreateHabitacion from "../CrearHabitaciones/CrearHabitaciones";
 import GraficosAdmin from "./graficosAdmin";
 
 const DashBoarAdmin = () => {
   return (
     <>
       <NavBarAdmin />
-      <CreateHabitacion/>
-      <GraficosAdmin/>
+      <CreateHabitacion />
+      <GraficosAdmin />
     </>
   );
 };

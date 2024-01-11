@@ -24,15 +24,21 @@ const { getReservas } = require("../Controladores/getReservas");
 const {
   getOrdenamientosFiltrosHandler,
 } = require("../Controladores/getOrdenamientosFiltrosHandler");
-const { HandlerPostDesarrollador } = require('../handlers/HandlersDesarrolladores/PostHandlersDesarrolladores');
-const { GetHandlerDesarrolladores } = require('../handlers/HandlersDesarrolladores/GetHandlerDesarrolladores');
-const { EliminarDesarrolladorHandler } = require('../handlers/HandlersDesarrolladores/EliminarDesarrolladorHandler');
-const { getHandlerUsuarios } = require("../handlers/HandlersUsuarios/GetHandlerUsuarios");
-
-const router = express.Router(); // importamos el metodo Router de express para poder crear rutas
+const {
+  HandlerPostDesarrollador,
+} = require("../handlers/HandlersDesarrolladores/PostHandlersDesarrolladores");
+const {
+  GetHandlerDesarrolladores,
+} = require("../handlers/HandlersDesarrolladores/GetHandlerDesarrolladores");
+const {
+  EliminarDesarrolladorHandler,
+} = require("../handlers/HandlersDesarrolladores/EliminarDesarrolladorHandler");
 const {
   getHandlerUsuarios,
 } = require("../handlers/HandlersUsuarios/GetHandlerUsuarios");
+
+const router = express.Router(); // importamos el metodo Router de express para poder crear rutas
+
 router.post("/usuario", HandlerPostUsuario);
 router.get("/usuarios", getHandlerUsuarios);
 
