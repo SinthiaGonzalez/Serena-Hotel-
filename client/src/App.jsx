@@ -9,7 +9,6 @@ import Habitaciones from "./Componentes/Habitaciones/Habitaciones.jsx";
 import PasareladePago from "./Componentes/Pasarela-de-Pago/PasareladePago.jsx";
 import axios from "axios";
 import AcercaDeSerena from "./Componentes/AcercaDeSerena/AcercaDeSerena.jsx";
-import DashBoarAdmin from "./Componentes/DashBoarAdmin/DashBoarAdmin.jsx";
 import DashBoardClienteReservas from "./Componentes/DashboarCliente/DashboardReservas.jsx";
 import DashBoardClientePerfil from "./Componentes/DashboarCliente/DashClientePerfil.jsx";
 import DashBoarAdminHabitaciones from "./Componentes/DashBoarAdminHabitaciones/DashBoarAdminHabitaciones.jsx";
@@ -37,7 +36,6 @@ const App = () => {
         <Route path="/registrarse" element={<CreateUsuario />} />
 
         {/* Rutas Dashboard Administrador */}
-        <Route path="/admin" element={<DashBoarAdmin />} />
         <Route path="/admin_habitaciones" element={<DashBoarAdminHabitaciones />}/>
 
         {/* Rutas Dashboard Usuario */}
