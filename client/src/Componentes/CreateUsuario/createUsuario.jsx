@@ -54,6 +54,9 @@ const CreateUsuario = () => {
       }}
     >
       <div className="flex flex-col items-center justify-center h-full bg-blanco w-2/3 rounded-lg px-20 mx-[250px] ">
+        <p className="flex my-4  font-inter text-3xl antialiased leading-normal text-center font-bold text-gris justify-center">
+          Registrarse
+        </p>
         <form onSubmit={handleSubmit} className="w-2/3">
           <h2 className="text-2xl mb-4">Crear Usuario</h2>
           <div className="mb-4">

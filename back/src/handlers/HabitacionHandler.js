@@ -39,6 +39,10 @@ const eliminarHabitacionHandler = async (req, res) => {
     const { id } = req.params;
     const respuesta = await EliminarHabitacion(id);
     return res.status(200).json({ mensaje: 'Habitación eliminada exitosamente' });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
 
 const updateHabitacionHandler = async (req, res) => {
   try {
@@ -64,8 +68,6 @@ module.exports = {
   getHabitacionHandler,
   postHabitacionHandler,
 
-  eliminarHabitacionHandler
-
+  eliminarHabitacionHandler,
   updateHabitacionHandler
-
-};
+}

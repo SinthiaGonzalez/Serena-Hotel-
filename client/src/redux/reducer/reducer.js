@@ -62,7 +62,6 @@ const reducer = (state = initialState, action) => {
         ...state,
         developers: action.payload,                
       } 
-    default: return state;
 
     case "GET_HABITACIONES_ORDENAMIENTOS":
       return {
