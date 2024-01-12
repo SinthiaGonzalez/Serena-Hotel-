@@ -129,6 +129,20 @@ const UpdateHabitacion = () => {
     e.preventDefault();
     if (Object.keys(errors).length === 0) {
       dispatch(updateHabitacion(nuevaDataHabitacion));
+      setNuevaDataHabitacion({
+        nombre: "",
+        precio: "",
+        imagenes: [],
+        servicios: [
+          { icono: "sensor_door", descripcion: "" },
+          { icono: "person", descripcion: "" },
+          { icono: "bed", descripcion: "" },
+          { icono: "home", descripcion: "" },
+          { icono: "local_bar", descripcion: "Minibar" },
+          { icono: "wifi", descripcion: "Wifi" },
+        ],
+         descripcion: '',
+      });
     } else {
       alert("Validation errors:", errors);
     }

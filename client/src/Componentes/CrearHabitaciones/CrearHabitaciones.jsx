@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import validation from "./validation.js"
 import { useDispatch, useSelector } from "react-redux";
 import { crearHabitacion } from "../../redux/Actions/actions";
+import { useRef } from 'react';
 
 const CrearHabitacion = () => {
   const dispatch = useDispatch();
@@ -43,6 +44,11 @@ const CrearHabitacion = () => {
     descripcion: "Habitacion comoda",
     estado: "Disponible"
   });
+  const nombreRef = useRef(null);
+  const precioRef = useRef(null);
+  const imagenesRef = useRef(null);
+  const serviciosRef = useRef(null);
+
   console.log({ habitacionData });
   console.log(errors);
 
@@ -125,10 +131,22 @@ const CrearHabitacion = () => {
     setSubmitDisabled(Object.keys(errors).length > 0 || isSubmitDisabled());
   }, [errors, habitacionData, isSubmitDisabled]);
 
+  const resetTouchedFields = () => {
+    const resetFields = {};
+    Object.keys(touchedFields).forEach((fieldName) => {
+      resetFields[fieldName] = "";
+    });
+    setHabitacionData({
+      ...habitacionData,
+      ...resetFields,
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (Object.keys(errors).length === 0) {
       dispatch(crearHabitacion(habitacionData));
+      resetTouchedFields();
     } else {
       alert("Validation errors:", errors);
     }
