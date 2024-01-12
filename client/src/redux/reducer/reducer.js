@@ -1,5 +1,6 @@
 const initialState = {
   habitaciones: [],
+  stringInput: [""],
   usuarios: [],
   preferenceIdMP: [],
   carrito: [],
@@ -12,6 +13,20 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+
+    case "GET_HABITACIONES_BUSQUEDA":
+      const buscar = action.payload; // string palabra a buscar
+      const habitacionesFiltradas = state.habitaciones.filter((habitacion) =>
+      habitacion.nombre.includes(buscar)
+    );
+        return {
+          ...state,
+          stringInput: action.payload,
+          habitaciones: habitacionesFiltradas,
+        };
+
+
+
     case "GET_USERS":
       return {
         ...state,
@@ -56,13 +71,12 @@ const reducer = (state = initialState, action) => {
 
     case "CREAR_HABITACION":
       return { ...state, nuevaHabitacion: [...state.nuevaHabitacion, action.payload], habitaciones: [...state.habitaciones, action.payload] };
-    
-    case "GET_DEVS":     
+
+    case "GET_DEVS":
       return {
         ...state,
-        developers: action.payload,                
-      } 
-    default: return state;
+        developers: action.payload,
+      }
 
     case "GET_HABITACIONES_ORDENAMIENTOS":
       return {
@@ -84,10 +98,9 @@ const reducer = (state = initialState, action) => {
         ...state,
         habitaciones: action.payload,
       };
-      case "UPDATE_HABITACION":
-        return { ...state, habitacionActualizada: [...state.habitacionActualizada, action.payload] }
-    default:
-      return state;
+    case "UPDATE_HABITACION":
+      return { ...state, habitacionActualizada: [...state.habitacionActualizada, action.payload] };
+    default: return state;
 
   }
 };

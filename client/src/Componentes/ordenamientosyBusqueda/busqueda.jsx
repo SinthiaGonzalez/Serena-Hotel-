@@ -1,35 +1,44 @@
 import React from "react";
-import { Input, Button } from "@material-tailwind/react";
+import { Input } from "@material-tailwind/react";
+import { useSelector, useDispatch } from "react-redux";
+import {getHabitacionesBusqueda} from "../../redux/Actions/actions.js";
+import { useEffect } from "react";
+
 const BuscarPorNombre = () => {
-    const [email, setEmail] = React.useState("");
-    const onChange = ({ target }) => setEmail(target.value);
-   
-    return (
-        <div className="flex flex-col w-full p-4 ">
- <div className="relative flex w-full max-w-[24rem]">
+
+  const StringInput = useSelector((state) => state.stringInput);
+  const [buscar, setBuscar] = React.useState("");
+  const dispatch = useDispatch();
+
+  const handlerstringInput = () => {
+    dispatch(getHabitacionesBusqueda(buscar));
+  };
+ useEffect(() => {
+   handlerstringInput();}, [buscar]);
+
+  const onChange = ({ target }) => {
+    setBuscar(target.value); 
+   };
+  
+
+  return (
+    <div className="flex flex-col w-full p-4 ">
+      <div className="relative flex w-full ">
         <Input
           type="text"
           label="BUSCAR POR NOMBRE"
           color="white"
-          value={email}
+          value={buscar}
           onChange={onChange}
           className="p-4 "
           containerProps={{
             className: "min-w-0 text-withe ",
           }}
         />
-        <Button
-          size="sm"
-          color={email ? "gray" : "blue-gray"}
-          disabled={!email}
-          className="!absolute right-1 top-1 rounded"
-        >
-          Buscar
-        </Button>
       </div>
-        </div>
-     
-    );
+    </div>
+
+  );
 };
 
 export default BuscarPorNombre;

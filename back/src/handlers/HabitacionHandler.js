@@ -38,9 +38,14 @@ const eliminarHabitacionHandler = async (req, res) => {
   try {
     const { id } = req.params;
     const respuesta = await EliminarHabitacion(id);
-    return res.status(200).json({ mensaje: 'Habitación eliminada exitosamente' });
+    res.status(200).json({ mensaje: 'Habitación eliminada exitosamente' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
 
-const updateHabitacionHandler = async (req, res) => {
+
+  const updateHabitacionHandler = async (req, res) => {
   try {
     
     const { nombre, precio, imagenes, servicios, descripcion, estado } = req.body;
@@ -63,9 +68,7 @@ const updateHabitacionHandler = async (req, res) => {
 module.exports = {
   getHabitacionHandler,
   postHabitacionHandler,
-
-  eliminarHabitacionHandler
-
-  updateHabitacionHandler
+  eliminarHabitacionHandler,
+  updateHabitacionHandler,
 
 };
