@@ -64,6 +64,22 @@ export function postUsuario(state) {
   };
 }
 
+
+export function putUsuario(state) {
+  return async function (dispatch) {
+    try {
+      console.log('antes de action put' ,state)
+      await axios.put("/login", state);
+      console.log('log de action put', state);
+      alert(' usuario logeado exitosamente');
+      
+    } catch (error) {
+      alert(error);
+    }
+  }
+}
+
+
 export function getAllcomentarios() {
   return async function (dispatch) {
     try {

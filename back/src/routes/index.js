@@ -30,7 +30,7 @@ const { GetHandlerDesarrolladores } = require('../handlers/HandlersDesarrollador
 const { EliminarDesarrolladorHandler } = require('../handlers/HandlersDesarrolladores/EliminarDesarrolladorHandler');
 
 
-
+const { LoginUsuario } = require("../Controladores/controllers_Usuaruios/logionUsuario")
 const { getHandlerUsuarios } = require("../handlers/HandlersUsuarios/GetHandlerUsuarios");
 const { updateHabitacionHandler } = require("../handlers/HabitacionHandler");
 
@@ -38,6 +38,7 @@ const router = express.Router(); // importamos el metodo Router de express para 
 
 router.post("/usuario", HandlerPostUsuario);
 router.get("/usuarios", getHandlerUsuarios);
+router.put("/login", LoginUsuario);
 
 router.post("/desarrollador", HandlerPostDesarrollador);
 router.delete("/desarrollador/:id", EliminarDesarrolladorHandler);
