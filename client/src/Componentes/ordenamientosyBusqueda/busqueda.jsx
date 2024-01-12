@@ -1,12 +1,10 @@
 import React from "react";
 import { Input } from "@material-tailwind/react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import {getHabitacionesBusqueda} from "../../redux/Actions/actions.js";
 import { useEffect } from "react";
 
 const BuscarPorNombre = () => {
-
-  const StringInput = useSelector((state) => state.stringInput);
   const [buscar, setBuscar] = React.useState("");
   const dispatch = useDispatch();
 

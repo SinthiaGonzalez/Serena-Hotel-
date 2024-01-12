@@ -26,6 +26,8 @@ import BuscarPorNombre from "../ordenamientosyBusqueda/busqueda";
 const Habitaciones = () => {
   const dispatch = useDispatch();
   const habitacionesShop = useSelector((state) => state.habitaciones);
+  const habitacionfiltrada = useSelector((state) => state.habitacionesfiltradas);
+  const stringdelbuscar = useSelector((state) => state.string);
 
   useEffect(() => {
     dispatch(getHabitaciones());
@@ -92,6 +94,13 @@ const Habitaciones = () => {
       })
     );
   };
+  const handlertoprops =()=>{
+if (stringdelbuscar.length>0){
+  return habitacionfiltrada
+}else{
+  return habitacionesShop
+}
+  }
   return (
     <>
       <NavBarHome />
@@ -198,7 +207,7 @@ const Habitaciones = () => {
             </List>
           </Card> */}
         </div>
-        <CardsShopHabitaciones habitacionesShop={habitacionesShop} />
+        <CardsShopHabitaciones habitacionesShop={handlertoprops()} />
       </div>
     </>
   );

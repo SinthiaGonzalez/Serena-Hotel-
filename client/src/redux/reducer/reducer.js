@@ -1,6 +1,7 @@
 const initialState = {
   habitaciones: [],
-  stringInput: [""],
+  habitacionesfiltradas: [],
+  string: "",
   usuarios: [],
   preferenceIdMP: [],
   carrito: [],
@@ -16,14 +17,15 @@ const reducer = (state = initialState, action) => {
 
     case "GET_HABITACIONES_BUSQUEDA":
       const buscar = action.payload; // string palabra a buscar
-      const habitacionesFiltradas = state.habitaciones.filter((habitacion) =>
-      habitacion.nombre.includes(buscar)
-    );
-        return {
-          ...state,
-          stringInput: action.payload,
-          habitaciones: habitacionesFiltradas,
-        };
+      const habitacionFiltrada = state.habitaciones.filter((habitacion) =>
+        habitacion.nombre.toLowerCase().includes(buscar)
+      );
+      console.log("habitacion filtrada", habitacionFiltrada);
+      return {
+        ...state,
+        string: buscar,
+        habitacionesfiltradas: habitacionFiltrada,
+      };
 
 
 
