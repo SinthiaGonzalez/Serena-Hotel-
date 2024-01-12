@@ -14,6 +14,13 @@ export function getHabitaciones() {
   };
 }
 
+export function getHabitacionesBusqueda(buscar) {
+  return {
+    type: "GET_HABITACIONES_BUSQUEDA",
+    payload: buscar,
+  };
+}
+
 // creamos la action que crea la preferenciaId de mercadopago
 export function createPreferenceMercadopagoId() {
   return async function (dispatch) {

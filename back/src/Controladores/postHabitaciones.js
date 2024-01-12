@@ -11,7 +11,7 @@ const postHabitaciones = async (
   estado
 ) => {
   
-  console.log("aqui", nombre, precio, imagenes, servicios, descripcion, estado);
+  console.log("aqui esta el posthabitaciones", nombre, precio, imagenes, servicios, descripcion, estado);
 
   const result = [];
   for (let i = 0; i < imagenes.length; i++) {
