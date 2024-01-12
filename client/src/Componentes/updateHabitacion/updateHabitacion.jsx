@@ -151,9 +151,8 @@ const UpdateHabitacion = () => {
   console.log(nuevaDataHabitacion)
 
   return (
-    <div className="flex justify-center items-center h-screen bg-blanco">
-      <div className="bg-verde p-8 rounded-lg mx-20 my/28">
-        <h1 className="text-4xl font-bold mb-28">Actualizar Habitacion</h1>
+      <div className="bg-verde p-8 rounded-lg mx-20 my-16">
+        <h1 className="text-4xl font-bold mb-28">Editar Habitación</h1>
         <form className="flex flex-row gap-20 mx-2 my-10" onSubmit={handleSubmit}>
           <div className="w-2/8">
             <div className="grid grid-cols-2 gap-4 ml-8">
@@ -348,7 +347,6 @@ const UpdateHabitacion = () => {
           </div> */}
         </form>
       </div>
-    </div>
   )
 };
 
