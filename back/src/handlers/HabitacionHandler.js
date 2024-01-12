@@ -47,9 +47,10 @@ const eliminarHabitacionHandler = async (req, res) => {
   const updateHabitacionHandler = async (req, res) => {
   try {
     
-    const { nombre, precio, imagenes, servicios, descripcion, estado } = req.body;
+    const { nombreId, nombre, precio, imagenes, servicios, descripcion, estado } = req.body;
 
     const respuesta = await updateHabitacion(
+      nombreId,
       nombre,
       precio,
       imagenes,
