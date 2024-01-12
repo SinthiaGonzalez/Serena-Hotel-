@@ -212,13 +212,7 @@ export function updateHabitacion (habitacionData) {
   console.log({habitacionData})
   return async (dispatch) => {
       try {
-<<<<<<< HEAD
           const response = await axios.put('/update/habitaciones', habitacionData)
-=======
-
-          const response = await axios.put('/update/habitaciones', habitacionData)
-
->>>>>>> cd8f1afbe656ad4b9e0adb979f9df61207c7a57c
           console.log(response.data);
           alert('Habitacion actualizada con exito')
           dispatch ({
@@ -232,10 +226,6 @@ export function updateHabitacion (habitacionData) {
       }
   }
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> cd8f1afbe656ad4b9e0adb979f9df61207c7a57c
 
 export function getDevs(){
   return async function(dispatch){ 
@@ -254,7 +244,3 @@ export function getDevs(){
 }  
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> cd8f1afbe656ad4b9e0adb979f9df61207c7a57c
