@@ -29,6 +29,11 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
+      logueado:{
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: false,
+      }
     },
     {
       timestamps: false,

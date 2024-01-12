@@ -21,9 +21,12 @@ const LoginUsuario = async (req, res) => {
         contraseña: null,
         logueado: true // Establecer el estado de logueo como true para el nuevo usuario
       });
-
+console.log('usuario registrado exitosamente');
       return res.status(200).json({ message: 'Usuario registrado exitosamente', newUser });
-    } else if (usuario.logueado) {
+    }
+
+    if (usuario.logueado) {
+      console.log('El usuario ya está logueado');
       return res.status(200).json({ message: 'El usuario ya está logueado' });
     }
 
@@ -31,7 +34,9 @@ const LoginUsuario = async (req, res) => {
     usuario.logueado = true;
     await usuario.save();
 
-    return res.status(200).json({ message: 'Usuario logueado exitosamente' });
+
+console.log('usuario logeado exitosamente');
+     return res.status(200).json({ message: 'Usuario logueado exitosamente' });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ error: error.message });

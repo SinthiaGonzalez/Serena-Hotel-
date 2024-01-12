@@ -31,20 +31,19 @@ const CreateUsuario = () => {
     e.preventDefault();
     try {
       await dispatch(postUsuario(user));
-      // Limpiar el formulario restableciendo el estado
+      // Restablecer el estado a los valores iniciales en lugar de un objeto vacío
       setUser({
         name: "",
         apellido: "",
         email: "",
         telefono: "",
         contraseña: "",
-        confirmarContraseña: "",
       });
     } catch (error) {
       alert(error.message);
     }
   };
-
+  
   return (
     <div
       className="relative bg-cover bg-center text-white text-center p-8 h-screen"
@@ -173,6 +172,7 @@ const CreateUsuario = () => {
           <button
             className="w-2/4 mb-4 mt-4 select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-blanco transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
             type="button"
+            onClick={handleSubmit}
           >
             REGISTRATE
           </button>
