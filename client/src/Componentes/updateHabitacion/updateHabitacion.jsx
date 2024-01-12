@@ -44,7 +44,9 @@ const UpdateHabitacion = () => {
     estado: "Disponible"
   });
   console.log({ nuevaDataHabitacion });
+  const habitacionesBackUp = useSelector((state) => state.habitacionBackUp);
   console.log(errors);
+  console.log("prueba",habitacionesBackUp)
 
   const isSubmitDisabled = () => {
     // Verifica si hay algún campo obligatorio sin completar
