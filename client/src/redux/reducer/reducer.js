@@ -8,6 +8,7 @@ const initialState = {
   nuevaHabitacion: [],
   developers: [],
   habitacionActualizada: [],
+  habitacionBackUp: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -21,6 +22,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         habitaciones: action.payload,
+        habitacionBackUp: action.payload, 
       };
     case "CREATE_PREFERENCE_MERCADOPAGO_ID":
       return {

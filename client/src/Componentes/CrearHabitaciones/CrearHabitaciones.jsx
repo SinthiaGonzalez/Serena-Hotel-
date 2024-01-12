@@ -44,6 +44,7 @@ const CrearHabitacion = () => {
     descripcion: "Habitacion comoda",
     estado: "Disponible",
   });
+
   console.log({ habitacionData });
   console.log(errors);
 
@@ -131,10 +132,22 @@ const CrearHabitacion = () => {
     setSubmitDisabled(Object.keys(errors).length > 0 || isSubmitDisabled());
   }, [errors, habitacionData, isSubmitDisabled]);
 
+  const resetTouchedFields = () => {
+    const resetFields = {};
+    Object.keys(touchedFields).forEach((fieldName) => {
+      resetFields[fieldName] = "";
+    });
+    setHabitacionData({
+      ...habitacionData,
+      ...resetFields,
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (Object.keys(errors).length === 0) {
       dispatch(crearHabitacion(habitacionData));
+      resetTouchedFields();
     } else {
       alert("Validation errors:", errors);
     }
