@@ -64,6 +64,7 @@ const updateHabitacionHandler = async (req, res) => {
 module.exports = {
   getHabitacionHandler,
   postHabitacionHandler,
+
   eliminarHabitacionHandler,
   updateHabitacionHandler
-};
+}

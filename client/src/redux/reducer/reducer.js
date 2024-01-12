@@ -62,7 +62,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         developers: action.payload,                
       } 
-    
+
     case "GET_HABITACIONES_ORDENAMIENTOS":
       return {
         ...state,
