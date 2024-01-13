@@ -216,14 +216,6 @@ const UpdateHabitacion = () => {
               onBlur={() => handleBlur("imagen")}
             />
             <p className="my-4">{touchedFields.imagen && errors.imagen}</p>
-
-            <button
-              type="button"
-              className="w-full mb-4 select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-blanco transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
-              onClick={handleImageSubmit}
-            >
-              Agregar Imagen
-            </button>
           </div>
 
           <div className="flex flex-col items-center w-4/8">
