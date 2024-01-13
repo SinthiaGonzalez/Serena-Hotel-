@@ -14,6 +14,13 @@ export function getHabitaciones() {
   };
 }
 
+export function getHabitacionesBusqueda(buscar) {
+  return {
+    type: "GET_HABITACIONES_BUSQUEDA",
+    payload: buscar,
+  };
+}
+
 // creamos la action que crea la preferenciaId de mercadopago
 export function createPreferenceMercadopagoId() {
   return async function (dispatch) {
@@ -134,7 +141,8 @@ export function crearHabitacion(habitacionData) {
         habitacionData
       );
       console.log(response.data);
-      alert("Creado con exito");
+      if (response.data=== "La habitacion ya existe") alert(response.data);
+      else alert("Creado con exito");
       dispatch({
         type: "CREAR_HABITACION",
         payload: response.data,
@@ -232,7 +240,8 @@ export function updateHabitacion (habitacionData) {
           const response = await axios.put('/update/habitaciones', habitacionData)
 
           console.log(response.data);
-          alert('Habitacion actualizada con exito')
+          if (response.data=== "No existe una habitacion con ese nombre") alert(response.data);
+          else alert('Habitacion actualizada con exito')
           dispatch ({
               type:"UPDATE_HABITACION",
               payload: response.data,
@@ -245,6 +254,19 @@ export function updateHabitacion (habitacionData) {
   }
 }
 
+export function getHabitacionesbackup() {
+  return async function (dispatch) {
+    try {
+      const habitaciones = await axios.get("/habitaciones");
+      return dispatch({
+        type: "GET_HABITACIONES_BACKUP",
+        payload: habitaciones.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
 
 export function getDevs(){
   return async function(dispatch){ 
@@ -274,5 +296,24 @@ export function getDevs(){
 
 
 
+// funciona para eliminar habitacion por id
+export function deleteHabitacion(id) {
+  console.log({ id });
+  return async function (dispatch) {
+    try {
+      const response = await axios.delete(`/habitaciones/${id}`);
+     
+      if (response.status === 200) {
+        dispatch({
+          type: "DELETE_HABITACION",
+          payload: id,
+        });
+        alert("Habitacion eliminada exitosamente");
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+}
 
 

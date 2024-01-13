@@ -18,7 +18,8 @@ const postHabitacionHandler = async (req, res) => {
       descripcion,
       estado
     );
-    res.status(200).json(respuesta);
+    if (respuesta==="La habitacion ya existe") res.status(400).json(respuesta);
+    else res.status(201).json(respuesta);
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
@@ -44,12 +45,13 @@ const eliminarHabitacionHandler = async (req, res) => {
   }
 };
 
-const updateHabitacionHandler = async (req, res) => {
+  const updateHabitacionHandler = async (req, res) => {
   try {
     
-    const { nombre, precio, imagenes, servicios, descripcion, estado } = req.body;
+    const { nombreId, nombre, precio, imagenes, servicios, descripcion, estado } = req.body;
 
     const respuesta = await updateHabitacion(
+      nombreId,
       nombre,
       precio,
       imagenes,
@@ -57,7 +59,8 @@ const updateHabitacionHandler = async (req, res) => {
       descripcion,
       estado
     );
-    res.status(200).json(respuesta);
+    if (respuesta=== "No existe una habitacion con ese nombre") res.status(400).json(respuesta);
+    else res.status(200).json(respuesta);
 
   } catch (error) {
     return res.status(500).json({ error: error.message });
@@ -67,7 +70,7 @@ const updateHabitacionHandler = async (req, res) => {
 module.exports = {
   getHabitacionHandler,
   postHabitacionHandler,
-
   eliminarHabitacionHandler,
-  updateHabitacionHandler
-}
+  updateHabitacionHandler,
+
+};

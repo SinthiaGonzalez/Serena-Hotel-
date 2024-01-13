@@ -3,7 +3,7 @@ const {Habitaciones}= require('../../db')
 const EliminarHabitacion = async (id) => { 
   try {
     if (!id) {
-      throw new Error('El ID del desarrollador es inválido');
+      throw new Error('El ID de la habitacion es inválido');
     }
 
     const habitacionEliminada = await Habitaciones.destroy({ where: { id } });
