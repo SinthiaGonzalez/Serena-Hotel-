@@ -3,94 +3,96 @@ const DashBoardAdminUsuarios = () => {
   return (
     <>
       <NavBarAdmin />
-      <div className="h-[120vh] flex flex-col items-center justify-center">
-        <div className="bg-verde p-12 rounded-lg shadow-md  text-white">
-          <h2 className="text-2xl font-semibold mb-4">Perfil</h2>
-          <div className="w-16 h-16 rounded-full bg-white mx-auto mb-10"></div>
+      <div className="h-[120vh] flex flex-col items-center pt-5">
+        <div className="border-2 border-verde h-[20%] w-[55%] rounded-3xl flex p-5 m-5">
+          <div className="flex-1 border-r-2 border-verde flex items-center justify-center">
+            <div className="mr-4 text-verde">Icono</div>
 
-          <div className="mb-4 bg-white bg-opacity-25 p-2  flex items-center w-[600px]">
-            <div className="block text-white-600 text-sm font-medium pr-2 border-r-2 border-naranja w-1/2 text-center">
-              <label className="flex items-center justify-center">
-                <UserIcon width={30} />
-                Nombre:
-              </label>
+            <div>
+            <p className="text-verde ">Total usuarios</p>
+            <p className="text-verde font-extrabold  text-4xl">70</p>
             </div>
-            <p className="text-white-800 pl-3 w-1/2 text-center">
-              Nombre de Usuario
-            </p>
-          </div>
-          <div className="mb-4 bg-white bg-opacity-25 p-2  flex items-center w-[600px]">
-            <div className="block text-white-600 text-sm font-medium pr-2 border-r-2 border-naranja w-1/2 text-center">
-              <label className="flex items-center justify-center">
-                <UserIcon width={30} />
-                Apellido:
-              </label>
-            </div>
-            <p className="text-white-800 pl-3 w-1/2 text-center">
-              Apellido de Usuario
-            </p>
           </div>
 
-          <div className="mb-4 bg-white bg-opacity-25 p-2  flex items-center w-[600px]">
-            <div className="block text-white-600 text-sm font-medium pr-2 border-r-2 border-naranja w-1/2 text-center">
-              <label className="flex items-center justify-center">
-                <EnvelopeIcon width={30} />
-                Correo:
-              </label>
+          <div className="flex-1 border-r-2 border-verde flex items-center justify-center">
+            <div className="mr-4 text-verde">Icono</div>
+
+            <div>
+            <p className="text-verde  ">Total activos</p>
+              <p className="text-verde font-extrabold  text-4xl">40</p>
             </div>
-            <p className="text-white-800 pl-3 w-1/2 text-center">
-              correo@gmail.com
-            </p>
+          </div>
+          <div className="flex-1  flex items-center justify-center">
+            <div className="mr-4 text-verde">Icono</div>
+
+            <div>
+            <p className="text-verde ">Total inactivos</p>
+              <p className="text-verde font-extrabold  text-4xl">30</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-verde p-4 rounded-md w-[95%]">
+          <div className="mb-4 flex items-center justify-end">
+            <div className="flex items-center">
+              <input
+                type="text"
+                placeholder="Buscar..."
+                className="bg-white p-2 rounded-md mr-4"
+              />
+
+              <select className="bg-white p-2 rounded-md mr-3">
+                <option value="filtro1">Filtro 1</option>
+                <option value="filtro2">Filtro 2</option>
+                <option value="filtro3">Filtro 3</option>
+              </select>
+              <select className="bg-white p-2 rounded-md">
+                <option value="filtro1">Filtro 1</option>
+                <option value="filtro2">Filtro 2</option>
+                <option value="filtro3">Filtro 3</option>
+              </select>
+            </div>
           </div>
 
-          <div className="mb-4 bg-white bg-opacity-25 p-2  flex items-center w-[600px]">
-            <div className="block text-white-600 text-sm font-medium pr-2 border-r-2 border-naranja w-1/2 text-center">
-              <label className="flex items-center justify-center">
-                <DevicePhoneMobileIcon width={30} />
-                Telefono:
-              </label>
+          <div>
+            <div className="p-0 rounded-md shadow-md mb-4 overflow-x-auto">
+              <table className="w-full">
+                <thead className="bg-white bg-opacity-15 border-b border-white border-opacity-25">
+                  <tr>
+                    <th className="py-2 px-2 text-left ">Identificacion</th>
+                    <th className="py-2 px-2 text-left">Nombre y apellido</th>
+                    <th className="py-2 px-2 text-left">Correo</th>
+                    <th className="py-2 px-2 text-left">Telefono</th>
+                    <th className="py-2 px-2 text-left">Fecha nacimiento</th>
+                    <th className="py-2 px-2 text-left">Edad</th>
+                    <th className="py-2 px-2 text-left">Nacionalidad</th>
+                    <th className="py-2 px-2 text-left">Estado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b">
+                    <td className="py-4 px-2 text-left">5141841</td>
+                    <td className="py-4 px-2 text-left">
+                      Emilio Orlando fernandez
+                    </td>
+                    <td className="py-4 px-2 text-left">
+                      Emilio-Orlando@gmail.com
+                    </td>
+                    <td className="py-4 px-2 text-left">0810-888-444</td>
+                    <td className="py-4 px-2 text-left">10-01-24</td>
+                    <td className="py-4 px-2 text-left">10-02-2024</td>
+                    <td className="py-4 px-2 text-left">
+                      Suit Ejecutiva del Bosque
+                    </td>
+                    <td className="py-4 px-2 text-left">
+                      <div className="bg-green-800 text-white py-2 px-4 rounded border border-green-500 text-center">
+                        Activo
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-            <p className="text-white-800 pl-3 w-1/2 text-center">1515115</p>
-          </div>
-
-          <div className="mb-4 bg-white bg-opacity-25 p-2 flex items-center w-[600px]">
-            <div className="block text-white-600 text-sm font-medium pr-2 border-r-2 border-naranja w-1/2 text-center">
-              <label className="flex items-center justify-center">
-                <LockClosedIcon width={30} />
-                Contraseña:
-              </label>
-            </div>
-            <input
-              type="password"
-              className="text-white-800 pl-3 w-1/2 text-center bg-transparent border-none outline-none"
-              placeholder="Ingrese su contraseña"
-            />
-          </div>
-
-          <div className="mb-4 bg-white bg-opacity-25 p-2 flex items-center w-[600px]">
-            <div className="block text-white-600 text-sm font-medium pr-2 border-r-2 border-naranja w-1/2 text-center">
-              <label className="flex items-center justify-center">
-                <LockClosedIcon width={30} />
-                Repetir Contraseña:
-              </label>
-            </div>
-            <input
-              type="password"
-              className="text-white-800 pl-3 w-1/2 text-center bg-transparent border-none outline-none"
-              placeholder="Ingrese su contraseña"
-            />
-          </div>
-
-          <div className="flex justify-center space-x-4">
-            <button className="bg-naranja text-white py-2 px-4 rounded-md hover:bg-orange-600 focus:outline-none focus:shadow-outline-orange">
-              Editar
-            </button>
-            <button className="bg-naranja text-white py-2 px-4 rounded-md hover:bg-orange-600 focus:outline-none focus:shadow-outline-orange">
-              Eliminar Cuenta
-            </button>
-            <button className="bg-naranja text-white py-2 px-4 rounded-md hover:bg-orange-600 focus:outline-none focus:shadow-outline-orange">
-              Guardar cambios
-            </button>
           </div>
         </div>
       </div>

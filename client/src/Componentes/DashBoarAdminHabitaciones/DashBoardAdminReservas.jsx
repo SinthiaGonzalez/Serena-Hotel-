@@ -35,7 +35,7 @@ const DashBoardAdminReservas = () => {
         </div>
 
         <div className="bg-verde p-4 rounded-md w-[95%]">
-          <div className="mb-4 flex items-center justify-center">
+          <div className="mb-4 flex items-center justify-end">
             <div className="flex items-center">
               <input
                 type="text"
@@ -43,6 +43,11 @@ const DashBoardAdminReservas = () => {
                 className="bg-white p-2 rounded-md mr-4"
               />
 
+              <select className="bg-white p-2 rounded-md mr-3">
+                <option value="filtro1">Filtro 1</option>
+                <option value="filtro2">Filtro 2</option>
+                <option value="filtro3">Filtro 3</option>
+              </select>
               <select className="bg-white p-2 rounded-md">
                 <option value="filtro1">Filtro 1</option>
                 <option value="filtro2">Filtro 2</option>
