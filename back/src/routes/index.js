@@ -12,7 +12,7 @@ const {
 } = require("../handlers/HandlersUsuarios/PostHandlerUsuario");
 const { CreatePreferenceMP } = require("../Controladores/postProductMP"); // importamos el metodo CreatePreferenceMP del archivo postProductMP.js
 
-const { EnvioMailContactenos } = require("../handlers/EnvioMailContactenos");
+const { EnvioMailContactenos } = require("../handlers/HandlerMailer/EnvioMailContactenos");
 const { getHabitacionHandler } = require("../handlers/HabitacionHandler");
 const {
   addHabitacionToCarrito,
