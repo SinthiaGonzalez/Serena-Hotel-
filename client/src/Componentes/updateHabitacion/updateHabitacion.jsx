@@ -241,7 +241,7 @@ const UpdateHabitacion = () => {
               className="text-center text-negro"
               type="text"
               name="nombre"
-              placeholder="Nombre"
+              placeholder="Nombre nuevo"
               onChange={handleChange}
               onBlur={() => handleBlur("nombre")}
             />
@@ -374,7 +374,13 @@ const UpdateHabitacion = () => {
             type="submit"
             disabled={isSubmitDisabled()}
           >
-            Actualizar
+            Editar
+          </button>
+          <button
+            className="w-full mt-2 mb-4 select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-blanco transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
+            type="submit"
+          >
+            Eliminar
           </button>
         </div>
 
