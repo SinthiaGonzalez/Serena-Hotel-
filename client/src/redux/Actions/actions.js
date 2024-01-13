@@ -268,5 +268,24 @@ export function getDevs(){
   }  
 }  
 
+// funciona para eliminar habitacion por id
+export function deleteHabitacion(id) {
+  console.log({ id });
+  return async function (dispatch) {
+    try {
+      const response = await axios.delete(`/habitaciones/${id}`);
+     
+      if (response.status === 200) {
+        dispatch({
+          type: "DELETE_HABITACION",
+          payload: id,
+        });
+        alert("Habitacion eliminada exitosamente");
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+}
 
 

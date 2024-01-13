@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import validation from "../CrearHabitaciones/validation";
 import { useDispatch, useSelector } from "react-redux";
-import { updateHabitacion, getHabitacionesbackup } from "../../redux/Actions/actions";
+import { updateHabitacion, getHabitacionesbackup,deleteHabitacion } from "../../redux/Actions/actions";
 import { Select, Option } from "@material-tailwind/react";
 import axios from "axios";
 
@@ -14,7 +14,7 @@ const UpdateHabitacion = () => {
   const [isEmpty, setIsEmpty] = useState(true);
   const [seleccionhabitacion, setSeleccionhabitacion] = useState("");
   const habitacionescKcup = useSelector((state) => state.habitacionBackUp);
-  console.log(seleccionhabitacion)
+ 
   const habitacionesB = habitacionescKcup.map(({ id, nombre }) => ({ id, nombre }));
 
   useEffect(() => {
@@ -62,7 +62,7 @@ const UpdateHabitacion = () => {
     setNuevaDataHabitacion({ ...nuevaDataHabitacion, nombreId: e })
     
   };
-  console.log("plis",nuevaDataHabitacion)
+ 
 
   const isSubmitDisabled = () => {
     // Verifica si hay algún campo obligatorio sin completar
@@ -172,8 +172,21 @@ const UpdateHabitacion = () => {
       imagenes: [response.data.secure_url],
     });
   }
-  console.log("aqui",response);
   }
+
+  const idhabitacion = habitacionesB.find(function(habitacion){
+    return habitacion.nombre === seleccionhabitacion;
+  
+  })
+
+const handlerdeleteHabitacion = () => {
+ dispatch(deleteHabitacion(idhabitacion.id))
+ dispatch(getHabitacionesbackup());
+
+}
+
+
+
 
   return (
     <div className="bg-verde p-8 rounded-lg mx-20 my-16">
@@ -376,12 +389,7 @@ const UpdateHabitacion = () => {
           >
             Editar
           </button>
-          <button
-            className="w-full mt-2 mb-4 select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-blanco transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
-            type="submit"
-          >
-            Eliminar
-          </button>
+         
         </div>
 
         {/* <div>
@@ -395,6 +403,18 @@ const UpdateHabitacion = () => {
             <p>{touchedFields.descripcion && errors.descripcion}</p>
           </div> */}
       </form>
+      <div className="flex justify-center">
+        <p>Seleccione la haitacion a eliminar</p>
+      </div>
+      <div className="flex justify-center ">
+      <button
+            className="p-6 w-2/8 mt-2 mb-4 select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-blanco transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
+            onClick={handlerdeleteHabitacion}
+          >
+            Eliminar
+          </button>
+      </div>
+      
     </div>
   )
 };
