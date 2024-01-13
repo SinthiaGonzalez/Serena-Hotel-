@@ -5,7 +5,7 @@ import { Link as ScrollToPositionLink, scroller } from "react-scroll";
 const SITEMAP = [
   {
     titulo: "Serena Hotel",
-    links: ["Experiecias", "Servicios", "Comentarios", "Galería de Fotos"],
+    links: ["Experiencias", "Servicios", "Habitaciones", "Comentarios"],
   },
   {
     titulo: "Explora",
@@ -88,27 +88,9 @@ const Footer = () => {
                     color="orange"
                     className="font-normal"
                   >
-                    {
-                    titulo === "Serena Hotel" ? (
-                      <ScrollToPositionLink
-                        to={link.toLowerCase()}
-                        spy={true}
-                        smooth={true}
-                        offset={-70} // Adjust this offset value
-                        duration={500}
-                        className="inline-block py-1 pr-2 transition-transform hover:scale-105"
-                        onClick={() =>
-                          scroller.scrollTo(link.toLowerCase(), {
-                            smooth: true,
-                            offset: -70,
-                            duration: 500,
-                          })
-                        }
-                      >
-                        {link}
-                      </ScrollToPositionLink>
-                    ) : 
-                    titulo === "Explora" ? (
+                    {titulo === "Serena Hotel" ? (
+                      <a href={"/" + "#" + link.toLowerCase()}>{link}</a>
+                    ) : titulo === "Explora" ? (
                       <Link
                         to={`/${link.ruta}`}
                         className="inline-block py-1 pr-2 transition-transform hover:scale-105"

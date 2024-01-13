@@ -71,6 +71,22 @@ export function postUsuario(state) {
   };
 }
 
+
+export function putUsuario(state) {
+  return async function (dispatch) {
+    try {
+      console.log('antes de action put' ,state)
+      await axios.put("/login", state);
+      console.log('log de action put', state);
+      alert(' verificado exitosamente');
+      
+    } catch (error) {
+      alert(error);
+    }
+  }
+}
+
+
 export function getAllcomentarios() {
   return async function (dispatch) {
     try {
@@ -266,7 +282,19 @@ export function getDevs(){
           return 
       }
   }  
-}  
+}
+
+
+  export const estadoLogeo = (estado) => {
+    
+    return {
+      type: "ESTADO_LOGEO",
+      payload: estado,
+    };
+  };
+
+
+
 
 // funciona para eliminar habitacion por id
 export function deleteHabitacion(id) {
