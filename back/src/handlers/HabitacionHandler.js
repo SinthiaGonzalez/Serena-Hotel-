@@ -45,7 +45,7 @@ const eliminarHabitacionHandler = async (req, res) => {
   }
 };
 
-const updateHabitacionHandler = async (req, res) => {
+  const updateHabitacionHandler = async (req, res) => {
   try {
     
     const { nombreId, nombre, precio, imagenes, servicios, descripcion, estado } = req.body;
@@ -70,7 +70,7 @@ const updateHabitacionHandler = async (req, res) => {
 module.exports = {
   getHabitacionHandler,
   postHabitacionHandler,
-
   eliminarHabitacionHandler,
-  updateHabitacionHandler
-}
+  updateHabitacionHandler,
+
+};

@@ -14,6 +14,13 @@ export function getHabitaciones() {
   };
 }
 
+export function getHabitacionesBusqueda(buscar) {
+  return {
+    type: "GET_HABITACIONES_BUSQUEDA",
+    payload: buscar,
+  };
+}
+
 // creamos la action que crea la preferenciaId de mercadopago
 export function createPreferenceMercadopagoId() {
   return async function (dispatch) {
@@ -231,6 +238,19 @@ export function updateHabitacion (habitacionData) {
   }
 }
 
+export function getHabitacionesbackup() {
+  return async function (dispatch) {
+    try {
+      const habitaciones = await axios.get("/habitaciones");
+      return dispatch({
+        type: "GET_HABITACIONES_BACKUP",
+        payload: habitaciones.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
 
 export function getDevs(){
   return async function(dispatch){ 
