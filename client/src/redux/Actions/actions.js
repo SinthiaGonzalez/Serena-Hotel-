@@ -236,6 +236,19 @@ export function updateHabitacion (habitacionData) {
   }
 }
 
+export function getHabitacionesbackup() {
+  return async function (dispatch) {
+    try {
+      const habitaciones = await axios.get("/habitaciones");
+      return dispatch({
+        type: "GET_HABITACIONES_BACKUP",
+        payload: habitaciones.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
 
 export function getDevs(){
   return async function(dispatch){ 

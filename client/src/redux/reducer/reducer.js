@@ -39,7 +39,6 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         habitaciones: action.payload,
-        habitacionBackUp: action.payload, 
       };
     case "CREATE_PREFERENCE_MERCADOPAGO_ID":
       return {
@@ -104,6 +103,11 @@ const reducer = (state = initialState, action) => {
       };
     case "UPDATE_HABITACION":
       return { ...state, habitacionActualizada: [...state.habitacionActualizada, action.payload] };
+    case "GET_HABITACIONES_BACKUP":
+      return {
+        ...state,
+        habitacionBackUp: action.payload,
+      };
     default: return state;
 
   }
