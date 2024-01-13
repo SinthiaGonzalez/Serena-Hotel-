@@ -59,9 +59,10 @@ const UpdateHabitacion = () => {
 
   const handlerselectHabitacion = (e) => {
     setSeleccionhabitacion(e);
-
+    setNuevaDataHabitacion({ ...nuevaDataHabitacion, nombreId: e })
+    
   };
-
+  console.log("plis",nuevaDataHabitacion)
 
   const isSubmitDisabled = () => {
     // Verifica si hay algún campo obligatorio sin completar
@@ -107,26 +108,6 @@ const UpdateHabitacion = () => {
     setIsEmpty(false);
   };
 
-  const handleImageSubmit = () => {
-    // Verificar que haya una imagen antes de agregarla
-    if (nuevaDataHabitacion.imagen) {
-      const nuevasImagenes = [...nuevaDataHabitacion.imagenes];
-
-      // Si ya hay 4 imágenes, reemplazar la última
-      if (nuevasImagenes.length === 4) {
-        nuevasImagenes[3] = nuevaDataHabitacion.imagen;
-      } else {
-        // Si no hay 4 imágenes, agregar la nueva imagen al final
-        nuevasImagenes.push(nuevaDataHabitacion.imagen);
-      }
-
-      setNuevaDataHabitacion({
-        ...nuevaDataHabitacion,
-        imagenes: nuevasImagenes,
-      });
-    }
-  };
-
   const handleImageRemove = (index) => {
     const nuevasImagenes = [...nuevaDataHabitacion.imagenes];
     nuevasImagenes.splice(index, 1);
@@ -167,7 +148,6 @@ const UpdateHabitacion = () => {
   const handleImageCloudinary= async (e) => {
     const file= e.target.files[0];
     const data = new FormData();
-    console.log("esteeeee",file)
     data.append("file",file);
     data.append("upload_preset", "preset serena");
 
@@ -194,7 +174,6 @@ const UpdateHabitacion = () => {
   }
   console.log("aqui",response);
   }
-
 
   return (
     <div className="bg-verde p-8 rounded-lg mx-20 my-16">

@@ -9,13 +9,13 @@ const CardsShopHabitaciones = ({ habitacionesShop }) => {
   };
   return (
     <div className="flex flex-col gap-4 mx-8 w-full">
-      {habitacionesShop.map(({ id, nombre, imagen, precio, servicios }) => {
+      {habitacionesShop.map(({ id, nombre, imagenes, precio, servicios }) => {
         return (
           <CardShopHabitaciones
             key={id}
             id={id}
             nombre={nombre}
-            imagen={imagen}
+            imagenes={imagenes}
             precio={precio}
             servicios={servicios}
             handlerAddToCart={handlerAddToCart}
