@@ -125,7 +125,8 @@ export function crearHabitacion(habitacionData) {
         habitacionData
       );
       console.log(response.data);
-      alert("Creado con exito");
+      if (response.data=== "La habitacion ya existe") alert(response.data);
+      else alert("Creado con exito");
       dispatch({
         type: "CREAR_HABITACION",
         payload: response.data,
@@ -223,7 +224,8 @@ export function updateHabitacion (habitacionData) {
           const response = await axios.put('/update/habitaciones', habitacionData)
 
           console.log(response.data);
-          alert('Habitacion actualizada con exito')
+          if (response.data=== "No existe una habitacion con ese nombre") alert(response.data);
+          else alert('Habitacion actualizada con exito')
           dispatch ({
               type:"UPDATE_HABITACION",
               payload: response.data,

@@ -4,6 +4,7 @@ import validation from "../CrearHabitaciones/validation";
 import { useDispatch, useSelector } from "react-redux";
 import { updateHabitacion, getHabitacionesbackup } from "../../redux/Actions/actions";
 import { Select, Option } from "@material-tailwind/react";
+import axios from "axios";
 
 const UpdateHabitacion = () => {
   const dispatch = useDispatch();
@@ -58,9 +59,10 @@ const UpdateHabitacion = () => {
 
   const handlerselectHabitacion = (e) => {
     setSeleccionhabitacion(e);
-
+    setNuevaDataHabitacion({ ...nuevaDataHabitacion, nombreId: e })
+    
   };
-
+  console.log("plis",nuevaDataHabitacion)
 
   const isSubmitDisabled = () => {
     // Verifica si hay algún campo obligatorio sin completar
@@ -106,26 +108,6 @@ const UpdateHabitacion = () => {
     setIsEmpty(false);
   };
 
-  const handleImageSubmit = () => {
-    // Verificar que haya una imagen antes de agregarla
-    if (nuevaDataHabitacion.imagen) {
-      const nuevasImagenes = [...nuevaDataHabitacion.imagenes];
-
-      // Si ya hay 4 imágenes, reemplazar la última
-      if (nuevasImagenes.length === 4) {
-        nuevasImagenes[3] = nuevaDataHabitacion.imagen;
-      } else {
-        // Si no hay 4 imágenes, agregar la nueva imagen al final
-        nuevasImagenes.push(nuevaDataHabitacion.imagen);
-      }
-
-      setNuevaDataHabitacion({
-        ...nuevaDataHabitacion,
-        imagenes: nuevasImagenes,
-      });
-    }
-  };
-
   const handleImageRemove = (index) => {
     const nuevasImagenes = [...nuevaDataHabitacion.imagenes];
     nuevasImagenes.splice(index, 1);
@@ -163,7 +145,35 @@ const UpdateHabitacion = () => {
       alert("Validation errors:", errors);
     }
   };
+  const handleImageCloudinary= async (e) => {
+    const file= e.target.files[0];
+    const data = new FormData();
+    data.append("file",file);
+    data.append("upload_preset", "preset serena");
 
+    const response = await axios.post("https://api.cloudinary.com/v1_1/de2jgnztx/image/upload",data)
+    if (nuevaDataHabitacion.imagenes[0]!==undefined) {
+      const nuevasImagenes = [...nuevaDataHabitacion.imagenes];
+
+      // Si ya hay 4 imágenes, reemplazar la última
+      if (nuevasImagenes.length === 4) {
+        nuevasImagenes[3] = response.data.secure_url;
+      } else {
+        // Si no hay 4 imágenes, agregar la nueva imagen al final
+        nuevasImagenes.push(response.data.secure_url);
+      }
+
+      setNuevaDataHabitacion({
+        ...nuevaDataHabitacion,
+        imagenes: nuevasImagenes,
+      });
+    } else {setNuevaDataHabitacion({
+      ...nuevaDataHabitacion,
+      imagenes: [response.data.secure_url],
+    });
+  }
+  console.log("aqui",response);
+  }
 
   return (
     <div className="bg-verde p-8 rounded-lg mx-20 my-16">
@@ -213,23 +223,16 @@ const UpdateHabitacion = () => {
             ))}
           </div>
           <input
-            className="mt-2 w-full text-center text-negro"
-            type="text"
-            name="imagen"
-            placeholder="Imagen URL"
-            value={nuevaDataHabitacion.imagen}
-            onChange={handleChange}
-            onBlur={() => handleBlur("imagen")}
+             className="mt-2 w-full text-center text-blanco"
+             type="file"
+             accept="image/*"
+             name="imagen"
+             placeholder="Imagen URL"
+             value={nuevaDataHabitacion.imagen}
+             onChange={handleImageCloudinary}
+             onBlur={() => handleBlur("imagen")}
           />
           <p className="my-4">{touchedFields.imagen && errors.imagen}</p>
-
-          <button
-            type="button"
-            className="w-full mb-4 select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-blanco transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
-            onClick={handleImageSubmit}
-          >
-            Agregar Imagen
-          </button>
         </div>
 
         <div className="flex flex-col items-center w-4/8">
