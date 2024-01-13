@@ -43,7 +43,7 @@ const CreateUsuario = () => {
       alert(error.message);
     }
   };
-  
+
   return (
     <div
       className="relative bg-cover bg-center text-white text-center p-8 h-screen"
@@ -52,8 +52,14 @@ const CreateUsuario = () => {
           'url("https://i.postimg.cc/3xxjwxft/selena-hotel-1.png")',
       }}
     >
-      <div className="flex flex-col items-center justify-center h-full bg-blanco w-2/3 rounded-lg px-20 mx-[250px] ">
-        <p className="flex my-4  font-inter text-3xl antialiased leading-normal text-center font-bold text-gris justify-center">
+      <div className="flex flex-col items-center justify-center h-auto bg-blanco w-2/3 rounded-lg px-20 mx-[250px] px-4 pt-3 pb-6">
+        <a
+          href="/logearse"
+          class="font-inter text-base antialiased font-bold text-naranja text-inter hover:scale-105 w-1/6 ml-[-700px] mt-6"
+        >
+          🡰 Volver
+        </a>
+        <p className="flex mt-4 font-inter text-3xl antialiased leading-normal text-center font-bold text-gris justify-center">
           Registrarse
         </p>
         <form onSubmit={handleSubmit} className="w-2/3">

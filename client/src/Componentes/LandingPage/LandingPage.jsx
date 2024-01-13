@@ -18,15 +18,15 @@ const LandingPage = () => {
       <ScrollToTop />
       <Home id="home" />
       {/* <LoginCliente id="loginCliente" /> */}
-      <Experiencias id="experiencias" />
-      <SobreSerenaLanding id="sobreSerena" />
-      <BarraInformacion id="barraInformacion" />
-      <Servicios id="servicios" />
-      <ImagenSeparadoraConBoton id="imagenSeparadora" />
-      <CardsHome id="cardsHome" />
-      <ShoppingCartCard1 id="shoppingCart" />
-      <ComentPage id="comentPage" />
-      <GaleriaDeFotos id="galeriaDeFotos" />
+      <Experiencias/>
+      <SobreSerenaLanding/>
+      <BarraInformacion />
+      <Servicios/>
+      <ImagenSeparadoraConBoton/>
+      <CardsHome/>
+      <ShoppingCartCard1/>
+      <ComentPage/>
+      <GaleriaDeFotos/>
       {/* <Contactenos id="contactenos" /> */}
       <Footer />
     </>

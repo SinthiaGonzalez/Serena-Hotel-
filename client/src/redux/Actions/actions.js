@@ -260,7 +260,19 @@ export function getDevs(){
           return 
       }
   }  
-}  
+}
+
+
+  export const estadoLogeo = (estado) => {
+    
+    return {
+      type: "ESTADO_LOGEO",
+      payload: estado,
+    };
+  };
+
+
+
 
 
 

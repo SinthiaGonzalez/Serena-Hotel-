@@ -2,13 +2,16 @@
 import React from 'react';
 import { GoogleLogin } from 'react-google-login';
 import { useGoogle } from "./useGoogle";
-import { useDispatch } from 'react-redux';
-import { putUsuario } from '../../redux/actions/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { estadoLogeo, putUsuario } from '../../redux/actions/actions';
 
 
 export default function LoginTemplate() {
   const { onSuccess, onFailure, clientId } = useGoogle();
   const dispatch = useDispatch();
+  const EstadoDeLogeo = useSelector((state) => state.estadoDeLogeo);
+  console.log("Logeado antes de boton google", EstadoDeLogeo)
+  
 
   
   const respuestaExitosa = (respuesta) => {
@@ -17,12 +20,20 @@ export default function LoginTemplate() {
     console.log(respuesta.profileObj.givenName);
     console.log(respuesta.profileObj.familyName);
 
-    dispatch( putUsuario({
-      name: respuesta.profileObj.givenName,
-      apellido: respuesta.profileObj.familyName,
-      email: respuesta.profileObj.email,
-    }));
+    // Despacha la acción putUsuario para crear o actualizar el usuario en la base de datos
+    dispatch(
+      putUsuario({
+        name: respuesta.profileObj.givenName,
+        apellido: respuesta.profileObj.familyName,
+        email: respuesta.profileObj.email,
+      })
+    );
+
+    // Despacha la acción estadoLogeo para cambiar el estado de logeo
+    dispatch(estadoLogeo(true));
   };
+  console.log("Logeado despues de boton google", EstadoDeLogeo)
+
   
 
   const respuestaFallida = (error) => {

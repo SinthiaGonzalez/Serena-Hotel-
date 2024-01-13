@@ -8,6 +8,7 @@ const initialState = {
   nuevaHabitacion: [],
   developers: [],
   habitacionActualizada: [],
+  estadoDeLogeo: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -55,13 +56,17 @@ const reducer = (state = initialState, action) => {
       };
 
     case "CREAR_HABITACION":
-      return { ...state, nuevaHabitacion: [...state.nuevaHabitacion, action.payload], habitaciones: [...state.habitaciones, action.payload] };
-    
-    case "GET_DEVS":     
       return {
         ...state,
-        developers: action.payload,                
-      } 
+        nuevaHabitacion: [...state.nuevaHabitacion, action.payload],
+        habitaciones: [...state.habitaciones, action.payload],
+      };
+
+    case "GET_DEVS":
+      return {
+        ...state,
+        developers: action.payload,
+      };
 
     case "GET_HABITACIONES_ORDENAMIENTOS":
       return {
@@ -83,11 +88,17 @@ const reducer = (state = initialState, action) => {
         ...state,
         habitaciones: action.payload,
       };
-      case "UPDATE_HABITACION":
-        return { ...state, habitacionActualizada: [...state.habitacionActualizada, action.payload] }
+    case "UPDATE_HABITACION":
+      return {
+        ...state,
+        habitacionActualizada: [...state.habitacionActualizada, action.payload],
+      };
+    case "ESTADO_LOGEO":
+      return { ...state, 
+        estadoDeLogeo: action.payload };
+        
     default:
       return state;
-
   }
 };
 
