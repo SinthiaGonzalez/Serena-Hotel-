@@ -6,6 +6,7 @@ const initialState = {
   comentarios: [],
   AllComentsBackUp: [],
   nuevaHabitacion: [],
+  developers: [],
   habitacionActualizada: [],
 };
 
@@ -52,6 +53,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         comentarios: updatedComentarios,
       };
+
     case "CREAR_HABITACION":
       return {
         ...state,
@@ -59,12 +61,20 @@ const reducer = (state = initialState, action) => {
         habitaciones: [...state.habitaciones, action.payload],
       };
 
-    case "GET_HABITACIONES_ORDENAMIENTOS":
+    case "GET_DEVS":
+      return {
+        ...state,
+        developers: action.payload,
+      };
+    default:
+      return state;
+
+    case "GET_HABITACIONES_NOMBRE":
       return {
         ...state,
         habitaciones: action.payload,
       };
-    case "GET_HABITACIONES_FILTROS":
+    case "GET_HABITACIONES_PRECIO":
       return {
         ...state,
         habitaciones: action.payload,
@@ -74,15 +84,21 @@ const reducer = (state = initialState, action) => {
         ...state,
         habitaciones: action.payload,
       };
+    case "GET_HABITACIONES_FILTROS_TIPOS":
+      return {
+        ...state,
+        habitaciones: action.payload,
+      };
     case "GET_RESERVAS":
       return {
         ...state,
         habitaciones: action.payload,
       };
-      case "UPDATE_HABITACION":
-        return { ...state, habitacionActualizada: [...state.habitacionActualizada, action.payload] }
-    default:
-      return state;
+    case "UPDATE_HABITACION":
+      return {
+        ...state,
+        habitacionActualizada: [...state.habitacionActualizada, action.payload],
+      };
   }
 };
 
