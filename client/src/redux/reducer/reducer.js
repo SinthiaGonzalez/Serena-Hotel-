@@ -1,5 +1,7 @@
 const initialState = {
   habitaciones: [],
+  habitacionesfiltradas: [],
+  string: "",
   usuarios: [],
   preferenceIdMP: [],
   carrito: [],
@@ -8,10 +10,24 @@ const initialState = {
   nuevaHabitacion: [],
   developers: [],
   habitacionActualizada: [],
+  estadoDeLogeo: false,
+  habitacionBackUp: [],
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case "GET_HABITACIONES_BUSQUEDA":
+      const buscar = action.payload; // string palabra a buscar
+      const habitacionFiltrada = state.habitaciones.filter((habitacion) =>
+        habitacion.nombre.toLowerCase().includes(buscar)
+      );
+      console.log("habitacion filtrada", habitacionFiltrada);
+      return {
+        ...state,
+        string: buscar,
+        habitacionesfiltradas: habitacionFiltrada,
+      };
+
     case "GET_USERS":
       return {
         ...state,
@@ -66,9 +82,6 @@ const reducer = (state = initialState, action) => {
         ...state,
         developers: action.payload,
       };
-    default:
-      return state;
-
     case "GET_HABITACIONES_NOMBRE":
       return {
         ...state,
@@ -99,6 +112,17 @@ const reducer = (state = initialState, action) => {
         ...state,
         habitacionActualizada: [...state.habitacionActualizada, action.payload],
       };
+    case "ESTADO_LOGEO":
+      return { ...state, estadoDeLogeo: action.payload };
+
+    case "GET_HABITACIONES_BACKUP":
+      return {
+        ...state,
+        habitacionBackUp: action.payload,
+      };
+
+    default:
+      return state;
   }
 };
 

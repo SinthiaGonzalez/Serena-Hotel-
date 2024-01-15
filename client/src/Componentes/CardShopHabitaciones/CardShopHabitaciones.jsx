@@ -1,12 +1,14 @@
 /* eslint-disable react/prop-types */
 const CardShopHabitaciones = ({
   id,
+  imagenes,
   nombre,
   precio,
   servicios,
   handlerAddToCart,
   tipo,
 }) => {
+  console.log(imagenes)
   return (
     <>
       <div
@@ -16,7 +18,7 @@ const CardShopHabitaciones = ({
         <div className="h-44 mx-8 my-8 w-60 overflow-hidden text-white  rounded-xl bg-verde bg-clip-border">
           <img
             className="w-full h-full object-cover"
-            src="https://www.es.kayak.com/rimg/himg/25/bc/10/expediav2-620936-1621e8-274187.jpg?width=968&height=607&crop=true"
+            src={imagenes[0]}
             alt={nombre}
           />
         </div>

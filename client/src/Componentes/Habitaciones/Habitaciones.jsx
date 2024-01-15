@@ -23,10 +23,14 @@ import Checkin from "../Filtros/filtro-Checkin";
 import Checkout from "../Filtros/filtro-Checkout";
 import { getReservas } from "../../redux/Actions/actions";
 import { format } from "date-fns";
-
+import BuscarPorNombre from "../ordenamientosyBusqueda/busqueda";
 const Habitaciones = () => {
   const dispatch = useDispatch();
   const habitacionesShop = useSelector((state) => state.habitaciones);
+  const habitacionfiltrada = useSelector(
+    (state) => state.habitacionesfiltradas
+  );
+  const stringdelbuscar = useSelector((state) => state.string);
 
   useEffect(() => {
     dispatch(getHabitaciones());
@@ -105,14 +109,20 @@ const Habitaciones = () => {
       })
     );
   };
-
+  const handlertoprops = () => {
+    if (stringdelbuscar.length > 0) {
+      return habitacionfiltrada;
+    } else {
+      return habitacionesShop;
+    }
+  };
   return (
     <>
       <NavBarHome />
       <div className="flex flex-row bg-white py-7 h-screen">
         <div className="ml-8 bg-verde w-2/5 rounded-xl ">
           <h2 className="text-3xl font-bold text-blanco p-4">Ordenamientos</h2>
-
+          <BuscarPorNombre />
           <div className="flex flex-col w-full p-4">
             <h2 className="text-2xl font-bold text-blanco mb-2">Nombre</h2>
             <Select
@@ -208,7 +218,7 @@ const Habitaciones = () => {
             </List>
           </Card>
         </div>
-        <CardsShopHabitaciones habitacionesShop={habitacionesShop} />
+        <CardsShopHabitaciones habitacionesShop={handlertoprops()} />
       </div>
     </>
   );

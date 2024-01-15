@@ -14,7 +14,8 @@ const CreateUsuario = async (req, res) => {
         apellido,
         email,
         telefono,
-        contraseña
+        contraseña,
+        logueado: true,
       });
   
       return newUser; 

@@ -12,7 +12,7 @@ const CardsHome = () => {
   }, [dispatch]);
   return (
     <>
-      <div className="px-14 pt-4 flex flex-row justify-between bg-blanco ">
+      <div id="habitaciones" className="px-14 pt-4 flex flex-row justify-between bg-blanco ">
         <div className="h-30 border-l-4 border-negro text-left p-4 mb-10">
           <span className="text-3xl text-negro font-inter font-medium block">
             HABITACIONES
