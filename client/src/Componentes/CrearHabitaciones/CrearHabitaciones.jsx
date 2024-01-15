@@ -155,16 +155,19 @@ const CrearHabitacion = () => {
   };
 
   console.log(habitacionData);
-  
-  const handleImageCloudinary= async (e) => {
-    const file= e.target.files[0];
+
+  const handleImageCloudinary = async (e) => {
+    const file = e.target.files[0];
     const data = new FormData();
-    console.log("esteeeee",file)
-    data.append("file",file);
+    console.log("esteeeee", file);
+    data.append("file", file);
     data.append("upload_preset", "preset serena");
 
-    const response = await axios.post("https://api.cloudinary.com/v1_1/de2jgnztx/image/upload",data)
-    if (habitacionData.imagenes[0]!==undefined) {
+    const response = await axios.post(
+      "https://api.cloudinary.com/v1_1/de2jgnztx/image/upload",
+      data
+    );
+    if (habitacionData.imagenes[0] !== undefined) {
       const nuevasImagenes = [...habitacionData.imagenes];
 
       // Si ya hay 4 imágenes, reemplazar la última
@@ -179,13 +182,14 @@ const CrearHabitacion = () => {
         ...habitacionData,
         imagenes: nuevasImagenes,
       });
-    } else {setHabitacionData({
-      ...habitacionData,
-      imagenes: [response.data.secure_url],
-    });
-  }
-  console.log("aqui2",response);
-  }
+    } else {
+      setHabitacionData({
+        ...habitacionData,
+        imagenes: [response.data.secure_url],
+      });
+    }
+    console.log("aqui2", response);
+  };
   return (
     <div className="flex flex-col justify-center items-center bg-blanco mt-16">
       <div className="bg-verde p-8 rounded-lg mx-20">

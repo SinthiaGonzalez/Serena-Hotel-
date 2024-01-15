@@ -34,7 +34,7 @@ module.exports = (sequelize) => {
       defaultValue: "Disponible",
     },
     tipo: {
-      type: DataTypes.ENUM("Deluxe", "Ejecutivo", "Presidencial"),
+      type: DataTypes.ENUM("Deluxe", "Ejecutiva", "Presidencial"),
       allowNull: false,
     },
   });

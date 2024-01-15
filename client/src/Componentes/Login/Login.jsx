@@ -3,7 +3,7 @@ import React from "react";
 import { GoogleLogin } from "react-google-login";
 import { useGoogle } from "./useGoogle";
 import { useDispatch, useSelector } from "react-redux";
-import { estadoLogeo, putUsuario } from "../../redux/actions/actions";
+import { estadoLogeo, putUsuario } from "../../redux/Actions/actions";
 
 export default function LoginTemplate() {
   const { onSuccess, onFailure, clientId } = useGoogle();

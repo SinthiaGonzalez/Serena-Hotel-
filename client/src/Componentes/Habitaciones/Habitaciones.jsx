@@ -187,7 +187,7 @@ const Habitaciones = () => {
           <h2 className="text-2xl font-bold text-blanco p-4">Tipos</h2>
           <Card className="w-full max-w-[30rem] ml-4">
             <List className="flex-row">
-              {["Deluxe", "Presidencial", "Ejecutivo"].map((tipo) => (
+              {["Deluxe", "Presidencial", "Ejecutiva"].map((tipo) => (
                 <ListItem key={tipo} className="p-0">
                   <label
                     htmlFor={`tipo-${tipo}`}
