@@ -1,6 +1,7 @@
+/* eslint-disable react/prop-types */
 import CardShopHabitaciones from "../CardShopHabitaciones/CardShopHabitaciones";
-import {useDispatch} from "react-redux";
-import { addToCart } from "../../redux/actions/actions";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/Actions/actions";
 const CardsShopHabitaciones = ({ habitacionesShop }) => {
   const dispatch = useDispatch();
   const handlerAddToCart = (id) => {

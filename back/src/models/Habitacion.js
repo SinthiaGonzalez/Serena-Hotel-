@@ -15,10 +15,10 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    imagen: {
+    imagenes: {
       type: DataTypes.JSONB,
       allowNull: false,
-      defaultValue: []
+      defaultValue: [],
     },
     servicios: {
       type: DataTypes.JSONB,
@@ -27,6 +27,11 @@ module.exports = (sequelize) => {
     descripcion: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    estado: {
+      type: DataTypes.ENUM("Disponible", "No Disponible"),
+      allowNull: false,
+      defaultValue: "Disponible",
     },
   });
 };

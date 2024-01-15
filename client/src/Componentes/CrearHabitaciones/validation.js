@@ -1,4 +1,5 @@
-const validation = (habitacionData)=>{
+
+const validation = (habitacionData) => {
     const errors = {}
   
     
@@ -13,8 +14,8 @@ const validation = (habitacionData)=>{
   }
   
   
-  if (!/^.{10,}$/.test(habitacionData.descripcion)) {
-    errors.descripcion = 'La descripcion debe contener al menos 10 letras';
+  if (!/^.{5,}$/.test(habitacionData.descripcion)) {
+    errors.descripcion = 'La descripcion debe contener al menos 5 letras';
     
 }
   
@@ -22,9 +23,8 @@ const validation = (habitacionData)=>{
     errors.servicios = 'Debes elegir al menos un servicio';
   }
   
-  
-  
+
   return errors
-  }
-  
-  export default validation;
+}
+
+export default validation;
