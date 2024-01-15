@@ -3,13 +3,14 @@ import validation from "./validation.js";
 import { useDispatch, useSelector } from "react-redux";
 import { crearHabitacion } from "../../redux/Actions/actions";
 import UpdateHabitacion from "../updateHabitacion/updateHabitacion.jsx";
-
+import axios from "axios";
 const CrearHabitacion = () => {
   const dispatch = useDispatch();
   const [errors, setErrors] = useState({});
   const [submitDisabled, setSubmitDisabled] = useState(true);
   const [touchedFields, setTouchedFields] = useState({});
   const [isEmpty, setIsEmpty] = useState(true);
+  const [cloudinary, setCloudinary] = useState("");
 
   const [habitacionData, setHabitacionData] = useState({
     nombre: "",
@@ -44,6 +45,7 @@ const CrearHabitacion = () => {
     descripcion: "Habitacion comoda",
     estado: "Disponible",
   });
+
   console.log({ habitacionData });
   console.log(errors);
 
@@ -131,10 +133,22 @@ const CrearHabitacion = () => {
     setSubmitDisabled(Object.keys(errors).length > 0 || isSubmitDisabled());
   }, [errors, habitacionData, isSubmitDisabled]);
 
+  const resetTouchedFields = () => {
+    const resetFields = {};
+    Object.keys(touchedFields).forEach((fieldName) => {
+      resetFields[fieldName] = "";
+    });
+    setHabitacionData({
+      ...habitacionData,
+      ...resetFields,
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (Object.keys(errors).length === 0) {
       dispatch(crearHabitacion(habitacionData));
+      resetTouchedFields();
     } else {
       alert("Validation errors:", errors);
     }
@@ -142,6 +156,40 @@ const CrearHabitacion = () => {
 
   console.log(habitacionData);
 
+  const handleImageCloudinary = async (e) => {
+    const file = e.target.files[0];
+    const data = new FormData();
+    console.log("esteeeee", file);
+    data.append("file", file);
+    data.append("upload_preset", "preset serena");
+
+    const response = await axios.post(
+      "https://api.cloudinary.com/v1_1/de2jgnztx/image/upload",
+      data
+    );
+    if (habitacionData.imagenes[0] !== undefined) {
+      const nuevasImagenes = [...habitacionData.imagenes];
+
+      // Si ya hay 4 imágenes, reemplazar la última
+      if (nuevasImagenes.length === 4) {
+        nuevasImagenes[3] = response.data.secure_url;
+      } else {
+        // Si no hay 4 imágenes, agregar la nueva imagen al final
+        nuevasImagenes.push(response.data.secure_url);
+      }
+
+      setHabitacionData({
+        ...habitacionData,
+        imagenes: nuevasImagenes,
+      });
+    } else {
+      setHabitacionData({
+        ...habitacionData,
+        imagenes: [response.data.secure_url],
+      });
+    }
+    console.log("aqui2", response);
+  };
   return (
     <div className="flex flex-col justify-center items-center bg-blanco mt-16">
       <div className="bg-verde p-8 rounded-lg mx-20">
@@ -169,23 +217,16 @@ const CrearHabitacion = () => {
               ))}
             </div>
             <input
-              className="mt-2 w-full text-center text-negro"
-              type="text"
+              className="mt-2 w-full text-center text-blanco"
+              type="file"
+              accept="image/*"
               name="imagen"
               placeholder="Imagen URL"
               value={habitacionData.imagen}
-              onChange={handleChange}
+              onChange={handleImageCloudinary}
               onBlur={() => handleBlur("imagen")}
             />
             <p className="my-4">{touchedFields.imagen && errors.imagen}</p>
-
-            <button
-              type="button"
-              className="w-full mb-4 select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-blanco transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
-              onClick={handleImageSubmit}
-            >
-              Agregar Imagen
-            </button>
           </div>
 
           <div className="flex flex-col items-center w-4/8">
