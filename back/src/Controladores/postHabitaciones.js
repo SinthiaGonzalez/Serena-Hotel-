@@ -8,19 +8,40 @@ const postHabitaciones = async (
   imagenes,
   servicios,
   descripcion,
-  estado
+  estado,
+  tipo
 ) => {
-  
-  console.log("aqui esta el posthabitaciones", nombre, precio, imagenes, servicios, descripcion, estado);
+  console.log(
+    "aqui",
+    nombre,
+    precio,
+    imagenes,
+    servicios,
+    descripcion,
+    estado,
+    tipo
+  );
 
-  if (!nombre || !precio || !imagenes || !servicios || !descripcion || !estado) {
+  const result = [];
+  for (let i = 0; i < imagenes.length; i++) {
+    result[i] = await cloudinary.uploader.upload(imagenes[i], {
+      folder: "habitaciones",
+    });
+  }
+  if (
+    !nombre ||
+    !precio ||
+    !imagenes ||
+    !servicios ||
+    !descripcion ||
+    !estado ||
+    !tipo
+  ) {
     return "faltan datos";
   }
   const prueba = await Habitaciones.findOne({ where: { nombre: nombre } });
   if (prueba) return "La habitacion ya existe";
   else {
-    
-    
     const habitacion = await Habitaciones.create({
       nombre,
       precio,
@@ -28,9 +49,10 @@ const postHabitaciones = async (
       servicios,
       descripcion,
       estado,
+      tipo,
     });
     return habitacion;
   }
-}
+};
 
 module.exports = { postHabitaciones };
