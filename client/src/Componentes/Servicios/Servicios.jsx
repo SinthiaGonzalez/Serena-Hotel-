@@ -51,7 +51,7 @@ const Servicios = () => {
   ];
 
   return (
-    <div className="mt-16 mb-16 ml-4">
+    <div id="servicios" className="mt-16 mb-16 ml-4">
       <div className="flex flex-col lg:flex-row items-center mb-8 ml-6 mr-8">
         <div className="w-full lg:w-1/2 lg:mb-0 lg:mr-4">
           <div className="h-30 border-l-4 border-negro text-left p-4 mb-10">
