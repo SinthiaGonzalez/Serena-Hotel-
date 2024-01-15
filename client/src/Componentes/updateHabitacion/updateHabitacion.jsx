@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import validation from "../CrearHabitaciones/validation";
 import { useDispatch, useSelector } from "react-redux";
-import { updateHabitacion } from "../../redux/Actions/actions";
+import { updateHabitacion, eliminarHabitacion } from "../../redux/Actions/actions";
 
 const UpdateHabitacion = () => {
   const dispatch = useDispatch();
@@ -9,6 +9,7 @@ const UpdateHabitacion = () => {
   const [submitDisabled, setSubmitDisabled] = useState(true);
   const [touchedFields, setTouchedFields] = useState({});
   const [isEmpty, setIsEmpty] = useState(true);
+  //const habitaciones = useSelector((state) => state.habitaciones);
 
   const [nuevaDataHabitacion, setNuevaDataHabitacion] = useState({
     nombre: "",
@@ -132,6 +133,15 @@ const UpdateHabitacion = () => {
     } else {
       alert("Validation errors:", errors);
     }
+  };
+
+  const handleEliminar = (e) => {
+    e.preventDefault();
+    //const idOptionSelected = getElementByName...
+    const idOptionSelected = "7e998da3-d8b0-4b85-8947-63e945d9bcaa"
+    dispatch(eliminarHabitacion(idOptionSelected)); 
+    alert("clickeaste eliminar!");
+ 
   };
 
   console.log(nuevaDataHabitacion)
@@ -311,7 +321,7 @@ const UpdateHabitacion = () => {
               /Noche
             </p>
             <p className="my-4">{touchedFields.precio && errors.precio}</p>
-
+        
             <button
               className="w-full mt-2 mb-4 select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-blanco transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
               type="submit"
@@ -319,7 +329,14 @@ const UpdateHabitacion = () => {
             >
               Actualizar
             </button>
-          </div>
+            <button
+              className="w-full mt-2 mb-4 select-none rounded-lg bg-red-500 py-3.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-blanco transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
+              type="button" onClick={handleEliminar}           
+            >
+              Eliminar
+            </button>
+
+          </div>         
 
           {/* <div>
             <input

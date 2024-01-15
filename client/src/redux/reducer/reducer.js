@@ -20,7 +20,7 @@ const reducer = (state = initialState, action) => {
     case "GET_HABITACIONES":
       return {
         ...state,
-        habitaciones: action.payload,
+        habitaciones: action.payload,        
       };
     case "CREATE_PREFERENCE_MERCADOPAGO_ID":
       return {
@@ -83,10 +83,20 @@ const reducer = (state = initialState, action) => {
         ...state,
         habitaciones: action.payload,
       };
-      case "UPDATE_HABITACION":
-        return { ...state, habitacionActualizada: [...state.habitacionActualizada, action.payload] }
+    case "UPDATE_HABITACION":
+      return { ...state, habitacionActualizada: [...state.habitacionActualizada, action.payload] }
+    
+      case "ELIMINAR_HABITACION": //action.payload es id 
+      //VERIFICAR Q FUNCIONE EL FILTRADO
+      const habitacionesFiltered = state.habitaciones.filter(
+        (habitacion) => habitacion.id !== action.payload );
+      return { 
+        ...state,
+        habitaciones: habitacionesFiltered,       
+      };
+    
     default:
-      return state;
+    return state;
   }
 };
 

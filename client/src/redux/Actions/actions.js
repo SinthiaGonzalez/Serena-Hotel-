@@ -227,6 +227,24 @@ export function updateHabitacion (habitacionData) {
   }
 }
 
+export function eliminarHabitacion(id) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.delete(`/habitaciones/${id}`);
+      console.log("actions response:", response);
+      if (response.status === 200) {
+        dispatch({
+          type: "ELIMINAR_HABITACION",
+          payload: id,
+        });
+        alert("Habitación eliminada exitosamente");
+      }
+    } catch (error) {
+      alert('Hubo un problema con el servidor. Comuníquese con el Administrador - Error: ' + error.message);
+    }
+  };
+}
+
 export function getDevs(){
   return async function(dispatch){ 
       try{
@@ -235,7 +253,7 @@ export function getDevs(){
           return dispatch({
               type: "GET_DEVS",      
               payload: response.data, 
-          });      
+          });                
       }catch(error){
           alert('Hubo un problema con el servidor. Comuniquese con el Administrador - Error: ' + error)
           return 

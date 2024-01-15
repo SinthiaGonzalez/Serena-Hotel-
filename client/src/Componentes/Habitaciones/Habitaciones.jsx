@@ -28,7 +28,7 @@ const Habitaciones = () => {
 
   useEffect(() => {
     dispatch(getHabitaciones());
-  }, [dispatch]);
+  }, [dispatch]); //[dispatch]
 
   const [filtros, setFiltros] = useState([]);
   const [ultimoOrdenamiento, setUltimoOrdenamiento] = useState({
