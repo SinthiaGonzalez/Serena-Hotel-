@@ -39,8 +39,7 @@ const App = () => {
 
         {/* Rutas Dashboard Administrador */}
         <Route path="/admin_habitaciones" element={<DashBoarAdminHabitaciones />}/>
-        <Route path="/admin_reservas" element={<DashBoardAdminReservas />} />
-        <Route path="/admin_usuarios" element={<DashBoardAdminUsuarios />} />
+
 
         {/* Rutas Dashboard Usuario */}
         <Route path="/clienteReservas" element={<DashBoardClienteReservas />} />
