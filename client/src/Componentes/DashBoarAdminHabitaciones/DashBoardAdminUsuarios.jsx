@@ -80,7 +80,7 @@ const DashBoardAdminUsuarios = () => {
                     </td>
                     <td className="py-4 px-2 text-left">0810-888-444</td>
                     <td className="py-4 px-2 text-left">10-01-24</td>
-                    <td className="py-4 px-2 text-left">10-02-2024</td>
+                    <td className="py-4 px-2 text-left">10-02-2025</td>
                     <td className="py-4 px-2 text-left">
                       Suit Ejecutiva del Bosque
                     </td>
