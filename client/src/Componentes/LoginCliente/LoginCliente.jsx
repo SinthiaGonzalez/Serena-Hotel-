@@ -82,6 +82,10 @@ const LoginCliente = () => {
 
         </div>
 
+        <a href="/recuperar-contraseña" className="mb-2 text-naranja">
+          ¿Has olvidado tu contraseña?
+        </a>
+
         <div className="p-6 pt-2">
           <button
             className="w-2/4 mb-4 select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-blanco transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
