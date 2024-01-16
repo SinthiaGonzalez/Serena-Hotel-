@@ -1,11 +1,14 @@
 /* eslint-disable react/prop-types */
 const CardShopHabitaciones = ({
   id,
+  imagenes,
   nombre,
   precio,
   servicios,
   handlerAddToCart,
+  tipo,
 }) => {
+  console.log(imagenes)
   return (
     <>
       <div
@@ -15,14 +18,17 @@ const CardShopHabitaciones = ({
         <div className="h-44 mx-8 my-8 w-60 overflow-hidden text-white  rounded-xl bg-verde bg-clip-border">
           <img
             className="w-full h-full object-cover"
-            src="https://www.es.kayak.com/rimg/himg/25/bc/10/expediav2-620936-1621e8-274187.jpg?width=968&height=607&crop=true"
+            src={imagenes[0]}
             alt={nombre}
           />
         </div>
 
         <div className="flex flex-col items-center justify-center gap-6">
-          <h5 className="block font-sans text-xl antialiased font-bold leading-snug tracking-normal text-blanco">
+          <h5 className="block font-sans text-2xl antialiased font-bold leading-snug tracking-normal text-blanco">
             {nombre}
+          </h5>
+          <h5 className="block font-sans text-xl antialiased font-bold leading-snug tracking-normal text-blanco">
+            {tipo}
           </h5>
           <div className="flex flex-row gap-4">
             {servicios.map(({ icono, descripcion }, index) => (
