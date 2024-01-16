@@ -8,7 +8,7 @@ const CardShopHabitaciones = ({
   handlerAddToCart,
   tipo,
 }) => {
-  console.log(imagenes)
+  console.log(imagenes);
   return (
     <>
       <div
@@ -18,7 +18,7 @@ const CardShopHabitaciones = ({
         <div className="h-44 mx-8 my-8 w-60 overflow-hidden text-white  rounded-xl bg-verde bg-clip-border">
           <img
             className="w-full h-full object-cover"
-            src={imagenes[0]}
+            src={imagenes}
             alt={nombre}
           />
         </div>
