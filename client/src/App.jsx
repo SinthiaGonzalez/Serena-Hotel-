@@ -14,9 +14,6 @@ import DashBoardClientePerfil from "./Componentes/DashboarCliente/DashClientePer
 import DashBoarAdminHabitaciones from "./Componentes/DashBoarAdminHabitaciones/DashBoarAdminHabitaciones.jsx";
 import Contactenos from "./Componentes/Contactenos/Contactenos.jsx";
 import LoginCliente from "./Componentes/LoginCliente/LoginCliente";
-import DashBoarAdminUpdate from "./Componentes/updateHabitacion/dashboardAdminUpdate.jsx";
-import DashBoardAdminReservas from "./Componentes/DashBoarAdminHabitaciones/DashBoardAdminReservas.jsx";
-import DashBoardAdminUsuarios from "./Componentes/DashBoarAdminHabitaciones/DashBoardAdminUsuarios.jsx";
 
 // Esta linea de codigo hace que por default todos los requerimientos en axios se hagan a esta ruta en el back
 // Luego nos va a servir para hacer el Deploy del front
@@ -38,19 +35,13 @@ const App = () => {
         <Route path="/registrarse" element={<CreateUsuario />} />
 
         {/* Rutas Dashboard Administrador */}
-        <Route path="/admin_habitaciones" element={<DashBoarAdminHabitaciones />}/>
-        <Route path="/admin_reservas" element={<DashBoardAdminReservas />} />
-        <Route path="/admin_usuarios" element={<DashBoardAdminUsuarios />} />
+        <Route path="/admin-habitaciones" element={<DashBoarAdminHabitaciones />}/>
 
         {/* Rutas Dashboard Usuario */}
         <Route path="/clienteReservas" element={<DashBoardClienteReservas />} />
-        <Route path="/ClientePerfil" element={<DashBoardClientePerfil />} />
+        <Route path="/clientePerfil" element={<DashBoardClientePerfil />} />
         <Route path="/pasareladePago" element={<PasareladePago />} />
         <Route path="/comentar" element={<CreateComentPage />} />
-        <Route
-          path="/admin_habitaciones/update"
-          element={<DashBoarAdminUpdate />}
-        />
         {/* Ruta 404 */}
         <Route path="*" element={<Error404 />} />
       </Routes>

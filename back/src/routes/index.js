@@ -12,27 +12,44 @@ const {
 } = require("../handlers/HandlersUsuarios/PostHandlerUsuario");
 const { CreatePreferenceMP } = require("../Controladores/postProductMP"); // importamos el metodo CreatePreferenceMP del archivo postProductMP.js
 
-const { EnvioMailContactenos } = require("../handlers/EnvioMailContactenos");
+const {
+  EnvioMailContactenos,
+} = require("../handlers/HandlerMailer/EnvioMailContactenos");
 const { getHabitacionHandler } = require("../handlers/HabitacionHandler");
 const {
   addHabitacionToCarrito,
   getCarrito,
 } = require("../Controladores/carritoControlador");
 const { postHabitacionHandler } = require("../handlers/HabitacionHandler");
+const { eliminarHabitacionHandler } = require("../handlers/HabitacionHandler");
 const { postReservasHandler } = require("../handlers/ReservasHandler");
 const { getReservas } = require("../Controladores/getReservas");
 const {
   getOrdenamientosFiltrosHandler,
 } = require("../Controladores/getOrdenamientosFiltrosHandler");
-const { HandlerPostDesarrollador } = require('../handlers/HandlersDesarrolladores/PostHandlersDesarrolladores');
-const { GetHandlerDesarrolladores } = require('../handlers/HandlersDesarrolladores/GetHandlerDesarrolladores');
-const { EliminarDesarrolladorHandler } = require('../handlers/HandlersDesarrolladores/EliminarDesarrolladorHandler');
-const { getHandlerUsuarios } = require("../handlers/HandlersUsuarios/GetHandlerUsuarios");
+const {
+  HandlerPostDesarrollador,
+} = require("../handlers/HandlersDesarrolladores/PostHandlersDesarrolladores");
+const {
+  GetHandlerDesarrolladores,
+} = require("../handlers/HandlersDesarrolladores/GetHandlerDesarrolladores");
+const {
+  EliminarDesarrolladorHandler,
+} = require("../handlers/HandlersDesarrolladores/EliminarDesarrolladorHandler");
+
+const {
+  LoginUsuario,
+} = require("../Controladores/controllers_Usuaruios/logionUsuario");
+const {
+  getHandlerUsuarios,
+} = require("../handlers/HandlersUsuarios/GetHandlerUsuarios");
 const { updateHabitacionHandler } = require("../handlers/HabitacionHandler");
+
 const router = express.Router(); // importamos el metodo Router de express para poder crear rutas
 
 router.post("/usuario", HandlerPostUsuario);
 router.get("/usuarios", getHandlerUsuarios);
+router.put("/login", LoginUsuario);
 
 router.post("/desarrollador", HandlerPostDesarrollador);
 router.delete("/desarrollador/:id", EliminarDesarrolladorHandler);
@@ -53,6 +70,7 @@ router.get("/habitaciones", getHabitacionHandler);
 router.post("/contactenos", EnvioMailContactenos);
 
 router.post("/post/habitaciones", postHabitacionHandler);
+router.delete("/habitaciones/:id", eliminarHabitacionHandler);
 router.post("/carrito", addHabitacionToCarrito);
 router.get("/carrito", getCarrito);
 router.post("/reservas", postReservasHandler);

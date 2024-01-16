@@ -9,14 +9,22 @@ module.exports = (sequelize) => {
         primaryKey: true,
         autoIncrement: true,
       },
-      name: {
+      nombre: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      image: {
+      ocupacion: {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      imagen: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },          
+      imagenFondo: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      }, 
       github: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -31,3 +39,6 @@ module.exports = (sequelize) => {
     }
   );
 };
+/*
+
+*/
