@@ -8,6 +8,9 @@ const CreateUsuario = async (req, res) => {
       if (!name || !apellido || !email || !telefono || !contraseña) {
         return res.status(400).json({ error: 'Faltan campos requeridos' });
       }
+
+      const prueba = await Usuario.findOne({ where: { email: email } });
+  if (prueba) return "Ya existe un usuario vinculado a ese correo";
   
       const newUser = await Usuario.create({
         name,
