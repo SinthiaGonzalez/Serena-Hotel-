@@ -28,14 +28,17 @@ const {
 const { HandlerPostDesarrollador } = require('../handlers/HandlersDesarrolladores/PostHandlersDesarrolladores');
 const { GetHandlerDesarrolladores } = require('../handlers/HandlersDesarrolladores/GetHandlerDesarrolladores');
 const { EliminarDesarrolladorHandler } = require('../handlers/HandlersDesarrolladores/EliminarDesarrolladorHandler');
-
-
-
 const { getHandlerUsuarios } = require("../handlers/HandlersUsuarios/GetHandlerUsuarios");
 const { updateHabitacionHandler } = require("../handlers/HabitacionHandler");
+const { verifyToken } = require("../Controladores/verify-token");
+const { loginCreateToken } = require("../Controladores/login-token");
 
 const router = express.Router(); // importamos el metodo Router de express para poder crear rutas
-
+router.post("/login", loginCreateToken);
+router.get("/verify", verifyToken, (req, res) => {
+  const userId = req.userId;
+  res.status(200).json({ message: "acceso correcto", userId });
+});
 router.post("/usuario", HandlerPostUsuario);
 router.get("/usuarios", getHandlerUsuarios);
 
