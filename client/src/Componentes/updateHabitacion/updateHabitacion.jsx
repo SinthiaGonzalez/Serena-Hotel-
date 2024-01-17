@@ -373,6 +373,7 @@ const handlerdeleteHabitacion = () => {
                 className="text-2xl font-bold text-negro w-1/3 mx-4 text-center"
                 type="number"
                 name="precio"
+                min="0"
                 placeholder="-"
                 onChange={handleChange}
                 onBlur={() => handleBlur("precio")}

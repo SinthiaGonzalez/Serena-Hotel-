@@ -24,6 +24,7 @@ const { postHabitacionHandler } = require("../handlers/HabitacionHandler");
 const { eliminarHabitacionHandler } = require("../handlers/HabitacionHandler");
 const { postReservasHandler } = require("../handlers/ReservasHandler");
 const { getReservas } = require("../Controladores/getReservas");
+const { getReservasPorUsuarioId } = require("../Controladores/getReservasPorUsuarioId");
 const {
   getOrdenamientosFiltrosHandler,
 } = require("../Controladores/getOrdenamientosFiltrosHandler");
@@ -46,10 +47,11 @@ const {
   getHandlerUsuarios,
 } = require("../handlers/HandlersUsuarios/GetHandlerUsuarios");
 const { updateHabitacionHandler } = require("../handlers/HabitacionHandler");
+const { putUsuarioHandler} = require("../handlers/HandlersUsuarios/PutAndDeleteUsuarios")
+const { deleteUsuarioHandler} = require("../handlers/HandlersUsuarios/PutAndDeleteUsuarios")
+//importamos el metodo Router de express para poder crear rutas
 const { EnvioMailNotificaciones } = require("../handlers/HandlerMailer/EnvioMailNotificaciones");
 const { RecuperarContraseña } = require("../handlers/HandlerMailer/RecuperarContraseña/RecuperarContraseña");
-
-
 const router = express.Router(); // importamos el metodo Router de express para poder crear rutas
 router.post("/login", loginCreateToken);
 router.get("/verify", verifyToken, (req, res) => {
@@ -65,7 +67,7 @@ router.post("/desarrollador", HandlerPostDesarrollador);
 router.delete("/desarrollador/:id", EliminarDesarrolladorHandler);
 router.get("/desarrolladores", GetHandlerDesarrolladores);
 
-router.get("/comentarios",verifyToken, AllComentariosdHandler);
+router.get("/comentarios", AllComentariosdHandler);
 router.put("/comentarios/:id", ActualizarComentarioHandler);
 router.post("/comentar", CreateComentario);
 router.delete("/comentario/:id", EliminarComentariosHandler);
@@ -86,8 +88,11 @@ router.post("/carrito", addHabitacionToCarrito);
 router.get("/carrito", getCarrito);
 router.post("/reservas", postReservasHandler);
 router.get("/reservas", getReservas);
+router.get("/reservas-por-usuario", getReservasPorUsuarioId); //trae por ID de usuario o todas (/reservas-por-usuario | http://localhost:3001/reservas-por-usuario?id=5)
 
 router.get("/ordenamientos&filtros", getOrdenamientosFiltrosHandler);
 
 router.put("/update/habitaciones", updateHabitacionHandler);
+router.put("/update/usuarios/:id", putUsuarioHandler);
+router.delete("/delete/usuarios/:id", deleteUsuarioHandler);
 module.exports = router;
