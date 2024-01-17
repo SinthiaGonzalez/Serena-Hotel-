@@ -67,7 +67,7 @@ const CreateComentPage = () => {
         <div className="flex flex-col gap-4 p-6 justify-center items-center">
           <a
             href="/"
-            class="text-left -ml-[600px] block font-inter text-base antialiased font-bold text-naranja text-inter hover:scale-105 w-1/6"
+            className="text-left -ml-[600px] block font-inter text-base antialiased font-bold text-naranja text-inter hover:scale-105 w-1/6"
           >
             🡰 Volver
           </a>
@@ -76,7 +76,7 @@ const CreateComentPage = () => {
             <div>
               <div className="flex flex-row w-full items-center mb-5 -ml-10">
                 <Avatar
-                  size="sm md:lg"
+                  size={window.innerWidth < 768 ? "sm" : "lg"}
                   variant="circular"
                   src={user.image}
                   alt="tania andrew"
@@ -137,65 +137,3 @@ const CreateComentPage = () => {
 
 export default CreateComentPage;
 
-
-// import { useAuth } from "auth"; // Importa el paquete de autenticación "auth"
-
-// const auth = useAuth(); // Inicializa el hook de autenticación
-
-// useEffect(() => {
-//   const unsubscribe = auth.onAuthStateChanged((user) => {
-//     if (user) {
-//       // El usuario está autenticado, puedes acceder a sus datos
-//       setUser(user);
-//     } else {
-//       // No hay usuario autenticado
-//       setUser(null);
-//     }
-//   });
-
-//   return () => unsubscribe();
-// }, [auth]);
-
-{
-  /* 
-
-          {user && (
-            <div className="flex items-center">
-              <span
-                className="text-white mr-2"
-                style={
-                  {
-                    // marginBottom: "50%",
-                    // position: "relative",
-                    // left: "50%",
-                    // transform: "translateX(-50%)",
-                  }
-                }
-              >
-                {user.name}
-              </span>
-              <img
-                src={user.image}
-                alt="Imagen de perfil"
-                className="w-10 h-10 rounded-full mr-2"
-                style={{ marginBottom: "30%" }} // Mover la imagen un poco más arriba
-              />
-              {[1, 2, 3, 4, 5].map((star) => (
-                <span
-                  key={star}
-                  className={
-                    star <= rating
-                      ? "text-naranja cursor-pointer text-4xl"
-                      : "text-gray cursor-pointer text-4xl"
-                  }
-                  onMouseEnter={() => handleStarHover(star)}
-                  onMouseLeave={() => handleStarHover(0)}
-                  onClick={() => handleStarClick(star)}
-                  style={{ marginBottom: "30%" }} // Mover las estrellas un poco más arriba
-                >
-                  {star <= rating ? "★" : "☆"}
-                </span>
-              ))}
-            </div>
-          )} */
-}

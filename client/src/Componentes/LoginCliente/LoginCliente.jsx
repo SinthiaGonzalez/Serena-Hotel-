@@ -36,7 +36,7 @@ const LoginCliente = () => {
         <div className="flex flex-col gap-4 p-6 ">
           <a
             href="/"
-            class="ml-[8%] text-left block font-inter text-base antialiased font-bold text-naranja text-inter hover:scale-105 w-1/6"
+            className="ml-[8%] text-left block font-inter text-base antialiased font-bold text-naranja text-inter hover:scale-105 w-1/6"
           >
             🡰 Volver
           </a>
