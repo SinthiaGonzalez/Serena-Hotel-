@@ -46,8 +46,14 @@ const {
   getHandlerUsuarios,
 } = require("../handlers/HandlersUsuarios/GetHandlerUsuarios");
 const { updateHabitacionHandler } = require("../handlers/HabitacionHandler");
+
+const { putUsuarioHandler} = require("../handlers/HandlersUsuarios/PutAndDeleteUsuarios")
+const { deleteUsuarioHandler} = require("../handlers/HandlersUsuarios/PutAndDeleteUsuarios")
+const router = express.Router(); // importamos el metodo Router de express para poder crear rutas
+
 const { EnvioMailNotificaciones } = require("../handlers/HandlerMailer/EnvioMailNotificaciones");
 const { RecuperarContraseña } = require("../handlers/HandlerMailer/RecuperarContraseña/RecuperarContraseña");
+
 
 
 const router = express.Router(); // importamos el metodo Router de express para poder crear rutas
@@ -90,4 +96,6 @@ router.get("/reservas", getReservas);
 router.get("/ordenamientos&filtros", getOrdenamientosFiltrosHandler);
 
 router.put("/update/habitaciones", updateHabitacionHandler);
+router.put("/update/usuarios/:id", putUsuarioHandler);
+router.delete("/delete/usuarios/:id", deleteUsuarioHandler);
 module.exports = router;
