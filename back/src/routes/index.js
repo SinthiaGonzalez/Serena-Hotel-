@@ -27,12 +27,6 @@ const { getReservas } = require("../Controladores/getReservas");
 const {
   getOrdenamientosFiltrosHandler,
 } = require("../Controladores/getOrdenamientosFiltrosHandler");
-
-const { HandlerPostDesarrollador } = require('../handlers/HandlersDesarrolladores/PostHandlersDesarrolladores');
-const { GetHandlerDesarrolladores } = require('../handlers/HandlersDesarrolladores/GetHandlerDesarrolladores');
-const { EliminarDesarrolladorHandler } = require('../handlers/HandlersDesarrolladores/EliminarDesarrolladorHandler');
-const { getHandlerUsuarios } = require("../handlers/HandlersUsuarios/GetHandlerUsuarios");
-const { updateHabitacionHandler } = require("../handlers/HabitacionHandler");
 const { verifyToken } = require("../Controladores/verify-token");
 const { loginCreateToken } = require("../Controladores/login-token");
 const {
@@ -71,7 +65,7 @@ router.post("/desarrollador", HandlerPostDesarrollador);
 router.delete("/desarrollador/:id", EliminarDesarrolladorHandler);
 router.get("/desarrolladores", GetHandlerDesarrolladores);
 
-router.get("/comentarios", AllComentariosdHandler);
+router.get("/comentarios",verifyToken, AllComentariosdHandler);
 router.put("/comentarios/:id", ActualizarComentarioHandler);
 router.post("/comentar", CreateComentario);
 router.delete("/comentario/:id", EliminarComentariosHandler);
