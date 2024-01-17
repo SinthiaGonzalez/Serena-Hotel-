@@ -46,9 +46,8 @@ const eliminarHabitacionHandler = async (req, res) => {
       .status(200)
       .json({ mensaje: "Habitación eliminada exitosamente" });
   } catch (error) {
-    return res.status(500).json({ error: error.message });
-  }
-};
+    res.status(400).json({ error: error.message });
+  }}
 
 const updateHabitacionHandler = async (req, res) => {
   try {
