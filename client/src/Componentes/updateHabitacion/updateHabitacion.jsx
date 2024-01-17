@@ -404,7 +404,7 @@ const handlerdeleteHabitacion = () => {
           </div> */}
       </form>
       <div className="flex justify-center">
-        <p>Seleccione la haitacion a eliminar</p>
+        <p>Seleccione la habitación a eliminar</p>
       </div>
       <div className="flex justify-center ">
       <button

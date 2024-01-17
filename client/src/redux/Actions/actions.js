@@ -125,6 +125,17 @@ export function enviarConsulta(formData) {
   };
 }
 
+export function envioNotificion(formData) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.post("/contactenos", formData);
+      console.log("Respuesta del servidor:", response.data);
+    } catch (error) {
+      console.error("Error al enviar la consulta:", error);
+    }
+  };
+}
+
 export function crearHabitacion(habitacionData) {
   console.log({ habitacionData });
   return async (dispatch) => {
@@ -315,6 +326,30 @@ export function getHabitacionesbackup() {
       });
     } catch (error) {
       console.log(error);
+    }
+  };
+}
+
+
+export function recuperarContraseñaAction(correo) {
+  return async function () {
+    try {
+      const response = await axios.put("/recuperarContrasena", {correo});
+      console.log("Respuesta del servidor:", response.data);
+    } catch (error) {
+      console.error("Error al enviar la consulta:", error);
+    }
+  };
+}
+
+export function verificacionLogeoUsuarioAction(infoLogeo) {
+  console.log(infoLogeo)
+  return async function () {
+    try {
+      const response = await axios.post("/login", infoLogeo);
+      console.log("Respuesta del servidor:", response.data);
+    } catch (error) {
+      console.error("Error al enviar la consulta:", error);
     }
   };
 }

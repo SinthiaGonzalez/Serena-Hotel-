@@ -14,6 +14,7 @@ import DashBoardClientePerfil from "./Componentes/DashboarCliente/DashClientePer
 import DashBoarAdminHabitaciones from "./Componentes/DashBoarAdminHabitaciones/DashBoarAdminHabitaciones.jsx";
 import Contactenos from "./Componentes/Contactenos/Contactenos.jsx";
 import LoginCliente from "./Componentes/LoginCliente/LoginCliente";
+import RecuperarContraseña from "./Componentes/RecuperarContraseña/RecuperarContraseña.jsx";
 
 // Esta linea de codigo hace que por default todos los requerimientos en axios se hagan a esta ruta en el back
 // Luego nos va a servir para hacer el Deploy del front
@@ -33,6 +34,7 @@ const App = () => {
         {/* Rutas de Logeo y Registrarse */}
         <Route path="/logearse" element={<LoginCliente />} />
         <Route path="/registrarse" element={<CreateUsuario />} />
+        <Route path="/recuperar-contraseña" element={<RecuperarContraseña />} />
 
         {/* Rutas Dashboard Administrador */}
         <Route path="/admin-habitaciones" element={<DashBoarAdminHabitaciones />}/>
