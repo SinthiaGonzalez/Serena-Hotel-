@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { postComent } from "../../redux/Actions/actions";
+import { useVerificarToken }  from "../AutenticadorToken/autenticadorToken";
 
 const CreateComentPage = () => {
   const [rating, setRating] = useState(0);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+   useVerificarToken();
+
 
   const handleStarHover = (value) => {
     if (rating === 0) {
@@ -49,7 +53,6 @@ const CreateComentPage = () => {
       className="bg-cover bg-center h-screen flex justify-center items-center"
       style={{
         backgroundImage:
-          // 'url("https://cf.bstatic.com/xdata/images/hotel/max1024x768/283384657.jpg?k=82f12511a23fc911e79146601860d7ae7b9839f37af39918d1312edd9d98efee&o=&hp=1")',
           'url("https://img.freepik.com/fotos-premium/vista-aerea-sobre-bosque-montana-niebla-neblina-paisaje-forestal-generativo-ai_751108-4026.jpg")',
       }}
     >
@@ -71,7 +74,7 @@ const CreateComentPage = () => {
             src={user.image}
             alt="Imagen de perfil"
             className="w-10 h-10 rounded-full mr-2"
-            style={{ marginBottom: "30%" }} // Mover la imagen un poco más arriba
+            style={{ marginBottom: "30%" }}
           />
           {[1, 2, 3, 4, 5].map((star) => (
             <span
@@ -84,7 +87,7 @@ const CreateComentPage = () => {
               onMouseEnter={() => handleStarHover(star)}
               onMouseLeave={() => handleStarHover(0)}
               onClick={() => handleStarClick(star)}
-              style={{ marginBottom: "30%" }} // Mover las estrellas un poco más arriba
+              style={{ marginBottom: "30%" }}
             >
               {star <= rating ? "★" : "☆"}
             </span>
@@ -125,6 +128,7 @@ const CreateComentPage = () => {
 };
 
 export default CreateComentPage;
+
 
 // import { useAuth } from "auth"; // Importa el paquete de autenticación "auth"
 
