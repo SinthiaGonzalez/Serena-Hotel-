@@ -341,3 +341,15 @@ export function recuperarContraseñaAction(correo) {
     }
   };
 }
+
+export function verificacionLogeoUsuarioAction(infoLogeo) {
+  console.log(infoLogeo)
+  return async function () {
+    try {
+      const response = await axios.post("/login", infoLogeo);
+      console.log("Respuesta del servidor:", response.data);
+    } catch (error) {
+      console.error("Error al enviar la consulta:", error);
+    }
+  };
+}

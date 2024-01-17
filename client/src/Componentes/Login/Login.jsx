@@ -9,7 +9,6 @@ export default function LoginTemplate() {
   const { onSuccess, onFailure, clientId } = useGoogle();
   const dispatch = useDispatch();
   const EstadoDeLogeo = useSelector((state) => state.estadoDeLogeo);
-  console.log("Logeado antes de boton google", EstadoDeLogeo);
 
   const respuestaExitosa = (respuesta) => {
     console.log(respuesta);
@@ -27,9 +26,8 @@ export default function LoginTemplate() {
     );
 
     // Despacha la acción estadoLogeo para cambiar el estado de logeo
-    dispatch(estadoLogeo(true));
+    // dispatch(estadoLogeo(true));
   };
-  console.log("Logeado despues de boton google", EstadoDeLogeo);
 
   const respuestaFallida = (error) => {
     console.log(error);
