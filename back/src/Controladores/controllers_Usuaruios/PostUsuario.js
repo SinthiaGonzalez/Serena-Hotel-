@@ -2,11 +2,11 @@ const {Usuario}= require('../../db')
 
 const CreateUsuario = async (req, res) => {
     try {
-      const { name, apellido, email, telefono, contraseña } = req.body;
+      const { name, apellido, email, telefono, contraseña, isAdmin } = req.body;
   
     
-      if (!name || !apellido || !email || !telefono || !contraseña) {
-        return res.status(400).json({ error: 'Faltan campos requeridos' });
+      if (!name || !apellido || !email || !telefono || !contraseña || !isAdmin) {
+        return 'Faltan campos requeridos' ;
       }
 
       const prueba = await Usuario.findOne({ where: { email: email } });
@@ -19,6 +19,7 @@ const CreateUsuario = async (req, res) => {
         telefono,
         contraseña,
         logueado: true,
+        isAdmin: false
       });
   
       return newUser; 
