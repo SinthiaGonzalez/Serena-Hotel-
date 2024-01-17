@@ -13,7 +13,12 @@ export function getHabitaciones() {
     }
   };
 }
-
+export function getHabitacionesBusqueda(buscar) {
+  return {
+    type: "GET_HABITACIONES_BUSQUEDA",
+    payload: buscar,
+  };
+}
 // creamos la action que crea la preferenciaId de mercadopago
 export function createPreferenceMercadopagoId() {
   return async function (dispatch) {
@@ -63,7 +68,18 @@ export function postUsuario(state) {
     }
   };
 }
-
+export function putUsuario(state) {
+  return async function (dispatch) {
+    try {
+      console.log("antes de action put", state);
+      await axios.put("/login", state);
+      console.log("log de action put", state);
+      alert(" verificado exitosamente");
+    } catch (error) {
+      alert(error);
+    }
+  };
+}
 export function getAllcomentarios() {
   return async function (dispatch) {
     try {
@@ -109,14 +125,22 @@ export function enviarConsulta(formData) {
   };
 }
 
+export function envioNotificion(formData) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.post("/contactenos", formData);
+      console.log("Respuesta del servidor:", response.data);
+    } catch (error) {
+      console.error("Error al enviar la consulta:", error);
+    }
+  };
+}
+
 export function crearHabitacion(habitacionData) {
   console.log({ habitacionData });
   return async (dispatch) => {
     try {
-      const response = await axios.post(
-        "/post/habitaciones",
-        habitacionData
-      );
+      const response = await axios.post("/post/habitaciones", habitacionData);
       console.log(response.data);
       alert("Creado con exito");
       dispatch({
@@ -142,7 +166,7 @@ export function getHabitacionesNombre({
       );
       console.log("Aquí está la respuesta de la API:", habitaciones.data);
       return dispatch({
-        type: "GET_HABITACIONES_ORDENAMIENTOS",
+        type: "GET_HABITACIONES_NOMBRE",
         payload: habitaciones.data,
       });
     } catch (error) {
@@ -163,7 +187,7 @@ export function getHabitacionesPrecio({
       );
       console.log("Aquí está la respuesta de la API:", habitaciones.data);
       return dispatch({
-        type: "GET_HABITACIONES_FILTROS",
+        type: "GET_HABITACIONES_PRECIO",
         payload: habitaciones.data,
       });
     } catch (error) {
@@ -175,17 +199,40 @@ export function getHabitacionesFiltrosPersonas({
   ordenado,
   direccion,
   personas,
+  tipos,
 }) {
   return async function (dispatch) {
+    console.log("Filtros Personas:", ordenado, direccion, personas, tipos);
     try {
-      const habitaciones = await axios.get(
-        `/ordenamientos&filtros?ordenarPor=${ordenado}&direccion=${direccion}&filtroPersonas=${personas}`
-      );
-      console.log("filtro personas:", habitaciones.data);
-      return dispatch({
-        type: "GET_HABITACIONES_FILTROS_PERSONAS",
-        payload: habitaciones.data,
-      });
+      if (personas) {
+        const habitaciones = await axios.get(
+          `/ordenamientos&filtros?ordenarPor=${ordenado}&direccion=${direccion}&filtroPersonas=${personas}&filtrosTipos=${tipos}`
+        );
+        console.log("filtro personas:", habitaciones.data);
+        return dispatch({
+          type: "GET_HABITACIONES_FILTROS_PERSONAS",
+          payload: habitaciones.data,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+export function getHabitacionesFiltrosTipos({ ordenado, direccion, tipos }) {
+  return async function (dispatch) {
+    console.log("Filtros tipos:", ordenado, direccion, tipos);
+    try {
+      if (tipos) {
+        const habitaciones = await axios.get(
+          `/ordenamientos&filtros?ordenarPor=${ordenado}&direccion=${direccion}&filtroTipos=${tipos}`
+        );
+        console.log("filtro tipos:", habitaciones.data);
+        return dispatch({
+          type: "GET_HABITACIONES_FILTROS_TIPOS",
+          payload: habitaciones.data,
+        });
+      }
     } catch (error) {
       console.log(error);
     }
@@ -208,21 +255,89 @@ export const getReservas = ({ fecha_entrada, fecha_salida }) => {
     }
   };
 };
-export function updateHabitacion (habitacionData) {
-  console.log({habitacionData})
+export function updateHabitacion(habitacionData) {
+  console.log({ habitacionData });
   return async (dispatch) => {
-      try {
-          const response = await axios.put('/update/habitaciones', habitacionData)
-          console.log(response.data);
-          alert('Habitacion actualizada con exito')
-          dispatch ({
-              type:"UPDATE_HABITACION",
-              payload: response.data,
-          });
-      } catch (error) {
-          console.log(error);
-          alert(error.message);
-          
+    try {
+      const response = await axios.put("/update/habitaciones", habitacionData);
+
+      console.log(response.data);
+      alert("Habitacion actualizada con exito");
+      dispatch({
+        type: "UPDATE_HABITACION",
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+      alert(error.message);
+    }
+  };
+}
+
+export function getDevs() {
+  return async function (dispatch) {
+    try {
+      const response = await axios("/desarrolladores");
+      console.log("linea 135", response.data);
+      return dispatch({
+        type: "GET_DEVS",
+        payload: response.data,
+      });
+    } catch (error) {
+      alert(
+        "Hubo un problema con el servidor. Comuniquese con el Administrador - Error: " +
+          error
+      );
+      return;
+    }
+  };
+}
+export const estadoLogeo = (estado) => {
+  return {
+    type: "ESTADO_LOGEO",
+    payload: estado,
+  };
+};
+export function deleteHabitacion(id) {
+  console.log({ id });
+  return async function (dispatch) {
+    try {
+      const response = await axios.delete(`/habitaciones/${id}`);
+
+      if (response.status === 200) {
+        dispatch({
+          type: "DELETE_HABITACION",
+          payload: id,
+        });
+        alert("Habitacion eliminada exitosamente");
       }
-  }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+}
+export function getHabitacionesbackup() {
+  return async function (dispatch) {
+    try {
+      const habitaciones = await axios.get("/habitaciones");
+      return dispatch({
+        type: "GET_HABITACIONES_BACKUP",
+        payload: habitaciones.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+
+export function recuperarContraseñaAction(correo) {
+  return async function () {
+    try {
+      const response = await axios.put("/recuperarContrasena", {correo});
+      console.log("Respuesta del servidor:", response.data);
+    } catch (error) {
+      console.error("Error al enviar la consulta:", error);
+    }
+  };
 }
