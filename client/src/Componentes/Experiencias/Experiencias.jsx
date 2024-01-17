@@ -22,7 +22,7 @@ const Experiencias = () => {
   ];
 
   return (
-    <div className="mt-4 mb-20 ml-4">
+    <div id="experiencias" className="mt-4 mb-20 ml-4" >
       <div className="flex items-center mb-8 ml-6">
         <div className="h-30 border-l-4 border-negro">
           <span className="text-3xl text-negro font-inter font-medium block mb-2 ml-4">

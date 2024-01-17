@@ -46,7 +46,7 @@ const ComentPage = () => {
   
   
   return (
-    <div className="mt-16 mb-16 bg-verde">
+    <div id="comentarios" className="mt-16 mb-16 bg-verde">
 
       <div className="flex flex-col lg:flex-row items-center mb-6 ml-10">
         

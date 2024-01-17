@@ -31,14 +31,13 @@ const CreateUsuario = () => {
     e.preventDefault();
     try {
       await dispatch(postUsuario(user));
-      // Limpiar el formulario restableciendo el estado
+      // Restablecer el estado a los valores iniciales en lugar de un objeto vacío
       setUser({
         name: "",
         apellido: "",
         email: "",
         telefono: "",
         contraseña: "",
-        confirmarContraseña: "",
       });
     } catch (error) {
       alert(error.message);
@@ -53,8 +52,14 @@ const CreateUsuario = () => {
           'url("https://i.postimg.cc/3xxjwxft/selena-hotel-1.png")',
       }}
     >
-      <div className="flex flex-col items-center justify-center h-full bg-blanco w-2/3 rounded-lg px-20 mx-[250px] ">
-        <p className="flex my-4  font-inter text-3xl antialiased leading-normal text-center font-bold text-gris justify-center">
+      <div className="flex flex-col items-center justify-center h-auto bg-blanco w-2/3 rounded-lg px-20 mx-[250px] px-4 pt-3 pb-6">
+        <a
+          href="/logearse"
+          class="font-inter text-base antialiased font-bold text-naranja text-inter hover:scale-105 w-1/6 ml-[-700px] mt-6"
+        >
+          🡰 Volver
+        </a>
+        <p className="flex mt-4 font-inter text-3xl antialiased leading-normal text-center font-bold text-gris justify-center">
           Registrarse
         </p>
         <form onSubmit={handleSubmit} className="w-2/3">
@@ -173,6 +178,7 @@ const CreateUsuario = () => {
           <button
             className="w-2/4 mb-4 mt-4 select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-blanco transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
             type="button"
+            onClick={handleSubmit}
           >
             REGISTRATE
           </button>
