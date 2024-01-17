@@ -372,20 +372,25 @@ export function deleteUsuario(id) {
   return async function (dispatch) {
     try {
       const response = await axios.delete(`/delete/usuarios/${id}`);
-      if (response.data=== "No se encontro el usuario") alert(response.data);
-      dispatch({
+      if (response.data === "No se encontro el usuario") {
+        alert(response.data);
+      } else {
+        dispatch({
           type: "DELETE_USUARIO",
           payload: id,
         });
-        alert("Habitacion eliminada exitosamente");
-      
+        alert("Usuario eliminado exitosamente");
+      }
     } catch (error) {
       alert(error.message);
+    }
+  };
+}
 
 export function recuperarContraseñaAction(correo) {
   return async function () {
     try {
-      const response = await axios.put("/recuperarContrasena", {correo});
+      const response = await axios.put("/recuperarContrasena", { correo });
       console.log("Respuesta del servidor:", response.data);
     } catch (error) {
       console.error("Error al enviar la consulta:", error);
@@ -394,14 +399,13 @@ export function recuperarContraseñaAction(correo) {
 }
 
 export function verificacionLogeoUsuarioAction(infoLogeo) {
-  console.log(infoLogeo)
+  console.log(infoLogeo);
   return async function () {
     try {
       const response = await axios.post("/login", infoLogeo);
       console.log("Respuesta del servidor:", response.data);
     } catch (error) {
       console.error("Error al enviar la consulta:", error);
-
     }
   };
 }
