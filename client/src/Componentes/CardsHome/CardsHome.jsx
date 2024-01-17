@@ -10,6 +10,7 @@ const CardsHome = () => {
   useEffect(() => {
     dispatch(getHabitaciones());
   }, [dispatch]);
+
   return (
     <>
       <div id="habitaciones" className="px-14 pt-4 flex flex-row justify-between bg-blanco ">

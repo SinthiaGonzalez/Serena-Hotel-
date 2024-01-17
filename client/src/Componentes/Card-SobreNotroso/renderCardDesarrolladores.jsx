@@ -4,29 +4,36 @@ import { getDevs } from "../../redux/Actions/actions";
 import { useEffect } from "react";
 
 const RenderCardDesarrolladores = () => {
+  
   const developers = useSelector((state) => state.developers);
   const dispatch = useDispatch();
+ 
   useEffect(() => {
     dispatch(getDevs());
 
   }, []); 
-
-  /*const developers = [
+/*
+  const developers = [
     {
-      "nombre": "Sithia Gonzalez",
-      "ocupacion": "Full Stack Developer",
-      "imagen":"https://avatars.githubusercontent.com/u/128981283?v=4",
-      "imagenFondo":"https://www.elagoradiario.com/wp-content/uploads/2021/10/siberia-bosques.jpg",
-      "github": "https://github.com/SinthiaGonzalez",
-      "linkedin": "https://www.linkedin.com/in/sinthia-fabiana-gonzalez/"
+      id: 1,
+      nombre: "Megan Fox",
+      ocupacion: "Full Stack Web Developer",
+      imagen:
+        "https://biografiacorta.net/wp-content/uploads/2022/01/Actress-Megan-Fox-1024x1024.jpg",
+      imagenFondo:
+        "https://www.elagoradiario.com/wp-content/uploads/2021/10/siberia-bosques.jpg",
+      github: "",
+      linkedin: "",
     },
     {
-      "nombre": "Pablo Figueroa",
-      "ocupacion": "Full Stack Developer",
-      "imagen":"https://i.postimg.cc/zfZY85RH/Pablo-Perfil.jpg",
-      "imagenFondo":"https://www.elagoradiario.com/wp-content/uploads/2021/10/siberia-bosques.jpg",
-      "github": "https://github.com/pablofigueroa16",
-      "linkedin": "https://www.linkedin.com/in/pablo-figueroa-0b204b22a/"
+      id: 2,
+      nombre: "Chris Hemsworth",
+      ocupacion: "Software Engineer",
+      imagen:
+        "https://e00-expansion.uecdn.es/assets/multimedia/imagenes/2021/02/25/16142565944318.jpg",
+      imagenFondo: "https://www.w3schools.com/w3images/nature.jpg",
+      github: "https://github.com/chrishemsworth",
+      linkedin: "https://www.linkedin.com/in/chrishemsworth/",
     },
     {
       "nombre": "Franco Famulari",

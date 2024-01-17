@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { postComent } from "../../redux/Actions/actions";
+import { useVerificarToken }  from "../AutenticadorToken/autenticadorToken";
 
 import {
   Card,
@@ -15,6 +16,9 @@ const CreateComentPage = () => {
   const [rating, setRating] = useState(0);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+   useVerificarToken();
+
 
   const handleStarHover = (value) => {
     if (rating === 0) {
@@ -132,6 +136,7 @@ const CreateComentPage = () => {
 };
 
 export default CreateComentPage;
+
 
 // import { useAuth } from "auth"; // Importa el paquete de autenticación "auth"
 
