@@ -5,11 +5,11 @@ import { verificacionLogeoUsuarioAction } from "../../redux/Actions/actions";
 
 const LoginCliente = () => {
   const dispatch = useDispatch();
-  const [correo, setCorreo] = useState("");
+  const [email, setemail] = useState("");
   const [contraseña, setContraseña] = useState("");
 
-  const handleCorreoChange = (event) => {
-    setCorreo(event.target.value);
+  const handleemailChange = (event) => {
+    setemail(event.target.value);
   };
 
   const handleContraseñaChange = (event) => {
@@ -17,9 +17,8 @@ const LoginCliente = () => {
   };
 
   const handleVerificarUsuario = () => {
-    dispatch(verificacionLogeoUsuarioAction({correo, contraseña}));
+    dispatch(verificacionLogeoUsuarioAction({ email, contraseña }));
   };
-
 
   return (
     <div
@@ -32,7 +31,7 @@ const LoginCliente = () => {
         display: "flex",
       }}
     >
-      <div className="relative flex flex-col text-gris bg-blanco shadow-md w-28 bg-clip-border justify-center w-[70%] p-2 rounded-l-lg">
+      <div className="relative flex flex-col text-gris bg-blanco shadow-md bg-clip-border justify-center w-[70%] p-2 rounded-l-lg">
         <div className="flex flex-col gap-4 p-6 ">
           <a
             href="/"
@@ -68,10 +67,10 @@ const LoginCliente = () => {
 
             <input
               className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
-              placeholder="Correo"
+              placeholder="email"
               type="mail"
-              value={correo}
-              onChange={handleCorreoChange}
+              value={email}
+              onChange={handleemailChange}
             />
           </div>
 
