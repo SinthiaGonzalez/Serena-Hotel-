@@ -170,7 +170,6 @@ const CardComent = ({ comentario, onDelete }) => {
               {renderStars(comentario.puntuacion)}
             </div>
           </div>
-        </div>
       </CardHeader>
       <CardBody className="mb-6 mx-12 p-0">
         <Typography className="text-xs md:text-base text-blanco font-medium font-inter">
