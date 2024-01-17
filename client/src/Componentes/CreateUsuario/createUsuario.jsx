@@ -55,7 +55,7 @@ const CreateUsuario = () => {
       <div className="flex flex-col items-center justify-center h-auto bg-blanco w-2/3 rounded-lg px-20 mx-[250px] px-4 pt-3 pb-6">
         <a
           href="/logearse"
-          class="font-inter text-base antialiased font-bold text-naranja text-inter hover:scale-105 w-1/6 ml-[-700px] mt-6"
+          className="font-inter text-base antialiased font-bold text-naranja text-inter hover:scale-105 w-1/6 ml-[-700px] mt-6"
         >
           🡰 Volver
         </a>
