@@ -155,20 +155,19 @@ const CardComent = ({ comentario, onDelete }) => {
         className="mx-10 flex items-center gap-4 pt-0 pb-4"
         
       >
-          <Avatar
-            size="sm md:lg"
-            variant="circular"
-            src={comentario.imagen}
-            alt="tania andrew"
-          />
-          <div className="flex w-full flex-col gap-0.5">
-            <div className="flex items-center justify-between">
-              <Typography className="text-lg md:text-2xl font-medium text-gris font-inter">
-                Tania Andrew
-              </Typography>
-              <div className="flex items-center gap-0">
-                {renderStars(comentario.puntuacion)}
-              </div>
+        <Avatar
+          size="sm md:lg"
+          variant="circular"
+          src={comentario.imagen}
+          alt="tania andrew"
+        />
+        <div className="flex w-full flex-col gap-0.5">
+          <div className="flex items-center justify-between">
+            <Typography className="text-lg md:text-2xl font-medium text-gris font-inter">
+              {comentario.nombre}
+            </Typography>
+            <div className="flex items-center gap-0">
+              {renderStars(comentario.puntuacion)}
             </div>
           </div>
       </CardHeader>

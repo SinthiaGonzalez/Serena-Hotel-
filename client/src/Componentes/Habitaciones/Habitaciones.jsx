@@ -4,6 +4,7 @@ import {
   getHabitacionesPrecio,
   getHabitacionesNombre,
   getHabitacionesFiltrosPersonas,
+  getHabitacionesFiltrosTipos,
 } from "../../redux/Actions/actions";
 import { getHabitaciones } from "../../redux/Actions/actions";
 import NavBarHome from "../NavBarHome/NavBarHome";
@@ -36,14 +37,16 @@ const Habitaciones = () => {
   }, [dispatch]);
 
   const [filtros, setFiltros] = useState([]);
+
   const [ultimoOrdenamiento, setUltimoOrdenamiento] = useState({
     ordenado: "nombre",
     direccion: "asc",
   });
+
   const [checkinDate, setCheckinDate] = useState(new Date());
   const [checkoutDate, setCheckoutDate] = useState(new Date());
+
   const handleNombreChange = (value, tipoOrdenamiento) => {
-    console.log("Ordenamiento:", value);
     setUltimoOrdenamiento({
       ordenado: tipoOrdenamiento,
       direccion: value === "asc" ? "asc" : "desc",
@@ -58,7 +61,6 @@ const Habitaciones = () => {
   };
 
   const handlePrecioChange = (value, tipoOrdenamiento) => {
-    console.log("Ordenamiento:", value);
     setUltimoOrdenamiento({
       ordenado: tipoOrdenamiento,
       direccion: value === "asc" ? "asc" : "desc",
@@ -82,6 +84,17 @@ const Habitaciones = () => {
     );
     setFiltros(nuevosFiltros || filtros);
   };
+  const aplicarFiltrostipos = (nuevosFiltros) => {
+    dispatch(
+      getHabitacionesFiltrosTipos({
+        ordenado: ultimoOrdenamiento.ordenado,
+        direccion: ultimoOrdenamiento.direccion,
+        tipos: nuevosFiltros || filtros,
+      })
+    );
+    setFiltros(nuevosFiltros || filtros);
+  };
+
   const handleCheckinChange = (selectedDate) => {
     setCheckinDate(selectedDate);
     console.log(format(selectedDate, "yyyy-MM-dd"));
@@ -176,10 +189,8 @@ const Habitaciones = () => {
               </List>
             </Card>
           </div>
-          {/* <h2 className="text-2xl font-bold text-blanco p-4">
-            Cantidad de Cuartos
-          </h2>
-          <Card className="w-full max-w-[24rem] ml-4">
+          <h2 className="text-2xl font-bold text-blanco p-4">Personas</h2>
+          <Card className="w-full max-w-[30rem] ml-4">
             <List className="flex-row">
               {[1, 2, 3].map((persona) => (
                 <ListItem key={persona} className="p-0">
@@ -210,7 +221,40 @@ const Habitaciones = () => {
                 </ListItem>
               ))}
             </List>
-          </Card> */}
+          </Card>
+          <h2 className="text-2xl font-bold text-blanco p-4">Tipos</h2>
+          <Card className="w-full max-w-[30rem] ml-4">
+            <List className="flex-row">
+              {["Deluxe", "Presidencial", "Ejecutiva"].map((tipo) => (
+                <ListItem key={tipo} className="p-0">
+                  <label
+                    htmlFor={`tipo-${tipo}`}
+                    className="flex w-full cursor-pointer items-center px-3 py-2"
+                  >
+                    <ListItemPrefix className="mr-3">
+                      <Checkbox
+                        id={`tipo-${tipo}`}
+                        ripple={false}
+                        checked={filtros.includes(tipo)}
+                        onChange={() => {
+                          const nuevosFiltros = filtros.includes(tipo)
+                            ? filtros.filter((t) => t !== tipo)
+                            : [tipo];
+                          aplicarFiltrostipos(nuevosFiltros);
+                        }}
+                        containerProps={{
+                          className: "p-0",
+                        }}
+                      />
+                    </ListItemPrefix>
+                    <Typography color="blue-gray" className="font-medium">
+                      {tipo}
+                    </Typography>
+                  </label>
+                </ListItem>
+              ))}
+            </List>
+          </Card>
         </div>
         <CardsShopHabitaciones habitacionesShop={handlertoprops()} />
       </div>

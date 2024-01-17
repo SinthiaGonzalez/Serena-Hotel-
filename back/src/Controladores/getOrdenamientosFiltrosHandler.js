@@ -2,7 +2,7 @@ const { Habitaciones } = require("../db");
 
 const getOrdenamientosFiltrosHandler = async (req, res) => {
   try {
-    const { ordenarPor, direccion, filtroPersonas } = req.query;
+    const { ordenarPor, direccion, filtroPersonas, filtroTipos } = req.query;
 
     const ordenValido = ["nombre", "precio"].includes(ordenarPor);
     const direccionValida = ["asc", "desc"].includes(direccion.toLowerCase());
@@ -26,6 +26,12 @@ const getOrdenamientosFiltrosHandler = async (req, res) => {
           (servicio) => servicio.descripcion === `${filtroPersonas} pers`
         );
         return personas;
+      });
+    }
+
+    if (filtroTipos) {
+      habitacionesOrdenadas = habitacionesOrdenadas.filter((habitacion) => {
+        return habitacion.tipo === filtroTipos;
       });
     }
 

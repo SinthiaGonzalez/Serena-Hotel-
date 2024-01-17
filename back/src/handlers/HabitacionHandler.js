@@ -1,14 +1,16 @@
 const { getHabitaciones } = require("../Controladores/getHabitaciones");
 const { postHabitaciones } = require("../Controladores/postHabitaciones");
 
-const { EliminarHabitacion } = require("../Controladores/controllers_Usuaruios/EliminarHabitacion")
+const {
+  EliminarHabitacion,
+} = require("../Controladores/controllers_Usuaruios/EliminarHabitacion");
 
 const { updateHabitacion } = require("../Controladores/updateHabitacion");
 
 const postHabitacionHandler = async (req, res) => {
   try {
-    
-    const { nombre, precio, imagenes, servicios, descripcion, estado } = req.body;
+    const { nombre, precio, imagenes, servicios, descripcion, estado, tipo } =
+      req.body;
 
     const respuesta = await postHabitaciones(
       nombre,
@@ -16,9 +18,11 @@ const postHabitacionHandler = async (req, res) => {
       imagenes,
       servicios,
       descripcion,
-      estado
+      estado,
+      tipo
     );
-    if (respuesta==="La habitacion ya existe") res.status(400).json(respuesta);
+    if (respuesta === "La habitacion ya existe")
+      res.status(400).json(respuesta);
     else res.status(201).json(respuesta);
   } catch (error) {
     return res.status(500).json({ error: error.message });
@@ -34,21 +38,30 @@ const getHabitacionHandler = async (req, res) => {
   }
 };
 
-
 const eliminarHabitacionHandler = async (req, res) => {
   try {
     const { id } = req.params;
     const respuesta = await EliminarHabitacion(id);
-    return res.status(200).json({ mensaje: 'Habitación eliminada exitosamente' });
+    return res
+      .status(200)
+      .json({ mensaje: "Habitación eliminada exitosamente" });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
 };
 
-  const updateHabitacionHandler = async (req, res) => {
+const updateHabitacionHandler = async (req, res) => {
   try {
-    
-    const { nombreId, nombre, precio, imagenes, servicios, descripcion, estado } = req.body;
+    const {
+      nombreId,
+      nombre,
+      precio,
+      imagenes,
+      servicios,
+      descripcion,
+      estado,
+      tipo,
+    } = req.body;
 
     const respuesta = await updateHabitacion(
       nombreId,
@@ -57,11 +70,12 @@ const eliminarHabitacionHandler = async (req, res) => {
       imagenes,
       servicios,
       descripcion,
-      estado
+      estado,
+      tipo
     );
-    if (respuesta=== "No existe una habitacion con ese nombre") res.status(400).json(respuesta);
+    if (respuesta === "No existe una habitacion con ese nombre")
+      res.status(400).json(respuesta);
     else res.status(200).json(respuesta);
-
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
@@ -72,5 +86,4 @@ module.exports = {
   postHabitacionHandler,
   eliminarHabitacionHandler,
   updateHabitacionHandler,
-
 };
