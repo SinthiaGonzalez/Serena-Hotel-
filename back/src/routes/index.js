@@ -27,6 +27,8 @@ const { getReservas } = require("../Controladores/getReservas");
 const {
   getOrdenamientosFiltrosHandler,
 } = require("../Controladores/getOrdenamientosFiltrosHandler");
+const { verifyToken } = require("../Controladores/verify-token");
+const { loginCreateToken } = require("../Controladores/login-token");
 const {
   HandlerPostDesarrollador,
 } = require("../handlers/HandlersDesarrolladores/PostHandlersDesarrolladores");
@@ -45,11 +47,21 @@ const {
 } = require("../handlers/HandlersUsuarios/GetHandlerUsuarios");
 const { updateHabitacionHandler } = require("../handlers/HabitacionHandler");
 
+const { putUsuarioHandler} = require("../handlers/HandlersUsuarios/PutAndDeleteUsuarios")
+const { deleteUsuarioHandler} = require("../handlers/HandlersUsuarios/PutAndDeleteUsuarios")
+//importamos el metodo Router de express para poder crear rutas
+const { EnvioMailNotificaciones } = require("../handlers/HandlerMailer/EnvioMailNotificaciones");
+const { RecuperarContraseña } = require("../handlers/HandlerMailer/RecuperarContraseña/RecuperarContraseña");
 const router = express.Router(); // importamos el metodo Router de express para poder crear rutas
-
+router.post("/login", loginCreateToken);
+router.get("/verify", verifyToken, (req, res) => {
+  const userId = req.userId;
+  res.status(200).json({ message: "acceso correcto", userId });
+});
 router.post("/usuario", HandlerPostUsuario);
 router.get("/usuarios", getHandlerUsuarios);
 router.put("/login", LoginUsuario);
+router.put("/recuperarContrasena", RecuperarContraseña);
 
 router.post("/desarrollador", HandlerPostDesarrollador);
 router.delete("/desarrollador/:id", EliminarDesarrolladorHandler);
@@ -68,6 +80,7 @@ router.post("/mercadopago/create_preference", CreatePreferenceMP);
 router.get("/habitaciones", getHabitacionHandler);
 
 router.post("/contactenos", EnvioMailContactenos);
+router.post("/notificaciones", EnvioMailNotificaciones);
 
 router.post("/post/habitaciones", postHabitacionHandler);
 router.delete("/habitaciones/:id", eliminarHabitacionHandler);
@@ -79,4 +92,6 @@ router.get("/reservas", getReservas);
 router.get("/ordenamientos&filtros", getOrdenamientosFiltrosHandler);
 
 router.put("/update/habitaciones", updateHabitacionHandler);
+router.put("/update/usuarios/:id", putUsuarioHandler);
+router.delete("/delete/usuarios/:id", deleteUsuarioHandler);
 module.exports = router;
