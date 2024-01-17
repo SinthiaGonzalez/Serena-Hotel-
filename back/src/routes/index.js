@@ -65,7 +65,7 @@ router.post("/desarrollador", HandlerPostDesarrollador);
 router.delete("/desarrollador/:id", EliminarDesarrolladorHandler);
 router.get("/desarrolladores", GetHandlerDesarrolladores);
 
-router.get("/comentarios",verifyToken, AllComentariosdHandler);
+router.get("/comentarios", AllComentariosdHandler);
 router.put("/comentarios/:id", ActualizarComentarioHandler);
 router.post("/comentar", CreateComentario);
 router.delete("/comentario/:id", EliminarComentariosHandler);
