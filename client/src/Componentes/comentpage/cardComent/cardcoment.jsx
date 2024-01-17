@@ -7,10 +7,8 @@ import {
   Typography,
   Avatar,
 } from "@material-tailwind/react";
- 
 
 const CardComent = ({ comentario, onDelete }) => {
-  
   const StarIcon = () => {
     return (
       <svg
@@ -26,7 +24,7 @@ const CardComent = ({ comentario, onDelete }) => {
         />
       </svg>
     );
-  }
+  };
 
   const renderStars = (puntuacion) => {
     const stars = [];
@@ -37,24 +35,25 @@ const CardComent = ({ comentario, onDelete }) => {
   };
 
   return (
-    <Card className="w-[500px] h-[200px] bg-cover bg-center relative mb-12"
-    style={{
-      backgroundImage:
-        'url("https://cf.bstatic.com/xdata/images/hotel/max1024x768/283384657.jpg?k=82f12511a23fc911e79146601860d7ae7b9839f37af39918d1312edd9d98efee&o=&hp=1")',
-    }}>
+    <Card
+      className="w-[500px] h-[200px] bg-cover bg-center relative mb-12"
+      style={{
+        backgroundImage:
+          'url("https://cf.bstatic.com/xdata/images/hotel/max1024x768/283384657.jpg?k=82f12511a23fc911e79146601860d7ae7b9839f37af39918d1312edd9d98efee&o=&hp=1")',
+      }}
+    >
       <div
-      className="absolute inset-0 bg-negro opacity-20 rounded-lg"
-      style={{ zIndex: 1 }}
-    ></div>
+        className="absolute inset-0 bg-negro opacity-20 rounded-lg"
+        style={{ zIndex: 1 }}
+      ></div>
       <CardHeader
         color="transparent"
         floated={false}
         shadow={false}
         className="mx-10 flex items-center gap-4 pt-0 pb-4"
-        
       >
         <Avatar
-           size={window.innerWidth < 768 ? "sm" : "lg"}
+          size={window.innerWidth < 768 ? "sm" : "lg"}
           variant="circular"
           src={comentario.imagen}
           alt="tania andrew"
@@ -77,6 +76,6 @@ const CardComent = ({ comentario, onDelete }) => {
       </CardBody>
     </Card>
   );
-}
+};
 
 export default CardComent;

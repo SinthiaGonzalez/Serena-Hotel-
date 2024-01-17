@@ -17,8 +17,9 @@ const { PORT } = process.env;
 
 // false no se borra la base de datos true modo dedarrollador si borras db
 
-conn.sync({ alter: true }).then(() => { // force: false
+conn.sync({ force: false }).then(() => {
+  // force: false
   server.listen(PORT, () => {
-    console.log(`%s listening at ${PORT}`, PORT); // eslint-disable-line no-console
+    console.log(`%s listening at ${PORT}`, PORT);
   });
 });
