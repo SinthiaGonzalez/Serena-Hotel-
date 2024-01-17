@@ -219,25 +219,6 @@ export function getHabitacionesFiltrosPersonas({
     }
   };
 }
-export function getHabitacionesFiltrosTipos({ ordenado, direccion, tipos }) {
-  return async function (dispatch) {
-    console.log("Filtros tipos:", ordenado, direccion, tipos);
-    try {
-      if (tipos) {
-        const habitaciones = await axios.get(
-          `/ordenamientos&filtros?ordenarPor=${ordenado}&direccion=${direccion}&filtroTipos=${tipos}`
-        );
-        console.log("filtro tipos:", habitaciones.data);
-        return dispatch({
-          type: "GET_HABITACIONES_FILTROS_TIPOS",
-          payload: habitaciones.data,
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
 
 export const getReservas = ({ fecha_entrada, fecha_salida }) => {
   return async function (dispatch) {
@@ -330,11 +311,10 @@ export function getHabitacionesbackup() {
   };
 }
 
-
 export function recuperarContraseñaAction(correo) {
   return async function () {
     try {
-      const response = await axios.put("/recuperarContrasena", {correo});
+      const response = await axios.put("/recuperarContrasena", { correo });
       console.log("Respuesta del servidor:", response.data);
     } catch (error) {
       console.error("Error al enviar la consulta:", error);
@@ -343,7 +323,7 @@ export function recuperarContraseñaAction(correo) {
 }
 
 export function verificacionLogeoUsuarioAction(infoLogeo) {
-  console.log(infoLogeo)
+  console.log(infoLogeo);
   return async function () {
     try {
       const response = await axios.post("/login", infoLogeo);

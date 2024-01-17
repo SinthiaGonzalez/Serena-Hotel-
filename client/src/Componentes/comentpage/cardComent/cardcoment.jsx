@@ -101,7 +101,6 @@ import React from "react";
 
 // export default CardComent;
 
-
 import {
   Card,
   CardHeader,
@@ -109,10 +108,8 @@ import {
   Typography,
   Avatar,
 } from "@material-tailwind/react";
- 
 
 const CardComent = ({ comentario, onDelete }) => {
-  
   const StarIcon = () => {
     return (
       <svg
@@ -128,7 +125,7 @@ const CardComent = ({ comentario, onDelete }) => {
         />
       </svg>
     );
-  }
+  };
 
   const renderStars = (puntuacion) => {
     const stars = [];
@@ -139,21 +136,22 @@ const CardComent = ({ comentario, onDelete }) => {
   };
 
   return (
-    <Card className="w-[500px] h-[200px] bg-cover bg-center relative mb-12"
-    style={{
-      backgroundImage:
-        'url("https://cf.bstatic.com/xdata/images/hotel/max1024x768/283384657.jpg?k=82f12511a23fc911e79146601860d7ae7b9839f37af39918d1312edd9d98efee&o=&hp=1")',
-    }}>
+    <Card
+      className="w-[500px] h-[200px] bg-cover bg-center relative mb-12"
+      style={{
+        backgroundImage:
+          'url("https://cf.bstatic.com/xdata/images/hotel/max1024x768/283384657.jpg?k=82f12511a23fc911e79146601860d7ae7b9839f37af39918d1312edd9d98efee&o=&hp=1")',
+      }}
+    >
       <div
-      className="absolute inset-0 bg-negro opacity-20 rounded-lg"
-      style={{ zIndex: 1 }}
-    ></div>
+        className="absolute inset-0 bg-negro opacity-20 rounded-lg"
+        style={{ zIndex: 1 }}
+      ></div>
       <CardHeader
         color="transparent"
         floated={false}
         shadow={false}
         className="mx-10 flex items-center gap-4 pt-0 pb-4"
-        
       >
         <Avatar
           size="sm md:lg"
@@ -170,6 +168,7 @@ const CardComent = ({ comentario, onDelete }) => {
               {renderStars(comentario.puntuacion)}
             </div>
           </div>
+        </div>
       </CardHeader>
       <CardBody className="mb-6 mx-12 p-0">
         <Typography className="text-xs md:text-base text-blanco font-medium font-inter">
@@ -178,6 +177,6 @@ const CardComent = ({ comentario, onDelete }) => {
       </CardBody>
     </Card>
   );
-}
+};
 
 export default CardComent;

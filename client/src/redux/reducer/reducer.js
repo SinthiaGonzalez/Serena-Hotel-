@@ -97,11 +97,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         habitaciones: action.payload,
       };
-    case "GET_HABITACIONES_FILTROS_TIPOS":
-      return {
-        ...state,
-        habitaciones: action.payload,
-      };
+
     case "GET_RESERVAS":
       return {
         ...state,

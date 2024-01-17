@@ -29,12 +29,6 @@ const getOrdenamientosFiltrosHandler = async (req, res) => {
       });
     }
 
-    if (filtroTipos) {
-      habitacionesOrdenadas = habitacionesOrdenadas.filter((habitacion) => {
-        return habitacion.tipo === filtroTipos;
-      });
-    }
-
     console.log("Habitaciones filtradas:", habitacionesOrdenadas);
     res.status(200).json(habitacionesOrdenadas);
   } catch (error) {
