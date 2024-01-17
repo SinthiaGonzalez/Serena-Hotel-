@@ -2,12 +2,13 @@ const { postReservas } = require("../Controladores/postReservas");
 
 const postReservasHandler = async (req, res) => {
   try {
-    const { fecha_entrada, fecha_salida, estado, habitaciones } = req.body;
+    const { fecha_entrada, fecha_salida, estado, habitaciones, usuarioId } = req.body;
     const respuesta = await postReservas(
       fecha_entrada,
       fecha_salida,
       estado,
-      habitaciones
+      habitaciones,
+      usuarioId
     );
     res.status(200).json(respuesta);
   } catch (error) {
@@ -15,4 +16,4 @@ const postReservasHandler = async (req, res) => {
   }
 };
 
-module.exports = { postReservasHandler };
+module.exports = { postReservasHandler};

@@ -14,7 +14,7 @@ export const PerfilUsuario2 = () => {
             <table className="w-full">
               <thead className="bg-white bg-opacity-15 border-b border-white border-opacity-25">
                 <tr>
-                  <th className="py-5 px-12 text-left ">N. de Reserva</th>
+                  <th className="py-5 px-12 text-left ">Id de Reserva</th>
                   <th className="py-5 px-12 text-left">Check-In</th>
                   <th className="py-5 px-12 text-left">Check-Out</th>
                   <th className="py-5 px-12 text-left">Habitación</th>              
@@ -28,12 +28,7 @@ export const PerfilUsuario2 = () => {
                   <td className="py-6 px-12 text-left">Habitación 101</td>                  
                 </tr>
 
-                <tr className="border-b">
-                  <td className="py-6 px-12 text-left">123456</td>
-                  <td className="py-6 px-12 text-left">2022-01-01</td>
-                  <td className="py-6 px-12 text-left">2022-01-10</td>
-                  <td className="py-6 px-12 text-left">Habitación 101</td>
-                </tr>
+                
 
                 <tr className="border-b">
                   <td className="py-6 px-12 text-left">123456</td>
@@ -50,3 +45,11 @@ export const PerfilUsuario2 = () => {
   );
 };
 export default PerfilUsuario2;
+/*
+<tr className="border-b">
+                  <td className="py-6 px-12 text-left">{id_reserva}</td>
+                  <td className="py-6 px-12 text-left">{fecha_entrada}</td>
+                  <td className="py-6 px-12 text-left">{fecha_salida}</td>
+                  <td className="py-6 px-12 text-left">{nombre_habitacion}</td>
+                </tr>
+              */

@@ -8,11 +8,11 @@ module.exports = (sequelize) => {
       primaryKey: true,
     },
     fecha_entrada: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: false,
     },
     fecha_salida: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: false,
     },
     estado: {
