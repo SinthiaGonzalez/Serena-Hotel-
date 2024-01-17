@@ -1,12 +1,27 @@
-//import NavBarHome from "../NavBarHome/NavBarHome";
-//import { Link } from 'react-router-dom';
-
+import { useDispatch } from "react-redux";
 import LoginTemplate from "../Login/Login";
+import { useState } from "react";
+import { verificacionLogeoUsuarioAction } from "../../redux/Actions/actions";
 
 const LoginCliente = () => {
-  //https://www.material-tailwind.com/docs/html/card#login-card
-  return (
+  const dispatch = useDispatch();
+  const [correo, setCorreo] = useState("");
+  const [contraseña, setContraseña] = useState("");
 
+  const handleCorreoChange = (event) => {
+    setCorreo(event.target.value);
+  };
+
+  const handleContraseñaChange = (event) => {
+    setContraseña(event.target.value);
+  };
+
+  const handleVerificarUsuario = () => {
+    dispatch(verificacionLogeoUsuarioAction({correo, contraseña}));
+  };
+
+
+  return (
     <div
       className="relative bg-cover bg-center h-screen text-white text-center"
       style={{
@@ -19,7 +34,7 @@ const LoginCliente = () => {
     >
       <div className="relative flex flex-col text-gris bg-blanco shadow-md w-28 bg-clip-border justify-center w-[70%] p-2 rounded-l-lg">
         <div className="flex flex-col gap-4 p-6 ">
-          <a 
+          <a
             href="/"
             class="ml-[8%] text-left block font-inter text-base antialiased font-bold text-naranja text-inter hover:scale-105 w-1/6"
           >
@@ -27,7 +42,6 @@ const LoginCliente = () => {
           </a>
           <p className="flex mt-4 mb-10 font-inter text-3xl antialiased leading-normal text-center justify-center">
             Te damos la Bienvenida nuevamente!
-
           </p>
 
           <div className="w-2/3 ml-[18%] justify-center text-center rounded-lg">
@@ -56,6 +70,8 @@ const LoginCliente = () => {
               className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
               placeholder="Correo"
               type="mail"
+              value={correo}
+              onChange={handleCorreoChange}
             />
           </div>
 
@@ -76,10 +92,11 @@ const LoginCliente = () => {
             <input
               className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
               placeholder="Contraseña"
-              type="password"
+              type="contraseña"
+              value={contraseña}
+              onChange={handleContraseñaChange}
             />
           </div>
-
         </div>
 
         <a href="/recuperar-contraseña" className="mb-2 text-naranja">
@@ -88,6 +105,7 @@ const LoginCliente = () => {
 
         <div className="p-6 pt-2">
           <button
+            onClick={handleVerificarUsuario}
             className="w-2/4 mb-4 select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-blanco transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
             type="button"
           >
