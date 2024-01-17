@@ -31,6 +31,7 @@
     "pg": "^8.5.1",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.3.5",
+    "jsonwebtoken": "^9.0.2",
     "xoauth2": "^1.2.0"
   },
   "devDependencies": {
