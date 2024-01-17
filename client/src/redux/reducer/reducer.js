@@ -28,7 +28,7 @@ const reducer = (state = initialState, action) => {
         habitacionesfiltradas: habitacionFiltrada,
       };
 
-    case "GET_USERS":
+    case "GET_USUARIOS":
       return {
         ...state,
         usuarios: action.payload,
@@ -120,6 +120,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         habitacionBackUp: action.payload,
       };
+
+
+    case "UPDATE_USUARIO":
+      return { ...state };
+      
 
     default:
       return state;

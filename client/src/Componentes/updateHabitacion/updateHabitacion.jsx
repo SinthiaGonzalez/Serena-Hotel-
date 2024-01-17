@@ -373,6 +373,7 @@ const handlerdeleteHabitacion = () => {
                 className="text-2xl font-bold text-negro w-1/3 mx-4 text-center"
                 type="number"
                 name="precio"
+                min="0"
                 placeholder="-"
                 onChange={handleChange}
                 onBlur={() => handleBlur("precio")}
@@ -404,7 +405,7 @@ const handlerdeleteHabitacion = () => {
           </div> */}
       </form>
       <div className="flex justify-center">
-        <p>Seleccione la haitacion a eliminar</p>
+        <p>Seleccione la habitación a eliminar</p>
       </div>
       <div className="flex justify-center ">
       <button

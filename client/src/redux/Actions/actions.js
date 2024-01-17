@@ -330,6 +330,57 @@ export function getHabitacionesbackup() {
   };
 }
 
+export function getUsuarios () {
+  return async function (dispatch) {
+    try {
+      const usuarios = await axios.get("/usuarios");
+      return dispatch({
+        type: "GET_USUARIOS",
+        payload: usuarios.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+
+export function updateUsuario (usuarioData, id) {
+  console.log({usuarioData, id})
+  return async (dispatch) => {
+      try {
+
+          const response = await axios.put(`/update/usuarios/${id}`, usuarioData)
+
+          console.log(response.data);
+          if (response.data=== "No se encontro el usuario") alert(response.data);
+          else alert('Usuario editado exitosamente')
+          dispatch ({
+              type:"UPDATE_USUARIO",
+              payload: response.data,
+          });
+      } catch (error) {
+          console.log(error);
+          alert(error.message);
+          
+      }
+  }
+}
+
+export function deleteUsuario(id) {
+  console.log({ id });
+  return async function (dispatch) {
+    try {
+      const response = await axios.delete(`/delete/usuarios/${id}`);
+      if (response.data=== "No se encontro el usuario") alert(response.data);
+      dispatch({
+          type: "DELETE_USUARIO",
+          payload: id,
+        });
+        alert("Habitacion eliminada exitosamente");
+      
+    } catch (error) {
+      alert(error.message);
 
 export function recuperarContraseñaAction(correo) {
   return async function () {
@@ -338,6 +389,19 @@ export function recuperarContraseñaAction(correo) {
       console.log("Respuesta del servidor:", response.data);
     } catch (error) {
       console.error("Error al enviar la consulta:", error);
+    }
+  };
+}
+
+export function verificacionLogeoUsuarioAction(infoLogeo) {
+  console.log(infoLogeo)
+  return async function () {
+    try {
+      const response = await axios.post("/login", infoLogeo);
+      console.log("Respuesta del servidor:", response.data);
+    } catch (error) {
+      console.error("Error al enviar la consulta:", error);
+
     }
   };
 }
