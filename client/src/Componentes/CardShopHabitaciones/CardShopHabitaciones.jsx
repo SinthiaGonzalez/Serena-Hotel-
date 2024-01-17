@@ -6,6 +6,7 @@ const CardShopHabitaciones = ({
   precio,
   servicios,
   handlerAddToCart,
+  tipo,
 }) => {
   console.log(imagenes)
   return (
@@ -23,8 +24,11 @@ const CardShopHabitaciones = ({
         </div>
 
         <div className="flex flex-col items-center justify-center gap-6">
-          <h5 className="block font-sans text-xl antialiased font-bold leading-snug tracking-normal text-blanco">
+          <h5 className="block font-sans text-2xl antialiased font-bold leading-snug tracking-normal text-blanco">
             {nombre}
+          </h5>
+          <h5 className="block font-sans text-xl antialiased font-bold leading-snug tracking-normal text-blanco">
+            {tipo}
           </h5>
           <div className="flex flex-row gap-4">
             {servicios.map(({ icono, descripcion }, index) => (

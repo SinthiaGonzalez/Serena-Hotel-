@@ -16,7 +16,6 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-
     case "GET_HABITACIONES_BUSQUEDA":
       const buscar = action.payload; // string palabra a buscar
       const habitacionFiltrada = state.habitaciones.filter((habitacion) =>
@@ -28,8 +27,6 @@ const reducer = (state = initialState, action) => {
         string: buscar,
         habitacionesfiltradas: habitacionFiltrada,
       };
-
-
 
     case "GET_USUARIOS":
       return {
@@ -74,27 +71,33 @@ const reducer = (state = initialState, action) => {
       };
 
     case "CREAR_HABITACION":
-      return { ...state, 
-        nuevaHabitacion: [...state.nuevaHabitacion, action.payload], 
-        habitaciones: [...state.habitaciones, action.payload] };
+      return {
+        ...state,
+        nuevaHabitacion: [...state.nuevaHabitacion, action.payload],
+        habitaciones: [...state.habitaciones, action.payload],
+      };
 
     case "GET_DEVS":
       return {
         ...state,
         developers: action.payload,
-      }
-
-    case "GET_HABITACIONES_ORDENAMIENTOS":
+      };
+    case "GET_HABITACIONES_NOMBRE":
       return {
         ...state,
         habitaciones: action.payload,
       };
-    case "GET_HABITACIONES_FILTROS":
+    case "GET_HABITACIONES_PRECIO":
       return {
         ...state,
         habitaciones: action.payload,
       };
     case "GET_HABITACIONES_FILTROS_PERSONAS":
+      return {
+        ...state,
+        habitaciones: action.payload,
+      };
+    case "GET_HABITACIONES_FILTROS_TIPOS":
       return {
         ...state,
         habitaciones: action.payload,
@@ -110,8 +113,7 @@ const reducer = (state = initialState, action) => {
         habitacionActualizada: [...state.habitacionActualizada, action.payload],
       };
     case "ESTADO_LOGEO":
-      return { ...state, 
-        estadoDeLogeo: action.payload };
+      return { ...state, estadoDeLogeo: action.payload };
 
     case "GET_HABITACIONES_BACKUP":
       return {
@@ -119,12 +121,13 @@ const reducer = (state = initialState, action) => {
         habitacionBackUp: action.payload,
       };
 
+
     case "UPDATE_USUARIO":
       return { ...state };
       
-    default: 
-      return state;
 
+    default:
+      return state;
   }
 };
 
