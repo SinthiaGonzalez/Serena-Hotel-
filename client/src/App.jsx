@@ -41,7 +41,7 @@ const App = () => {
 
         {/* Rutas Dashboard Usuario */}
         <Route path="/clienteReservas" element={<DashBoardClienteReservas />} />
-        <Route path="/clientePerfil" element={<DashBoardClientePerfil />} />
+        <Route path="/clientePerfil/:id" element={<DashBoardClientePerfil />} />
         <Route path="/pasareladePago" element={<PasareladePago />} />
         <Route path="/comentar" element={<CreateComentPage />} />
         {/* Ruta 404 */}
