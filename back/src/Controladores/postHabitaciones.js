@@ -8,19 +8,9 @@ const postHabitaciones = async (
   imagenes,
   servicios,
   descripcion,
-  estado,
-  tipo
+  estado
 ) => {
-  console.log(
-    "aqui",
-    nombre,
-    precio,
-    imagenes,
-    servicios,
-    descripcion,
-    estado,
-    tipo
-  );
+  console.log("aqui", nombre, precio, imagenes, servicios, descripcion, estado);
 
   const result = [];
   for (let i = 0; i < imagenes.length; i++) {
@@ -34,8 +24,7 @@ const postHabitaciones = async (
     !imagenes ||
     !servicios ||
     !descripcion ||
-    !estado ||
-    !tipo
+    !estado
   ) {
     return "faltan datos";
   }
@@ -49,7 +38,6 @@ const postHabitaciones = async (
       servicios,
       descripcion,
       estado,
-      tipo,
     });
     return habitacion;
   }

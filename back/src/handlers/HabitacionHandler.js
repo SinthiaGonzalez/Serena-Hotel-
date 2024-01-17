@@ -9,7 +9,7 @@ const { updateHabitacion } = require("../Controladores/updateHabitacion");
 
 const postHabitacionHandler = async (req, res) => {
   try {
-    const { nombre, precio, imagenes, servicios, descripcion, estado, tipo } =
+    const { nombre, precio, imagenes, servicios, descripcion, estado } =
       req.body;
 
     const respuesta = await postHabitaciones(
@@ -18,8 +18,7 @@ const postHabitacionHandler = async (req, res) => {
       imagenes,
       servicios,
       descripcion,
-      estado,
-      tipo
+      estado
     );
     if (respuesta === "La habitacion ya existe")
       res.status(400).json(respuesta);
@@ -60,7 +59,6 @@ const updateHabitacionHandler = async (req, res) => {
       servicios,
       descripcion,
       estado,
-      tipo,
     } = req.body;
 
     const respuesta = await updateHabitacion(
@@ -70,8 +68,7 @@ const updateHabitacionHandler = async (req, res) => {
       imagenes,
       servicios,
       descripcion,
-      estado,
-      tipo
+      estado
     );
     if (respuesta === "No existe una habitacion con ese nombre")
       res.status(400).json(respuesta);
