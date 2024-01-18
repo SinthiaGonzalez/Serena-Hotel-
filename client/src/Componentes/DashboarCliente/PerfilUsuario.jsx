@@ -22,7 +22,6 @@ const UpdateUsuario = () => {
     telefono: "",
     contraseña: "",
   });
-  const users = useSelector((state) => state.usuarios);
 
   const handleChange = (e) => {
     setUser({
