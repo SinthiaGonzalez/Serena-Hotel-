@@ -29,11 +29,10 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      logueado:{
-        type: DataTypes.STRING,
-        allowNull: false,
+      isadmin: {
+        type: DataTypes.BOOLEAN,
         defaultValue: false,
-      }
+      },
     },
     {
       timestamps: false,

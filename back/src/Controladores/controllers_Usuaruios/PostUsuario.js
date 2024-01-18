@@ -1,31 +1,29 @@
-const {Usuario}= require('../../db')
+const { Usuario } = require('../../db')
 
 const CreateUsuario = async (req, res) => {
-    try {
-      const { name, apellido, email, telefono, contraseña } = req.body;
-  
-    
-      if (!name || !apellido || !email || !telefono || !contraseña) {
-        return res.status(400).json({ error: 'Faltan campos requeridos' });
-      }
-
-      const prueba = await Usuario.findOne({ where: { email: email } });
-  if (prueba) return "Ya existe un usuario vinculado a ese correo";
-  
+  try {
+    const { name, apellido, email, telefono, contraseña,isadmin } = req.body;
+    console.log("aqui en el createusuario", name, apellido, email)
+const isAdmin = isadmin === true || isadmin === "true";
+    const prueba = await Usuario.findOne({ where: { email: email } });
+    if (prueba) {
+      return res.status(200).json({ message: "Ya existe un usuario vinculado a ese correo" })
+    } else {
       const newUser = await Usuario.create({
         name,
         apellido,
         email,
         telefono,
         contraseña,
-        logueado: true,
+        isadmin: isAdmin,
+
       });
-  
-      return newUser; 
-    } catch (error) {
-      console.log(error);
-      throw new Error(error.message); 
+      return res.status(200).json(newUser);
     }
-  };
-  
+  } catch (error) {
+    res.status(500).json({ error: "Error al crear el usuario en la base de datos" });
+
+  }
+};
+
 module.exports = { CreateUsuario };

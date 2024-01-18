@@ -5,11 +5,11 @@ import { verificacionLogeoUsuarioAction } from "../../redux/Actions/actions";
 
 const LoginCliente = () => {
   const dispatch = useDispatch();
-  const [correo, setCorreo] = useState("");
+  const [email, setEmail] = useState("");
   const [contraseña, setContraseña] = useState("");
 
   const handleCorreoChange = (event) => {
-    setCorreo(event.target.value);
+    setEmail(event.target.value);
   };
 
   const handleContraseñaChange = (event) => {
@@ -17,7 +17,7 @@ const LoginCliente = () => {
   };
 
   const handleVerificarUsuario = () => {
-    dispatch(verificacionLogeoUsuarioAction({correo, contraseña}));
+    dispatch(verificacionLogeoUsuarioAction({email, contraseña}));
   };
 
 
@@ -70,7 +70,7 @@ const LoginCliente = () => {
               className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
               placeholder="Correo"
               type="mail"
-              value={correo}
+              value={email}
               onChange={handleCorreoChange}
             />
           </div>

@@ -8,8 +8,8 @@ const {
   EliminarComentariosHandler,
 } = require("../handlers/EliminarComentaiosHandler");
 const {
-  HandlerPostUsuario,
-} = require("../handlers/HandlersUsuarios/PostHandlerUsuario");
+  CreateUsuario
+} = require("../Controladores/controllers_Usuaruios/PostUsuario");
 const { CreatePreferenceMP } = require("../Controladores/postProductMP"); // importamos el metodo CreatePreferenceMP del archivo postProductMP.js
 
 const {
@@ -56,9 +56,12 @@ const router = express.Router(); // importamos el metodo Router de express para 
 router.post("/login", loginCreateToken);
 router.get("/verify", verifyToken, (req, res) => {
   const userId = req.userId;
-  res.status(200).json({ message: "acceso correcto", userId });
+  console.log("userId", userId,);
+  res.status(200).json({ message: "acceso correcto", userId});
 });
-router.post("/usuario", HandlerPostUsuario);
+
+
+router.post("/usuario", CreateUsuario);
 router.get("/usuarios", getHandlerUsuarios);
 router.put("/login", LoginUsuario);
 router.put("/recuperarContrasena", RecuperarContraseña);
