@@ -57,7 +57,7 @@ Habitaciones.belongsToMany(Carrito, { through: "CarritoHabitacion" });
 Reservas.belongsToMany(Habitaciones, { through: "ReservaHabitacion" });
 Habitaciones.belongsToMany(Reservas, { through: "ReservaHabitacion" });
 
-Usuario.hasMany(Reservas, { foreignKey: "usuarioId" });
+Usuario.belongsTo(Reservas, { foreignKey: "usuarioId" });
 Reservas.belongsTo(Usuario, { foreignKey: "usuarioId" });
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
