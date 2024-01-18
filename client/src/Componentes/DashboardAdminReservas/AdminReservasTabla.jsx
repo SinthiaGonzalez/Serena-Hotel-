@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getReservas_usuario } from "../../redux/Actions/actions";
+import { getReservas_Admin } from "../../redux/Actions/actions";
 import Paginacion from "../Paginacion/Paginacion";
 
 const AdminReservasTabla = () => {
 
   const dispatch = useDispatch();
-  const idUsuario = 1; // tomar el id de donde corresponda, x ejemplo: useSelector((state) => state.idUsuario)
-  const reservasUsuario = useSelector((state) => state.reservasUsuario);
+  const idUsuario = 5; // tomar el id de donde corresponda, x ejemplo: useSelector((state) => state.idUsuario)
+  const reservasTodasAdmin = useSelector((state) => state.reservasTodasAdmin);
   const [paginaActual, setPaginaActual] = useState(1);
   const [itemsPerPage] = useState(5);
 
 
   useEffect(() => {
     dispatch(
-      getReservas_usuario(idUsuario, { page: paginaActual, itemsPerPage })
+      getReservas_Admin(idUsuario, { page: paginaActual, itemsPerPage })
     );
   }, [dispatch, idUsuario, paginaActual, itemsPerPage]);
 
@@ -22,7 +22,7 @@ const AdminReservasTabla = () => {
     setPaginaActual(nuevaPagina);
   };
 
-  const ReservasUsuariosPaginadas = reservasUsuario.slice(
+  const ReservasTodasAdminPaginadas = reservasTodasAdmin.slice(
     (paginaActual - 1) * itemsPerPage,
     paginaActual * itemsPerPage
   );
@@ -47,12 +47,12 @@ const AdminReservasTabla = () => {
               </tr>
             </thead>
             <tbody>
-              {ReservasUsuariosPaginadas?.map((linea) => (
+              {ReservasTodasAdminPaginadas?.map((linea) => (
                 <tr className="border-b" key={linea.id_reserva}>
                   <td className="py-6 px-12 text-center">{linea.id_reserva}</td>
-                  <td className="py-6 px-12 text-center">Nombre y Apellido</td>
-                  <td className="py-6 px-12 text-center">Correo</td>
-                  <td className="py-6 px-12 text-center">Teléfono</td>
+                  <td className="py-6 px-12 text-center">{linea.nombre_y_apellido}</td>
+                  <td className="py-6 px-12 text-center">{linea.email}</td>
+                  <td className="py-6 px-12 text-center">{linea.telefono}</td>
                   <td className="py-6 px-12 text-center">{linea.fecha_entrada}</td>
                   <td className="py-6 px-12 text-center">{linea.fecha_salida}</td>
                   <td className="py-6 px-12 text-center">{linea.nombre_habitacion}</td>
@@ -66,7 +66,7 @@ const AdminReservasTabla = () => {
         className="mt-12 w-1/2"
         active={paginaActual}
         setActive={handlePaginaChange}
-        totalItems={reservasUsuario.length}
+        totalItems={reservasTodasAdmin.length}
         itemsPerPage={itemsPerPage}
       />
     </div>

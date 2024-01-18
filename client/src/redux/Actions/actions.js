@@ -421,3 +421,20 @@ export function getReservas_usuario(usuarioId){
   }
 }
 
+export function getReservas_Admin(usuarioId){
+  return async function (dispatch) {
+    try{       
+      const response = await axios.get("/reservas-todas")
+      console.log("Respuesta del servidor:", response.data);   
+      dispatch({
+        type: "RESERVAS_TODAS_ADMIN",
+        payload: response.data,
+      });
+        //alert("Reservas del Usuario obtenidas exitosamente");   
+    } catch (error) {
+        alert("Error al solicitar las Reservas por Usuario:",error);
+        // console.log("Error al solicitar las Reservas por Usuario:",error);
+    }   
+  }
+}
+
