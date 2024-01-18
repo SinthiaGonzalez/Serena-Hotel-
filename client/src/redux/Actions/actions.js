@@ -340,9 +340,11 @@ export function getUsuarios() {
 }
 
 export function updateUsuario(usuarioData, id) {
-  console.log({ usuarioData, id });
+  console.log({ usuarioData });
   return async (dispatch) => {
     try {
+      console.log(usuarioData);
+      id= usuarioData.id;
       const response = await axios.put(`/update/usuarios/${id}`, usuarioData);
 
       console.log(response.data);

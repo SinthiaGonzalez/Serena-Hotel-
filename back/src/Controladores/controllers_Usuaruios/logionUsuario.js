@@ -19,7 +19,8 @@ const LoginUsuario = async (req, res) => {
         email,
         telefono,
         contraseña: null,
-        logueado: true // Establecer el estado de logueo como true para el nuevo usuario
+        logueado: true, // Establecer el estado de logueo como true para el nuevo usuario
+        isAdmin: false 
       });
 console.log('usuario registrado exitosamente');
       return res.status(200).json({ message: 'Usuario registrado exitosamente', newUser });
