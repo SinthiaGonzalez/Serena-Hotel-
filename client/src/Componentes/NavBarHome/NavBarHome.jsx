@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import keanu from "../../../public/keanu.jpg";
 import { useState } from "react";
 import { useVerificarTokenPerfilNav } from "../AutenticadorToken/useVerificarTokenPerfilNav";
@@ -18,6 +19,7 @@ import {
 } from "@material-tailwind/react";
 import { ChevronDownIcon, Bars2Icon } from "@heroicons/react/24/solid";
 import AddShoppingCart from "../cardCarrito/cardAñadirCarrito";
+import { verificarToken } from "../../redux/Actions/actions";
 const profileMenuItems = [
   {
     label: "Notificaciones",
@@ -149,8 +151,12 @@ const NavBarHome = () => {
   const toggleCart = () => {
     setIsCartOpen(!isCartOpen);
   };
-  const esTokenValido = useVerificarTokenPerfilNav();
-
+  // const esTokenValido = useVerificarTokenPerfilNav();
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.token);
+  React.useEffect(() => {
+    dispatch(verificarToken());
+  }, [dispatch]);
   React.useEffect(() => {
     window.addEventListener(
       "resize",
@@ -200,7 +206,7 @@ const NavBarHome = () => {
               />
             </svg>
           </button>
-          {esTokenValido ? (
+          {token ? (
             <ProfileMenu />
           ) : (
             <a
