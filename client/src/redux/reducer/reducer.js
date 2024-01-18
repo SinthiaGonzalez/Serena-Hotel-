@@ -28,7 +28,7 @@ const reducer = (state = initialState, action) => {
         habitacionesfiltradas: habitacionFiltrada,
       };
 
-    case "GET_USERS":
+    case "GET_USUARIOS":
       return {
         ...state,
         usuarios: action.payload,
@@ -36,7 +36,7 @@ const reducer = (state = initialState, action) => {
     case "GET_HABITACIONES":
       return {
         ...state,
-        habitaciones: action.payload,
+        habitaciones: action.payload,        
       };
     case "CREATE_PREFERENCE_MERCADOPAGO_ID":
       return {
@@ -97,11 +97,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         habitaciones: action.payload,
       };
-    case "GET_HABITACIONES_FILTROS_TIPOS":
-      return {
-        ...state,
-        habitaciones: action.payload,
-      };
+
     case "GET_RESERVAS":
       return {
         ...state,
@@ -120,6 +116,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         habitacionBackUp: action.payload,
       };
+
+
+    case "UPDATE_USUARIO":
+      return { ...state };
+      
 
     default:
       return state;

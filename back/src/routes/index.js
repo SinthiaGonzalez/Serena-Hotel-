@@ -8,8 +8,8 @@ const {
   EliminarComentariosHandler,
 } = require("../handlers/EliminarComentaiosHandler");
 const {
-  HandlerPostUsuario,
-} = require("../handlers/HandlersUsuarios/PostHandlerUsuario");
+  CreateUsuario
+} = require("../Controladores/controllers_Usuaruios/PostUsuario");
 const { CreatePreferenceMP } = require("../Controladores/postProductMP"); // importamos el metodo CreatePreferenceMP del archivo postProductMP.js
 
 const {
@@ -24,6 +24,7 @@ const { postHabitacionHandler } = require("../handlers/HabitacionHandler");
 const { eliminarHabitacionHandler } = require("../handlers/HabitacionHandler");
 const { postReservasHandler } = require("../handlers/ReservasHandler");
 const { getReservas } = require("../Controladores/getReservas");
+const { getReservasPorUsuarioId } = require("../Controladores/getReservasPorUsuarioId");
 const {
   getOrdenamientosFiltrosHandler,
 } = require("../Controladores/getOrdenamientosFiltrosHandler");
@@ -46,17 +47,24 @@ const {
   getHandlerUsuarios,
 } = require("../handlers/HandlersUsuarios/GetHandlerUsuarios");
 const { updateHabitacionHandler } = require("../handlers/HabitacionHandler");
+const { putUsuarioHandler} = require("../handlers/HandlersUsuarios/PutAndDeleteUsuarios")
+const { deleteUsuarioHandler} = require("../handlers/HandlersUsuarios/PutAndDeleteUsuarios")
+//importamos el metodo Router de express para poder crear rutas
 const { EnvioMailNotificaciones } = require("../handlers/HandlerMailer/EnvioMailNotificaciones");
 const { RecuperarContraseña } = require("../handlers/HandlerMailer/RecuperarContraseña/RecuperarContraseña");
-
-
 const router = express.Router(); // importamos el metodo Router de express para poder crear rutas
 router.post("/login", loginCreateToken);
+
+//creamos una ruta para verificar el token es de prueba para ver si funciona
 router.get("/verify", verifyToken, (req, res) => {
   const userId = req.userId;
-  res.status(200).json({ message: "acceso correcto", userId });
+  const isAdmin = req.isAdmin;
+
+  console.log("userId", userId,);
+  res.status(200).json({ message: "acceso correcto", userId,isAdmin});
 });
-router.post("/usuario", HandlerPostUsuario);
+
+router.post("/usuario", CreateUsuario);
 router.get("/usuarios", getHandlerUsuarios);
 router.put("/login", LoginUsuario);
 router.put("/recuperarContrasena", RecuperarContraseña);
@@ -86,8 +94,11 @@ router.post("/carrito", addHabitacionToCarrito);
 router.get("/carrito", getCarrito);
 router.post("/reservas", postReservasHandler);
 router.get("/reservas", getReservas);
+router.get("/reservas-por-usuario", getReservasPorUsuarioId); //trae por ID de usuario o todas (/reservas-por-usuario | http://localhost:3001/reservas-por-usuario?id=5)
 
 router.get("/ordenamientos&filtros", getOrdenamientosFiltrosHandler);
 
 router.put("/update/habitaciones", updateHabitacionHandler);
+router.put("/update/usuarios/:id", putUsuarioHandler);
+router.delete("/delete/usuarios/:id", deleteUsuarioHandler);
 module.exports = router;

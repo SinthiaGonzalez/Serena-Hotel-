@@ -10,6 +10,7 @@ const CardsHome = () => {
   useEffect(() => {
     dispatch(getHabitaciones());
   }, [dispatch]);
+
   return (
     <>
       <div id="habitaciones" className="px-14 pt-4 flex flex-row justify-between bg-blanco ">
@@ -18,12 +19,14 @@ const CardsHome = () => {
             HABITACIONES
           </span>
         </div>
-        <div className="flex flex-row items-center justify-center gap-2">
-          <p className="text-xl font-medium text-negro">Ver Todo</p>
+        <div className="flex flex-row items-center justify-center gap-2 hover:scale-105">
+          <a 
+          href="/habitaciones"
+          className="text-xl font-medium text-negro">Ver Todo</a>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="16"
-            width="14"
+            width="20"
             viewBox="0 0 448 512"
           >
             <path

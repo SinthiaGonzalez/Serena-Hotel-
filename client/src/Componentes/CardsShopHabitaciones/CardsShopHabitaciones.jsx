@@ -9,22 +9,19 @@ const CardsShopHabitaciones = ({ habitacionesShop }) => {
   };
   return (
     <div className="flex flex-col gap-4 mx-8 w-full">
-      {habitacionesShop.map(
-        ({ id, nombre, imagen, precio, servicios, tipo }) => {
-          return (
-            <CardShopHabitaciones
-              key={id}
-              id={id}
-              nombre={nombre}
-              imagen={imagen}
-              precio={precio}
-              servicios={servicios}
-              handlerAddToCart={handlerAddToCart}
-              tipo={tipo}
-            />
-          );
-        }
-      )}
+      {habitacionesShop.map(({ id, nombre, imagenes, precio, servicios }) => {
+        return (
+          <CardShopHabitaciones
+            key={id}
+            id={id}
+            nombre={nombre}
+            imagenes={imagenes}
+            precio={precio}
+            servicios={servicios}
+            handlerAddToCart={handlerAddToCart}
+          />
+        );
+      })}
     </div>
   );
 };

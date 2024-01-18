@@ -1,107 +1,5 @@
 import React from "react";
 
-// const CardComent = ({ comentario, onDelete }) => {
-//   const renderStars = (puntuacion) => {
-//     const stars = [];
-//     for (let i = 0; i < puntuacion; i++) {
-//       stars.push(
-//         <span
-//           key={i}
-//           className="text-orange-500"
-//           style={{ fontSize: "30px", marginRight: "5px", marginTop: "-5%" }}
-//         >
-//           &#9733;
-//         </span>
-//       );
-//     }
-//     return stars;
-//   };
-
-//   return (
-//     <div
-//       className="bg-gray-100 p-4 rounded-lg mb-12"
-//       style={{
-//         position: "relative",
-//         width: "500px",
-//         minHeight: "200px",
-//         maxHeight: "300px",
-//         overflow: "hidden",
-//         backgroundImage:
-//           'url("https://img.freepik.com/fotos-premium/ai-generated-ai-generative-adventure-al-aire-libre-naturaleza-niebla-niebla-nubes-bosque-arboles-paisaje_95211-18925.jpg?w=996")',
-//         backgroundSize: "cover",
-//         display: "flex",
-//         flexDirection: "column",
-//         alignItems: "center",
-//       }}
-//     >
-//       <button
-//         className="absolute top-2 right-2 text-white"
-//         style={{ fontSize: "20px" }}
-//         onClick={() => onDelete(comentario.id)}
-//       >
-//         X
-//       </button>
-//       <div
-//         className="overlay"
-//         style={{
-//           backgroundColor: "rgba(0, 0, 0, 0.2)",
-//           position: "absolute",
-//           top: 0,
-//           left: 0,
-//           right: 0,
-//           bottom: 0,
-//           pointerEvents: "none",
-//         }}
-//       ></div>
-
-//       <h3
-//         className="text-white font-bold mb-2"
-//         style={{
-//           filter: "brightness(120%)",
-//           marginLeft: "50px",
-//           marginTop: "10px",
-//         }}
-//       >
-//         {" "}
-//         {comentario.nombre}
-//       </h3>
-
-//       <div style={{ display: "flex", alignItems: "center" }}>
-//         <img
-//           src={comentario.imagen}
-//           alt="Imagen de perfil"
-//           className="w-16 h-16 rounded-full mr-4"
-//           style={{ filter: "brightness(85%)", alignSelf: "flex-start" }}
-//         />
-//         <p
-//           className="text-naranja text-sm"
-//           style={{ filter: "brightness(150%)", marginTop: "5px" }}
-//         >
-//           {renderStars(comentario.puntuacion)}
-//         </p>
-//       </div>
-//       <div
-//         style={{
-//           flex: 1,
-//           display: "flex",
-//           flexDirection: "column",
-//           justifyContent: "center",
-//         }}
-//       >
-//         <p
-//           className="text-white text-center"
-//           style={{ filter: "brightness(120%)" }}
-//         >
-//           {comentario.contenido}
-//         </p>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default CardComent;
-
-
 import {
   Card,
   CardHeader,
@@ -109,10 +7,8 @@ import {
   Typography,
   Avatar,
 } from "@material-tailwind/react";
- 
 
 const CardComent = ({ comentario, onDelete }) => {
-  
   const StarIcon = () => {
     return (
       <svg
@@ -128,7 +24,7 @@ const CardComent = ({ comentario, onDelete }) => {
         />
       </svg>
     );
-  }
+  };
 
   const renderStars = (puntuacion) => {
     const stars = [];
@@ -139,24 +35,25 @@ const CardComent = ({ comentario, onDelete }) => {
   };
 
   return (
-    <Card className="w-[500px] h-[200px] bg-cover bg-center relative mb-12"
-    style={{
-      backgroundImage:
-        'url("https://cf.bstatic.com/xdata/images/hotel/max1024x768/283384657.jpg?k=82f12511a23fc911e79146601860d7ae7b9839f37af39918d1312edd9d98efee&o=&hp=1")',
-    }}>
+    <Card
+      className="w-[500px] h-[200px] bg-cover bg-center relative mb-12"
+      style={{
+        backgroundImage:
+          'url("https://cf.bstatic.com/xdata/images/hotel/max1024x768/283384657.jpg?k=82f12511a23fc911e79146601860d7ae7b9839f37af39918d1312edd9d98efee&o=&hp=1")',
+      }}
+    >
       <div
-      className="absolute inset-0 bg-negro opacity-20 rounded-lg"
-      style={{ zIndex: 1 }}
-    ></div>
+        className="absolute inset-0 bg-negro opacity-20 rounded-lg"
+        style={{ zIndex: 1 }}
+      ></div>
       <CardHeader
         color="transparent"
         floated={false}
         shadow={false}
         className="mx-10 flex items-center gap-4 pt-0 pb-4"
-        
       >
         <Avatar
-          size="sm md:lg"
+          size={window.innerWidth < 768 ? "sm" : "lg"}
           variant="circular"
           src={comentario.imagen}
           alt="tania andrew"
@@ -164,7 +61,7 @@ const CardComent = ({ comentario, onDelete }) => {
         <div className="flex w-full flex-col gap-0.5">
           <div className="flex items-center justify-between">
             <Typography className="text-lg md:text-2xl font-medium text-gris font-inter">
-              {comentario.nombre}
+              Tania Andrew
             </Typography>
             <div className="flex items-center gap-0">
               {renderStars(comentario.puntuacion)}
@@ -179,6 +76,6 @@ const CardComent = ({ comentario, onDelete }) => {
       </CardBody>
     </Card>
   );
-}
+};
 
 export default CardComent;

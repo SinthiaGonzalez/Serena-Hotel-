@@ -68,18 +68,29 @@ export function postUsuario(state) {
     }
   };
 }
-export function putUsuario(state) {
+
+export function postUsuarioGoogle(data) {
   return async function (dispatch) {
     try {
-      console.log("antes de action put", state);
-      await axios.put("/login", state);
-      console.log("log de action put", state);
-      alert(" verificado exitosamente");
+      // Intentar crear o actualizar el usuario en la ruta "/usuario"
+      const response = await axios.post("/usuario",data);
+      if (response.status === 200 || response.status === 201) {
+      const  response2 = await axios.post("/login", data);
+      console.log("Respuesta del servidor:", response2.data);
+      dispatch({
+        type: "POST_USUARIO_GOOGLE",
+        payload: response2.data,
+      });
+      }
+    
     } catch (error) {
-      alert(error);
+    console.error("Error al crear o actualizar el usuario:", error);
     }
   };
 }
+
+
+
 export function getAllcomentarios() {
   return async function (dispatch) {
     try {
@@ -219,25 +230,6 @@ export function getHabitacionesFiltrosPersonas({
     }
   };
 }
-export function getHabitacionesFiltrosTipos({ ordenado, direccion, tipos }) {
-  return async function (dispatch) {
-    console.log("Filtros tipos:", ordenado, direccion, tipos);
-    try {
-      if (tipos) {
-        const habitaciones = await axios.get(
-          `/ordenamientos&filtros?ordenarPor=${ordenado}&direccion=${direccion}&filtroTipos=${tipos}`
-        );
-        console.log("filtro tipos:", habitaciones.data);
-        return dispatch({
-          type: "GET_HABITACIONES_FILTROS_TIPOS",
-          payload: habitaciones.data,
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
 
 export const getReservas = ({ fecha_entrada, fecha_salida }) => {
   return async function (dispatch) {
@@ -292,12 +284,12 @@ export function getDevs() {
     }
   };
 }
-export const estadoLogeo = (estado) => {
+export function estadoLogeo(estado) {
   return {
     type: "ESTADO_LOGEO",
     payload: estado,
   };
-};
+}
 export function deleteHabitacion(id) {
   console.log({ id });
   return async function (dispatch) {
@@ -330,14 +322,83 @@ export function getHabitacionesbackup() {
   };
 }
 
+export function getUsuarios() {
+  return async function (dispatch) {
+    try {
+      const usuarios = await axios.get("/usuarios");
+      return dispatch({
+        type: "GET_USUARIOS",
+        payload: usuarios.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function updateUsuario(usuarioData, id) {
+  console.log({ usuarioData, id });
+  return async (dispatch) => {
+    try {
+      const response = await axios.put(`/update/usuarios/${id}`, usuarioData);
+
+      console.log(response.data);
+      if (response.data === "No se encontro el usuario") alert(response.data);
+      else alert("Usuario editado exitosamente");
+      dispatch({
+        type: "UPDATE_USUARIO",
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+      alert(error.message);
+    }
+  };
+}
+
+export function deleteUsuario(id) {
+  console.log({ id });
+  return async function (dispatch) {
+    try {
+      const response = await axios.delete(`/delete/usuarios/${id}`);
+      if (response.data === "No se encontro el usuario") {
+        alert(response.data);
+      } else {
+        dispatch({
+          type: "DELETE_USUARIO",
+          payload: id,
+        });
+        alert("Usuario eliminado exitosamente");
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+}
 
 export function recuperarContraseñaAction(correo) {
   return async function () {
     try {
-      const response = await axios.put("/recuperarContrasena", {correo});
+      const response = await axios.put("/recuperarContrasena", { correo });
       console.log("Respuesta del servidor:", response.data);
     } catch (error) {
       console.error("Error al enviar la consulta:", error);
+    }
+  };
+}
+
+export function verificacionLogeoUsuarioAction(infoLogeo) {
+  console.log(infoLogeo);
+  return async function () {
+    try {
+      const response = await axios.post("/login", infoLogeo);
+      const { token } = response.data;
+      localStorage.setItem("token", JSON.stringify(token));
+      console.log("Respuesta del servidor:", response.data);
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        alert("Usuario o contraseña incorrectos");
+      }
     }
   };
 }

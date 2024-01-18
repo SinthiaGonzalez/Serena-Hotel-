@@ -133,7 +133,7 @@ const NavBarAdmin = () => {
       <div className="container mx-auto flex items-center justify-between text-blanco">
         <Typography
           as="a"
-          href="#"
+          href="/"
           className="mr-4 text-blanco  cursor-pointer py-1.5 font-medium"
         >
           SERENA HOTEL
