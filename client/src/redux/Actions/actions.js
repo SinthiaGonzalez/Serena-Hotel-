@@ -409,3 +409,22 @@ export function verificacionLogeoUsuarioAction(infoLogeo) {
     }
   };
 }
+
+export function getReservas_usuario(usuarioId){
+  return async function (dispatch) {
+    try{          
+      URL = "http://localhost:3001/reservas-por-usuario?id=" + usuarioId
+      const response = await axios.get(URL)
+      console.log("Respuesta del servidor:", response.data);   
+      dispatch({
+        type: "RESERVAS_USUARIO",
+        payload: response.data,
+      });
+        //alert("Reservas del Usuario obtenidas exitosamente");   
+    } catch (error) {
+        alert("Error al solicitar las Reservas por Usuario:",error);
+        console.log("Error al solicitar las Reservas por Usuario:",error);
+    }   
+  }
+}
+

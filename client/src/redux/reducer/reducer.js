@@ -12,6 +12,7 @@ const initialState = {
   habitacionActualizada: [],
   estadoDeLogeo: false,
   habitacionBackUp: [],
+  reservasUsuario: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -121,11 +122,15 @@ const reducer = (state = initialState, action) => {
         habitacionBackUp: action.payload,
       };
 
-
     case "UPDATE_USUARIO":
       return { ...state };
-      
+    
 
+    case "RESERVAS_USUARIO":
+      return {
+        ...state,
+        reservasUsuario: action.payload,
+      };
     default:
       return state;
   }
