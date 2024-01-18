@@ -25,6 +25,7 @@ const { eliminarHabitacionHandler } = require("../handlers/HabitacionHandler");
 const { postReservasHandler } = require("../handlers/ReservasHandler");
 const { getReservas } = require("../Controladores/getReservas");
 const { getReservasPorUsuarioId } = require("../Controladores/getReservasPorUsuarioId");
+const { getReservasTodas } = require("../Controladores/getReservasTodas");
 const {
   getOrdenamientosFiltrosHandler,
 } = require("../Controladores/getOrdenamientosFiltrosHandler");
@@ -95,6 +96,7 @@ router.get("/carrito", getCarrito);
 router.post("/reservas", postReservasHandler);
 router.get("/reservas", getReservas);
 router.get("/reservas-por-usuario", getReservasPorUsuarioId); //trae por ID de usuario o todas (/reservas-por-usuario | http://localhost:3001/reservas-por-usuario?id=5)
+router.get("/reservas-todas", getReservasTodas);
 
 router.get("/ordenamientos&filtros", getOrdenamientosFiltrosHandler);
 

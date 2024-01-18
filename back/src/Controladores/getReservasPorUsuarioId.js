@@ -25,6 +25,7 @@ const getReservasPorUsuarioId = async (req, res) => {
             "nombre_habitacion": habitacion.nombre, 
             "fecha_entrada": reserva.fecha_entrada,
             "fecha_salida": reserva.fecha_salida,
+            
           })
         });
       });
