@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import keanu from "../../../public/keanu.jpg";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useVerificarTokenPerfilNav } from "../AutenticadorToken/useVerificarTokenPerfilNav";
 import {
   Navbar,
   Collapse,
@@ -18,7 +18,6 @@ import {
 } from "@material-tailwind/react";
 import { ChevronDownIcon, Bars2Icon } from "@heroicons/react/24/solid";
 import AddShoppingCart from "../cardCarrito/cardAñadirCarrito";
-// profile menu component
 const profileMenuItems = [
   {
     label: "Notificaciones",
@@ -33,7 +32,11 @@ const profileMenuItems = [
 function ProfileMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const closeMenu = () => setIsMenuOpen(false);
-
+  const navigate = useNavigate();
+  const handlerSesion = (e) => {
+    localStorage.removeItem("token");
+    navigate("/logearse");
+  };
   return (
     <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
       <MenuHandler>
@@ -80,9 +83,9 @@ function ProfileMenu() {
               >
                 <path fill="#ffffff" d={d} />
               </svg>
-              <Typography as="span" variant="small" className="font-normal">
+              <button onClick={handlerSesion} className="font-normal">
                 {label}
-              </Typography>
+              </button>
             </MenuItem>
           );
         })}
@@ -143,14 +146,10 @@ const NavBarHome = () => {
   const [isNavOpen, setIsNavOpen] = React.useState(false);
   const toggleIsNavOpen = () => setIsNavOpen((cur) => !cur);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const EstadoDeLogeo = useSelector((state) => state.estadoDeLogeo);
-
-  console.log("Logeado", EstadoDeLogeo)
-
-
   const toggleCart = () => {
     setIsCartOpen(!isCartOpen);
   };
+  const esTokenValido = useVerificarTokenPerfilNav();
 
   React.useEffect(() => {
     window.addEventListener(
@@ -201,16 +200,16 @@ const NavBarHome = () => {
               />
             </svg>
           </button>
-          {EstadoDeLogeo ? (
+          {esTokenValido ? (
             <ProfileMenu />
           ) : (
             <a
-            href="/logearse"
-            className="select-none rounded-lg bg-naranja py-1.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-blanco transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
-            type="button"
-          >
-            INICIAR SESIÓN
-          </a>
+              href="/logearse"
+              className="select-none rounded-lg bg-naranja py-1.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-blanco transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
+              type="button"
+            >
+              INICIAR SESIÓN
+            </a>
           )}
         </div>
       </div>
