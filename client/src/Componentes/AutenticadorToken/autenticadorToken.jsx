@@ -1,18 +1,19 @@
-// autenticadorToken.jsx
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-
+import { useNavigate, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 export const useVerificarToken = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    localStorage.setItem("tokenValido", "true");
-    // Obtener la información directamente del localStorage y convertirla a booleano
-    const esTokenValido = localStorage.getItem("tokenValido") === "true";
+    const token = JSON.parse(localStorage.getItem("token"));
+    console.log(token);
 
-    if (!esTokenValido) {
-      // Si el token no es válido, redirigir al usuario a la página de inicio de sesión
+    if (!token) {
       navigate("/logearse");
     }
+    // else {
+    //   if (token === true && location.pathname === "/logearse") {
+    //     navigate("/");
+    //   }
+    // }
   }, [navigate]);
 };

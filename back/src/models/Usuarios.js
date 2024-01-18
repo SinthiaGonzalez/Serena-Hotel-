@@ -29,15 +29,14 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      logueado:{
-        type: DataTypes.STRING,
-        allowNull: false,
+      isadmin: {
+        type: DataTypes.BOOLEAN,
         defaultValue: false,
       },
-      isAdmin:{
-        type: DataTypes.BOOLEAN,
+      estado:{ 
+        type: DataTypes.STRING,
         allowNull: false,
-        defaultValue: false,
+        defaultValue: "activo", // "activo"|"inactivo"|"eliminado"
       }
     },
     {

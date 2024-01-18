@@ -37,7 +37,7 @@ const NavBarAdmin = () => {
           />
         </svg>
 
-        <a href="#" className="font-medium flex items-center">
+        <a href="/admin-reservas" className="font-medium flex items-center">
           RESERVAS
         </a>
       </Typography>
@@ -58,7 +58,7 @@ const NavBarAdmin = () => {
             d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"
           />
         </svg>
-        <a href="#" className="font-medium flex items-center">
+        <a href="/admin-usuarios" className="font-medium flex items-center">
           USUARIO
         </a>
       </Typography>
@@ -79,7 +79,7 @@ const NavBarAdmin = () => {
             d="M32 32c17.7 0 32 14.3 32 32V320H288V160c0-17.7 14.3-32 32-32H544c53 0 96 43 96 96V448c0 17.7-14.3 32-32 32s-32-14.3-32-32V416H352 320 64v32c0 17.7-14.3 32-32 32s-32-14.3-32-32V64C0 46.3 14.3 32 32 32zm144 96a80 80 0 1 1 0 160 80 80 0 1 1 0-160z"
           />
         </svg>
-        <a href="#" className="font-medium  flex items-center">
+        <a href="/admin-habitaciones" className="font-medium  flex items-center">
           HABITACIONES
         </a>
       </Typography>

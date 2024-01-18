@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { useParams} from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { postUsuario } from "../../redux/actions/actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -11,11 +10,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const UpdateUsuario = () => {
-  const { id } = useParams();
   const dispatch = useDispatch();
 
   const [user, setUser] = useState({
-    id: id,
     name: "",
     apellido: "",
     email: "",
