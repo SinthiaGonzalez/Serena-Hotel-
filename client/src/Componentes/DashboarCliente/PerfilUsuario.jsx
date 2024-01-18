@@ -30,7 +30,7 @@ const UpdateUsuario = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await dispatch(postUsuario(user, id));
+      await dispatch(postUsuario(user));
       // Restablecer el estado a los valores iniciales en lugar de un objeto vacío
       setUser({
         name: "",
