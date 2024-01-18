@@ -198,7 +198,7 @@ const CrearHabitacion = () => {
           className="flex flex-row gap-20 mx-2 my-10"
           onSubmit={handleSubmit}
         >
-          <div className="w-2/8">
+          <div className="w-2/8 -mt-16">
             <div className="grid grid-cols-2 gap-4 ml-8">
               {habitacionData.imagenes.map((imagen, index) => (
                 <div key={index} className="relative">
