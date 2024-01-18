@@ -23,6 +23,7 @@ import Checkout from "../Filtros/filtro-Checkout";
 import { getReservas } from "../../redux/Actions/actions";
 import { format } from "date-fns";
 import BuscarPorNombre from "../ordenamientosyBusqueda/busqueda";
+import Paginacion from "../Paginacion/Paginacion";
 const Habitaciones = () => {
   const dispatch = useDispatch();
   const habitacionesShop = useSelector((state) => state.habitaciones);
@@ -30,20 +31,19 @@ const Habitaciones = () => {
     (state) => state.habitacionesfiltradas
   );
   const stringdelbuscar = useSelector((state) => state.string);
-
-  useEffect(() => {
-    dispatch(getHabitaciones());
-  }, [dispatch]); //[dispatch]
-
   const [filtros, setFiltros] = useState([]);
-
   const [ultimoOrdenamiento, setUltimoOrdenamiento] = useState({
     ordenado: "nombre",
     direccion: "asc",
   });
-
   const [checkinDate, setCheckinDate] = useState(new Date());
   const [checkoutDate, setCheckoutDate] = useState(new Date());
+  const [paginaActual, setPaginaActual] = useState(1);
+  const [itemsPerPage] = useState(3);
+
+  useEffect(() => {
+    dispatch(getHabitaciones({ page: paginaActual, itemsPerPage }));
+  }, [dispatch, itemsPerPage]);
 
   const handleNombreChange = (value, tipoOrdenamiento) => {
     setUltimoOrdenamiento({
@@ -57,6 +57,11 @@ const Habitaciones = () => {
         tipoOrdenamiento,
       })
     );
+    setPaginaActual(1);
+  };
+
+  const handlePaginaChange = (nuevaPagina) => {
+    setPaginaActual(nuevaPagina);
   };
 
   const handlePrecioChange = (value, tipoOrdenamiento) => {
@@ -71,6 +76,7 @@ const Habitaciones = () => {
         tipoOrdenamiento,
       })
     );
+    setPaginaActual(1);
   };
 
   const aplicarFiltrosPersonas = (nuevosFiltros) => {
@@ -79,24 +85,18 @@ const Habitaciones = () => {
         ordenado: ultimoOrdenamiento.ordenado,
         direccion: ultimoOrdenamiento.direccion,
         personas: nuevosFiltros || filtros,
+        page: paginaActual,
+        itemsPerPage,
       })
     );
     setFiltros(nuevosFiltros || filtros);
-  };
-  const aplicarFiltrostipos = (nuevosFiltros) => {
-    dispatch(
-      getHabitacionesFiltrosTipos({
-        ordenado: ultimoOrdenamiento.ordenado,
-        direccion: ultimoOrdenamiento.direccion,
-        tipos: nuevosFiltros || filtros,
-      })
-    );
-    setFiltros(nuevosFiltros || filtros);
+    setPaginaActual(1);
   };
 
   const handleCheckinChange = (selectedDate) => {
     setCheckinDate(selectedDate);
     console.log(format(selectedDate, "yyyy-MM-dd"));
+    setPaginaActual(1);
   };
 
   const handleCheckoutChange = (selectedDate) => {
@@ -107,14 +107,26 @@ const Habitaciones = () => {
         fecha_salida: format(selectedDate, "yyyy-MM-dd"),
       })
     );
+    setPaginaActual(1);
   };
-  const handlertoprops = () => {
-    if (stringdelbuscar.length > 0) {
-      return habitacionfiltrada;
-    } else {
-      return habitacionesShop;
-    }
-  };
+
+  const totalItems =
+    stringdelbuscar.length > 0
+      ? habitacionfiltrada.length
+      : habitacionesShop.length;
+
+  const habitacionesActuales =
+    stringdelbuscar.length > 0
+      ? habitacionfiltrada
+      .slice(
+          (paginaActual - 1) * itemsPerPage,
+          paginaActual * itemsPerPage
+        )
+      : habitacionesShop.slice(
+          (paginaActual - 1) * itemsPerPage,
+          paginaActual * itemsPerPage
+        );
+
   return (
     <>
       <NavBarHome />
@@ -157,7 +169,7 @@ const Habitaciones = () => {
             </h2>
             <Card className="w-6/7 mx-2">
               <List className="flex-row">
-                {[1, 2, 3, 4, 5, 6].map((persona) => (
+                {[2, 3, 4, 5, 6].map((persona) => (
                   <ListItem key={persona} className="p-0">
                     <label
                       htmlFor={`persona-${persona}`}
@@ -189,7 +201,17 @@ const Habitaciones = () => {
             </Card>
           </div>
         </div>
-        <CardsShopHabitaciones habitacionesShop={handlertoprops()} />
+        <div className="w-full mr-12">
+          <CardsShopHabitaciones habitacionesShop={habitacionesActuales} />
+
+          <Paginacion
+            className="mt-12 w-1/2"
+            active={paginaActual}
+            setActive={handlePaginaChange}
+            totalItems={totalItems}
+            itemsPerPage={itemsPerPage}
+          />
+        </div>
       </div>
     </>
   );
