@@ -59,6 +59,7 @@ router.post("/login", loginCreateToken);
 router.get("/verify", verifyToken, (req, res) => {
   const userId = req.userId;
   const isAdmin = req.isAdmin;
+  
   console.log("userId", userId,);
   res.status(200).json({ message: "acceso correcto", userId,isAdmin});
 });
