@@ -54,12 +54,14 @@ const { EnvioMailNotificaciones } = require("../handlers/HandlerMailer/EnvioMail
 const { RecuperarContraseña } = require("../handlers/HandlerMailer/RecuperarContraseña/RecuperarContraseña");
 const router = express.Router(); // importamos el metodo Router de express para poder crear rutas
 router.post("/login", loginCreateToken);
+
+
 router.get("/verify", verifyToken, (req, res) => {
   const userId = req.userId;
+  const isAdmin = req.isAdmin;
   console.log("userId", userId,);
-  res.status(200).json({ message: "acceso correcto", userId});
+  res.status(200).json({ message: "acceso correcto", userId,isAdmin});
 });
-
 
 router.post("/usuario", CreateUsuario);
 router.get("/usuarios", getHandlerUsuarios);
