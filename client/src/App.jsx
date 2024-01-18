@@ -15,6 +15,7 @@ import DashBoarAdminHabitaciones from "./Componentes/DashBoarAdminHabitaciones/D
 import Contactenos from "./Componentes/Contactenos/Contactenos.jsx";
 import LoginCliente from "./Componentes/LoginCliente/LoginCliente";
 import RecuperarContraseña from "./Componentes/RecuperarContraseña/RecuperarContraseña.jsx";
+import DetailHabitacionesComponent from "../src/Componentes/DetailHabitaciones/DetailHabitaciones.jsx"
 import DashBoarAdminReservas from "./Componentes/DashboardAdminReservas/DashBoarAdminReservas.jsx";
 import DashBoarAdminUsuarios from "./Componentes/DashBoardAdminUsuarios/DashBoarAdminReservas.jsx";
 
@@ -28,7 +29,9 @@ const App = () => {
       <Routes>
         {/* Rutas de la Navbar Home y Creacion de Comentarios*/}
         <Route path="/" element={<LandingPage />} />
+        <Route path="/habitacion/:id" element={< DetailHabitacionesComponent />} />
         <Route path="/habitaciones" element={<Habitaciones />} />
+        
         <Route path="/acercadeserena" element={<AcercaDeSerena />} />
         <Route path="/contactenos" element={<Contactenos />} />
         <Route path="/comentarios" element={<ComentPage />} />

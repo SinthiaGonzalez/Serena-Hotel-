@@ -5,7 +5,7 @@ import { getHabitaciones } from "../../redux/Actions/actions";
 const CardsHome = () => {
   const dispatch = useDispatch();
   const habitacionesHome = useSelector((state) => state.habitaciones);
-  console.log(habitacionesHome);
+  
   const primerasTresHabitaciones = habitacionesHome.slice(0, 3);
   useEffect(() => {
     dispatch(getHabitaciones());
@@ -41,6 +41,7 @@ const CardsHome = () => {
           ({ nombre, imagen, precio, servicios, id }) => (
             <CardHome
               key={id}
+              id={id}
               imagen={imagen}
               nombre={nombre}
               precio={precio}
