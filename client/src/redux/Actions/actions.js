@@ -273,12 +273,12 @@ export function getDevs() {
     }
   };
 }
-export const estadoLogeo = (estado) => {
+export function estadoLogeo(estado) {
   return {
     type: "ESTADO_LOGEO",
     payload: estado,
   };
-};
+}
 export function deleteHabitacion(id) {
   console.log({ id });
   return async function (dispatch) {
@@ -381,8 +381,8 @@ export function verificacionLogeoUsuarioAction(infoLogeo) {
   return async function () {
     try {
       const response = await axios.post("/login", infoLogeo);
-      const { token } = response;
-      localStorage.setItem("token", token);
+      const { token } = response.data;
+      localStorage.setItem("token", JSON.stringify(token));
       console.log("Respuesta del servidor:", response.data);
     } catch (error) {
       console.error("Error al enviar la consulta:", error);

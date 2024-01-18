@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { postComent } from "../../redux/Actions/actions";
-import { useVerificarToken }  from "../AutenticadorToken/autenticadorToken";
+import { useVerificarToken } from "../AutenticadorToken/autenticadorToken";
 
 import {
   Card,
@@ -17,8 +17,7 @@ const CreateComentPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-   useVerificarToken();
-
+  useVerificarToken();
 
   const handleStarHover = (value) => {
     if (rating === 0) {
@@ -59,15 +58,14 @@ const CreateComentPage = () => {
           'url("https://cf.bstatic.com/xdata/images/hotel/max1024x768/283384657.jpg?k=82f12511a23fc911e79146601860d7ae7b9839f37af39918d1312edd9d98efee&o=&hp=1")',
       }}
     >
-      <div className="absolute inset-0 bg-negro opacity-20 rounded-lg"
-      ></div>
+      <div className="absolute inset-0 bg-negro opacity-20 rounded-lg"></div>
 
       {/* Espacio para la imagen del usuario y las estrellas */}
       <div className="relative flex flex-col text-gris bg-none justify-center -ml-16 my-12">
         <div className="flex flex-col gap-4 p-6 justify-center items-center">
           <a
             href="/"
-            class="text-left -ml-[600px] block font-inter text-base antialiased font-bold text-naranja text-inter hover:scale-105 w-1/6"
+            className="text-left -ml-[600px] block font-inter text-base antialiased font-bold text-naranja text-inter hover:scale-105 w-1/6"
           >
             🡰 Volver
           </a>
@@ -76,7 +74,7 @@ const CreateComentPage = () => {
             <div>
               <div className="flex flex-row w-full items-center mb-5 -ml-10">
                 <Avatar
-                  size="sm md:lg"
+                  size="md"
                   variant="circular"
                   src={user.image}
                   alt="tania andrew"
@@ -136,7 +134,6 @@ const CreateComentPage = () => {
 };
 
 export default CreateComentPage;
-
 
 // import { useAuth } from "auth"; // Importa el paquete de autenticación "auth"
 

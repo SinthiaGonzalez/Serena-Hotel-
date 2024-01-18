@@ -1,5 +1,7 @@
 import NavBarAdmin from "../NavBarAdmin/NavBarAdmin";
+import { useVerificarToken } from "../AutenticadorToken/autenticadorToken";
 const DashBoardAdminUsuarios = () => {
+  useVerificarToken();
   return (
     <>
       <NavBarAdmin />
@@ -9,8 +11,8 @@ const DashBoardAdminUsuarios = () => {
             <div className="mr-4 text-verde">Icono</div>
 
             <div>
-            <p className="text-verde ">Total usuarios</p>
-            <p className="text-verde font-extrabold  text-4xl">70</p>
+              <p className="text-verde ">Total usuarios</p>
+              <p className="text-verde font-extrabold  text-4xl">70</p>
             </div>
           </div>
 
@@ -18,7 +20,7 @@ const DashBoardAdminUsuarios = () => {
             <div className="mr-4 text-verde">Icono</div>
 
             <div>
-            <p className="text-verde  ">Total activos</p>
+              <p className="text-verde  ">Total activos</p>
               <p className="text-verde font-extrabold  text-4xl">40</p>
             </div>
           </div>
@@ -26,7 +28,7 @@ const DashBoardAdminUsuarios = () => {
             <div className="mr-4 text-verde">Icono</div>
 
             <div>
-            <p className="text-verde ">Total inactivos</p>
+              <p className="text-verde ">Total inactivos</p>
               <p className="text-verde font-extrabold  text-4xl">30</p>
             </div>
           </div>
