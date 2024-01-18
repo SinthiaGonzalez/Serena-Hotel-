@@ -31,7 +31,7 @@ const AdminReservasTabla = () => {
     <div className="flex flex-col items-center justify-center mt-20">
       <div className="bg-verde p-6 rounded-md">
         <h2 className="text-center text-2xl font-bold my-2">
-          Historial de Reservas
+          Historial de Reservas (Admin)
         </h2>
         <div className="p-5 rounded-md shadow-md mb-4 overflow-x-auto">
           <table className="w-full">

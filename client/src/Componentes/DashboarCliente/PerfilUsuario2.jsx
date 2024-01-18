@@ -12,7 +12,7 @@ import Paginacion from "../Paginacion/Paginacion";
 //a
 export const PerfilUsuario2 = () => {
   const dispatch = useDispatch();
-  const idUsuario = 5; // tomar el id de donde corresponda, x ejemplo: useSelector((state) => state.idUsuario)
+  const idUsuario = 11; // tomar el id de donde corresponda, x ejemplo: useSelector((state) => state.idUsuario)
   const reservasUsuario = useSelector((state) => state.reservasUsuario);
   const [paginaActual, setPaginaActual] = useState(1);
   const [itemsPerPage] = useState(5);
@@ -52,7 +52,7 @@ export const PerfilUsuario2 = () => {
     <div className="flex flex-col items-center justify-center mt-20">
       <div className="bg-verde p-6 rounded-md">
         <h2 className="text-center text-2xl font-bold my-2">
-          Historial de Reservas
+          Historial de Reservas (Usuario)
         </h2>
         <div className="p-5 rounded-md shadow-md mb-4 overflow-x-auto">
           <table className="w-full">
