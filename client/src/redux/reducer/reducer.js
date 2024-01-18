@@ -1,5 +1,6 @@
 const initialState = {
   habitaciones: [],
+  habitacionesDetail: {},
   habitacionesfiltradas: [],
   string: "",
   usuarios: [],
@@ -121,7 +122,13 @@ const reducer = (state = initialState, action) => {
     case "UPDATE_USUARIO":
       return { ...state };
       
-
+      case "DETAIL":
+        console.log('action.payload', action.payload); // Agrega este console.log para verificar los datos del payload
+        return {
+          ...state,
+          habitacionesDetail: [action.payload]
+        };
+  
     default:
       return state;
   }
