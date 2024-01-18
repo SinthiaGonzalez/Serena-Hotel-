@@ -8,7 +8,7 @@ const CardShopHabitaciones = ({
   handlerAddToCart,
   tipo,
 }) => {
-  console.log(imagenes)
+  console.log("imagen", imagenes);
   return (
     <>
       <div
