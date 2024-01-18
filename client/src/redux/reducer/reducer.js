@@ -12,7 +12,8 @@ const initialState = {
   habitacionActualizada: [],
   estadoDeLogeo: false,
   habitacionBackUp: [],
-  reservasUsuario: []
+  reservasUsuario: [],
+  token: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -37,7 +38,7 @@ const reducer = (state = initialState, action) => {
     case "GET_HABITACIONES":
       return {
         ...state,
-        habitaciones: action.payload,        
+        habitaciones: action.payload,
       };
     case "CREATE_PREFERENCE_MERCADOPAGO_ID":
       return {
@@ -120,12 +121,16 @@ const reducer = (state = initialState, action) => {
 
     case "UPDATE_USUARIO":
       return { ...state };
-    
 
     case "RESERVAS_USUARIO":
       return {
         ...state,
         reservasUsuario: action.payload,
+      };
+    case "VERIFICARTOKEN":
+      return {
+        ...state,
+        token: action.payload,
       };
     default:
       return state;

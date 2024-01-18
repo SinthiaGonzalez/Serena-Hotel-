@@ -12,7 +12,8 @@ import Paginacion from "../Paginacion/Paginacion";
 //a
 export const PerfilUsuario2 = () => {
   const dispatch = useDispatch();
-  const idUsuario = 11; // tomar el id de donde corresponda, x ejemplo: useSelector((state) => state.idUsuario)
+  const { userId } = localStorage.getItem("userId");
+  const idUsuario = userId; // tomar el id de donde corresponda, x ejemplo: useSelector((state) => state.idUsuario)
   const reservasUsuario = useSelector((state) => state.reservasUsuario);
   const [paginaActual, setPaginaActual] = useState(1);
   const [itemsPerPage] = useState(5);
@@ -69,9 +70,15 @@ export const PerfilUsuario2 = () => {
               {ReservasUsuariosPaginadas?.map((linea) => (
                 <tr className="border-b" key={linea.id_reserva}>
                   <td className="py-6 px-12 text-center">{linea.id_reserva}</td>
-                  <td className="py-6 px-12 text-center">{linea.fecha_entrada}</td>
-                  <td className="py-6 px-12 text-center">{linea.fecha_salida}</td>
-                  <td className="py-6 px-12 text-center">{linea.nombre_habitacion}</td>
+                  <td className="py-6 px-12 text-center">
+                    {linea.fecha_entrada}
+                  </td>
+                  <td className="py-6 px-12 text-center">
+                    {linea.fecha_salida}
+                  </td>
+                  <td className="py-6 px-12 text-center">
+                    {linea.nombre_habitacion}
+                  </td>
                   <td className="py-6 px-12 text-center">$ - </td>
                 </tr>
               ))}

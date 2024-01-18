@@ -76,8 +76,11 @@ export function postUsuarioGoogle(data) {
       const response = await axios.post("/usuario", data);
       if (response.status === 200 || response.status === 201) {
         const response2 = await axios.post("/login", data);
-        const { token } = response2.data;
+
+        const { token, userId, isAdmin } = response2.data;
         localStorage.setItem("token", JSON.stringify(token));
+        localStorage.setItem("userId", JSON.stringify(userId));
+        localStorage.setItem("isAdmin", JSON.stringify(isAdmin));
         console.log("Respuesta del servidor:", response2.data);
         dispatch({
           type: "POST_USUARIO_GOOGLE",
@@ -391,8 +394,11 @@ export function verificacionLogeoUsuarioAction(infoLogeo) {
   return async function () {
     try {
       const response = await axios.post("/login", infoLogeo);
-      const { token } = response.data;
+      const { token, userId, isAdmin } = response.data;
       localStorage.setItem("token", JSON.stringify(token));
+      localStorage.setItem("userId", JSON.stringify(userId));
+      localStorage.setItem("isAdmin", JSON.stringify(isAdmin));
+
       console.log("Respuesta del servidor:", response.data);
     } catch (error) {
       if (error.response && error.response.status === 400) {
@@ -416,6 +422,28 @@ export function getReservas_usuario(usuarioId) {
     } catch (error) {
       alert("Error al solicitar las Reservas por Usuario:", error);
       // console.log("Error al solicitar las Reservas por Usuario:",error);
+    }
+  };
+}
+
+export function verificarToken() {
+  return async function (dispatch) {
+    try {
+      const token = localStorage.getItem("token");
+      console.log("token", token);
+      if (token) {
+        dispatch({
+          type: "VERIFICARTOKEN",
+          payload: true,
+        });
+      } else {
+        dispatch({
+          type: "VERIFICARTOKEN",
+          payload: false,
+        });
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 }
