@@ -4,6 +4,7 @@ export function getHabitaciones() {
   return async function (dispatch) {
     try {
       const habitaciones = await axios.get("/habitaciones");
+      console.log('logdeaction', habitaciones.data);
       return dispatch({
         type: "GET_HABITACIONES",
         payload: habitaciones.data,
@@ -418,4 +419,20 @@ export function getReservas_usuario(usuarioId) {
       // console.log("Error al solicitar las Reservas por Usuario:",error);
     }
   };
+}
+
+export function DetailHabitaciones(id) {
+  return async function (dispatch){
+      try {
+        console.log('antes de action',id);
+          const response= await axios.get(`/habitaciones/${id}`);
+          console.log('logdeaction234', response.data);
+          dispatch({
+              type: "DETAIL",
+              payload: response.data
+          });
+      } catch (error) {
+          alert(error.response.data.error);
+      }
+  }
 }
