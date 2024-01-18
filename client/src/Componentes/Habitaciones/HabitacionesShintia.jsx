@@ -13,8 +13,8 @@ const HabitacionesShintia = () => {
   const dispatch = useDispatch();
   const habitacionesShop = useSelector((state) => state.habitaciones);
   useEffect(() => {
-    dispatch(getHabitaciones());
-  }, [dispatch]);
+    dispatch(getHabitaciones());  
+  }, [dispatch]); 
 
   return (
     <>

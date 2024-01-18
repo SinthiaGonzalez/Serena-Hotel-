@@ -230,25 +230,6 @@ export function getHabitacionesFiltrosPersonas({
     }
   };
 }
-export function getHabitacionesFiltrosTipos({ ordenado, direccion, tipos }) {
-  return async function (dispatch) {
-    console.log("Filtros tipos:", ordenado, direccion, tipos);
-    try {
-      if (tipos) {
-        const habitaciones = await axios.get(
-          `/ordenamientos&filtros?ordenarPor=${ordenado}&direccion=${direccion}&filtroTipos=${tipos}`
-        );
-        console.log("filtro tipos:", habitaciones.data);
-        return dispatch({
-          type: "GET_HABITACIONES_FILTROS_TIPOS",
-          payload: habitaciones.data,
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
 
 export const getReservas = ({ fecha_entrada, fecha_salida }) => {
   return async function (dispatch) {
@@ -303,12 +284,12 @@ export function getDevs() {
     }
   };
 }
-export const estadoLogeo = (estado) => {
+export function estadoLogeo(estado) {
   return {
     type: "ESTADO_LOGEO",
     payload: estado,
   };
-};
+}
 export function deleteHabitacion(id) {
   console.log({ id });
   return async function (dispatch) {
@@ -341,7 +322,7 @@ export function getHabitacionesbackup() {
   };
 }
 
-export function getUsuarios () {
+export function getUsuarios() {
   return async function (dispatch) {
     try {
       const usuarios = await axios.get("/usuarios");
@@ -355,27 +336,24 @@ export function getUsuarios () {
   };
 }
 
-
-export function updateUsuario (usuarioData, id) {
-  console.log({usuarioData, id})
+export function updateUsuario(usuarioData, id) {
+  console.log({ usuarioData, id });
   return async (dispatch) => {
-      try {
+    try {
+      const response = await axios.put(`/update/usuarios/${id}`, usuarioData);
 
-          const response = await axios.put(`/update/usuarios/${id}`, usuarioData)
-
-          console.log(response.data);
-          if (response.data=== "No se encontro el usuario") alert(response.data);
-          else alert('Usuario editado exitosamente')
-          dispatch ({
-              type:"UPDATE_USUARIO",
-              payload: response.data,
-          });
-      } catch (error) {
-          console.log(error);
-          alert(error.message);
-          
-      }
-  }
+      console.log(response.data);
+      if (response.data === "No se encontro el usuario") alert(response.data);
+      else alert("Usuario editado exitosamente");
+      dispatch({
+        type: "UPDATE_USUARIO",
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+      alert(error.message);
+    }
+  };
 }
 
 export function deleteUsuario(id) {
@@ -414,6 +392,8 @@ export function verificacionLogeoUsuarioAction(infoLogeo) {
   return async function () {
     try {
       const response = await axios.post("/login", infoLogeo);
+      const { token } = response.data;
+      localStorage.setItem("token", JSON.stringify(token));
       console.log("Respuesta del servidor:", response.data);
     } catch (error) {
       if (error.response && error.response.status === 400) {

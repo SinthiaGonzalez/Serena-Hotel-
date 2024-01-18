@@ -1,6 +1,6 @@
-const {Usuario} = require('../db.js');
-const jwt = require('jsonwebtoken');
-require('dotenv').config();
+const { Usuario } = require("../db.js");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 const loginCreateToken = async (req, res) => {
 
