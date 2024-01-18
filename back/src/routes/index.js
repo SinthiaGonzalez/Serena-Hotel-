@@ -52,6 +52,10 @@ const { deleteUsuarioHandler} = require("../handlers/HandlersUsuarios/PutAndDele
 //importamos el metodo Router de express para poder crear rutas
 const { EnvioMailNotificaciones } = require("../handlers/HandlerMailer/EnvioMailNotificaciones");
 const { RecuperarContraseña } = require("../handlers/HandlerMailer/RecuperarContraseña/RecuperarContraseña");
+const { HanlderHabitacionDetail }=require ('../handlers/HabitacionDetailHandler')
+
+
+
 const router = express.Router(); // importamos el metodo Router de express para poder crear rutas
 router.post("/login", loginCreateToken);
 
@@ -84,6 +88,7 @@ router.get("/", (req, res) => {
 router.post("/mercadopago/create_preference", CreatePreferenceMP);
 
 router.get("/habitaciones", getHabitacionHandler);
+router.get("/habitaciones/:id", HanlderHabitacionDetail )
 
 router.post("/contactenos", EnvioMailContactenos);
 router.post("/notificaciones", EnvioMailNotificaciones);
