@@ -42,7 +42,7 @@ const CrearHabitacion = () => {
         descripcion: "WIFI",
       },
     ],
-    descripcion: "Habitacion comoda",
+    descripcion: "",
     estado: "Disponible",
   });
 
@@ -230,7 +230,7 @@ const CrearHabitacion = () => {
           </div>
 
           <div className="flex flex-col items-center w-4/8">
-            <div className="block font-inter text-2xl font-bold text-blanco mb-16">
+            <div className="block font-inter text-2xl font-bold text-blanco mb-8 -mt-[80px]">
               <input
                 className="text-center text-negro"
                 type="text"
@@ -348,10 +348,21 @@ const CrearHabitacion = () => {
                 </div>
               </div>
             </div>
+            <div className="mt-10 w-full">
+              <textarea
+                className="w-full h-24 text-center pt-8"
+                name="descripcion"
+                placeholder="Descripcion"
+                value={habitacionData.descripcion}
+                onChange={handleChange}
+                onBlur={() => handleBlur("descripcion")}
+              />
+              <p>{touchedFields.descripcion && errors.descripcion}</p>
+            </div>
           </div>
 
           <div className="p-6 pt-3 flex flex-col items-center gap-4 w-2/8">
-            <p className="text-2xl font-bold text-blanco w-2/3 justify-center">
+            <p className="text-2xl font-bold text-blanco w-2/3 justify-center mt-4">
               $
               {
                 <input
@@ -376,17 +387,6 @@ const CrearHabitacion = () => {
               Crear
             </button>
           </div>
-
-          {/* <div>
-            <input
-              type="text"
-              name="descripcion"
-              placeholder="Descripcion"
-              onChange={handleChange}
-              onBlur={() => handleBlur("descripcion")}
-            />
-            <p>{touchedFields.descripcion && errors.descripcion}</p>
-          </div> */}
         </form>
       </div>
       <UpdateHabitacion />
