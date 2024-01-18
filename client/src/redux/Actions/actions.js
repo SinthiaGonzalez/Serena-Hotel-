@@ -69,18 +69,28 @@ export function postUsuario(state) {
     }
   };
 }
-export function putUsuario(state) {
+
+export function postUsuarioGoogle(data) {
   return async function (dispatch) {
     try {
-      console.log("antes de action put", state);
-      await axios.put("/login", state);
-      console.log("log de action put", state);
-      alert(" verificado exitosamente");
+      // Intentar crear o actualizar el usuario en la ruta "/usuario"
+      const response = await axios.post("/usuario", data);
+      if (response.status === 200 || response.status === 201) {
+        const response2 = await axios.post("/login", data);
+        const { token } = response2.data;
+        localStorage.setItem("token", JSON.stringify(token));
+        console.log("Respuesta del servidor:", response2.data);
+        dispatch({
+          type: "POST_USUARIO_GOOGLE",
+          payload: response2.data,
+        });
+      }
     } catch (error) {
-      alert(error);
+      console.error("Error al crear o actualizar el usuario:", error);
     }
   };
 }
+
 export function getAllcomentarios() {
   return async function (dispatch) {
     try {
@@ -274,12 +284,12 @@ export function getDevs() {
     }
   };
 }
-export const estadoLogeo = (estado) => {
+export function estadoLogeo(estado) {
   return {
     type: "ESTADO_LOGEO",
     payload: estado,
   };
-};
+}
 export function deleteHabitacion(id) {
   console.log({ id });
   return async function (dispatch) {
@@ -382,11 +392,31 @@ export function verificacionLogeoUsuarioAction(infoLogeo) {
   return async function () {
     try {
       const response = await axios.post("/login", infoLogeo);
-      const { token } = response;
-      localStorage.setItem("token", token);
+      const { token } = response.data;
+      localStorage.setItem("token", JSON.stringify(token));
       console.log("Respuesta del servidor:", response.data);
     } catch (error) {
-      console.error("Error al enviar la consulta:", error);
+      if (error.response && error.response.status === 400) {
+        alert("Usuario o contraseña incorrectos");
+      }
+    }
+  };
+}
+
+export function getReservas_usuario(usuarioId) {
+  return async function (dispatch) {
+    try {
+      // URL = "http://localhost:3001/reservas-por-usuario?id=" + usuarioId
+      const response = await axios.get("/reservas-por-usuario?id=" + usuarioId);
+      console.log("Respuesta del servidor:", response.data);
+      dispatch({
+        type: "RESERVAS_USUARIO",
+        payload: response.data,
+      });
+      //alert("Reservas del Usuario obtenidas exitosamente");
+    } catch (error) {
+      alert("Error al solicitar las Reservas por Usuario:", error);
+      // console.log("Error al solicitar las Reservas por Usuario:",error);
     }
   };
 }

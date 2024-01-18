@@ -16,6 +16,8 @@ import Contactenos from "./Componentes/Contactenos/Contactenos.jsx";
 import LoginCliente from "./Componentes/LoginCliente/LoginCliente";
 import RecuperarContraseña from "./Componentes/RecuperarContraseña/RecuperarContraseña.jsx";
 import DetailHabitacionesComponent from "../src/Componentes/DetailHabitaciones/DetailHabitaciones.jsx"
+import DashBoarAdminReservas from "./Componentes/DashboardAdminReservas/DashBoarAdminReservas.jsx";
+import DashBoarAdminUsuarios from "./Componentes/DashBoardAdminUsuarios/DashBoarAdminReservas.jsx";
 
 // Esta linea de codigo hace que por default todos los requerimientos en axios se hagan a esta ruta en el back
 // Luego nos va a servir para hacer el Deploy del front
@@ -40,6 +42,8 @@ const App = () => {
         <Route path="/recuperar-contraseña" element={<RecuperarContraseña />} />
 
         {/* Rutas Dashboard Administrador */}
+        <Route path="/admin-reservas" element={<DashBoarAdminReservas />}/>
+        <Route path="/admin-usuarios" element={<DashBoarAdminUsuarios />}/>
         <Route path="/admin-habitaciones" element={<DashBoarAdminHabitaciones />}/>
 
         {/* Rutas Dashboard Usuario */}

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { postComent } from "../../redux/Actions/actions";
-import { useVerificarToken }  from "../AutenticadorToken/autenticadorToken";
+import { useVerificarToken } from "../AutenticadorToken/autenticadorToken";
 
 import {
   Card,
@@ -17,8 +17,7 @@ const CreateComentPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-   useVerificarToken();
-
+  useVerificarToken();
 
   const handleStarHover = (value) => {
     if (rating === 0) {
@@ -59,8 +58,7 @@ const CreateComentPage = () => {
           'url("https://cf.bstatic.com/xdata/images/hotel/max1024x768/283384657.jpg?k=82f12511a23fc911e79146601860d7ae7b9839f37af39918d1312edd9d98efee&o=&hp=1")',
       }}
     >
-      <div className="absolute inset-0 bg-negro opacity-20 rounded-lg"
-      ></div>
+      <div className="absolute inset-0 bg-negro opacity-20 rounded-lg"></div>
 
       {/* Espacio para la imagen del usuario y las estrellas */}
       <div className="relative flex flex-col text-gris bg-none justify-center -ml-16 my-12">
@@ -76,7 +74,7 @@ const CreateComentPage = () => {
             <div>
               <div className="flex flex-row w-full items-center mb-5 -ml-10">
                 <Avatar
-                  size={window.innerWidth < 768 ? "sm" : "lg"}
+                  size="md"
                   variant="circular"
                   src={user.image}
                   alt="tania andrew"
@@ -137,3 +135,64 @@ const CreateComentPage = () => {
 
 export default CreateComentPage;
 
+// import { useAuth } from "auth"; // Importa el paquete de autenticación "auth"
+
+// const auth = useAuth(); // Inicializa el hook de autenticación
+
+// useEffect(() => {
+//   const unsubscribe = auth.onAuthStateChanged((user) => {
+//     if (user) {
+//       // El usuario está autenticado, puedes acceder a sus datos
+//       setUser(user);
+//     } else {
+//       // No hay usuario autenticado
+//       setUser(null);
+//     }
+//   });
+
+//   return () => unsubscribe();
+// }, [auth]);
+
+{
+  /* 
+
+          {user && (
+            <div className="flex items-center">
+              <span
+                className="text-white mr-2"
+                style={
+                  {
+                    // marginBottom: "50%",
+                    // position: "relative",
+                    // left: "50%",
+                    // transform: "translateX(-50%)",
+                  }
+                }
+              >
+                {user.name}
+              </span>
+              <img
+                src={user.image}
+                alt="Imagen de perfil"
+                className="w-10 h-10 rounded-full mr-2"
+                style={{ marginBottom: "30%" }} // Mover la imagen un poco más arriba
+              />
+              {[1, 2, 3, 4, 5].map((star) => (
+                <span
+                  key={star}
+                  className={
+                    star <= rating
+                      ? "text-naranja cursor-pointer text-4xl"
+                      : "text-gray cursor-pointer text-4xl"
+                  }
+                  onMouseEnter={() => handleStarHover(star)}
+                  onMouseLeave={() => handleStarHover(0)}
+                  onClick={() => handleStarClick(star)}
+                  style={{ marginBottom: "30%" }} // Mover las estrellas un poco más arriba
+                >
+                  {star <= rating ? "★" : "☆"}
+                </span>
+              ))}
+            </div>
+          )} */
+}

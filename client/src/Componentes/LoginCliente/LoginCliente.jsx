@@ -1,13 +1,17 @@
 import { useDispatch } from "react-redux";
 import LoginTemplate from "../Login/Login";
 import { useState } from "react";
-import { verificacionLogeoUsuarioAction } from "../../redux/Actions/actions";
-
+import {
+  estadoLogeo,
+  verificacionLogeoUsuarioAction,
+} from "../../redux/Actions/actions";
+import { useNavigate } from "react-router-dom";
+import { useVerificarToken } from "../AutenticadorToken/autenticadorToken";
 const LoginCliente = () => {
   const dispatch = useDispatch();
   const [email, setemail] = useState("");
   const [contraseña, setContraseña] = useState("");
-
+  const navigate = useNavigate();
   const handleemailChange = (event) => {
     setemail(event.target.value);
   };
@@ -18,8 +22,10 @@ const LoginCliente = () => {
 
   const handleVerificarUsuario = () => {
     dispatch(verificacionLogeoUsuarioAction({ email, contraseña }));
-  };
 
+    navigate("/");
+  };
+  useVerificarToken();
   return (
     <div
       className="relative bg-cover bg-center h-screen text-white text-center"
