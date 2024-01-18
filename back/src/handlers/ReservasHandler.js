@@ -1,4 +1,4 @@
-const { postReservas } = require("../Controladores/postReservas");
+const { postReservas } = require("../../src/Controladores/postReservas.js")
 
 const postReservasHandler = async (req, res) => {
   try {
@@ -15,5 +15,4 @@ const postReservasHandler = async (req, res) => {
     return res.status(500).json({ error: error.message });
   }
 };
-
-module.exports = { postReservasHandler};
+module.exports = { postReservasHandler }
