@@ -55,11 +55,11 @@ const { RecuperarContraseña } = require("../handlers/HandlerMailer/RecuperarCon
 const router = express.Router(); // importamos el metodo Router de express para poder crear rutas
 router.post("/login", loginCreateToken);
 
-
+//creamos una ruta para verificar el token es de prueba para ver si funciona
 router.get("/verify", verifyToken, (req, res) => {
   const userId = req.userId;
   const isAdmin = req.isAdmin;
-  
+
   console.log("userId", userId,);
   res.status(200).json({ message: "acceso correcto", userId,isAdmin});
 });
