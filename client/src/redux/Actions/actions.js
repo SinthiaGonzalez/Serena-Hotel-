@@ -73,23 +73,22 @@ export function postUsuarioGoogle(data) {
   return async function (dispatch) {
     try {
       // Intentar crear o actualizar el usuario en la ruta "/usuario"
-      const response = await axios.post("/usuario",data);
+      const response = await axios.post("/usuario", data);
       if (response.status === 200 || response.status === 201) {
-      const  response2 = await axios.post("/login", data);
-      console.log("Respuesta del servidor:", response2.data);
-      dispatch({
-        type: "POST_USUARIO_GOOGLE",
-        payload: response2.data,
-      });
+        const response2 = await axios.post("/login", data);
+        const { token } = response2.data;
+        localStorage.setItem("token", JSON.stringify(token));
+        console.log("Respuesta del servidor:", response2.data);
+        dispatch({
+          type: "POST_USUARIO_GOOGLE",
+          payload: response2.data,
+        });
       }
-    
     } catch (error) {
-    console.error("Error al crear o actualizar el usuario:", error);
+      console.error("Error al crear o actualizar el usuario:", error);
     }
   };
 }
-
-
 
 export function getAllcomentarios() {
   return async function (dispatch) {
@@ -403,21 +402,20 @@ export function verificacionLogeoUsuarioAction(infoLogeo) {
   };
 }
 
-export function getReservas_usuario(usuarioId){
+export function getReservas_usuario(usuarioId) {
   return async function (dispatch) {
-    try{          
+    try {
       // URL = "http://localhost:3001/reservas-por-usuario?id=" + usuarioId
-      const response = await axios.get("/reservas-por-usuario?id=" + usuarioId)
-      console.log("Respuesta del servidor:", response.data);   
+      const response = await axios.get("/reservas-por-usuario?id=" + usuarioId);
+      console.log("Respuesta del servidor:", response.data);
       dispatch({
         type: "RESERVAS_USUARIO",
         payload: response.data,
       });
-        //alert("Reservas del Usuario obtenidas exitosamente");   
+      //alert("Reservas del Usuario obtenidas exitosamente");
     } catch (error) {
-        alert("Error al solicitar las Reservas por Usuario:",error);
-        // console.log("Error al solicitar las Reservas por Usuario:",error);
-    }   
-  }
+      alert("Error al solicitar las Reservas por Usuario:", error);
+      // console.log("Error al solicitar las Reservas por Usuario:",error);
+    }
+  };
 }
-
