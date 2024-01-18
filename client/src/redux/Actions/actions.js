@@ -68,18 +68,29 @@ export function postUsuario(state) {
     }
   };
 }
-export function putUsuario(state) {
+
+export function postUsuarioGoogle(data) {
   return async function (dispatch) {
     try {
-      console.log("antes de action put", state);
-      await axios.put("/login", state);
-      console.log("log de action put", state);
-      alert(" verificado exitosamente");
+      // Intentar crear o actualizar el usuario en la ruta "/usuario"
+      const response = await axios.post("/usuario",data);
+      if (response.status === 200 || response.status === 201) {
+      const  response2 = await axios.post("/login", data);
+      console.log("Respuesta del servidor:", response2.data);
+      dispatch({
+        type: "POST_USUARIO_GOOGLE",
+        payload: response2.data,
+      });
+      }
+    
     } catch (error) {
-      alert(error);
+    console.error("Error al crear o actualizar el usuario:", error);
     }
   };
 }
+
+
+
 export function getAllcomentarios() {
   return async function (dispatch) {
     try {
@@ -385,7 +396,9 @@ export function verificacionLogeoUsuarioAction(infoLogeo) {
       localStorage.setItem("token", JSON.stringify(token));
       console.log("Respuesta del servidor:", response.data);
     } catch (error) {
-      console.error("Error al enviar la consulta:", error);
+      if (error.response && error.response.status === 400) {
+        alert("Usuario o contraseña incorrectos");
+      }
     }
   };
 }
