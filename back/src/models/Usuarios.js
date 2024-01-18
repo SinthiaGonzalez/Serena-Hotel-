@@ -22,7 +22,7 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       telefono: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: true,
       },
       contraseña: {
@@ -37,6 +37,11 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
         defaultValue: "activo", // "activo"|"inactivo"|"eliminado"
+      },
+      imagen:{
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: "https://res.cloudinary.com/de2jgnztx/image/upload/v1705619360/habitaciones/dsqhjd0wd9xqe9anigxj.png"
       }
     },
     {
