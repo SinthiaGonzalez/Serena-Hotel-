@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { DetailHabitaciones } from "../../redux/Actions/actions";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 const DetailHabitacionesComponent = () => {
   const { id } = useParams();
@@ -26,7 +26,12 @@ const DetailHabitacionesComponent = () => {
   console.log("log de habitacion", habitacion);
 
   return (
-    <div className="bg-black text-white min-h-screen flex items-center justify-center">
+    <div className="bg-black text-white min-h-screen flex flex-col items-center justify-center">
+    <div className="absolute top-0 left-0 p-4">
+      <Link to="/" className="text-blue-500 hover:underline">
+        &#x2190; Volver
+      </Link>
+    </div>
       {habitacion && (
         <div>
           <h2>{habitacion.nombre}</h2>

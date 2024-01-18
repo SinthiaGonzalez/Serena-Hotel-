@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 /* eslint-disable react/prop-types */
 const CardShopHabitaciones = ({
   id,
@@ -24,9 +25,9 @@ const CardShopHabitaciones = ({
         </div>
 
         <div className="flex flex-col items-center justify-center gap-6">
-          <h5 className="block font-sans text-2xl antialiased font-bold leading-snug tracking-normal text-blanco">
-            {nombre}
-          </h5>
+        <Link to={`/habitacion/${id}`} className="block font-sans text-2xl antialiased font-bold leading-snug tracking-normal text-blanco hover:underline">
+          {nombre}
+        </Link>
           <h5 className="block font-sans text-xl antialiased font-bold leading-snug tracking-normal text-blanco">
             {tipo}
           </h5>
