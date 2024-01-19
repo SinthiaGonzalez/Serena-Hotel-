@@ -12,6 +12,7 @@ import Paginacion from "../Paginacion/Paginacion";
 //a
 export const PerfilUsuario2 = () => {
   const dispatch = useDispatch();
+
   const userId = localStorage.getItem("userId");
   const idUsuario = userId; // tomar el id de donde corresponda, x ejemplo: useSelector((state) => state.idUsuario)
   console.log("idUsuario:", idUsuario);
