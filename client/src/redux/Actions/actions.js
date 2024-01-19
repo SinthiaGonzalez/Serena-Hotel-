@@ -416,6 +416,7 @@ export function verificacionLogeoUsuarioAction(infoLogeo) {
 }
 
 export function getReservas_usuario(usuarioId) {
+  console.log("usuarioId action", usuarioId);
   return async function (dispatch) {
     try {
       // URL = "http://localhost:3001/reservas-por-usuario?id=" + usuarioId
@@ -427,8 +428,13 @@ export function getReservas_usuario(usuarioId) {
       });
       //alert("Reservas del Usuario obtenidas exitosamente");
     } catch (error) {
-      alert("Error al solicitar las Reservas por Usuario:", error);
-      // console.log("Error al solicitar las Reservas por Usuario:",error);
+      // if(error.response.data === "No se encontró ninguna Reserva con el ID de Usuario proporcionado"){
+      //   alert(error.response.data);
+      // }
+       console.log("Error al solicitar las Reservas por Usuario:", error);
+       alert("El usuario no tiene Reservas", error);
+
+       console.log("Error al solicitar las Reservas por Usuario:",error);
     }
   };
 }

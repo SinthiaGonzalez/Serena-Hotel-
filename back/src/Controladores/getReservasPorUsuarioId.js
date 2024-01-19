@@ -6,13 +6,14 @@ const { Reservas, Habitaciones } = require("../db.js");
 const getReservasPorUsuarioId = async (req, res) => {
   try{    
     const { id } = req.query;  
+    console.log("id de getreservas por id",id)
     if (id){ //traigo las reservas de ese usuario
       const reservasPorUsuarioId = await Reservas.findAll({
         include: Habitaciones,
         where: { usuarioId:id } 
       });
       if (reservasPorUsuarioId == 0) {
-        throw new Error('No se encontró ninguna Reserva con el ID de Usuario proporcionado');
+        return res.status(404).json({ error: 'No se encontró ninguna Reserva con el ID de Usuario proporcionado' });
       }
       let objToResponse = []
       reservasPorUsuarioId.forEach(reserva => {
@@ -36,12 +37,13 @@ const getReservasPorUsuarioId = async (req, res) => {
         include: Habitaciones,
       });
       if (todasLasReservas == 0) {
-        throw new Error('No se encontró ninguna Reserva con el ID de Usuario proporcionado');
+        return res.status(404).json({ error: 'No se encontró ninguna Reserva' });
       }
       res.status(200).json(todasLasReservas);
     }
   } catch (error) {    
-    res.status(500).json({ error: error.message });
+    console.error("Error en getReservasPorUsuarioId:", error);
+    return res.status(500).json({ error: 'Error interno del servidor' });
   }
 };
 
