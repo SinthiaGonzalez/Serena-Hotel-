@@ -24,7 +24,7 @@ const RecuperarContraseña = () => {
         display: "flex",
       }}
     >
-      <div className="relative text-gris bg-blanco shadow-md bg-clip-border justify-center w-2/3 p-2 rounded-l-lg">
+      <div className="relative text-gris bg-blanco shadow-md bg-clip-border justify-center w-2/3 p-2 rounded-lg">
         <div className="flex flex-col gap-4 p-6 mt-8 ">
           <a
             href="/logearse"
