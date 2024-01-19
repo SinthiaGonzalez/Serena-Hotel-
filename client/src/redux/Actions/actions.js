@@ -21,7 +21,7 @@ export function getHabitacionesBusqueda(buscar) {
   };
 }
 // creamos la action que crea la preferenciaId de mercadopago
-export function createPreferenceMercadopagoId() {
+export function createPreferenceMercadopagoId(data) {
   return async function (dispatch) {
     try {
       const preference = await axios.post(
@@ -463,3 +463,44 @@ export function DetailHabitaciones(id) {
     }
   };
 }
+export const getCarrito = () => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get("/carrito");
+      dispatch({
+        type: "GET_CARRITO",
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const eliminarDelCarrito = (id) => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.delete(`/carrito/${id}`);
+      console.log("eliminarDelCarrito", response.data);
+      dispatch({
+        type: "DELETE_CARRITO",
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+export const añadirAlCarrito = (id) => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.post(`/carrito/${id}`);
+      dispatch({
+        type: "AÑADIR_AL_CARRITO",
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

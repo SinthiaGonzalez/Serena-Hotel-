@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { añadirAlCarrito } from "../../redux/Actions/actions";
 /* eslint-disable react/prop-types */
 const CardShopHabitaciones = ({
   id,
@@ -6,9 +8,13 @@ const CardShopHabitaciones = ({
   nombre,
   precio,
   servicios,
-  handlerAddToCart,
   tipo,
 }) => {
+  const dispatch = useDispatch();
+  const handlerAddToCart = () => {
+    console.log("handlerAddToCart", id);
+    dispatch(añadirAlCarrito(id));
+  };
   console.log("imagen", imagenes);
   return (
     <>
@@ -25,9 +31,12 @@ const CardShopHabitaciones = ({
         </div>
 
         <div className="flex flex-col items-center justify-center gap-6">
-        <Link to={`/habitacion/${id}`} className="block font-sans text-2xl antialiased font-bold leading-snug tracking-normal text-blanco hover:underline">
-          {nombre}
-        </Link>
+          <Link
+            to={`/habitacion/${id}`}
+            className="block font-sans text-2xl antialiased font-bold leading-snug tracking-normal text-blanco hover:underline"
+          >
+            {nombre}
+          </Link>
           <h5 className="block font-sans text-xl antialiased font-bold leading-snug tracking-normal text-blanco">
             {tipo}
           </h5>
@@ -48,7 +57,7 @@ const CardShopHabitaciones = ({
           <button
             className="block w-full mb-4 select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all  focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
             type="button"
-            onClick={() => handlerAddToCart(id)}
+            onClick={handlerAddToCart}
           >
             AÑADIR AL CARRITO
           </button>

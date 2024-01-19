@@ -2,7 +2,7 @@ const { Carrito, Habitaciones } = require("../db");
 
 const addHabitacionToCarrito = async (req, res) => {
   try {
-    const id = req.body.id;
+    const id = req.params.id;
 
     console.log("ID recibido:", id);
 
@@ -26,25 +26,60 @@ const addHabitacionToCarrito = async (req, res) => {
 
     await carrito.addHabitaciones(habitacion);
 
-    res
-      .status(200)
-      .json({ message: "Habitación añadida al carrito con éxito." });
+    res.status(200).json({
+      message: "Habitación añadida al carrito con éxito.",
+      carrito: carrito,
+      habitacion: habitacion,
+    });
   } catch (error) {
     console.error(error);
-    res
-      .status(500)
-      .json({ error: "Error al añadir la habitación al carrito." });
+    res.status(500).json({
+      error: "Error al añadir la habitación al carrito.",
+      details: error.message,
+    });
   }
 };
 const getCarrito = async (req, res) => {
   try {
     const carrito = await Carrito.findAll({
-      include: [{ model: Habitaciones }],
+      include: [{ model: Habitaciones, through: "CarritoHabitacion" }],
     });
-    res.status(200).json(carrito);
+
+    const habitacionesEnCarrito = carrito.flatMap((item) => item.Habitaciones);
+
+    res.status(200).json(habitacionesEnCarrito);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Error al obtener el carrito." });
   }
 };
-module.exports = { addHabitacionToCarrito, getCarrito };
+const deleteCarrito = async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const carrito = await Carrito.findOne({
+      include: [{ model: Habitaciones, through: "CarritoHabitacion" }],
+    });
+
+    if (!carrito) {
+      return res.status(404).json({ error: "Carrito no encontrado." });
+    }
+
+    const rowsDeleted = await carrito.removeHabitaciones([id]);
+
+    if (rowsDeleted === 0) {
+      return res
+        .status(404)
+        .json({ error: "Habitación no encontrada en el carrito." });
+    }
+
+    const habitacionesRestantes = await carrito.getHabitaciones();
+
+    res.status(200).json(habitacionesRestantes);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error al borrar del carrito." });
+  }
+};
+
+module.exports = { addHabitacionToCarrito, getCarrito, deleteCarrito };
