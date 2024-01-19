@@ -2,7 +2,11 @@ import React from "react";
 import { useEffect, useState } from "react";
 import validation from "../CrearHabitaciones/validation";
 import { useDispatch, useSelector } from "react-redux";
-import { updateHabitacion, getHabitacionesbackup,deleteHabitacion } from "../../redux/Actions/actions";
+import {
+  updateHabitacion,
+  getHabitacionesbackup,
+  deleteHabitacion,
+} from "../../redux/Actions/actions";
 import { Select, Option } from "@material-tailwind/react";
 import axios from "axios";
 
@@ -14,8 +18,11 @@ const UpdateHabitacion = () => {
   const [isEmpty, setIsEmpty] = useState(true);
   const [seleccionhabitacion, setSeleccionhabitacion] = useState("");
   const habitacionescKcup = useSelector((state) => state.habitacionBackUp);
- 
-  const habitacionesB = habitacionescKcup.map(({ id, nombre }) => ({ id, nombre }));
+
+  const habitacionesB = habitacionescKcup.map(({ id, nombre }) => ({
+    id,
+    nombre,
+  }));
 
   useEffect(() => {
     dispatch(getHabitacionesbackup());
@@ -28,41 +35,38 @@ const UpdateHabitacion = () => {
     imagenes: [],
     servicios: [
       {
-        "icono": "sensor_door",
-        "descripcion": ""
+        icono: "sensor_door",
+        descripcion: "",
       },
       {
-        "icono": "person",
-        "descripcion": ""
+        icono: "person",
+        descripcion: "",
       },
       {
-        "icono": "bed",
-        "descripcion": ""
+        icono: "bed",
+        descripcion: "",
       },
       {
-        "icono": "home",
-        "descripcion": ""
+        icono: "home",
+        descripcion: "",
       },
       {
-        "icono": "local_bar",
-        "descripcion": "Minibar"
+        icono: "local_bar",
+        descripcion: "Minibar",
       },
       {
-        "icono": "wifi",
-        "descripcion": "WIFI"
-      }
+        icono: "wifi",
+        descripcion: "WIFI",
+      },
     ],
-    descripcion: "Habitacion comoda",
-    estado: "Disponible"
+    descripcion: "",
+    estado: "Disponible",
   });
-
 
   const handlerselectHabitacion = (e) => {
     setSeleccionhabitacion(e);
-    setNuevaDataHabitacion({ ...nuevaDataHabitacion, nombreId: e })
-    
+    setNuevaDataHabitacion({ ...nuevaDataHabitacion, nombreId: e });
   };
- 
 
   const isSubmitDisabled = () => {
     // Verifica si hay algún campo obligatorio sin completar
@@ -74,7 +78,10 @@ const UpdateHabitacion = () => {
   const handleChangeServicio = (index, event) => {
     const updatedServicios = [...nuevaDataHabitacion.servicios]; // Create a copy of the servicios array
     updatedServicios[index].descripcion = event.target.value; // Update the descripcion at the specified index
-    setNuevaDataHabitacion({ ...nuevaDataHabitacion, servicios: updatedServicios }); // Update the state with the modified servicios array
+    setNuevaDataHabitacion({
+      ...nuevaDataHabitacion,
+      servicios: updatedServicios,
+    }); // Update the state with the modified servicios array
   };
 
   const handleBlur = (fieldName) => {
@@ -139,20 +146,23 @@ const UpdateHabitacion = () => {
           { icono: "local_bar", descripcion: "Minibar" },
           { icono: "wifi", descripcion: "Wifi" },
         ],
-        descripcion: '',
+        descripcion: "",
       });
     } else {
       alert("Validation errors:", errors);
     }
   };
-  const handleImageCloudinary= async (e) => {
-    const file= e.target.files[0];
+  const handleImageCloudinary = async (e) => {
+    const file = e.target.files[0];
     const data = new FormData();
-    data.append("file",file);
+    data.append("file", file);
     data.append("upload_preset", "preset serena");
 
-    const response = await axios.post("https://api.cloudinary.com/v1_1/de2jgnztx/image/upload",data)
-    if (nuevaDataHabitacion.imagenes[0]!==undefined) {
+    const response = await axios.post(
+      "https://api.cloudinary.com/v1_1/de2jgnztx/image/upload",
+      data
+    );
+    if (nuevaDataHabitacion.imagenes[0] !== undefined) {
       const nuevasImagenes = [...nuevaDataHabitacion.imagenes];
 
       // Si ya hay 4 imágenes, reemplazar la última
@@ -167,26 +177,22 @@ const UpdateHabitacion = () => {
         ...nuevaDataHabitacion,
         imagenes: nuevasImagenes,
       });
-    } else {setNuevaDataHabitacion({
-      ...nuevaDataHabitacion,
-      imagenes: [response.data.secure_url],
-    });
-  }
-  }
+    } else {
+      setNuevaDataHabitacion({
+        ...nuevaDataHabitacion,
+        imagenes: [response.data.secure_url],
+      });
+    }
+  };
 
-  const idhabitacion = habitacionesB.find(function(habitacion){
+  const idhabitacion = habitacionesB.find(function (habitacion) {
     return habitacion.nombre === seleccionhabitacion;
-  
-  })
+  });
 
-const handlerdeleteHabitacion = () => {
- dispatch(deleteHabitacion(idhabitacion.id))
- dispatch(getHabitacionesbackup());
-
-}
-
-
-
+  const handlerdeleteHabitacion = () => {
+    dispatch(deleteHabitacion(idhabitacion.id));
+    dispatch(getHabitacionesbackup());
+  };
 
   return (
     <div className="bg-verde p-8 rounded-lg mx-20 my-16">
@@ -194,9 +200,8 @@ const handlerdeleteHabitacion = () => {
         <h1 className="text-4xl font-bold mb-28">Editar Habitación</h1>
 
         <div className="w-1/2">
-
           <Select
-          selected={seleccionhabitacion}
+            selected={seleccionhabitacion}
             onChange={handlerselectHabitacion}
             size="lg"
             label="Selecciona la habitacion a Editar"
@@ -206,13 +211,12 @@ const handlerdeleteHabitacion = () => {
                 id={id}
                 key={id}
                 value={nombre}
-                className="flex items-center gap-2">
+                className="flex items-center gap-2"
+              >
                 {nombre}
               </Option>
             ))}
           </Select>
-
-
         </div>
       </div>
 
@@ -236,14 +240,14 @@ const handlerdeleteHabitacion = () => {
             ))}
           </div>
           <input
-             className="mt-2 w-full text-center text-blanco"
-             type="file"
-             accept="image/*"
-             name="imagen"
-             placeholder="Imagen URL"
-             value={nuevaDataHabitacion.imagen}
-             onChange={handleImageCloudinary}
-             onBlur={() => handleBlur("imagen")}
+            className="mt-2 w-full text-center text-blanco"
+            type="file"
+            accept="image/*"
+            name="imagen"
+            placeholder="Imagen URL"
+            value={nuevaDataHabitacion.imagen}
+            onChange={handleImageCloudinary}
+            onBlur={() => handleBlur("imagen")}
           />
           <p className="my-4">{touchedFields.imagen && errors.imagen}</p>
         </div>
@@ -269,7 +273,8 @@ const handlerdeleteHabitacion = () => {
                 </span>
                 <p className="text-blanco text-sm text-center">
                   {
-                    <select onChange={(event) => handleChangeServicio(0, event)}
+                    <select
+                      onChange={(event) => handleChangeServicio(0, event)}
                       name="select"
                       className="ml-2 p-1 rounded-md text-negro text-center w-[80px]"
                     >
@@ -290,7 +295,8 @@ const handlerdeleteHabitacion = () => {
                 </span>
                 <p className="text-blanco text-sm text-center">
                   {
-                    <select onChange={(event) => handleChangeServicio(1, event)}
+                    <select
+                      onChange={(event) => handleChangeServicio(1, event)}
                       name="select"
                       className="ml-2 p-1 rounded-md text-negro text-center w-[80px]"
                     >
@@ -303,8 +309,6 @@ const handlerdeleteHabitacion = () => {
                       <option value="4">4</option>
                       <option value="5">5</option>
                       <option value="6">6</option>
-                      <option value="7">7</option>
-                      <option value="8">8</option>
                     </select>
                   }
                 </p>
@@ -316,7 +320,8 @@ const handlerdeleteHabitacion = () => {
                 </span>
                 <p className="text-blanco text-sm text-center">
                   {
-                    <select onChange={(event) => handleChangeServicio(2, event)}
+                    <select
+                      onChange={(event) => handleChangeServicio(2, event)}
                       name="select"
                       className="ml-2 p-1 rounded-md text-negro text-center w-[80px]"
                     >
@@ -338,7 +343,8 @@ const handlerdeleteHabitacion = () => {
                 </span>
                 <p className="text-negro text-sm text-center">
                   {
-                    <input onChange={(event) => handleChangeServicio(3, event)}
+                    <input
+                      onChange={(event) => handleChangeServicio(3, event)}
                       className="text-center w-[80px] mr-2 p-1 rounded-md"
                       type="number"
                       name="m2"
@@ -363,9 +369,20 @@ const handlerdeleteHabitacion = () => {
               </div>
             </div>
           </div>
+          <div className="mt-10 w-full">
+            <textarea
+              className="w-full h-24 text-center pt-8"
+              name="descripcion"
+              placeholder="Descripcion"
+              value={nuevaDataHabitacion.descripcion}
+              onChange={handleChange}
+              onBlur={() => handleBlur("descripcion")}
+            />
+            <p>{touchedFields.descripcion && errors.descripcion}</p>
+          </div>
         </div>
 
-        <div className="p-6 pt-3 flex flex-col items-center gap-4 w-2/8">
+        <div className="p-6 pt-3 flex flex-col items-center gap-4 w-2/8 mt-20">
           <p className="text-2xl font-bold text-blanco w-2/3 justify-center">
             $
             {
@@ -384,40 +401,25 @@ const handlerdeleteHabitacion = () => {
           <p className="my-4">{touchedFields.precio && errors.precio}</p>
 
           <button
-            className="w-full mt-2 mb-4 select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-blanco transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
+            className="w-full mt-2  select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-blanco transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
             type="submit"
             disabled={isSubmitDisabled()}
           >
             Editar
           </button>
-         
-        </div>
 
-        {/* <div>
-            <input
-              type="text"
-              name="descripcion"
-              placeholder="Descripcion"
-              onChange={handleChange}
-              onBlur={() => handleBlur("descripcion")}
-            />
-            <p>{touchedFields.descripcion && errors.descripcion}</p>
-          </div> */}
-      </form>
-      <div className="flex justify-center">
-        <p>Seleccione la habitación a eliminar</p>
-      </div>
-      <div className="flex justify-center ">
-      <button
-            className="p-6 w-2/8 mt-2 mb-4 select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-blanco transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
+          <button
+            className="w-full  select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-blanco transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
             onClick={handlerdeleteHabitacion}
           >
             Eliminar
           </button>
-      </div>
-      
+          <p>Seleccione la habitación a eliminar</p>
+        </div>
+        <div className="flex justify-center"></div>
+      </form>
     </div>
-  )
+  );
 };
 
 export default UpdateHabitacion;
