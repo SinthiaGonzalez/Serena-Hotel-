@@ -21,7 +21,7 @@ export function getHabitacionesBusqueda(buscar) {
   };
 }
 // creamos la action que crea la preferenciaId de mercadopago
-export function createPreferenceMercadopagoId() {
+export function createPreferenceMercadopagoId(data) {
   return async function (dispatch) {
     try {
       const preference = await axios.post(
@@ -78,7 +78,7 @@ export function postUsuarioGoogle(data) {
       if (response.status === 200 || response.status === 201) {
         const response2 = await axios.post("/login", data);
 
-        const { token, userId, isAdmin,imagen,name } = response2.data;
+        const { token, userId, isAdmin, imagen, name } = response2.data;
         localStorage.setItem("name", JSON.stringify(name));
         localStorage.setItem("token", JSON.stringify(token));
         localStorage.setItem("userId", JSON.stringify(userId));
@@ -346,7 +346,7 @@ export function updateUsuario(usuarioData, id) {
   return async (dispatch) => {
     try {
       console.log(usuarioData);
-      id= usuarioData.id;
+      id = usuarioData.id;
       const response = await axios.put(`/update/usuarios/${id}`, usuarioData);
 
       console.log(response.data);
@@ -399,7 +399,7 @@ export function verificacionLogeoUsuarioAction(infoLogeo) {
   return async function () {
     try {
       const response = await axios.post("/login", infoLogeo);
-      const { token, userId, isAdmin,imagen,name } = response.data;
+      const { token, userId, isAdmin, imagen, name } = response.data;
       localStorage.setItem("token", JSON.stringify(token));
       localStorage.setItem("userId", JSON.stringify(userId));
       localStorage.setItem("name", JSON.stringify(name));
@@ -433,21 +433,21 @@ export function getReservas_usuario(usuarioId) {
   };
 }
 
-export function getReservas_Admin(usuarioId){
+export function getReservas_Admin(usuarioId) {
   return async function (dispatch) {
-    try{       
-      const response = await axios.get("/reservas-todas")
-      console.log("Respuesta del servidor:", response.data);   
+    try {
+      const response = await axios.get("/reservas-todas");
+      console.log("Respuesta del servidor:", response.data);
       dispatch({
         type: "RESERVAS_TODAS_ADMIN",
         payload: response.data,
       });
-        //alert("Reservas del Usuario obtenidas exitosamente");   
+      //alert("Reservas del Usuario obtenidas exitosamente");
     } catch (error) {
-        alert("Error al solicitar las Reservas por Usuario:",error);
-        // console.log("Error al solicitar las Reservas por Usuario:",error);
-    }   
-  }
+      alert("Error al solicitar las Reservas por Usuario:", error);
+      // console.log("Error al solicitar las Reservas por Usuario:",error);
+    }
+  };
 }
 export function verificarToken() {
   return async function (dispatch) {
@@ -485,4 +485,44 @@ export function DetailHabitaciones(id) {
     }
   };
 }
+export const getCarrito = () => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get("/carrito");
+      dispatch({
+        type: "GET_CARRITO",
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 
+export const eliminarDelCarrito = (id) => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.delete(`/carrito/${id}`);
+      console.log("eliminarDelCarrito", response.data);
+      dispatch({
+        type: "DELETE_CARRITO",
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+export const añadirAlCarrito = (id) => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.post(`/carrito/${id}`);
+      dispatch({
+        type: "AÑADIR_AL_CARRITO",
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

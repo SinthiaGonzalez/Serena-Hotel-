@@ -1,12 +1,18 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import ShoppingCartCard1 from "./Card-Shop-Cart";
-
 const AddShoppingCart = () => {
-  const  habitaciones  = useSelector((state) => state.carrito);
+  const carrito = useSelector((state) => state.carrito);
+
   return (
     <div>
-      {habitaciones.map((habitacion) => (
-        <ShoppingCartCard1 key={habitacion.id} habitaciones={habitacion} />
+      {carrito.map(({ imagenes, nombre, precio, id }) => (
+        <ShoppingCartCard1
+          key={id}
+          nombre={nombre}
+          precio={precio}
+          imagenes={imagenes}
+          id={id}
+        />
       ))}
     </div>
   );
