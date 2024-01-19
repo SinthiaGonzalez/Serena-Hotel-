@@ -1,8 +1,8 @@
 const Sequelize = require("sequelize");
 const { Usuario } = require("../../db");
 
-const updateUsuario = async (  id, name, apellido, email, telefono, contraseña,isadmin) => {
-        console.log("aqui", id, name, apellido, email, telefono, contraseña)
+const updateUsuario = async (  id, name, apellido, email, telefono, contraseña,isadmin, imagen) => {
+        console.log("aqui", id, name, apellido, email, telefono, contraseña, isadmin, imagen)
        
         
         let user = await Usuario.findByPk(id);
@@ -14,6 +14,7 @@ const updateUsuario = async (  id, name, apellido, email, telefono, contraseña,
           user.telefono = telefono;
           user.contraseña = contraseña;
           user.isadmin = isadmin;
+          user.imagen = imagen;
         
         await user.save();
 

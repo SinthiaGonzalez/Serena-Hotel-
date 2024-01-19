@@ -98,26 +98,6 @@ const CrearHabitacion = () => {
     setIsEmpty(false);
   };
 
-  const handleImageSubmit = () => {
-    // Verificar que haya una imagen antes de agregarla
-    if (habitacionData.imagen) {
-      const nuevasImagenes = [...habitacionData.imagenes];
-
-      // Si ya hay 4 imágenes, reemplazar la última
-      if (nuevasImagenes.length === 4) {
-        nuevasImagenes[3] = habitacionData.imagen;
-      } else {
-        // Si no hay 4 imágenes, agregar la nueva imagen al final
-        nuevasImagenes.push(habitacionData.imagen);
-      }
-
-      setHabitacionData({
-        ...habitacionData,
-        imagenes: nuevasImagenes,
-      });
-    }
-  };
-
   const handleImageRemove = (index) => {
     const nuevasImagenes = [...habitacionData.imagenes];
     nuevasImagenes.splice(index, 1);
