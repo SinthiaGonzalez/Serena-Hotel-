@@ -14,6 +14,7 @@ import "slick-carousel/slick/slick-theme.css";
 const ComentPage = () => {
   const dispatch = useDispatch();
   const comentarios = useSelector((state) => state.comentarios);
+  console.log("aca los comentarios globales ",comentarios);
 
   useEffect(() => {
     dispatch(getAllcomentarios());

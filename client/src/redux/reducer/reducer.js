@@ -14,7 +14,7 @@ const initialState = {
   estadoDeLogeo: false,
   habitacionBackUp: [],
   reservasUsuario: [],
-  reservasTodasAdmin: []
+  reservasTodasAdmin: [],
   token: false,
 };
 
@@ -139,8 +139,8 @@ const reducer = (state = initialState, action) => {
     case "RESERVAS_TODAS_ADMIN":
       return {
         ...state,
-        reservasTodasAdmin: action.payload,
-
+        reservasTodasAdmin: action.payload,};
+        
     case "VERIFICARTOKEN":
       return {
         ...state,

@@ -16,6 +16,11 @@ const CreateComentPage = () => {
   const [rating, setRating] = useState(0);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  let imagenUsuario  = localStorage.getItem("imagen");
+  imagenUsuario = imagenUsuario.replace(/^"|"$/g, '');
+  let name = localStorage.getItem("name");
+  name = name.replace(/^"|"$/g, '');
+  console.log("aca la imagen ",name)
 
   useVerificarToken();
 
@@ -32,16 +37,16 @@ const CreateComentPage = () => {
 
   // Información del usuario autenticado (simulada)
   const user = {
-    name: "Keanu",
-    image: "https://img2.rtve.es/i/?w=1600&i=1679645896852.jpg",
+    name: name,
+    image:imagenUsuario,
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const comentario = {
       imagen:
-        "https://media.tycsports.com/files/2022/06/14/440410/las-20-mejores-fotos-de-perfil-para-tu-cuenta-de-free-fire_w416.webp",
-      nombre: "juan carlos",
+       imagenUsuario,
+      nombre: name,
       contenido: e.target.comentarios.value,
       puntuacion: rating,
     };

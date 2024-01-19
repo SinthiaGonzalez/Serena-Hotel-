@@ -13,6 +13,8 @@ const verifyToken = (req,res,next) => {
 
     try{
         const decoded = jwt.verify(token,process.env.ACCES_JWT);
+        const name = decoded.name;
+        req.decoded =imagen
         req.userId = decoded.userId;
         req.isAdmin = decoded.isAdmin || false;
         next();
