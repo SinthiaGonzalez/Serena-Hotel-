@@ -14,8 +14,8 @@ const validation = (habitacionData) => {
   }
   
   
-  if (!/^.{5,}$/.test(habitacionData.descripcion)) {
-    errors.descripcion = 'La descripcion debe contener al menos 5 letras';
+  if (!/^.{50,}$/.test(habitacionData.descripcion)) {
+    errors.descripcion = 'La descripcion debe contener al menos 50 letras';
     
 }
   
