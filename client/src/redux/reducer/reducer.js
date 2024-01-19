@@ -1,6 +1,6 @@
 const initialState = {
   habitaciones: [],
-  habitacionesDetail: {},
+  habitacionesDetail: [],
   habitacionesfiltradas: [],
   string: "",
   usuarios: [],
@@ -141,8 +141,9 @@ const reducer = (state = initialState, action) => {
     case "RESERVAS_TODAS_ADMIN":
       return {
         ...state,
-        reservasTodasAdmin: action.payload,};
-        
+        reservasTodasAdmin: action.payload,
+      };
+
     case "VERIFICARTOKEN":
       return {
         ...state,
