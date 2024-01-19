@@ -78,11 +78,13 @@ export function postUsuarioGoogle(data) {
       if (response.status === 200 || response.status === 201) {
         const response2 = await axios.post("/login", data);
 
-        const { token, userId, isAdmin } = response2.data;
+        const { token, userId, isAdmin,imagen,name } = response2.data;
+        localStorage.setItem("name", JSON.stringify(name));
         localStorage.setItem("token", JSON.stringify(token));
         localStorage.setItem("userId", JSON.stringify(userId));
         localStorage.setItem("isAdmin", JSON.stringify(isAdmin));
-        console.log("Respuesta del servidor:", response2.data);
+        localStorage.setItem("imagen", JSON.stringify(imagen));
+        console.log("Respuesta del servidor con google:", response2.data);
         dispatch({
           type: "POST_USUARIO_GOOGLE",
           payload: response2.data,
@@ -340,9 +342,11 @@ export function getUsuarios() {
 }
 
 export function updateUsuario(usuarioData, id) {
-  console.log({ usuarioData, id });
+  console.log({ usuarioData });
   return async (dispatch) => {
     try {
+      console.log(usuarioData);
+      id= usuarioData.id;
       const response = await axios.put(`/update/usuarios/${id}`, usuarioData);
 
       console.log(response.data);
@@ -395,12 +399,14 @@ export function verificacionLogeoUsuarioAction(infoLogeo) {
   return async function () {
     try {
       const response = await axios.post("/login", infoLogeo);
-      const { token, userId, isAdmin } = response.data;
+      const { token, userId, isAdmin,imagen,name } = response.data;
       localStorage.setItem("token", JSON.stringify(token));
       localStorage.setItem("userId", JSON.stringify(userId));
+      localStorage.setItem("name", JSON.stringify(name));
       localStorage.setItem("isAdmin", JSON.stringify(isAdmin));
+      localStorage.setItem("imagen", JSON.stringify(imagen));
 
-      console.log("Respuesta del servidor:", response.data);
+      console.log("Respuesta del servidor manual:", response.data);
     } catch (error) {
       if (error.response && error.response.status === 400) {
         alert("Usuario o contraseña incorrectos");
@@ -410,6 +416,7 @@ export function verificacionLogeoUsuarioAction(infoLogeo) {
 }
 
 export function getReservas_usuario(usuarioId) {
+  console.log("usuarioId action", usuarioId);
   return async function (dispatch) {
     try {
       // URL = "http://localhost:3001/reservas-por-usuario?id=" + usuarioId
@@ -421,8 +428,13 @@ export function getReservas_usuario(usuarioId) {
       });
       //alert("Reservas del Usuario obtenidas exitosamente");
     } catch (error) {
-      alert("Error al solicitar las Reservas por Usuario:", error);
-      // console.log("Error al solicitar las Reservas por Usuario:",error);
+      // if(error.response.data === "No se encontró ninguna Reserva con el ID de Usuario proporcionado"){
+      //   alert(error.response.data);
+      // }
+       console.log("Error al solicitar las Reservas por Usuario:", error);
+       alert("El usuario no tiene Reservas", error);
+
+       console.log("Error al solicitar las Reservas por Usuario:",error);
     }
   };
 }

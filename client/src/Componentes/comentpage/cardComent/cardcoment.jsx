@@ -56,12 +56,12 @@ const CardComent = ({ comentario, onDelete }) => {
           size={window.innerWidth < 768 ? "sm" : "lg"}
           variant="circular"
           src={comentario.imagen}
-          alt="tania andrew"
+          alt={comentario.nombre}
         />
         <div className="flex w-full flex-col gap-0.5">
           <div className="flex items-center justify-between">
             <Typography className="text-lg md:text-2xl font-medium text-gris font-inter">
-              Tania Andrew
+             {comentario.nombre}
             </Typography>
             <div className="flex items-center gap-0">
               {renderStars(comentario.puntuacion)}
