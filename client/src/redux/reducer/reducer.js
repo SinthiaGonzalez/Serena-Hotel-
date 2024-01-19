@@ -1,6 +1,6 @@
 const initialState = {
   habitaciones: [],
-  habitacionesDetail: {},
+  habitacionesDetail: [],
   habitacionesfiltradas: [],
   string: "",
   usuarios: [],
@@ -47,11 +47,13 @@ const reducer = (state = initialState, action) => {
         ...state,
         preferenceIdMP: action.payload,
       };
-    case "ADD_TO_CART":
+    case "AÑADIR_AL_CARRITO":
       const habitacionToAdd = state.habitaciones.find(
         (habitacion) => habitacion.id === action.payload
       );
-      if (habitacionToAdd) {
+      // Verifica si la habitación ya está en el carrito
+      const isInCart = state.carrito.some((item) => item.id === action.payload);
+      if (habitacionToAdd && !isInCart) {
         return {
           ...state,
           carrito: [...state.carrito, habitacionToAdd],
@@ -139,13 +141,25 @@ const reducer = (state = initialState, action) => {
     case "RESERVAS_TODAS_ADMIN":
       return {
         ...state,
-        reservasTodasAdmin: action.payload,};
-        
+        reservasTodasAdmin: action.payload,
+      };
+
     case "VERIFICARTOKEN":
       return {
         ...state,
         token: action.payload,
       };
+    case "GET_CARRITO":
+      return {
+        ...state,
+        carrito: action.payload,
+      };
+    case "DELETE_CARRITO":
+      return {
+        ...state,
+        carrito: action.payload,
+      };
+
     default:
       return state;
   }

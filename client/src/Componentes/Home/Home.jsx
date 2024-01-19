@@ -7,7 +7,7 @@ const Home = () => {
       className="relative bg-cover bg-center h-screen text-white text-center mb-16"
       style={{
         backgroundImage:
-          'url("https://i.postimg.cc/3xxjwxft/selena-hotel-1.png")',
+          'url("https://res.cloudinary.com/dmwjn7cwr/image/upload/v1705633696/qbiqecphhjtmtxbgrznq.jpg")',
       }}
     >
       <NavBarHome />

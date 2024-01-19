@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import keanu from "../../../public/keanu.jpg";
 import { useState } from "react";
-import { useVerificarTokenPerfilNav } from "../AutenticadorToken/useVerificarTokenPerfilNav";
 import {
   Navbar,
   Collapse,
@@ -19,7 +18,7 @@ import {
 } from "@material-tailwind/react";
 import { ChevronDownIcon, Bars2Icon } from "@heroicons/react/24/solid";
 import AddShoppingCart from "../cardCarrito/cardAñadirCarrito";
-import { verificarToken } from "../../redux/Actions/actions";
+import { getCarrito, verificarToken } from "../../redux/Actions/actions";
 const profileMenuItems = [
   {
     label: "Notificaciones",
@@ -71,14 +70,18 @@ function ProfileMenu() {
           />
         </Button>
       </MenuHandler>
+
       <MenuList className="text-lg text-white bg-verde border-0 w-60 flex flex-col items-center p-1">
-        <p className="p-1 font-medium focus:outline-none">Perfil</p>
+      <p className="p-1 font-medium focus:outline-none">Perfil</p>
+        <Link to="/clientePerfil">
         <img
           className="h-36 w-36 object-cover rounded-full focus:outline-none"
           src={imagenUsuario}
           alt="https://res.cloudinary.com/de2jgnztx/image/upload/v1705619360/habitaciones/dsqhjd0wd9xqe9anigxj.png"
         />
+        </Link>
         <p className="p-1 font-medium focus:outline-none">¡Hola,{name}!</p>
+
         {profileMenuItems.map(({ label, d }, key) => {
           return (
             <MenuItem
@@ -159,10 +162,17 @@ const NavBarHome = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const toggleCart = () => {
     setIsCartOpen(!isCartOpen);
+    dispatch(getCarrito());
   };
+  const carrito = useSelector((state) => state.carrito);
+  const subtotal = carrito.reduce(
+    (total, producto) => total + producto.precio,
+    0
+  );
   // const esTokenValido = useVerificarTokenPerfilNav();
   const dispatch = useDispatch();
   const token = useSelector((state) => state.token);
+  console.log("carrito", carrito);
   React.useEffect(() => {
     dispatch(verificarToken());
   }, [dispatch]);
@@ -215,9 +225,7 @@ const NavBarHome = () => {
               />
             </svg>
           </button>
-          {token ? (
-            <ProfileMenu />
-          ) : (
+          {!token ? (
             <a
               href="/logearse"
               className="select-none rounded-lg bg-naranja py-1.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-blanco transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
@@ -225,6 +233,8 @@ const NavBarHome = () => {
             >
               INICIAR SESIÓN
             </a>
+          ) : (
+            <ProfileMenu />
           )}
         </div>
       </div>
@@ -234,7 +244,7 @@ const NavBarHome = () => {
       </Collapse>
       <div className="relative ">
         {isCartOpen && (
-          <div className="flex flex-col justify-between h-96 w-80 absolute top-12 right-0  bg-verde p-6 rounded-md shadow-md">
+          <div className="flex flex-col justify-between h-[30] w-80 absolute top-12 right-0  bg-verde p-6 rounded-md shadow-md">
             <div>
               <button
                 onClick={toggleCart}
@@ -254,10 +264,12 @@ const NavBarHome = () => {
               <p className="text-white text-xm">TUS COMPRAS</p>
             </div>
             <div className="flex flex-col gap-2">
-              <AddShoppingCart />
+              <div className="h-64 overflow-y-auto">
+                <AddShoppingCart />
+              </div>
               <div className="flex flex-row justify-between">
                 <p>Sub Total</p>
-                <p>$300</p>
+                <p>${subtotal}</p>
               </div>
               <Button
                 className="bg-naranja cursor-pointer"

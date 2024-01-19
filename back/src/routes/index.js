@@ -8,7 +8,7 @@ const {
   EliminarComentariosHandler,
 } = require("../handlers/EliminarComentaiosHandler");
 const {
-  CreateUsuario
+  CreateUsuario,
 } = require("../Controladores/controllers_Usuaruios/PostUsuario");
 const { CreatePreferenceMP } = require("../Controladores/postProductMP"); // importamos el metodo CreatePreferenceMP del archivo postProductMP.js
 
@@ -24,7 +24,9 @@ const { postHabitacionHandler } = require("../handlers/HabitacionHandler");
 const { eliminarHabitacionHandler } = require("../handlers/HabitacionHandler");
 const { postReservasHandler } = require("../handlers/ReservasHandler");
 const { getReservas } = require("../Controladores/getReservas");
-const { getReservasPorUsuarioId } = require("../Controladores/getReservasPorUsuarioId");
+const {
+  getReservasPorUsuarioId,
+} = require("../Controladores/getReservasPorUsuarioId");
 const { getReservasTodas } = require("../Controladores/getReservasTodas");
 const {
   getOrdenamientosFiltrosHandler,
@@ -48,14 +50,24 @@ const {
   getHandlerUsuarios,
 } = require("../handlers/HandlersUsuarios/GetHandlerUsuarios");
 const { updateHabitacionHandler } = require("../handlers/HabitacionHandler");
-const { putUsuarioHandler} = require("../handlers/HandlersUsuarios/PutAndDeleteUsuarios")
-const { deleteUsuarioHandler} = require("../handlers/HandlersUsuarios/PutAndDeleteUsuarios")
+const {
+  putUsuarioHandler,
+} = require("../handlers/HandlersUsuarios/PutAndDeleteUsuarios");
+const {
+  deleteUsuarioHandler,
+} = require("../handlers/HandlersUsuarios/PutAndDeleteUsuarios");
 //importamos el metodo Router de express para poder crear rutas
-const { EnvioMailNotificaciones } = require("../handlers/HandlerMailer/EnvioMailNotificaciones");
-const { RecuperarContraseña } = require("../handlers/HandlerMailer/RecuperarContraseña/RecuperarContraseña");
-const { HanlderHabitacionDetail }=require ('../handlers/HabitacionDetailHandler')
+const {
+  EnvioMailNotificaciones,
+} = require("../handlers/HandlerMailer/EnvioMailNotificaciones");
+const {
+  RecuperarContraseña,
+} = require("../handlers/HandlerMailer/RecuperarContraseña/RecuperarContraseña");
+const {
+  HanlderHabitacionDetail,
+} = require("../handlers/HabitacionDetailHandler");
 
-
+const { deleteCarrito } = require("../Controladores/carritoControlador");
 
 const router = express.Router(); // importamos el metodo Router de express para poder crear rutas
 router.post("/login", loginCreateToken);
@@ -65,8 +77,8 @@ router.get("/verify", verifyToken, (req, res) => {
   const userId = req.userId;
   const isAdmin = req.isAdmin;
 
-  console.log("userId", userId,);
-  res.status(200).json({ message: "acceso correcto", userId,isAdmin});
+  console.log("userId", userId);
+  res.status(200).json({ message: "acceso correcto", userId, isAdmin });
 });
 
 router.post("/usuario", CreateUsuario);
@@ -87,16 +99,16 @@ router.get("/", (req, res) => {
 });
 
 router.post("/mercadopago/create_preference", CreatePreferenceMP);
-
 router.get("/habitaciones", getHabitacionHandler);
-router.get("/habitaciones/:id", HanlderHabitacionDetail )
+router.get("/habitaciones/:id", HanlderHabitacionDetail);
 
 router.post("/contactenos", EnvioMailContactenos);
 router.post("/notificaciones", EnvioMailNotificaciones);
 
 router.post("/post/habitaciones", postHabitacionHandler);
 router.delete("/habitaciones/:id", eliminarHabitacionHandler);
-router.post("/carrito", addHabitacionToCarrito);
+router.delete("/carrito/:id", deleteCarrito);
+router.post("/carrito/:id", addHabitacionToCarrito);
 router.get("/carrito", getCarrito);
 router.post("/reservas", postReservasHandler);
 router.get("/reservas", getReservas);

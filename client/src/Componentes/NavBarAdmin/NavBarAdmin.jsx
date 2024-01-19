@@ -83,7 +83,7 @@ const NavBarAdmin = () => {
           HABITACIONES
         </a>
       </Typography>
-      <Typography
+      {/* <Typography
         as="li"
         variant="small"
         color="blue-gray"
@@ -124,7 +124,7 @@ const NavBarAdmin = () => {
         <a href="#" className="font-medium flex items-center">
           NOTIFICACIONES
         </a>
-      </Typography>
+      </Typography> */}
     </ul>
   );
 
