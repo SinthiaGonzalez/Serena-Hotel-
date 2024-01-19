@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import validation from "./validation.js";
 import { useDispatch, useSelector } from "react-redux";
 import { crearHabitacion } from "../../redux/Actions/actions";
-import UpdateHabitacion from "../updateHabitacion/updateHabitacion.jsx";
 import axios from "axios";
 const CrearHabitacion = () => {
   const dispatch = useDispatch();
@@ -171,8 +170,7 @@ const CrearHabitacion = () => {
     console.log("aqui2", response);
   };
   return (
-    <div className="flex flex-col justify-center items-center bg-blanco mt-16">
-      <div className="bg-verde p-8 rounded-lg mx-20">
+      <div className="bg-verde p-8 rounded-lg mx-20 mt-20">
         <h1 className="text-4xl font-bold mb-28">Crear Habitación</h1>
         <form
           className="flex flex-row gap-20 mx-2 my-10"
@@ -367,8 +365,6 @@ const CrearHabitacion = () => {
           </div>
         </form>
       </div>
-      <UpdateHabitacion />
-    </div>
   );
 };
 
