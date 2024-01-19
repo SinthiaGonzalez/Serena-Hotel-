@@ -10,9 +10,8 @@ import {
 } from "@material-tailwind/react";
 import { useNavigate } from 'react-router-dom';
 
-const CardHome = ({ nombre, precio, servicios, id  }) => {
+const CardHome = ({ nombre, precio, imagenes, servicios, id  }) => {
   const navigate = useNavigate();
-
   const handleVerClick = () => {
     navigate(`/habitacion/${id}`);
   };
@@ -21,7 +20,7 @@ const CardHome = ({ nombre, precio, servicios, id  }) => {
     <Card className="m-0 p-0 flex flex-col items-center justify-center bg-verde  w-full max-w-[28rem] ">
       <CardHeader className="bg-verde" floated={false}>
         <img
-          src="https://www.es.kayak.com/rimg/himg/25/bc/10/expediav2-620936-1621e8-274187.jpg?width=968&height=607&crop=true"
+          src={imagenes[0]}
           alt={nombre}
         />
       </CardHeader>

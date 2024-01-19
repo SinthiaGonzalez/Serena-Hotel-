@@ -29,6 +29,11 @@ const profileMenuItems = [
     d: "M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z",
   },
 ];
+let imagenUsuario  = localStorage.getItem("imagen");
+imagenUsuario = imagenUsuario.replace(/^"|"$/g, '');
+let name = localStorage.getItem("name");
+name = name.replace(/^"|"$/g, '');
+
 
 function ProfileMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -38,6 +43,10 @@ function ProfileMenu() {
     localStorage.removeItem("token");
     navigate("/logearse");
   };
+
+
+
+
   return (
     <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
       <MenuHandler>
@@ -51,7 +60,7 @@ function ProfileMenu() {
             size="sm"
             alt="tania andrew"
             className="border border-gray-900 p-0.5"
-            src={keanu}
+            src={imagenUsuario}
           />
           <ChevronDownIcon
             strokeWidth={2.5}
@@ -65,10 +74,10 @@ function ProfileMenu() {
         <p className="p-1 font-medium focus:outline-none">Perfil</p>
         <img
           className="h-36 w-36 object-cover rounded-full focus:outline-none"
-          src={keanu}
-          alt="Keanu"
+          src={imagenUsuario}
+          alt="https://res.cloudinary.com/de2jgnztx/image/upload/v1705619360/habitaciones/dsqhjd0wd9xqe9anigxj.png"
         />
-        <p className="p-1 font-medium focus:outline-none">¡Hola,Keanu!</p>
+        <p className="p-1 font-medium focus:outline-none">¡Hola,{name}!</p>
         {profileMenuItems.map(({ label, d }, key) => {
           return (
             <MenuItem

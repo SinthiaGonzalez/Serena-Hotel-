@@ -1,11 +1,11 @@
 import NavBarAdmin from "../NavBarCliente/NavBarCliente";
-import PerfilUsuario from "./PerfilUsuario";
+import UpdateUsuario from "./PerfilUsuario";
 
 const DashBoardClientePerfil = () => {
   return (
     <>
       <NavBarAdmin />
-      <PerfilUsuario />
+      <UpdateUsuario />
     </>
   );
 };

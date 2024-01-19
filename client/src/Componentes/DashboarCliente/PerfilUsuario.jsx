@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postUsuario } from "../../redux/actions/actions";
+import { updateUsuario } from "../../redux/actions/actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
@@ -8,30 +8,51 @@ import {
   faPhone,
   faLock,
 } from "@fortawesome/free-solid-svg-icons";
-
-const updateUsuario = () => {
+import axios from "axios";
+const UpdateUsuario = () => {
   const dispatch = useDispatch();
+  const userId  = localStorage.getItem("userId");
+  const isAdmin = localStorage.getItem("isAdmin");
+  console.log('aqui',userId)
+  
 
   const [user, setUser] = useState({
+    id: userId,
     name: "",
     apellido: "",
     email: "",
     telefono: "",
     contraseña: "",
+    isadmin: isAdmin,
+    imagen: ""
   });
-  const users = useSelector((state) => state.usuarios);
 
   const handleChange = (e) => {
     setUser({
       ...user,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value,    
     });
   };
 
+  const handleImageCloudinary = async (e) => {
+    const file = e.target.files[0];
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", "preset serena");
+
+    const response = await axios.post(
+      "https://api.cloudinary.com/v1_1/de2jgnztx/image/upload",
+      data
+    )
+  const url=response.data.url
+  console.log("aqui",url)
+  setUser({...user,
+   imagen:url})
+}
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await dispatch(postUsuario(user, id));
+      await dispatch(updateUsuario(user));
       // Restablecer el estado a los valores iniciales en lugar de un objeto vacío
       setUser({
         name: "",
@@ -44,7 +65,7 @@ const updateUsuario = () => {
       alert(error.message);
     }
   };
-
+ console.log("este", user)
   return (
     <div
       className="relative bg-cover bg-center text-white text-center p-8 h-screen"
@@ -63,6 +84,17 @@ const updateUsuario = () => {
         <p className="flex mt-4 font-inter text-3xl antialiased leading-normal text-center font-bold text-gris justify-center">
           Editar Usuario
         </p>
+        <div>
+        <input
+              className="mt-2 w-full text-center text-blanco"
+              type="file"
+              accept="image/*"
+              name="imagen"
+              placeholder="Imagen URL"
+              onChange={handleImageCloudinary}
+              //onBlur={() => handleBlur("imagen")}
+            />
+        </div>
         <form onSubmit={handleSubmit} className="w-2/3">
           <h2 className="text-2xl mb-4">Crear Usuario</h2>
           <div className="mb-4">
@@ -189,4 +221,4 @@ const updateUsuario = () => {
   );
 };
 
-export default updateUsuario;
+export default UpdateUsuario;
