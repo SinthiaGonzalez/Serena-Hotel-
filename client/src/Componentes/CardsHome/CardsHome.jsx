@@ -38,11 +38,11 @@ const CardsHome = () => {
       </div>
       <div className="pl-10 pr-6 py-10 bg-blanco mx-auto justify-center grid grid-cols-1 md:grid-cols-3 gap-2">
         {primerasTresHabitaciones.map(
-          ({ nombre, imagen, precio, servicios, id }) => (
+          ({ nombre, imagenes, precio, servicios, id }) => (
             <CardHome
               key={id}
               id={id}
-              imagen={imagen}
+              imagenes={imagenes}
               nombre={nombre}
               precio={precio}
               servicios={servicios}
