@@ -70,14 +70,18 @@ function ProfileMenu() {
           />
         </Button>
       </MenuHandler>
+
       <MenuList className="text-lg text-white bg-verde border-0 w-60 flex flex-col items-center p-1">
-        <p className="p-1 font-medium focus:outline-none">Perfil</p>
+      <p className="p-1 font-medium focus:outline-none">Perfil</p>
+        <Link to="/clientePerfil">
         <img
           className="h-36 w-36 object-cover rounded-full focus:outline-none"
           src={imagenUsuario}
           alt="https://res.cloudinary.com/de2jgnztx/image/upload/v1705619360/habitaciones/dsqhjd0wd9xqe9anigxj.png"
         />
+        </Link>
         <p className="p-1 font-medium focus:outline-none">¡Hola,{name}!</p>
+
         {profileMenuItems.map(({ label, d }, key) => {
           return (
             <MenuItem
