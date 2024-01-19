@@ -33,8 +33,10 @@ const loginCreateToken = async (req, res) => {
       } else {
         const userId = user.id;
         const isAdmin = user.isadmin;
-        const token = jwt.sign({ userId,isAdmin }, process.env.ACCES_JWT, { expiresIn: '1h' });
-        res.json({ message: 'Autenticación exitosa', token, userId, isAdmin });
+        const imagen = user.imagen;
+        const name = user.name;
+        const token = jwt.sign({ userId,isAdmin,imagen,name}, process.env.ACCES_JWT, { expiresIn: '1h' });
+        res.json({ message: 'Autenticación exitosa', token, userId, isAdmin, imagen,name });
       }
     } catch (error) {
       console.error('Error al crear el token', error);
