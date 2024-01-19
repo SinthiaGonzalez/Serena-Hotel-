@@ -281,9 +281,9 @@ const UpdateHabitacion = () => {
                       <option value="" selected>
                         Cuartos
                       </option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
+                      <option value="1 cuartos">1</option>
+                      <option value="2 cuartos">2</option>
+                      <option value="3 cuartos">3</option>
                     </select>
                   }{" "}
                 </p>
@@ -303,12 +303,12 @@ const UpdateHabitacion = () => {
                       <option value="" selected>
                         Personas
                       </option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
+                      <option value="1 pers">1</option>
+                      <option value="2 pers">2</option>
+                      <option value="3 pers">3</option>
+                      <option value="4 pers">4</option>
+                      <option value="5 pers">5</option>
+                      <option value="6 pers">6</option> 
                     </select>
                   }
                 </p>
