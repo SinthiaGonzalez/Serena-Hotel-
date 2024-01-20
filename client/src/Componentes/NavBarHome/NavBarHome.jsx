@@ -21,10 +21,10 @@ import AddShoppingCart from "../cardCarrito/cardAñadirCarrito";
 import { getCarrito, verificarToken } from "../../redux/Actions/actions";
 
 let imagenUsuario = localStorage.getItem("imagen");
-imagenUsuario = imagenUsuario.replace(/^"|"$/g, "");
+/*imagenUsuario = imagenUsuario.replace(/^"|"$/g, "");
 let name = localStorage.getItem("name");
 name = name.replace(/^"|"$/g, "");
-
+*/
 function ProfileMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const closeMenu = () => setIsMenuOpen(false);
