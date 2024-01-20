@@ -1,13 +1,13 @@
 import { useSelector, useDispatch } from "react-redux";
-import ShoppingCartCard1 from "./Card-Shop-Cart";
+import CardDetalleCompras from "./CardDetalleCompra";
 
-const AddShoppingCart = () => {
+const AddCardDetalleCompra = () => {
   const carrito = useSelector((state) => state.carrito);
 
   return (
     <div>
       {carrito.map(({ imagenes, nombre, precio, id }) => (
-        <ShoppingCartCard1
+        <CardDetalleCompras
           key={id}
           nombre={nombre}
           precio={precio}
@@ -19,4 +19,4 @@ const AddShoppingCart = () => {
   );
 };
 
-export default AddShoppingCart;
+export default AddCardDetalleCompra;
