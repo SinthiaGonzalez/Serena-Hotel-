@@ -58,12 +58,19 @@ export function postComent(state) {
     }
   };
 }
+
 export function postUsuario(state) {
   return async function (dispatch) {
     try {
-      await axios.post("/usuario", state);
+      const response = await axios.post("/usuario", state);
       console.log("log de action", state);
-      alert("se creo el usuario exitosamente");
+      if (response.status === 200){
+        alert("Se creo el nuevo Usuario exitosamente");
+        dispatch({
+          type: "POST_USUARIO",
+          payload: response.data,
+        });
+      }
     } catch (error) {
       alert(error);
     }
@@ -533,4 +540,16 @@ export const añadirAlCarrito = (id) => {
   };
 };
 
-
+export function cambiarEstadoUsuario(id, nuevoEstado) {
+  console.log(id, nuevoEstado)
+  return async function () {
+    try {
+      const response = await axios.put("/update/usuarioEstado", {id, nuevoEstado});
+      alert("Cambio de estado de Usuario realizado exitosamente");
+      console.log("Respuesta del servidor:", response.data);
+     // ver si es necesario dispatch aqui "POST_USUARIO",p/q actualice estado "usuarios"
+    } catch (error) {
+      console.error("Error al enviar la consulta:", error);
+    }
+  };
+}

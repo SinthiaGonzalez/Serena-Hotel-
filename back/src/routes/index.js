@@ -51,7 +51,7 @@ const {
 } = require("../handlers/HandlersUsuarios/GetHandlerUsuarios");
 const { updateHabitacionHandler } = require("../handlers/HabitacionHandler");
 const {
-  putUsuarioHandler,
+  putUsuarioHandler, putUsuarioEstadoHandler
 } = require("../handlers/HandlersUsuarios/PutAndDeleteUsuarios");
 const {
   deleteUsuarioHandler,
@@ -80,6 +80,7 @@ router.get("/verify", verifyToken, (req, res) => {
   console.log("userId", userId);
   res.status(200).json({ message: "acceso correcto", userId, isAdmin });
 });
+
 
 router.post("/usuario", CreateUsuario);
 router.get("/usuarios", getHandlerUsuarios);
@@ -119,5 +120,6 @@ router.get("/ordenamientos&filtros", getOrdenamientosFiltrosHandler);
 
 router.put("/update/habitaciones", updateHabitacionHandler);
 router.put("/update/usuarios/:id", putUsuarioHandler);
+router.put("/update/usuarioEstado", putUsuarioEstadoHandler);
 router.delete("/delete/usuarios/:id", deleteUsuarioHandler);
 module.exports = router;
