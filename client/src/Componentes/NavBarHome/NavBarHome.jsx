@@ -284,21 +284,25 @@ const NavBarHome = () => {
                 <p>Sub Total</p>
                 <p>${subtotal}</p>
               </div>
-              <Button
-                className="bg-naranja cursor-pointer"
-                size="sm"
-                color="orange"
-                variant="text"
+              <Link
+                to="/habitaciones"
+                className="bg-naranja cursor-pointer hover:scale-105 rounded-lg text-center"
               >
-                SEGUIR COMPRANDO
-              </Button>
-              <Link to="/pasareladePago">
                 <Button
-                  className="bg-naranja cursor-pointer"
+                  className="bg-naranja cursor-pointer hover:scale-105"
                   size="sm"
                   color="orange"
                   variant="text"
                 >
+                  SEGUIR COMPRANDO
+                </Button>
+              </Link>
+
+              <Link
+                to="/pasareladePago"
+                className="bg-naranja cursor-pointer hover:scale-105 rounded-lg text-center"
+              >
+                <Button size="sm" color="orange" variant="text">
                   PAGAR
                 </Button>
               </Link>
