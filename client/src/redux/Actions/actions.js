@@ -532,3 +532,5 @@ export const añadirAlCarrito = (id) => {
     }
   };
 };
+
+
