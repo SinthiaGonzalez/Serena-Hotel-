@@ -479,9 +479,9 @@ export function verificarToken() {
 export function DetailHabitaciones(id) {
   return async function (dispatch) {
     try {
-      console.log("antes de action", id);
+      // console.log("antes de action", id);
       const response = await axios.get(`/habitaciones/${id}`);
-      console.log("logdeaction234", response.data);
+      // console.log("logdeaction234", response.data);
       dispatch({
         type: "DETAIL",
         payload: response.data,

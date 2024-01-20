@@ -17,15 +17,16 @@ const CardHome = ({ nombre, precio, imagenes, servicios, id  }) => {
   };
 
   return (
-    <Card className="m-0 p-0 flex flex-col items-center justify-center bg-verde  w-full max-w-[28rem] ">
-      <CardHeader className="bg-verde" floated={false}>
+    <Card className="m-0 p-0 flex flex-col items-center justify-center bg-verde  w-full max-w-[28rem] hover:scale-105" onClick={() => handleVerClick(id)}>
+      <CardHeader className="bg-verde p-1" floated={false}>
         <img
+        className="rounded-lg"
           src={imagenes[0]}
           alt={nombre}
         />
       </CardHeader>
       <CardBody>
-        <div className="mb-3 flex items-center justify-between">
+        <div className="mb-3 flex items-center justify-center">
           <Typography className="text-blanco text-xl font-medium ">
             {nombre}
           </Typography>
