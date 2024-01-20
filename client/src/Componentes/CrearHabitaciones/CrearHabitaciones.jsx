@@ -302,6 +302,7 @@ const CrearHabitacion = () => {
                         onChange={(event) => handleChangeServicio(3, event)}
                         className="text-center w-[80px] mr-2 p-1 rounded-md"
                         type="number"
+                        min="0"
                         name="m2"
                         placeholder="m²"
                       />
