@@ -36,7 +36,7 @@ const CardsHome = () => {
           </svg>
         </div>
       </div>
-      <div className="pl-10 pr-6 py-10 bg-blanco mx-auto justify-center grid grid-cols-1 md:grid-cols-3 gap-2">
+      <div className="pl-12 pr-6 py-10 bg-blanco mx-auto justify-center grid grid-cols-1 md:grid-cols-3 gap-2">
         {primerasTresHabitaciones.map(
           ({ nombre, imagenes, precio, servicios, id }) => (
             <CardHome
