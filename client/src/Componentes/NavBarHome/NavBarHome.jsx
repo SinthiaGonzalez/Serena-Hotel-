@@ -257,7 +257,7 @@ const NavBarHome = () => {
       </Collapse>
       <div className="relative ">
         {isCartOpen && (
-          <div className="flex flex-col justify-between h-[30] w-80 absolute top-12 right-0  bg-verde p-6 rounded-md shadow-md">
+          <div className="flex flex-col justify-between h-[30] w-[350px] absolute top-12 right-0  bg-verde p-6 rounded-md shadow-md">
             <div>
               <button
                 onClick={toggleCart}
@@ -274,7 +274,7 @@ const NavBarHome = () => {
                 </svg>
               </button>
 
-              <p className="text-white text-xm">TUS COMPRAS</p>
+              <p className="text-white text-xm mb-4 -mt-3 ">TUS COMPRAS</p>
             </div>
             <div className="flex flex-col gap-2">
               <div className="h-64 overflow-y-auto">
