@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from 'sweetalert2'
 
 export function getHabitaciones() {
   return async function (dispatch) {
@@ -61,9 +62,15 @@ export function postComent(state) {
 export function postUsuario(state) {
   return async function (dispatch) {
     try {
-      await axios.post("/usuario", state);
+      const response = await axios.post("/usuario", state);
       console.log("log de action", state);
-      alert("se creo el usuario exitosamente");
+      if (response.status === 200){
+        alert("Se creo el nuevo Usuario exitosamente");
+        dispatch({
+          type: "POST_USUARIO",
+          payload: response.data,
+        });
+      }
     } catch (error) {
       alert(error);
     }
@@ -348,17 +355,16 @@ export function updateUsuario(usuarioData, id) {
       console.log(usuarioData);
       id = usuarioData.id;
       const response = await axios.put(`/update/usuarios/${id}`, usuarioData);
-
+      if (response.data === "No se encontro el usuario") Swal.fire(response,"","error");
+      else Swal.fire("Guardados!", "", "success");
       console.log(response.data);
-      if (response.data === "No se encontro el usuario") alert(response.data);
-      else alert("Usuario editado exitosamente");
       dispatch({
         type: "UPDATE_USUARIO",
         payload: response.data,
       });
     } catch (error) {
       console.log(error);
-      alert(error.message);
+      Swal.fire(error.message,"","error");
     }
   };
 }
@@ -532,3 +538,17 @@ export const añadirAlCarrito = (id) => {
     }
   };
 };
+
+export function cambiarEstadoUsuario(id, nuevoEstado) {
+  console.log(id, nuevoEstado)
+  return async function () {
+    try {
+      const response = await axios.put("/update/usuarioEstado", {id, nuevoEstado});
+      alert("Cambio de estado de Usuario realizado exitosamente");
+      console.log("Respuesta del servidor:", response.data);
+     // ver si es necesario dispatch aqui "POST_USUARIO",p/q actualice estado "usuarios"
+    } catch (error) {
+      console.error("Error al enviar la consulta:", error);
+    }
+  };
+}

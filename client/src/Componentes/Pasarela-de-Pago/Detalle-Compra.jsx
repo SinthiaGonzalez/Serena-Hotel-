@@ -11,6 +11,7 @@ const DetalledelaCompra = () => {
     (total, producto) => total + producto.precio,
     0
   );
+  const usuarioId = JSON.parse(localStorage.getItem("userId"));
   const iva = subtotal * 0.21;
   const total = subtotal + iva;
   const handlerpostMP = () => {
@@ -20,6 +21,7 @@ const DetalledelaCompra = () => {
         price: total,
         quantity: 1,
         picture_url: "https://picsum.photos/200",
+        userId: usuarioId,
       })
     );
   };

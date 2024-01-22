@@ -2,16 +2,23 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Paginacion from "../Paginacion/Paginacion";
 import { getUsuarios } from "../../redux/Actions/actions";
+import  Linea  from "./LineaTablaAdminUsuarios.jsx"
 
 const AdminUsuariosTabla = () => {
   const dispatch = useDispatch();
-  const TodosLosUsuario = useSelector((state) => state.usuarios);
+  const TodosLosUsuario = useSelector((state) => state.usuarios); 
   const [paginaActual, setPaginaActual] = useState(1);
   const [itemsPerPage] = useState(5);
 
-  useEffect(() => {
-    dispatch(getUsuarios());
+  useEffect(() => { //montado del comp.
+    dispatch(getUsuarios());    
+   
   }, []);
+
+  useEffect(() => { //actualizacion del comp.
+  console.log("Re montado del componente")
+  console.log("TodosLosUsuario LENGTH", TodosLosUsuario.length)
+  }, [TodosLosUsuario]);
 
   const handlePaginaChange = (nuevaPagina) => {
     setPaginaActual(nuevaPagina);
@@ -28,16 +35,7 @@ const AdminUsuariosTabla = () => {
     (paginaActual - 1) * itemsPerPage,
     paginaActual * itemsPerPage
   );
-
-  const [nuevoEstado, setNuevoEstado] = useState("");
-
-  const handleEstadoChange = (event, usuarioId, estadoActual) => {
-    const nuevoEstado = event.target.value;
-    if (nuevoEstado !== estadoActual) {
-      dispatch(cambiarEstadoUsuario(usuarioId, nuevoEstado));
-    }
-  };
-
+  
   return (
     <div className="flex flex-col items-center justify-center mb-8">
       <div className="border-2 border-verde h-[15%] w-[55%] rounded-3xl flex p-6 m-10">
@@ -94,41 +92,14 @@ const AdminUsuariosTabla = () => {
                 <th className="py-5 px-12 tex-center ">Id Usuario</th>
                 <th className="py-5 px-12 text-center">Nombre y Apellido</th>
                 <th className="py-5 px-12 text-center">Correo</th>
-                <th className="py-5 px-12 text-center">Teléfono</th>
-                <th className="py-5 px-12 text-center">Estado</th>
+                <th className="py-5 px-12 text-center">Telefono</th>
+                <th className="py-5 px-12 text-center">Estado</th>              
               </tr>
             </thead>
-            <tbody>
-              {UsuariosPaginados?.map((linea) => (
-                <tr className="border-b" key={linea.id_reserva}>
-                  <td className="py-6 px-12 text-center">{linea.id}</td>
-                  <td className="py-6 px-12 text-center">
-                    {linea.name + " " + linea.apellido}
-                  </td>
-                  <td className="py-6 px-12 text-center">{linea.email}</td>
-                  <td className="py-6 px-12 text-center">{linea.telefono}</td>
-                  <td className="py-6 px-12 text-center">
-                    <select
-                      key={linea.id}
-                      value={nuevoEstado || linea.estado}
-                      onChange={(e) => setNuevoEstado(e.target.value)}
-                      className={`py-2 px-4 rounded text-center ${
-                        nuevoEstado === "activo"
-                          ? "bg-green-500"
-                          : nuevoEstado === "inactivo"
-                          ? "bg-gray-500"
-                          : nuevoEstado === "eliminar"
-                          ? "bg-red-500"
-                          : ""
-                      }`}
-                    >
-                      <option value="activo" className="bg-green-500">Activo</option>
-                      <option value="inactivo" className="bg-gray-500" >Inactivo</option>
-                      <option value="eliminar" className="bg-red-500">Eliminar</option>
-                    </select>
-                  </td>
-                </tr>
-              ))}
+            <tbody>   
+                {UsuariosPaginados?.map((linea) => (
+                <Linea linea={linea} key={linea.id}/>  
+                ))}   
             </tbody>
           </table>
         </div>
@@ -145,11 +116,7 @@ const AdminUsuariosTabla = () => {
 };
 
 {
-  /* <td className="py-4 px-2 text-left">
-                      <div className="bg-green-800 text-white py-2 px-4 rounded border border-green-500 text-center">
-                        Activo
-                      </div>
-                    </td> */
+  
 }
 
 export default AdminUsuariosTabla;
