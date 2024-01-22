@@ -18,10 +18,12 @@ import RecuperarContraseña from "./Componentes/RecuperarContraseña/RecuperarCo
 import DetailHabitacionesComponent from "../src/Componentes/DetailHabitaciones/DetailHabitaciones.jsx"
 import DashBoarAdminReservas from "./Componentes/DashboardAdminReservas/DashBoarAdminReservas.jsx";
 import DashBoarAdminUsuarios from "./Componentes/DashBoardAdminUsuarios/DashBoarAdminReservas.jsx";
+import ResponseMP from "./Componentes/respuestademercadoPago/ResponseMP.jsx";
 
 // Esta linea de codigo hace que por default todos los requerimientos en axios se hagan a esta ruta en el back
 // Luego nos va a servir para hacer el Deploy del front
-axios.defaults.baseURL = "http://localhost:3001/";
+axios.defaults.baseURL = "http://localhost:3001/"; // comentarlo cuando lo suba haga el marge
+axios.defaults.baseURL = "https://serenahotel.up.railway.app/";
 
 const App = () => {
   return (
@@ -51,6 +53,9 @@ const App = () => {
         <Route path="/clientePerfil" element={<DashBoardClientePerfil />} />
         <Route path="/pasareladePago" element={<PasareladePago />} />
         <Route path="/comentar" element={<CreateComentPage />} />
+         {/*Ruta mercadopago caso de exito fallo o pendiente */}
+        <Route path="/mercadopago" element={<ResponseMP />} />
+
         {/* Ruta 404 */}
         <Route path="*" element={<Error404 />} />
       </Routes>

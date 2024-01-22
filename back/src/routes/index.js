@@ -68,6 +68,8 @@ const {
 } = require("../handlers/HabitacionDetailHandler");
 
 const { deleteCarrito } = require("../Controladores/carritoControlador");
+const  {respuestaConfirmacionPago}  = require("../Controladores/postProductMP");
+
 
 const router = express.Router(); // importamos el metodo Router de express para poder crear rutas
 router.post("/login", loginCreateToken);
@@ -100,6 +102,12 @@ router.get("/", (req, res) => {
 });
 
 router.post("/mercadopago/create_preference", CreatePreferenceMP);
+router.get("/success", (req, res) => res.send("success"));
+router.get("/failure", (req, res) => res.send("failure"));
+router.get("/pending", (req, res) => res.send("pending"));
+router.post("/confirmaciondelpago",respuestaConfirmacionPago);
+
+
 router.get("/habitaciones", getHabitacionHandler);
 router.get("/habitaciones/:id", HanlderHabitacionDetail);
 

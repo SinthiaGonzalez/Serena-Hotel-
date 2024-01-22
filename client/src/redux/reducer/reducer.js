@@ -159,7 +159,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         carrito: action.payload,
       };
-    case "POST_USUARIO":
+      case "POST_USUARIO":
       return {
         ...state,
         usuarios: action.payload,

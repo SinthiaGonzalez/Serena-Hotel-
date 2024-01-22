@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from 'sweetalert2'
 
 export function getHabitaciones() {
   return async function (dispatch) {
@@ -355,17 +356,16 @@ export function updateUsuario(usuarioData, id) {
       console.log(usuarioData);
       id = usuarioData.id;
       const response = await axios.put(`/update/usuarios/${id}`, usuarioData);
-
+      if (response.data === "No se encontro el usuario") Swal.fire(response,"","error");
+      else Swal.fire("Guardados!", "", "success");
       console.log(response.data);
-      if (response.data === "No se encontro el usuario") alert(response.data);
-      else alert("Usuario editado exitosamente");
       dispatch({
         type: "UPDATE_USUARIO",
         payload: response.data,
       });
     } catch (error) {
       console.log(error);
-      alert(error.message);
+      Swal.fire(error.message,"","error");
     }
   };
 }
@@ -553,3 +553,4 @@ export function cambiarEstadoUsuario(id, nuevoEstado) {
     }
   };
 }
+

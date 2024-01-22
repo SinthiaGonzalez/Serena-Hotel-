@@ -1,4 +1,4 @@
-const { updateUsuario, updateEstadoUsuario } = require("../../Controladores/controllers_Usuaruios/putUsuarios");
+const { updateUsuario,updateEstadoUsuario } = require("../../Controladores/controllers_Usuaruios/putUsuarios");
 const { deleteUsuario } = require("../../Controladores/controllers_Usuaruios/deleteUsuarios");
 
 const putUsuarioHandler = async (req, res) => {
@@ -25,13 +25,13 @@ const deleteUsuarioHandler = async (req, res) => {
 }
 
 const putUsuarioEstadoHandler = async (req, res) => {
-    try {   
+    try {
         const { id, nuevoEstado } = req.body;
         console.log( "log handler args PutNuevoEstadoUsuario", id, nuevoEstado)
         const respuesta = await updateEstadoUsuario(id, nuevoEstado);
         if (respuesta === "No se encontro el usuario") {
             res.status(400).json(respuesta);
-        }else{          
+        }else{
           res.status(200).json(respuesta);
         }
     } catch (error) {
@@ -41,6 +41,8 @@ const putUsuarioEstadoHandler = async (req, res) => {
 
 module.exports = {
     putUsuarioHandler,
+    deleteUsuarioHandler,
+    putUsuarioEstadoHandler
     deleteUsuarioHandler,
     putUsuarioEstadoHandler
 };
