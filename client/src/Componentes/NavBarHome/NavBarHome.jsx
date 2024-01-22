@@ -20,10 +20,6 @@ import { ChevronDownIcon, Bars2Icon } from "@heroicons/react/24/solid";
 import AddShoppingCart from "../cardCarrito/cardAñadirCarrito";
 import { getCarrito, verificarToken } from "../../redux/Actions/actions";
 
-let imagenUsuario = localStorage.getItem("imagen");
-imagenUsuario = imagenUsuario.replace(/^"|"$/g, "");
-let name = localStorage.getItem("name");
-name = name.replace(/^"|"$/g, "");
 
 function ProfileMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -31,8 +27,16 @@ function ProfileMenu() {
   const navigate = useNavigate();
   const handlerSesion = (e) => {
     localStorage.removeItem("token");
+    localStorage.removeItem("name");
+    localStorage.removeItem("imagen");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("isAdmin");
     navigate("/logearse");
   };
+const imagenUsuario = JSON.parse(localStorage.getItem("imagen"));
+const name = JSON.parse(localStorage.getItem("name"));
+
+
 
   const formattedName =
     name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
@@ -284,21 +288,25 @@ const NavBarHome = () => {
                 <p>Sub Total</p>
                 <p>${subtotal}</p>
               </div>
-              <Button
-                className="bg-naranja cursor-pointer"
-                size="sm"
-                color="orange"
-                variant="text"
+              <Link
+                to="/habitaciones"
+                className="bg-naranja cursor-pointer hover:scale-105 rounded-lg text-center"
               >
-                SEGUIR COMPRANDO
-              </Button>
-              <Link to="/pasareladePago">
                 <Button
-                  className="bg-naranja cursor-pointer"
+                  className="bg-naranja cursor-pointer hover:scale-105"
                   size="sm"
                   color="orange"
                   variant="text"
                 >
+                  SEGUIR COMPRANDO
+                </Button>
+              </Link>
+
+              <Link
+                to="/pasareladePago"
+                className="bg-naranja cursor-pointer hover:scale-105 rounded-lg text-center"
+              >
+                <Button size="sm" color="orange" variant="text">
                   PAGAR
                 </Button>
               </Link>

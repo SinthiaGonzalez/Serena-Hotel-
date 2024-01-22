@@ -12,8 +12,25 @@ const CardShopHabitaciones = ({
 }) => {
   const dispatch = useDispatch();
   const handlerAddToCart = () => {
-    console.log("handlerAddToCart", id);
-    dispatch(añadirAlCarrito(id));
+     // Verificar si hay un token en el localStorage
+     const token = localStorage.getItem('token');
+     if (!token) {
+      alert('Necesita iniciar Sesion para añadir productos al carrito');
+     }else{ console.log("handlerAddToCart", id);
+     dispatch(añadirAlCarrito(id));}
+   
+  };
+  const handlerReserva = () => {
+     // Verificar si hay un token en el localStorage
+     const token = localStorage.getItem('token');
+     if (token) {
+      dispatch(añadirAlCarrito(id));
+       window.location.href = '/pasareladePago'; 
+
+     } else {
+       alert('Necesita iniciar Sesion para Reservar');
+    
+     }
   };
   console.log("imagen", imagenes);
   return (
@@ -23,13 +40,13 @@ const CardShopHabitaciones = ({
         className="flex w-full h-60 flex-row items-center justify-between rounded-xl bg-verde bg-clip-border text-blanco"
       >
         <div className="h-44 mx-8 my-8 w-60 overflow-hidden text-white  rounded-xl bg-verde bg-clip-border  hover:scale-105">
-        <Link to={`/habitacion/${id}`}>
-          <img
-            className="w-full h-full object-cover"
-            src={imagenes[0]}
-            alt={nombre}
-          />
-           </Link>
+          <Link to={`/habitacion/${id}`}>
+            <img
+              className="w-full h-full object-cover"
+              src={imagenes[0]}
+              alt={nombre}
+            />
+          </Link>
         </div>
 
         <div className="flex flex-col items-center justify-center gap-6">
@@ -66,6 +83,7 @@ const CardShopHabitaciones = ({
           <button
             className="block w-full select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all  focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
             type="button"
+            onClick={handlerReserva}
           >
             Reserve
           </button>
