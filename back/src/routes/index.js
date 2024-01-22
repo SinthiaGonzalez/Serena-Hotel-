@@ -83,6 +83,7 @@ router.get("/verify", verifyToken, (req, res) => {
   res.status(200).json({ message: "acceso correcto", userId, isAdmin });
 });
 
+
 router.post("/usuario", CreateUsuario);
 router.get("/usuarios", getHandlerUsuarios);
 router.put("/login", LoginUsuario);

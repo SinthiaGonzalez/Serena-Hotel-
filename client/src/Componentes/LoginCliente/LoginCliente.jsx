@@ -73,7 +73,7 @@ const LoginCliente = () => {
 
             <input
               className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
-              placeholder="email"
+              placeholder="Correo"
               type="mail"
               value={email}
               onChange={handleemailChange}
@@ -97,7 +97,7 @@ const LoginCliente = () => {
             <input
               className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
               placeholder="Contraseña"
-              type="contraseña"
+              type="password"
               value={contraseña}
               onChange={handleContraseñaChange}
             />

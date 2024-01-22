@@ -4,8 +4,8 @@ const { deleteUsuario } = require("../../Controladores/controllers_Usuaruios/del
 const putUsuarioHandler = async (req, res) => {
     try {
         const { id } = req.params;
-        const { name, apellido, email, telefono, contraseña,isadmin, imagen } = req.body;
-        const respuesta = await updateUsuario(id, name, apellido, email, telefono, contraseña,isadmin, imagen);
+        const { name, apellido, email, telefono, contraseña,isadmin } = req.body;
+        const respuesta = await updateUsuario(id, name, apellido, email, telefono, contraseña,isadmin);
         if (respuesta === "No se encontro el usuario") res.status(400).json(respuesta);
         else res.status(200).json(respuesta);
     } catch (error) {
@@ -41,6 +41,8 @@ const putUsuarioEstadoHandler = async (req, res) => {
 
 module.exports = {
     putUsuarioHandler,
+    deleteUsuarioHandler,
+    putUsuarioEstadoHandler
     deleteUsuarioHandler,
     putUsuarioEstadoHandler
 };

@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import Paginacion from "../Paginacion/Paginacion";
 import { getUsuarios } from "../../redux/Actions/actions";
 import  Linea  from "./LineaTablaAdminUsuarios.jsx"
+import  Linea  from "./LineaTablaAdminUsuarios.jsx"
 
 const AdminUsuariosTabla = () => {
   const dispatch = useDispatch();
+  const TodosLosUsuario = useSelector((state) => state.usuarios); 
   const TodosLosUsuario = useSelector((state) => state.usuarios); 
   const [paginaActual, setPaginaActual] = useState(1);
   const [itemsPerPage] = useState(5);
@@ -13,7 +15,15 @@ const AdminUsuariosTabla = () => {
   useEffect(() => { //montado del comp.
     dispatch(getUsuarios());    
    
+  useEffect(() => { //montado del comp.
+    dispatch(getUsuarios());    
+   
   }, []);
+
+  useEffect(() => { //actualizacion del comp.
+  console.log("Re montado del componente")
+  console.log("TodosLosUsuario LENGTH", TodosLosUsuario.length)
+  }, [TodosLosUsuario]);
 
   useEffect(() => { //actualizacion del comp.
   console.log("Re montado del componente")
@@ -35,6 +45,7 @@ const AdminUsuariosTabla = () => {
     (paginaActual - 1) * itemsPerPage,
     paginaActual * itemsPerPage
   );
+  
   
   return (
     <div className="flex flex-col items-center justify-center mb-8">
@@ -100,6 +111,10 @@ const AdminUsuariosTabla = () => {
                 {UsuariosPaginados?.map((linea) => (
                 <Linea linea={linea} key={linea.id}/>  
                 ))}   
+            <tbody>   
+                {UsuariosPaginados?.map((linea) => (
+                <Linea linea={linea} key={linea.id}/>  
+                ))}   
             </tbody>
           </table>
         </div>
@@ -116,6 +131,7 @@ const AdminUsuariosTabla = () => {
 };
 
 {
+  
   
 }
 

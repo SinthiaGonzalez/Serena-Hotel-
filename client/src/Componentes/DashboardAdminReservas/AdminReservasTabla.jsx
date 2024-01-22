@@ -6,7 +6,6 @@ import Paginacion from "../Paginacion/Paginacion";
 const AdminReservasTabla = () => {
 
   const dispatch = useDispatch();
-  const idUsuario = 5; // tomar el id de donde corresponda, x ejemplo: useSelector((state) => state.idUsuario)
   const reservasTodasAdmin = useSelector((state) => state.reservasTodasAdmin);
   const [paginaActual, setPaginaActual] = useState(1);
   const [itemsPerPage] = useState(5);
@@ -14,9 +13,9 @@ const AdminReservasTabla = () => {
 
   useEffect(() => {
     dispatch(
-      getReservas_Admin(idUsuario, { page: paginaActual, itemsPerPage })
+      getReservas_Admin({ page: paginaActual, itemsPerPage })
     );
-  }, [dispatch, idUsuario, paginaActual, itemsPerPage]);
+  }, [dispatch, paginaActual, itemsPerPage]);
 
   const handlePaginaChange = (nuevaPagina) => {
     setPaginaActual(nuevaPagina);

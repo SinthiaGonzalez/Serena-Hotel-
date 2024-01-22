@@ -32,9 +32,8 @@ const updateUsuario = async (id, name, apellido, email, telefono, contraseña, i
 
   await user.save();
 
-  return user;
-
-
+        return user;       
+      
 };
 
 

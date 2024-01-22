@@ -39,18 +39,20 @@ const CardShopHabitaciones = ({
         key={id}
         className="flex w-full h-60 flex-row items-center justify-between rounded-xl bg-verde bg-clip-border text-blanco"
       >
-        <div className="h-44 mx-8 my-8 w-60 overflow-hidden text-white  rounded-xl bg-verde bg-clip-border">
-          <img
-            className="w-full h-full object-cover"
-            src={imagenes[0]}
-            alt={nombre}
-          />
+        <div className="h-44 mx-8 my-8 w-60 overflow-hidden text-white  rounded-xl bg-verde bg-clip-border  hover:scale-105">
+          <Link to={`/habitacion/${id}`}>
+            <img
+              className="w-full h-full object-cover"
+              src={imagenes[0]}
+              alt={nombre}
+            />
+          </Link>
         </div>
 
         <div className="flex flex-col items-center justify-center gap-6">
           <Link
             to={`/habitacion/${id}`}
-            className="block font-sans text-2xl antialiased font-bold leading-snug tracking-normal text-blanco hover:underline"
+            className="block font-sans text-2xl antialiased font-bold leading-snug tracking-normal text-blanco hover:scale-105"
           >
             {nombre}
           </Link>

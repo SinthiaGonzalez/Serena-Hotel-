@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 import { useDispatch } from "react-redux";
 import { eliminarDelCarrito } from "../../redux/Actions/actions";
+
 const ShoppingCartCard1 = ({ imagenes, nombre, precio, id }) => {
   const dispatch = useDispatch();
   const eliminarHabitacion = () => {
@@ -11,27 +12,30 @@ const ShoppingCartCard1 = ({ imagenes, nombre, precio, id }) => {
     return <div>loading...</div>;
   }
   return (
-    <div className="max-w-md mx-auto bg-naranja rounded-md overflow-hidden shadow-md flex mb-4">
-      <div style={{ width: "70%" }} className="flex items-center space-x-4">
-        <img
-          src={imagenes}
-          alt="imagen"
-          className="w-2/3 h-20 ml-3 object-cover rounded-md"
-        />
-        <h5 className="mb-2 text-white text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl">
+    <div className="bg-naranja rounded-md overflow-hidden shadow-md mb-4 mr-2">
+      <div className="felx-col p-2">
+        <h5 className="text-white text-center text-inter text-xs sm:text-sm md:text-base lg:text-lg xl:text-lg">
           {nombre}
         </h5>
-      </div>
-
-      <div className="p-4 flex flex-col items-end justify-between w-1/3">
-        <p className="text-white-700 ">${precio}</p>
-        <div>
-          <button
-            className="bg-red-500 text-white p-2 mt-2 hover:bg-red-600 transition duration-300"
-            onClick={eliminarHabitacion}
-          >
-            <FontAwesomeIcon icon={faTrashAlt} className="mr-2" />
-          </button>
+        <div className="flex flex-row items-center p-1">
+          <img
+            src={imagenes}
+            alt="imagen"
+            className="h-20 ml-3 object-cover rounded-md w-1/2"
+          />
+          <div className="flex flex-col items-center w-1/2">
+            <p className="text-white-700 text-inter text-xl font-bold">
+              ${precio}
+            </p>
+            <div>
+              <button
+                className="bg-red-500 text-white px-8 py-2 mt-2 hover:bg-red-600 transition duration-300"
+                onClick={eliminarHabitacion}
+              >
+                <FontAwesomeIcon icon={faTrashAlt} />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
