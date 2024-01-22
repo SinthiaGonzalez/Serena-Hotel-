@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { postUsuario } from "../../redux/actions/actions";
+import { postUsuario } from "../../redux/actions/actions.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
