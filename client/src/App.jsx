@@ -5,7 +5,7 @@ import CreateComentPage from "./Componentes/CreateComentario/CreateComentario.js
 import Error404 from "./Componentes/Error 404/Error404.jsx";
 import { Route, Routes } from "react-router-dom";
 import CreateUsuario from "../src/Componentes/CreateUsuario/createUsuario.jsx";
-import Habitaciones from "./Componentes/Habitaciones/Habitaciones.jsx";
+import Habitaciones from "./Componentes/Habitaciones/Habitaciones2.jsx";
 import PasareladePago from "./Componentes/Pasarela-de-Pago/PasareladePago.jsx";
 import axios from "axios";
 import AcercaDeSerena from "./Componentes/AcercaDeSerena/AcercaDeSerena.jsx";
@@ -15,7 +15,7 @@ import DashBoarAdminHabitaciones from "./Componentes/DashBoarAdminHabitaciones/D
 import Contactenos from "./Componentes/Contactenos/Contactenos.jsx";
 import LoginCliente from "./Componentes/LoginCliente/LoginCliente";
 import RecuperarContraseña from "./Componentes/RecuperarContraseña/RecuperarContraseña.jsx";
-import DetailHabitacionesComponent from "../src/Componentes/DetailHabitaciones/DetailHabitaciones.jsx"
+import DetailHabitacionesComponent from "../src/Componentes/DetailHabitaciones/DetailHabitaciones.jsx";
 import DashBoarAdminReservas from "./Componentes/DashboardAdminReservas/DashBoarAdminReservas.jsx";
 import DashBoarAdminUsuarios from "./Componentes/DashBoardAdminUsuarios/DashBoarAdminReservas.jsx";
 
@@ -29,9 +29,12 @@ const App = () => {
       <Routes>
         {/* Rutas de la Navbar Home y Creacion de Comentarios*/}
         <Route path="/" element={<LandingPage />} />
-        <Route path="/habitacion/:id" element={< DetailHabitacionesComponent />} />
+        <Route
+          path="/habitacion/:id"
+          element={<DetailHabitacionesComponent />}
+        />
         <Route path="/habitaciones" element={<Habitaciones />} />
-        
+
         <Route path="/acercadeserena" element={<AcercaDeSerena />} />
         <Route path="/contactenos" element={<Contactenos />} />
         <Route path="/comentarios" element={<ComentPage />} />
@@ -42,9 +45,12 @@ const App = () => {
         <Route path="/recuperar-contraseña" element={<RecuperarContraseña />} />
 
         {/* Rutas Dashboard Administrador */}
-        <Route path="/admin-reservas" element={<DashBoarAdminReservas />}/>
-        <Route path="/admin-usuarios" element={<DashBoarAdminUsuarios />}/>
-        <Route path="/admin-habitaciones" element={<DashBoarAdminHabitaciones />}/>
+        <Route path="/admin-reservas" element={<DashBoarAdminReservas />} />
+        <Route path="/admin-usuarios" element={<DashBoarAdminUsuarios />} />
+        <Route
+          path="/admin-habitaciones"
+          element={<DashBoarAdminHabitaciones />}
+        />
 
         {/* Rutas Dashboard Usuario */}
         <Route path="/clienteReservas" element={<DashBoardClienteReservas />} />

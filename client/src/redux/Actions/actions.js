@@ -172,13 +172,14 @@ export function crearHabitacion(habitacionData) {
 
 export function getHabitacionesNombre({
   direccion,
-  filtros,
+  filtrosPersonas,
+  filtrosCuarto,
   tipoOrdenamiento,
 }) {
   return async function (dispatch) {
     try {
       const habitaciones = await axios.get(
-        `/ordenamientos&filtros?ordenarPor=${tipoOrdenamiento}&direccion=${direccion}&filtroPersonas=${filtros}`
+        `/ordenamientos&filtros?ordenarPor=${tipoOrdenamiento}&direccion=${direccion}&filtroPersonas=${filtrosPersonas}&filtroCuarto=${filtrosCuarto}`
       );
       console.log("Aquí está la respuesta de la API:", habitaciones.data);
       return dispatch({
@@ -193,13 +194,14 @@ export function getHabitacionesNombre({
 
 export function getHabitacionesPrecio({
   direccion,
-  filtros,
+  filtrosPersonas,
+  filtrosCuarto,
   tipoOrdenamiento,
 }) {
   return async function (dispatch) {
     try {
       const habitaciones = await axios.get(
-        `/ordenamientos&filtros?ordenarPor=${tipoOrdenamiento}&direccion=${direccion}&filtroPersonas=${filtros}`
+        `/ordenamientos&filtros?ordenarPor=${tipoOrdenamiento}&direccion=${direccion}&filtroPersonas=${filtrosPersonas}&filtroCuarto=${filtrosCuarto}`
       );
       console.log("Aquí está la respuesta de la API:", habitaciones.data);
       return dispatch({
@@ -215,14 +217,20 @@ export function getHabitacionesFiltrosPersonas({
   ordenado,
   direccion,
   personas,
-  tipos,
+  filtroCuarto,
 }) {
   return async function (dispatch) {
-    console.log("Filtros Personas:", ordenado, direccion, personas, tipos);
+    console.log(
+      "Filtros Personas:",
+      ordenado,
+      direccion,
+      personas,
+      filtroCuarto
+    );
     try {
       if (personas) {
         const habitaciones = await axios.get(
-          `/ordenamientos&filtros?ordenarPor=${ordenado}&direccion=${direccion}&filtroPersonas=${personas}&filtrosTipos=${tipos}`
+          `/ordenamientos&filtros?ordenarPor=${ordenado}&direccion=${direccion}&filtroPersonas=${personas}&filtroCuarto=${filtroCuarto}`
         );
         console.log("filtro personas:", habitaciones.data);
         return dispatch({
