@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from 'sweetalert2'
 
 export function getHabitaciones() {
   return async function (dispatch) {
@@ -52,9 +53,9 @@ export function postComent(state) {
   return async function (dispatch) {
     try {
       await axios.post("/comentar", state);
-      alert("se añadió el comentario exitosamente");
+      Swal.fire("Se agrego el comentario exitosamente!", "", "success");
     } catch (error) {
-      alert(error);
+      Swal.fire(error.message,"","error");
     }
   };
 }
@@ -63,9 +64,9 @@ export function postUsuario(state) {
     try {
       await axios.post("/usuario", state);
       console.log("log de action", state);
-      alert("se creo el usuario exitosamente");
+      Swal.fire("Usuario creado exitosamente!", "", "success");
     } catch (error) {
-      alert(error);
+      Swal.fire(error.message,"","error");
     }
   };
 }
@@ -107,7 +108,7 @@ export function getAllcomentarios() {
         });
       }
     } catch (error) {
-      alert(error.message);
+      Swal.fire(error.message,"","error");
     }
   };
 }
@@ -122,10 +123,10 @@ export function eliminarComentario(id) {
           type: "ELIMINAR_COMENTARIO",
           payload: id,
         });
-        alert("Comentario eliminado exitosamente");
+        Swal.fire("Comentario eliminado exitosamente!", "", "success");
       }
     } catch (error) {
-      alert(error.message);
+      Swal.fire(error.message,"","error");
     }
   };
 }
@@ -158,14 +159,14 @@ export function crearHabitacion(habitacionData) {
     try {
       const response = await axios.post("/post/habitaciones", habitacionData);
       console.log(response.data);
-      alert("Creado con exito");
+      Swal.fire("Habitacion creada exitosamente!", "", "success");
       dispatch({
         type: "CREAR_HABITACION",
         payload: response.data,
       });
     } catch (error) {
       console.log(error);
-      alert(error.message);
+      Swal.fire(error.message,"","error");
     }
   };
 }
@@ -259,14 +260,14 @@ export function updateHabitacion(habitacionData) {
       const response = await axios.put("/update/habitaciones", habitacionData);
 
       console.log(response.data);
-      alert("Habitacion actualizada con exito");
+      Swal.fire("Habitacion editada exitosamente!", "", "success");
       dispatch({
         type: "UPDATE_HABITACION",
         payload: response.data,
       });
     } catch (error) {
       console.log(error);
-      alert(error.message);
+      Swal.fire(error.message,"","error");
     }
   };
 }
@@ -281,10 +282,7 @@ export function getDevs() {
         payload: response.data,
       });
     } catch (error) {
-      alert(
-        "Hubo un problema con el servidor. Comuniquese con el Administrador - Error: " +
-          error
-      );
+      Swal.fire(error.message,"Hubo un problema con el servidor. Comuniquese con el Administrador","error")
       return;
     }
   };
@@ -306,10 +304,10 @@ export function deleteHabitacion(id) {
           type: "DELETE_HABITACION",
           payload: id,
         });
-        alert("Habitacion eliminada exitosamente");
+        Swal.fire("Habitacion eliminada exitosamente!", "", "success");
       }
     } catch (error) {
-      alert(error.message);
+      Swal.fire(error.message,"","error");
     }
   };
 }
@@ -348,17 +346,16 @@ export function updateUsuario(usuarioData, id) {
       console.log(usuarioData);
       id = usuarioData.id;
       const response = await axios.put(`/update/usuarios/${id}`, usuarioData);
-
+      if (response.data === "No se encontro el usuario") Swal.fire(response,"","error");
+      else Swal.fire("Guardados!", "", "success");
       console.log(response.data);
-      if (response.data === "No se encontro el usuario") alert(response.data);
-      else alert("Usuario editado exitosamente");
       dispatch({
         type: "UPDATE_USUARIO",
         payload: response.data,
       });
     } catch (error) {
       console.log(error);
-      alert(error.message);
+      Swal.fire(error.message,"","error");
     }
   };
 }
@@ -369,16 +366,16 @@ export function deleteUsuario(id) {
     try {
       const response = await axios.delete(`/delete/usuarios/${id}`);
       if (response.data === "No se encontro el usuario") {
-        alert(response.data);
+        Swal.fire("No se encontro el usuario","","error");
       } else {
         dispatch({
           type: "DELETE_USUARIO",
           payload: id,
         });
-        alert("Usuario eliminado exitosamente");
+        Swal.fire("Usuario eliminado exitosamente!", "", "success");
       }
     } catch (error) {
-      alert(error.message);
+      Swal.fire(error.message,"","error");
     }
   };
 }
@@ -409,7 +406,7 @@ export function verificacionLogeoUsuarioAction(infoLogeo) {
       console.log("Respuesta del servidor manual:", response.data);
     } catch (error) {
       if (error.response && error.response.status === 400) {
-        alert("Usuario o contraseña incorrectos");
+         Swal.fire(error.message,"Usuario o contraseña incorrectos","error");
       }
     }
   };
@@ -432,7 +429,7 @@ export function getReservas_usuario(usuarioId) {
       //   alert(error.response.data);
       // }
        console.log("Error al solicitar las Reservas por Usuario:", error);
-       alert("El usuario no tiene Reservas", error);
+       Swal.fire("El usuario no tiene reservas!", "", "error");
 
        console.log("Error al solicitar las Reservas por Usuario:",error);
     }
@@ -450,7 +447,7 @@ export function getReservas_Admin(usuarioId) {
       });
       //alert("Reservas del Usuario obtenidas exitosamente");
     } catch (error) {
-      alert("Error al solicitar las Reservas por Usuario:", error);
+      Swal.fire("Error al solicitar las Reservas por Usuario", "", "error");
       // console.log("Error al solicitar las Reservas por Usuario:",error);
     }
   };
@@ -487,7 +484,7 @@ export function DetailHabitaciones(id) {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.response.data.error);
+      Swal.fire(error.response.data.error, "", "error");
     }
   };
 }

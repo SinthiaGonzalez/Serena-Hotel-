@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { añadirAlCarrito } from "../../redux/Actions/actions";
+import Swal from 'sweetalert2'
 /* eslint-disable react/prop-types */
 const CardShopHabitaciones = ({
   id,
@@ -14,8 +15,26 @@ const CardShopHabitaciones = ({
   const handlerAddToCart = () => {
     console.log("handlerAddToCart", id);
     dispatch(añadirAlCarrito(id));
+    notificacion();
   };
   console.log("imagen", imagenes);
+const notificacion = () => {
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    }
+  });
+  Toast.fire({
+    icon: "success",
+    title: "Agregado al carrito"
+  });
+}
   return (
     <>
       <div

@@ -30,11 +30,9 @@ const profileMenuItems = [
   },
 ];
 
-let imagenUsuario  = localStorage.getItem("imagen");
-imagenUsuario = imagenUsuario.replace(/^"|"$/g, '');
-let name = localStorage.getItem("name");
-name = name.replace(/^"|"$/g, '');
-if (!imagenUsuario) imagenUsuario = keanu;
+const imagenUsuario = JSON.parse(localStorage.getItem("imagen"));
+const name = JSON.parse(localStorage.getItem("name"));
+
 
 
 
@@ -45,6 +43,10 @@ function ProfileMenu() {
   const navigate = useNavigate();
   const handlerSesion = (e) => {
     localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("imagen");
+    localStorage.removeItem("name");
+    localStorage.removeItem("isAdmin");
     navigate("/logearse");
   };
 
