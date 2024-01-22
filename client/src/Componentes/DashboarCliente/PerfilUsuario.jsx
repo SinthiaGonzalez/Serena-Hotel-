@@ -9,14 +9,13 @@ import {
   faLock,
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 
 const UpdateUsuario = () => {
   const dispatch = useDispatch();
-  const userId  = localStorage.getItem("userId");
+  const userId = localStorage.getItem("userId");
   const isAdmin = localStorage.getItem("isAdmin");
-  console.log('aqui',userId)
-  
+  console.log("aqui", userId);
 
   const [user, setUser] = useState({
     id: userId,
@@ -26,13 +25,13 @@ const UpdateUsuario = () => {
     telefono: "",
     contraseña: "",
     isadmin: isAdmin,
-    imagen: ""
+    imagen: "",
   });
 
   const handleChange = (e) => {
     setUser({
       ...user,
-      [e.target.name]: e.target.value,    
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -45,17 +44,15 @@ const UpdateUsuario = () => {
     const response = await axios.post(
       "https://api.cloudinary.com/v1_1/de2jgnztx/image/upload",
       data
-    )
-  const url=response.data.url
-  console.log("aqui",url)
-  setUser({...user,
-   imagen:url})
-}
+    );
+    const url = response.data.url;
+    console.log("aqui", url);
+    setUser({ ...user, imagen: url });
+  };
 
-const deleteImage = () => {
-  setUser({...user,
-    imagen:""})
-}
+  const deleteImage = () => {
+    setUser({ ...user, imagen: "" });
+  };
   const handleSubmit = async (e) => {
     try {
       await dispatch(updateUsuario(user));
@@ -68,31 +65,31 @@ const deleteImage = () => {
         telefono: "",
         contraseña: "",
         isadmin: isAdmin,
-        imagen: ""
+        imagen: "",
       });
     } catch (error) {
       alert(error.message);
     }
   };
- console.log("este", user)
+  console.log("este", user);
 
- const confirmacion = () =>{
-  Swal.fire({
-    title: "Quieres guardar los cambios?",
-    showDenyButton: true,
-    confirmButtonText: "Guardar",
-    denyButtonText: `No guardar`,
-    confirmButtonColor: "#FB350C",
-    denyButtonColor: "#322F2C",
-  }).then(async (result) => {
-    /* Read more about isConfirmed, isDenied below */
-    if (result.isConfirmed) {
-      handleSubmit();
-    } else if (result.isDenied) {
-      Swal.fire("No se guardaron los cambios", "", "info");
-    }
-  });
- }
+  const confirmacion = () => {
+    Swal.fire({
+      title: "Quieres guardar los cambios?",
+      showDenyButton: true,
+      confirmButtonText: "Guardar",
+      denyButtonText: " No guardar",
+      confirmButtonColor: "#FB350C",
+      denyButtonColor: "#322F2C",
+    }).then(async (result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        handleSubmit();
+      } else if (result.isDenied) {
+        Swal.fire("No se guardaron los cambios", "", "info");
+      }
+    });
+  };
   return (
     <div
       className="relative bg-cover bg-center text-white text-center p-8 h-screen"
@@ -105,30 +102,30 @@ const deleteImage = () => {
         <p className="flex mt-4 font-inter text-3xl antialiased leading-normal text-center font-bold text-gris justify-center">
           Editar Usuario
         </p>
-        <div>
-        <input
-              className="mt-2 w-full text-center text-blanco"
-              type="file"
-              accept="image/*"
-              name="imagen"
-              placeholder="Imagen URL"
-              onChange={handleImageCloudinary}
-              //onBlur={() => handleBlur("imagen")}
-            />
-        </div>
         <div className="relative">
-                  <img
-                    className="h-36 w-36 object-cover rounded-xl mb-4"
-                    src={user.imagen}
-                    alt={`Imagen`}
-                  />
-                  <button
-                    className="material-symbols-outlined absolute w-36 h-36 top-0 left-0 right-0 bottom-0 text-white opacity-0 hover:opacity-90 transition-opacity"
-                    onClick={deleteImage}
-                  >
-                    Delete
-                  </button>
-                </div>
+          <img
+            className="h-36 w-36 object-cover rounded-xl mb-4"
+            src={user.imagen}
+            alt="Imagen de perfil"
+          />
+          <button
+            className="material-symbols-outlined absolute w-36 h-36 top-0 left-0 right-0 bottom-0 text-white opacity-0 hover:opacity-90 transition-opacity"
+            onClick={deleteImage}
+          >
+            Delete
+          </button>
+        </div>
+        <div>
+          <input
+            className="mt-2 w-full text-center text-blanco"
+            type="file"
+            accept="image/*"
+            name="imagen"
+            placeholder="Imagen URL"
+            onChange={handleImageCloudinary}
+            //onBlur={() => handleBlur("imagen")}
+          />
+        </div>
         <form onSubmit={handleSubmit} className="w-2/3">
           <div className="mb-4">
             <label className="block text-gray-200 text-sm font-bold mb-2">

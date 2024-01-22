@@ -1,9 +1,8 @@
-require("dotenv").config();
-const { YOUR_ACCESS_TOKEN } = process.env;
-const { MercadoPagoConfig, Preference } = require("mercadopago");
+
+const { MercadoPagoConfig, Preference, } = require("mercadopago");
 
 const CreatePreferenceMP = async (req, res) => {
-  const client = new MercadoPagoConfig({ accessToken: YOUR_ACCESS_TOKEN });
+  const client = new MercadoPagoConfig({ accessToken: "TEST-7280768752766794-122809-47a53b66d4aff3b7fad1a49fdd6d753e-1611759187" });
   try {
     const body = {
       items: [
@@ -17,13 +16,14 @@ const CreatePreferenceMP = async (req, res) => {
       ],
       back_urls: {
         success:
-          "https://mediateca.educa.madrid.org/imagen.php?id=low1cq1ha42o6fcb&type=2",
+          "https://b9f0-207-188-179-12.ngrok-free.app/success",
         failure:
-          "https://t4.ftcdn.net/jpg/00/06/32/33/360_F_6323356_UNMbB0uOmhkfPFC2JpzX5QX3Nnj9xMVI.webp",
+         "https://b9f0-207-188-179-12.ngrok-free.app/failure",
         pending:
-          "https://www.larepublica.net/storage/images/2019/01/03/20190103093814.pago.jpg",
+        "https://b9f0-207-188-179-12.ngrok-free.app/pending",
       },
-      auto_return: "approved",
+      notification_url: "https://b9f0-207-188-179-12.ngrok-free.app/confirmaciondelpago",
+
     };
 
     const preference = new Preference(client);
@@ -34,4 +34,31 @@ const CreatePreferenceMP = async (req, res) => {
   }
 };
 
-module.exports = { CreatePreferenceMP };
+
+const respuestaConfirmacionPago = async (req, res) => {
+  const { query } = req;
+  const topic = query.topic || query.type;
+console.log("topic",topic);
+  try {
+    if (topic === "payment") {
+      const paymentId = query.id || query['data.id'];
+      console.log("paymentId",paymentId);
+      if (!paymentId) {
+        console.error("ID del pago no encontrado en req.query");
+        return res.status(400).json({ error: "ID del pago no encontrado en req.query" });
+      }
+
+
+      res.status(200).send("OK");
+    } else {
+      res.status(400).json({ error: "Topic no válido" });
+    }
+  } catch (error) {
+    console.error(error);
+    const errorMessage = error.message || "Error desconocido";
+    res.status(500).json({ error: errorMessage });
+  }
+};
+
+
+module.exports = { respuestaConfirmacionPago, CreatePreferenceMP };
