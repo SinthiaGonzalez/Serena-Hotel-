@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUsuario } from "../../redux/Actions/actions";
+import { getUsuarios, updateUsuario } from "../../redux/Actions/actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
@@ -27,7 +27,7 @@ const UpdateUsuario = () => {
     isadmin: isAdmin,
     imagen: "",
   });
-
+ 
   const handleChange = (e) => {
     setUser({
       ...user,
@@ -97,32 +97,35 @@ const UpdateUsuario = () => {
       }}
     >
       <div className="flex flex-col items-center justify-center h-auto bg-blanco w-2/3 rounded-lg px-20 mx-[250px] px-4 pt-3 pb-6">
-        <p className="flex mt-4 font-inter text-3xl antialiased leading-normal text-center font-bold text-gris justify-center">
+        <p className="flex mt-4 mb-4 font-inter text-3xl antialiased leading-normal text-center font-bold text-gris justify-center">
           Editar Usuario
         </p>
         <div className="relative">
           <img
-            className="h-36 w-36 object-cover rounded-xl mb-4"
+            className="h-36 w-36 object-cover rounded-full"
             src={user.imagen}
             alt="Imagen de perfil"
           />
           <button
-            className="material-symbols-outlined absolute w-36 h-36 top-0 left-0 right-0 bottom-0 text-white opacity-0 hover:opacity-90 transition-opacity"
+            className="material-symbols-outlined absolute w-36 h-36 top-0 left-0 right-0 bottom-0 text-white rounded-full opacity-0 hover:opacity-90 transition-opacity"
             onClick={deleteImage}
           >
             Delete
           </button>
         </div>
-        <div>
-          <input
-            className="mt-2 w-full text-center text-blanco"
-            type="file"
-            accept="image/*"
-            name="imagen"
-            placeholder="Imagen URL"
-            onChange={handleImageCloudinary}
-            //onBlur={() => handleBlur("imagen")}
-          />
+        <div className="mb-8">
+          <label className="relative mt-2 w-full text-center text-blanco cursor-pointer">
+            <input
+              className="material-symbols-outlined opacity-0 absolute inset-0 w-full h-full"
+              type="file"
+              accept="image/*"
+              name="imagen"
+              onChange={handleImageCloudinary}
+            />
+            <span className="material-symbols-outlined bg-verde rounded-full p-2 mb-4 absolute z-10 -mt-8 ml-8">
+              Edit
+            </span>
+          </label>
         </div>
         <form onSubmit={handleSubmit} className="w-2/3">
           <div className="mb-4">
