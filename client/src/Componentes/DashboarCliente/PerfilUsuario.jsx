@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
