@@ -16,6 +16,7 @@ const initialState = {
   reservasUsuario: [],
   reservasTodasAdmin: [],
   token: false,
+  usuarioById:[],
 };
 
 const reducer = (state = initialState, action) => {
@@ -164,7 +165,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         usuarios: action.payload,
       };
-
+    
+      case "GET_USUARIO_BY_ID":
+        return {
+          ...state,
+          usuarioById: action.payload,
+        }
     default:
       return state;
   }

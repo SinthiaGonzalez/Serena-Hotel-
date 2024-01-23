@@ -19,9 +19,14 @@ const UpdateHabitacion = () => {
   const [seleccionhabitacion, setSeleccionhabitacion] = useState("");
   const habitacionescKcup = useSelector((state) => state.habitacionBackUp);
 
-  const habitacionesB = habitacionescKcup.map(({ id, nombre }) => ({
+  const habitacionesB = habitacionescKcup.map(({ id, nombre, precio, imagenes, servicios, descripcion, estado }) => ({
     id,
     nombre,
+    // precio, 
+    // imagenes, 
+    // servicios, 
+    // descripcion, 
+    // estado
   }));
 
   useEffect(() => {
