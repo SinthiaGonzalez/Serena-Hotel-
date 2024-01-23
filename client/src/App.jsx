@@ -26,7 +26,6 @@ import ResponseMP from "./Componentes/respuestademercadoPago/ResponseMP.jsx";
 //axios.defaults.baseURL = "http://localhost:3001/"; // comentarlo cuando lo suba haga el marge
 axios.defaults.baseURL = "https://serenahotel.up.railway.app/";
 
-
 const App = () => {
   return (
     <>

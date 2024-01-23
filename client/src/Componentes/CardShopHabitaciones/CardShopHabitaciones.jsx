@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { añadirAlCarrito } from "../../redux/Actions/actions";
+import Swal from 'sweetalert2'
 /* eslint-disable react/prop-types */
 const CardShopHabitaciones = ({
   id,
@@ -17,7 +18,8 @@ const CardShopHabitaciones = ({
      if (!token) {
       alert('Necesita iniciar Sesion para añadir productos al carrito');
      }else{ console.log("handlerAddToCart", id);
-     dispatch(añadirAlCarrito(id));}
+     dispatch(añadirAlCarrito(id));
+     notificacion();}
    
   };
   const handlerReserva = () => {
@@ -33,6 +35,23 @@ const CardShopHabitaciones = ({
      }
   };
   console.log("imagen", imagenes);
+const notificacion = () => {
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    }
+  });
+  Toast.fire({
+    icon: "success",
+    title: "Agregado al carrito"
+  });
+}
   return (
     <>
       <div
