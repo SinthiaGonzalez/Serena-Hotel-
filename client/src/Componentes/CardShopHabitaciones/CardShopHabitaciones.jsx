@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { añadirAlCarrito } from "../../redux/Actions/actions";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 /* eslint-disable react/prop-types */
 const CardShopHabitaciones = ({
   id,
@@ -13,45 +13,46 @@ const CardShopHabitaciones = ({
 }) => {
   const dispatch = useDispatch();
   const handlerAddToCart = () => {
-     // Verificar si hay un token en el localStorage
-     const token = localStorage.getItem('token');
-     if (!token) {
-      alert('Necesita iniciar Sesion para añadir productos al carrito');
-     }else{ console.log("handlerAddToCart", id);
-     dispatch(añadirAlCarrito(id));
-     notificacion();}
-   
+    const userId = JSON.parse(localStorage.getItem("userId"));
+    const idHabitacion = id;
+
+    console.log("handlerAddToCart", userId, idHabitacion);
+    dispatch(añadirAlCarrito(userId, idHabitacion));
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("Necesita iniciar Sesion para añadir productos al carrito");
+    } else {
+      console.log("handlerAddToCart", id);
+      notificacion();
+    }
   };
   const handlerReserva = () => {
-     // Verificar si hay un token en el localStorage
-     const token = localStorage.getItem('token');
-     if (token) {
+    // Verificar si hay un token en el localStorage
+    const token = localStorage.getItem("token");
+    if (token) {
       dispatch(añadirAlCarrito(id));
-       window.location.href = '/pasareladePago'; 
-
-     } else {
-       alert('Necesita iniciar Sesion para Reservar');
-    
-     }
-  };
-  console.log("imagen", imagenes);
-const notificacion = () => {
-  const Toast = Swal.mixin({
-    toast: true,
-    position: "top-end",
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.onmouseenter = Swal.stopTimer;
-      toast.onmouseleave = Swal.resumeTimer;
+      window.location.href = "/pasareladePago";
+    } else {
+      alert("Necesita iniciar Sesion para Reservar");
     }
-  });
-  Toast.fire({
-    icon: "success",
-    title: "Agregado al carrito"
-  });
-}
+  };
+  const notificacion = () => {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      },
+    });
+    Toast.fire({
+      icon: "success",
+      title: "Agregado al carrito",
+    });
+  };
   return (
     <>
       <div

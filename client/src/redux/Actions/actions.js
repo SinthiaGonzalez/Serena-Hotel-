@@ -173,13 +173,14 @@ export function crearHabitacion(habitacionData) {
 
 export function getHabitacionesNombre({
   direccion,
-  filtros,
+  filtrosPersonas,
+  filtrosCuarto,
   tipoOrdenamiento,
 }) {
   return async function (dispatch) {
     try {
       const habitaciones = await axios.get(
-        `/ordenamientos&filtros?ordenarPor=${tipoOrdenamiento}&direccion=${direccion}&filtroPersonas=${filtros}`
+        `/ordenamientos&filtros?ordenarPor=${tipoOrdenamiento}&direccion=${direccion}&filtroPersonas=${filtrosPersonas}&filtroCuarto=${filtrosCuarto}`
       );
       console.log("Aquí está la respuesta de la API:", habitaciones.data);
       return dispatch({
@@ -194,13 +195,14 @@ export function getHabitacionesNombre({
 
 export function getHabitacionesPrecio({
   direccion,
-  filtros,
+  filtrosPersonas,
+  filtrosCuarto,
   tipoOrdenamiento,
 }) {
   return async function (dispatch) {
     try {
       const habitaciones = await axios.get(
-        `/ordenamientos&filtros?ordenarPor=${tipoOrdenamiento}&direccion=${direccion}&filtroPersonas=${filtros}`
+        `/ordenamientos&filtros?ordenarPor=${tipoOrdenamiento}&direccion=${direccion}&filtroPersonas=${filtrosPersonas}&filtroCuarto=${filtrosCuarto}`
       );
       console.log("Aquí está la respuesta de la API:", habitaciones.data);
       return dispatch({
@@ -216,14 +218,20 @@ export function getHabitacionesFiltrosPersonas({
   ordenado,
   direccion,
   personas,
-  tipos,
+  filtroCuarto,
 }) {
   return async function (dispatch) {
-    console.log("Filtros Personas:", ordenado, direccion, personas, tipos);
+    console.log(
+      "Filtros Personas:",
+      ordenado,
+      direccion,
+      personas,
+      filtroCuarto
+    );
     try {
       if (personas) {
         const habitaciones = await axios.get(
-          `/ordenamientos&filtros?ordenarPor=${ordenado}&direccion=${direccion}&filtroPersonas=${personas}&filtrosTipos=${tipos}`
+          `/ordenamientos&filtros?ordenarPor=${ordenado}&direccion=${direccion}&filtroPersonas=${personas}&filtroCuarto=${filtroCuarto}`
         );
         console.log("filtro personas:", habitaciones.data);
         return dispatch({
@@ -490,7 +498,9 @@ export function DetailHabitaciones(id) {
 export const getCarrito = () => {
   return async function (dispatch) {
     try {
-      const response = await axios.get("/carrito");
+      const id = JSON.parse(localStorage.getItem("userId"));
+      const response = await axios.get(`/carrito/${id}`);
+      console.log("getCarrito", response.data);
       dispatch({
         type: "GET_CARRITO",
         payload: response.data,
@@ -515,10 +525,12 @@ export const eliminarDelCarrito = (id) => {
     }
   };
 };
-export const añadirAlCarrito = (id) => {
+export const añadirAlCarrito = (idUser, idHabitacion) => {
   return async function (dispatch) {
     try {
-      const response = await axios.post(`/carrito/${id}`);
+      const data = { idUser, idHabitacion };
+      const response = await axios.post(`/carrito`, data);
+      console.log("anadirAlCarrito", response.data);
       dispatch({
         type: "AÑADIR_AL_CARRITO",
         payload: response.data,
