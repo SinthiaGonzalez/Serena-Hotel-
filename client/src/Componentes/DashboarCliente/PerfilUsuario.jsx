@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { updateUsuario } from "../../redux/Actions/actions";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
@@ -9,14 +8,14 @@ import {
   faLock,
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
+import { updateUsuario } from "../../redux/Actions/actions"
 
 const UpdateUsuario = () => {
   const dispatch = useDispatch();
-  const userId  = localStorage.getItem("userId");
+  const userId = localStorage.getItem("userId");
   const isAdmin = localStorage.getItem("isAdmin");
-  console.log('aqui',userId)
-  
+  console.log("aqui", userId);
 
   const [user, setUser] = useState({
     id: userId,
@@ -26,13 +25,13 @@ const UpdateUsuario = () => {
     telefono: "",
     contraseña: "",
     isadmin: isAdmin,
-    imagen: ""
+    imagen: "",
   });
-
+ 
   const handleChange = (e) => {
     setUser({
       ...user,
-      [e.target.name]: e.target.value,    
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -45,20 +44,18 @@ const UpdateUsuario = () => {
     const response = await axios.post(
       "https://api.cloudinary.com/v1_1/de2jgnztx/image/upload",
       data
-    )
-  const url=response.data.url
-  console.log("aqui",url)
-  setUser({...user,
-   imagen:url})
-}
+    );
+    const url = response.data.url;
+    console.log("aqui", url);
+    setUser({ ...user, imagen: url });
+  };
 
-const deleteImage = () => {
-  setUser({...user,
-    imagen:""})
-}
+  const deleteImage = () => {
+    setUser({ ...user, imagen: "" });
+  };
   const handleSubmit = async (e) => {
     try {
-      await dispatch(updateUsuario(user));
+      dispatch(updateUsuario(user));
       // Restablecer el estado a los valores iniciales en lugar de un objeto vacío
       setUser({
         id: userId,
@@ -68,29 +65,29 @@ const deleteImage = () => {
         telefono: "",
         contraseña: "",
         isadmin: isAdmin,
-        imagen: ""
+        imagen: "",
       });
     } catch (error) {
       alert(error.message);
     }
   };
- console.log("este", user)
+  console.log("este", user);
 
- const alertPrueba = () =>{
-  Swal.fire({
-    title: "Quieres guardar los cambios?",
-    showDenyButton: true,
-    confirmButtonText: "Guardar",
-    denyButtonText:" No guardar",
-  }).then(async (result) => {
-    /* Read more about isConfirmed, isDenied below */
-    if (result.isConfirmed) {
-      handleSubmit();
-    } else if (result.isDenied) {
-      Swal.fire("No se guardaron los cambios", "", "info");
-    }
-  });
- }
+  const alertPrueba = () => {
+    Swal.fire({
+      title: "Quieres guardar los cambios?",
+      showDenyButton: true,
+      confirmButtonText: "Guardar",
+      denyButtonText: " No guardar",
+    }).then(async (result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        handleSubmit();
+      } else if (result.isDenied) {
+        Swal.fire("No se guardaron los cambios", "", "info");
+      }
+    });
+  };
   return (
     <div
       className="relative bg-cover bg-center text-white text-center p-8 h-screen"
@@ -100,33 +97,36 @@ const deleteImage = () => {
       }}
     >
       <div className="flex flex-col items-center justify-center h-auto bg-blanco w-2/3 rounded-lg px-20 mx-[250px] px-4 pt-3 pb-6">
-        <p className="flex mt-4 font-inter text-3xl antialiased leading-normal text-center font-bold text-gris justify-center">
+        <p className="flex mt-4 mb-4 font-inter text-3xl antialiased leading-normal text-center font-bold text-gris justify-center">
           Editar Usuario
         </p>
-        <div>
-        <input
-              className="mt-2 w-full text-center text-blanco"
+        <div className="relative">
+          <img
+            className="h-36 w-36 object-cover rounded-full"
+            src={user.imagen}
+            alt="Imagen de perfil"
+          />
+          <button
+            className="material-symbols-outlined absolute w-36 h-36 top-0 left-0 right-0 bottom-0 text-white rounded-full opacity-0 hover:opacity-90 transition-opacity"
+            onClick={deleteImage}
+          >
+            Delete
+          </button>
+        </div>
+        <div className="mb-8">
+          <label className="relative mt-2 w-full text-center text-blanco cursor-pointer">
+            <input
+              className="material-symbols-outlined opacity-0 absolute inset-0 w-full h-full"
               type="file"
               accept="image/*"
               name="imagen"
-              placeholder="Imagen URL"
               onChange={handleImageCloudinary}
-              //onBlur={() => handleBlur("imagen")}
             />
+            <span className="material-symbols-outlined bg-verde rounded-full p-2 mb-4 absolute z-10 -mt-8 ml-8">
+              Edit
+            </span>
+          </label>
         </div>
-        <div className="relative">
-                  <img
-                    className="h-36 w-36 object-cover rounded-xl mb-4"
-                    src={user.imagen}
-                    alt="Imagen de perfil"
-                  />
-                  <button
-                    className="material-symbols-outlined absolute w-36 h-36 top-0 left-0 right-0 bottom-0 text-white opacity-0 hover:opacity-90 transition-opacity"
-                    onClick={deleteImage}
-                  >
-                    Delete
-                  </button>
-                </div>
         <form onSubmit={handleSubmit} className="w-2/3">
           <div className="mb-4">
             <label className="block text-gray-200 text-sm font-bold mb-2">

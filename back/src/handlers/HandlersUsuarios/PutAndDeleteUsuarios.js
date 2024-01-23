@@ -44,5 +44,4 @@ module.exports = {
     putUsuarioHandler,
     deleteUsuarioHandler,
     putUsuarioEstadoHandler
-
 };
