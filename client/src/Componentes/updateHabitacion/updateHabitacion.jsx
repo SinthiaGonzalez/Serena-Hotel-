@@ -22,11 +22,11 @@ const UpdateHabitacion = () => {
   const habitacionesB = habitacionescKcup.map(({ id, nombre, precio, imagenes, servicios, descripcion, estado }) => ({
     id,
     nombre,
-    precio, 
-    imagenes, 
-    servicios, 
-    descripcion, 
-    estado
+    // precio, 
+    // imagenes, 
+    // servicios, 
+    // descripcion, 
+    // estado
   }));
 
   useEffect(() => {
