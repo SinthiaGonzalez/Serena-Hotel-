@@ -23,13 +23,26 @@ const updateHabitacion = async (
       return 'No existe una habitacion con ese nombre' ;
     }
     
-    habitacion.nombre = nombre;
-    habitacion.precio = precio;
-    habitacion.imagenes = imagenes;
-    habitacion.servicios = servicios;
-    habitacion.descripcion = descripcion;
-    habitacion.estado = estado;
+    if (nombre !== "") {
+      user.nombre = nombre;
+    }
+    if (precio !== "") {
+      user.precio = precio;
+    }
+    if (imagenes !== "") {
+      user.imagenes = imagenes;
+    }
+    if (servicios !== "") {
+      user.servicios = servicios;
+    }
+  
+    if (descripcion !== "") {
+      user.descripcion = descripcion;
+    }
 
+    if (estado !== "") {
+      user.estado = estado;
+    }
     await habitacion.save();
 
     return habitacion;

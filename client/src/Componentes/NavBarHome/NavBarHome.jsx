@@ -33,9 +33,19 @@ function ProfileMenu() {
     localStorage.removeItem("isAdmin");
     navigate("/logearse");
   };
+//const[userLoggedIn, setUserLoggedIn] = useState(false);
 const imagenUsuario = JSON.parse(localStorage.getItem("imagen"));
 const name = JSON.parse(localStorage.getItem("name"));
 
+// const verifyLogin = () => {
+//   const prueba = localStorage.getItem("token");
+//   if (prueba) setUserLoggedIn(true);
+//   else setUserLoggedIn(false);
+// }
+
+// useEffect(() => {
+//   verifyLogin();
+// }, []);
 
 
   const formattedName =

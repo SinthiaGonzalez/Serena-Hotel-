@@ -340,10 +340,9 @@ export function getUsuarios() {
 }
 
 export function updateUsuario(usuarioData, id) {
-  console.log({ usuarioData });
   return async (dispatch) => {
     try {
-      console.log(usuarioData);
+      console.log("plis",usuarioData);
       id = usuarioData.id;
       const response = await axios.put(`/update/usuarios/${id}`, usuarioData);
       if (response.data === "No se encontro el usuario") Swal.fire(response,"","error");
@@ -529,3 +528,46 @@ export const añadirAlCarrito = (id) => {
     }
   };
 };
+
+export function cambiarEstadoUsuario(id, nuevoEstado) {
+    console.log(id, nuevoEstado)
+    return async function () {
+      try {
+        const response = await axios.put("/update/usuarioEstado", {id, nuevoEstado});
+        alert("Cambio de estado de Usuario realizado exitosamente");
+        console.log("Respuesta del servidor:", response.data);
+       // ver si es necesario dispatch aqui "POST_USUARIO",p/q actualice estado "usuarios"
+      } catch (error) {
+        console.error("Error al enviar la consulta:", error);
+      }
+    };
+  }
+
+  export function getUsuarioById(id) {
+    return async function (dispatch) {
+      try {
+        const usuarios = await axios.get(`/usuario/${id}`);
+        return dispatch({
+          type: "GET_USUARIO_BY_ID",
+          payload: usuarios.data,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  }
+
+  export const deleteReservas = (id) => {
+    return async function (dispatch) {
+      try {
+        const response = await axios.delete(`/reservas/delete/${id}`);
+        Swal.fire("Reserva eliminada exitosamente!", "", "success");
+        dispatch({
+          type: "DELETE_RESERVA",
+          payload: response.data,
+        });
+      } catch (error) {
+        Swal.fire(error.message, "", "error");
+      }
+    };
+  };

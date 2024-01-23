@@ -22,7 +22,7 @@ const {
 } = require("../Controladores/carritoControlador");
 const { postHabitacionHandler } = require("../handlers/HabitacionHandler");
 const { eliminarHabitacionHandler } = require("../handlers/HabitacionHandler");
-const { postReservasHandler } = require("../handlers/ReservasHandler");
+const { postReservasHandler, deleteReservasHandler } = require("../handlers/ReservasHandler");
 const { getReservas } = require("../Controladores/getReservas");
 const {
   getReservasPorUsuarioId,
@@ -69,6 +69,7 @@ const {
 
 const { deleteCarrito } = require("../Controladores/carritoControlador");
 const  {respuestaConfirmacionPago}  = require("../Controladores/postProductMP");
+const { getUsuarioByIdHandler } = require("../handlers/HandlersUsuarios/GetHandlerUsuarios")
 
 
 const router = express.Router(); // importamos el metodo Router de express para poder crear rutas
@@ -83,7 +84,7 @@ router.get("/verify", verifyToken, (req, res) => {
   res.status(200).json({ message: "acceso correcto", userId, isAdmin });
 });
 
-
+router.get("/usuario/:id", getUsuarioByIdHandler)
 router.post("/usuario", CreateUsuario);
 router.get("/usuarios", getHandlerUsuarios);
 router.put("/login", LoginUsuario);
@@ -123,6 +124,7 @@ router.post("/reservas", postReservasHandler);
 router.get("/reservas", getReservas);
 router.get("/reservas-por-usuario", getReservasPorUsuarioId); //trae por ID de usuario o todas (/reservas-por-usuario | http://localhost:3001/reservas-por-usuario?id=5)
 router.get("/reservas-todas", getReservasTodas);
+router.delete("/reservas/delete/:id", deleteReservasHandler)
 
 router.get("/ordenamientos&filtros", getOrdenamientosFiltrosHandler);
 

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUsuario } from "../../redux/actions/actions";
+
+import { updateUsuario, getUsuarioById } from "../../redux/actions/actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
@@ -27,6 +28,8 @@ const UpdateUsuario = () => {
     isadmin: isAdmin,
     imagen: "",
   });
+
+  const usuarioData = useSelector((state) => state.usuarioById);
 
   const handleChange = (e) => {
     setUser({
@@ -90,6 +93,21 @@ const UpdateUsuario = () => {
       }
     });
   };
+
+  // const usuario = usuarioData.map(({ name, apellido, email, telefono, contraseña, imagen }) => ({
+  //   name,
+  //   apellido, 
+  //   email, 
+  //   telefono, 
+  //   contraseña, 
+  //   imagen
+  // }));
+
+  console.log(" a ver", usuarioData)
+
+  useEffect(() => {
+    dispatch(getUsuarioById(userId));
+  }, []);
   return (
     <div
       className="relative bg-cover bg-center text-white text-center p-8 h-screen"
@@ -141,7 +159,7 @@ const UpdateUsuario = () => {
                   className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
                   type="text"
                   name="name"
-                  placeholder="Nombre"
+                  placeholder={usuarioData.name} 
                   value={user.name}
                   onChange={handleChange}
                 />
@@ -159,7 +177,7 @@ const UpdateUsuario = () => {
                   className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
                   type="text"
                   name="apellido"
-                  placeholder="Apellido"
+                  placeholder={usuarioData.apellido}
                   value={user.apellido}
                   onChange={handleChange}
                 />
@@ -177,7 +195,7 @@ const UpdateUsuario = () => {
                   className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
                   type="email"
                   name="email"
-                  placeholder="Email"
+                  placeholder={usuarioData.email}
                   value={user.email}
                   onChange={handleChange}
                 />
@@ -195,7 +213,7 @@ const UpdateUsuario = () => {
                   className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
                   type="text"
                   name="telefono"
-                  placeholder="Teléfono"
+                  placeholder={usuarioData.telefono}
                   value={user.telefono}
                   onChange={handleChange}
                 />

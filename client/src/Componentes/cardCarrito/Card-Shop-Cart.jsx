@@ -19,7 +19,7 @@ const ShoppingCartCard1 = ({ imagenes, nombre, precio, id }) => {
         </h5>
         <div className="flex flex-row items-center p-1">
           <img
-            src={imagenes}
+            src={imagenes[0]}
             alt="imagen"
             className="h-20 ml-3 object-cover rounded-md w-1/2"
           />
