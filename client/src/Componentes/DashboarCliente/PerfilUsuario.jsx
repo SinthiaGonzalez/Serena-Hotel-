@@ -9,7 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { editarUsuario } from "../../redux/Actions/actions";
+import { updateUsuario } from "../../redux/Actions/actions"
 
 const UpdateUsuario = () => {
   const dispatch = useDispatch();
@@ -55,7 +55,7 @@ const UpdateUsuario = () => {
   };
   const handleSubmit = async (e) => {
     try {
-      dispatch(editarUsuario(user));
+      dispatch(updateUsuario(user));
       // Restablecer el estado a los valores iniciales en lugar de un objeto vacío
       setUser({
         id: userId,
