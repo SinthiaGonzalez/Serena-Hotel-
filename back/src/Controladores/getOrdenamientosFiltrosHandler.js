@@ -2,10 +2,12 @@ const { Habitaciones } = require("../db");
 
 const getOrdenamientosFiltrosHandler = async (req, res) => {
   try {
-    const { ordenarPor, direccion, filtroPersonas, filtroTipos } = req.query;
+    const { ordenarPor, direccion, filtroPersonas, filtroCuarto } = req.query;
 
     const ordenValido = ["nombre", "precio"].includes(ordenarPor);
-    const direccionValida = ["asc", "desc"].includes(direccion.toLowerCase());
+    const direccionValida = ["asc", "desc"].includes(
+      direccion ? direccion.toLowerCase() : ""
+    );
 
     if (!ordenValido || !direccionValida) {
       return res
@@ -17,10 +19,10 @@ const getOrdenamientosFiltrosHandler = async (req, res) => {
       order: [[ordenarPor, direccion]],
     };
 
-    let habitacionesOrdenadas = await Habitaciones.findAll(consulta);
+    let habitacionesFiltradas = await Habitaciones.findAll(consulta);
 
     if (filtroPersonas) {
-      habitacionesOrdenadas = habitacionesOrdenadas.filter((habitacion) => {
+      habitacionesFiltradas = habitacionesFiltradas.filter((habitacion) => {
         const servicios = habitacion.servicios || [];
         const personas = servicios.find(
           (servicio) => servicio.descripcion === `${filtroPersonas} pers`
@@ -28,9 +30,18 @@ const getOrdenamientosFiltrosHandler = async (req, res) => {
         return personas;
       });
     }
+    if (filtroCuarto) {
+      habitacionesFiltradas = habitacionesFiltradas.filter((habitacion) => {
+        const servicios1 = habitacion.servicios || [];
+        const cuartos = servicios1.find(
+          (servicio) => servicio.descripcion === `${filtroCuarto} cuartos`
+        );
+        return cuartos;
+      });
+    }
 
-    console.log("Habitaciones filtradas:", habitacionesOrdenadas);
-    res.status(200).json(habitacionesOrdenadas);
+    console.log("Habitaciones filtradas:", habitacionesFiltradas);
+    res.status(200).json(habitacionesFiltradas);
   } catch (error) {
     console.error("Error:", error);
     res.status(500).json({ error: error.message });
