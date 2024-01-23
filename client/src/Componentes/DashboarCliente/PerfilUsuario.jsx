@@ -102,7 +102,7 @@ const UpdateUsuario = () => {
       telefono: usuarioData.telefono,
       contraseña: "",
       isadmin: isAdmin,
-      imagen: "",
+      imagen: usuarioData.imagen,
     });
   }
 
