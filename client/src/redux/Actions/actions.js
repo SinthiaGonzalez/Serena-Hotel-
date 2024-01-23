@@ -496,7 +496,9 @@ export function DetailHabitaciones(id) {
 export const getCarrito = () => {
   return async function (dispatch) {
     try {
-      const response = await axios.get("/carrito");
+      const id = JSON.parse(localStorage.getItem("userId"));
+      const response = await axios.get(`/carrito/${id}`);
+      console.log("getCarrito", response.data);
       dispatch({
         type: "GET_CARRITO",
         payload: response.data,
@@ -521,10 +523,12 @@ export const eliminarDelCarrito = (id) => {
     }
   };
 };
-export const añadirAlCarrito = (id) => {
+export const añadirAlCarrito = (idUser, idHabitacion) => {
   return async function (dispatch) {
     try {
-      const response = await axios.post(`/carrito/${id}`);
+      const data = { idUser, idHabitacion };
+      const response = await axios.post(`/carrito`, data);
+      console.log("anadirAlCarrito", response.data);
       dispatch({
         type: "AÑADIR_AL_CARRITO",
         payload: response.data,

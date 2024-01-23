@@ -108,8 +108,8 @@ router.post("/notificaciones", EnvioMailNotificaciones);
 router.post("/post/habitaciones", postHabitacionHandler);
 router.delete("/habitaciones/:id", eliminarHabitacionHandler);
 router.delete("/carrito/:id", deleteCarrito);
-router.post("/carrito/:id", addHabitacionToCarrito);
-router.get("/carrito", getCarrito);
+router.post("/carrito", addHabitacionToCarrito);
+router.get("/carrito/:id", getCarrito);
 router.post("/reservas", postReservasHandler);
 router.get("/reservas", getReservas);
 router.get("/reservas-por-usuario", getReservasPorUsuarioId); //trae por ID de usuario o todas (/reservas-por-usuario | http://localhost:3001/reservas-por-usuario?id=5)

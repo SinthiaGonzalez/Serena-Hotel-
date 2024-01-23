@@ -1,22 +1,25 @@
-const { Carrito, Habitaciones } = require("../db");
+const { Carrito, Habitaciones, Usuario } = require("../db");
 
 const addHabitacionToCarrito = async (req, res) => {
   try {
-    const id = req.params.id;
+    const { idUser, idHabitacion } = req.body;
 
-    console.log("ID recibido:", id);
+    console.log("ID del usuario:", idUser);
+    console.log("ID de la habitación recibido:", idHabitacion);
 
     let carrito = await Carrito.findOne({
+      where: { usuarioId: idUser },
       include: [{ model: Habitaciones }],
     });
 
     if (!carrito) {
       carrito = await Carrito.create({});
+      await carrito.setUsuario(idUser);
     }
 
     console.log("Carrito actual:", carrito);
 
-    const habitacion = await Habitaciones.findByPk(id);
+    const habitacion = await Habitaciones.findByPk(idHabitacion);
 
     console.log("Habitación encontrada:", habitacion);
 
@@ -41,11 +44,19 @@ const addHabitacionToCarrito = async (req, res) => {
 };
 const getCarrito = async (req, res) => {
   try {
-    const carrito = await Carrito.findAll({
+    const { id } = req.params;
+    console.log("id", id);
+
+    const carrito = await Carrito.findOne({
+      where: { usuarioId: id },
       include: [{ model: Habitaciones, through: "CarritoHabitacion" }],
     });
 
-    const habitacionesEnCarrito = carrito.flatMap((item) => item.Habitaciones);
+    if (!carrito) {
+      return res.status(404).json({ error: "Carrito no encontrado." });
+    }
+
+    const habitacionesEnCarrito = carrito.Habitaciones;
 
     res.status(200).json(habitacionesEnCarrito);
   } catch (error) {

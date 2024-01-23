@@ -125,6 +125,7 @@ const Habitaciones = () => {
         fecha_salida: format(selectedDate, "yyyy-MM-dd"),
       })
     );
+
     setPaginaActual(1);
   };
 

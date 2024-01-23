@@ -8,9 +8,9 @@ import {
   Button,
   Tooltip,
 } from "@material-tailwind/react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-const CardHome = ({ nombre, precio, imagenes, servicios, id  }) => {
+const CardHome = ({ nombre, precio, imagenes, servicios, id }) => {
   const navigate = useNavigate();
   const handleVerClick = () => {
     navigate(`/habitacion/${id}`);
@@ -18,11 +18,8 @@ const CardHome = ({ nombre, precio, imagenes, servicios, id  }) => {
 
   return (
     <Card className="m-0 p-0 flex flex-col items-center justify-center bg-verde  w-full max-w-[28rem] ">
-      <CardHeader className="bg-verde" floated={false}>
-        <img
-          src={imagenes[0]}
-          alt={nombre}
-        />
+      <CardHeader className="bg-verde " floated={false}>
+        <img src={imagenes[0]} alt={nombre} />
       </CardHeader>
       <CardBody>
         <div className="mb-3 flex items-center justify-between">
@@ -48,7 +45,12 @@ const CardHome = ({ nombre, precio, imagenes, servicios, id  }) => {
         <Typography className="text-blanco font-light">
           ${precio} / Noche
         </Typography>
-        <Button size="lg" className="bg-naranja" fullWidth={true} onClick={() => handleVerClick(id)}>
+        <Button
+          size="lg"
+          className="bg-naranja"
+          fullWidth={true}
+          onClick={() => handleVerClick(id)}
+        >
           VER
         </Button>
       </CardFooter>

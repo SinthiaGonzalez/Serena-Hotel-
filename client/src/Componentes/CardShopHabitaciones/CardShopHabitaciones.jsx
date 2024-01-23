@@ -12,10 +12,12 @@ const CardShopHabitaciones = ({
 }) => {
   const dispatch = useDispatch();
   const handlerAddToCart = () => {
-    console.log("handlerAddToCart", id);
-    dispatch(añadirAlCarrito(id));
+    const userId = JSON.parse(localStorage.getItem("userId"));
+    const idHabitacion = id;
+
+    console.log("handlerAddToCart", userId, idHabitacion);
+    dispatch(añadirAlCarrito(userId, idHabitacion));
   };
-  console.log("imagen", imagenes);
   return (
     <>
       <div

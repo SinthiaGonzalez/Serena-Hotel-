@@ -14,13 +14,10 @@ const ShoppingCartCard1 = ({ imagenes, nombre, precio, id }) => {
     <div className="max-w-md mx-auto bg-naranja rounded-md overflow-hidden shadow-md flex mb-4">
       <div style={{ width: "70%" }} className="flex items-center space-x-4">
         <img
-          src={imagenes}
+          src={imagenes[0]}
           alt="imagen"
           className="w-2/3 h-20 ml-3 object-cover rounded-md"
         />
-        <h5 className="mb-2 text-white text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl">
-          {nombre}
-        </h5>
       </div>
 
       <div className="p-4 flex flex-col items-end justify-between w-1/3">
