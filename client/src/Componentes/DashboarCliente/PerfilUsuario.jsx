@@ -9,7 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { editarUsuario } from "../../redux/Actions/actions";
+import { editarUsuario } from "../../redux/Actions/actions"
 
 const UpdateUsuario = () => {
   const dispatch = useDispatch();
