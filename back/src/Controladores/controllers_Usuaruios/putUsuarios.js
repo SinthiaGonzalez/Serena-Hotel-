@@ -1,8 +1,8 @@
 const Sequelize = require("sequelize");
 const { Usuario } = require("../../db");
 
-const updateUsuario = async (id, name, apellido, email, telefono, contraseña, isadmin, imagen,) => {
-  console.log("aqui", id, name, apellido, email, telefono, contraseña, isadmin, imagen,)
+const updateUsuario = async (id, name, apellido, email, telefono, contraseña, isadmin, imagen) => {
+  console.log("aqui en put usuario", id, name, apellido, email, telefono, contraseña, isadmin, imagen,)
 
 
   let user = await Usuario.findByPk(id);

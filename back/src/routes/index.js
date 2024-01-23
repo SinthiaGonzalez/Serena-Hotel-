@@ -71,7 +71,6 @@ const { deleteCarrito } = require("../Controladores/carritoControlador");
 const  {respuestaConfirmacionPago}  = require("../Controladores/postProductMP");
 const { getUsuarioByIdHandler } = require("../handlers/HandlersUsuarios/GetHandlerUsuarios")
 
-
 const router = express.Router(); // importamos el metodo Router de express para poder crear rutas
 router.post("/login", loginCreateToken);
 

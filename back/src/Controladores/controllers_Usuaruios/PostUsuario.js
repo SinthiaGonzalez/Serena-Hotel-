@@ -2,7 +2,7 @@ const { Usuario } = require('../../db')
 
 const CreateUsuario = async (req, res) => {
   try {
-    const { name, apellido, email, telefono, contraseña,isadmin,estado } = req.body;
+    const { name, apellido, email, telefono, contraseña,isadmin,estado,imagen} = req.body;
     console.log("aqui en el createusuario", name, apellido, email)
     const isAdmin = isadmin === true || isadmin === "true";
     const prueba = await Usuario.findOne({ where: { email: email } });
@@ -16,7 +16,8 @@ const CreateUsuario = async (req, res) => {
         telefono,
         contraseña,
         isadmin: isAdmin,
-        estado
+        estado,
+        imagen
 
       });
       return res.status(200).json(newUser);

@@ -10,10 +10,6 @@ const Linea = ({linea}) => {
  
   const [nuevoEstado, setNuevoEstado] = useState(estado)
  
-  useEffect(() => {   
-    
-   
-  }, []);
 
   const handleEstadoChange = (estadoElegido, estadoPrevio) => { 
     console.log("estadoElegido" + estadoElegido)
