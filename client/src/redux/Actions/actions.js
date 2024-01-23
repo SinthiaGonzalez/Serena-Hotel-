@@ -349,7 +349,7 @@ export function getUsuarios() {
   };
 }
 
-export function updateUsuario(usuarioData, id) {
+export function editarUsuario(usuarioData, id) {
   console.log({ usuarioData });
   return async (dispatch) => {
     try {
