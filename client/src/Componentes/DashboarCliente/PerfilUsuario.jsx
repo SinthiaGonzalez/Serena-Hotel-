@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch} from "react-redux";
-import { editarUsuario } from "../../redux/Actions/actions";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
@@ -10,6 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { editarUsuario } from "../../redux/Actions/actions";
 
 const UpdateUsuario = () => {
   const dispatch = useDispatch();
