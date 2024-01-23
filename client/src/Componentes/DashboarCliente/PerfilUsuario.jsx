@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getUsuarios, updateUsuario } from "../../redux/Actions/actions";
+import React, { useState } from "react";
+import { useDispatch} from "react-redux";
+import { editarUsuario } from "../../redux/Actions/actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
@@ -55,7 +55,7 @@ const UpdateUsuario = () => {
   };
   const handleSubmit = async (e) => {
     try {
-      await dispatch(updateUsuario(user));
+      dispatch(editarUsuario(user));
       // Restablecer el estado a los valores iniciales en lugar de un objeto vacío
       setUser({
         id: userId,
