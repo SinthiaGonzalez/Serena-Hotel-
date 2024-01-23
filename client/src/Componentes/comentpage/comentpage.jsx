@@ -45,6 +45,20 @@ const ComentPage = () => {
     ],
   };
   
+  const handleLinkClick = () => {
+    // Verificar si hay un token en el localStorage
+    const token = localStorage.getItem('token');
+
+    // Si hay un token, permitir la navegación a la ruta "/comentar"
+    if (token) {
+      window.location.href = '/comentar'; // Redirigir a la ruta "/comentar"
+    } else {
+      // Si no hay un token, mostrar un alert y realizar otras acciones según sea necesario
+      alert('Necesita iniciar Sesion para dejar comentarios en la pagina');
+      // Puedes realizar otras acciones aquí, como redirigir a otra ruta, mostrar un modal, etc.
+    }
+  };
+
   
   return (
     <div id="comentarios" className="mt-16 mb-16 bg-verde">
@@ -60,7 +74,8 @@ const ComentPage = () => {
 
         <div className="flex flex-row items-center justify-end">
           <Link
-            to="/comentar"
+            to="#"
+            onClick={handleLinkClick}
             className="bg-naranja text-white text-center w-[200px] px-4 py-2 rounded-lg transition-transform hover:scale-105 z-10 "
           >
             Dejanos Tu Comentario

@@ -6,10 +6,11 @@ import {
   Button,
   IconButton,
 } from "@material-tailwind/react";
+import { useNavigate } from "react-router-dom";
 
 const NavBarCliente = () => {
   const [openNav, setOpenNav] = React.useState(false);
-
+  const navigate = useNavigate();
   React.useEffect(() => {
     window.addEventListener(
       "resize",
@@ -17,8 +18,37 @@ const NavBarCliente = () => {
     );
   }, []);
 
+  const handlerSesion = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("name");
+    localStorage.removeItem("imagen");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("isAdmin");
+    navigate("/logearse");
+  };
   const navList = (
     <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+      <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="text-blanco h-12 hover:bg-naranja rounded-xl flex items-center gap-x-2 p-2 font-medium"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="16"
+          width="14"
+          viewBox="0 0 448 512"
+        >
+          <path
+            fill="#ffffff"
+            d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"
+          />
+        </svg>
+        <a href="/ClientePerfil" className="font-medium flex items-center">
+          USUARIO
+        </a>
+      </Typography>
       <Typography
         as="li"
         variant="small"
@@ -41,27 +71,6 @@ const NavBarCliente = () => {
           RESERVAS
         </a>
       </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="text-blanco h-12 hover:bg-naranja rounded-xl flex items-center gap-x-2 p-2 font-medium"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          height="16"
-          width="14"
-          viewBox="0 0 448 512"
-        >
-          <path
-            fill="#ffffff"
-            d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"
-          />
-        </svg>
-        <a href="/ClientePerfil" className="font-medium flex items-center">
-          USUARIO
-        </a>
-      </Typography>
     </ul>
   );
 
@@ -80,6 +89,7 @@ const NavBarCliente = () => {
           <Button
             size="sm"
             className="border-2 border-naranja hover:border-blanco bg-naranja hidden lg:inline-block"
+            onClick={handlerSesion}
           >
             <span>Salir</span>
           </Button>

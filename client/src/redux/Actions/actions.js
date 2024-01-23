@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from 'sweetalert2'
 
 export function getHabitaciones() {
   return async function (dispatch) {
@@ -52,9 +53,9 @@ export function postComent(state) {
   return async function (dispatch) {
     try {
       await axios.post("/comentar", state);
-      alert("se añadió el comentario exitosamente");
+      Swal.fire("Se agrego el comentario exitosamente!", "", "success");
     } catch (error) {
-      alert(error);
+      Swal.fire(error.message,"","error");
     }
   };
 }
@@ -63,9 +64,9 @@ export function postUsuario(state) {
     try {
       await axios.post("/usuario", state);
       console.log("log de action", state);
-      alert("se creo el usuario exitosamente");
+      Swal.fire("Usuario creado exitosamente!", "", "success");
     } catch (error) {
-      alert(error);
+      Swal.fire(error.message,"","error");
     }
   };
 }
@@ -107,7 +108,7 @@ export function getAllcomentarios() {
         });
       }
     } catch (error) {
-      alert(error.message);
+      Swal.fire(error.message,"","error");
     }
   };
 }
@@ -122,10 +123,10 @@ export function eliminarComentario(id) {
           type: "ELIMINAR_COMENTARIO",
           payload: id,
         });
-        alert("Comentario eliminado exitosamente");
+        Swal.fire("Comentario eliminado exitosamente!", "", "success");
       }
     } catch (error) {
-      alert(error.message);
+      Swal.fire(error.message,"","error");
     }
   };
 }
@@ -158,14 +159,14 @@ export function crearHabitacion(habitacionData) {
     try {
       const response = await axios.post("/post/habitaciones", habitacionData);
       console.log(response.data);
-      alert("Creado con exito");
+      Swal.fire("Habitacion creada exitosamente!", "", "success");
       dispatch({
         type: "CREAR_HABITACION",
         payload: response.data,
       });
     } catch (error) {
       console.log(error);
-      alert(error.message);
+      Swal.fire(error.message,"","error");
     }
   };
 }
@@ -267,14 +268,14 @@ export function updateHabitacion(habitacionData) {
       const response = await axios.put("/update/habitaciones", habitacionData);
 
       console.log(response.data);
-      alert("Habitacion actualizada con exito");
+      Swal.fire("Habitacion editada exitosamente!", "", "success");
       dispatch({
         type: "UPDATE_HABITACION",
         payload: response.data,
       });
     } catch (error) {
       console.log(error);
-      alert(error.message);
+      Swal.fire(error.message,"","error");
     }
   };
 }
@@ -289,10 +290,7 @@ export function getDevs() {
         payload: response.data,
       });
     } catch (error) {
-      alert(
-        "Hubo un problema con el servidor. Comuniquese con el Administrador - Error: " +
-          error
-      );
+      Swal.fire(error.message,"Hubo un problema con el servidor. Comuniquese con el Administrador","error")
       return;
     }
   };
@@ -314,10 +312,10 @@ export function deleteHabitacion(id) {
           type: "DELETE_HABITACION",
           payload: id,
         });
-        alert("Habitacion eliminada exitosamente");
+        Swal.fire("Habitacion eliminada exitosamente!", "", "success");
       }
     } catch (error) {
-      alert(error.message);
+      Swal.fire(error.message,"","error");
     }
   };
 }
@@ -350,23 +348,21 @@ export function getUsuarios() {
 }
 
 export function updateUsuario(usuarioData, id) {
-  console.log({ usuarioData });
   return async (dispatch) => {
     try {
-      console.log(usuarioData);
+      console.log("plis",usuarioData);
       id = usuarioData.id;
       const response = await axios.put(`/update/usuarios/${id}`, usuarioData);
-
+      if (response.data === "No se encontro el usuario") Swal.fire(response,"","error");
+      else Swal.fire("Guardados!", "", "success");
       console.log(response.data);
-      if (response.data === "No se encontro el usuario") alert(response.data);
-      else alert("Usuario editado exitosamente");
       dispatch({
         type: "UPDATE_USUARIO",
         payload: response.data,
       });
     } catch (error) {
       console.log(error);
-      alert(error.message);
+      Swal.fire(error.message,"","error");
     }
   };
 }
@@ -377,16 +373,16 @@ export function deleteUsuario(id) {
     try {
       const response = await axios.delete(`/delete/usuarios/${id}`);
       if (response.data === "No se encontro el usuario") {
-        alert(response.data);
+        Swal.fire("No se encontro el usuario","","error");
       } else {
         dispatch({
           type: "DELETE_USUARIO",
           payload: id,
         });
-        alert("Usuario eliminado exitosamente");
+        Swal.fire("Usuario eliminado exitosamente!", "", "success");
       }
     } catch (error) {
-      alert(error.message);
+      Swal.fire(error.message,"","error");
     }
   };
 }
@@ -417,13 +413,14 @@ export function verificacionLogeoUsuarioAction(infoLogeo) {
       console.log("Respuesta del servidor manual:", response.data);
     } catch (error) {
       if (error.response && error.response.status === 400) {
-        alert("Usuario o contraseña incorrectos");
+         Swal.fire(error.message,"Usuario o contraseña incorrectos","error");
       }
     }
   };
 }
 
 export function getReservas_usuario(usuarioId) {
+  console.log("usuarioId action", usuarioId);
   return async function (dispatch) {
     try {
       // URL = "http://localhost:3001/reservas-por-usuario?id=" + usuarioId
@@ -435,8 +432,13 @@ export function getReservas_usuario(usuarioId) {
       });
       //alert("Reservas del Usuario obtenidas exitosamente");
     } catch (error) {
-      alert("Error al solicitar las Reservas por Usuario:", error);
-      // console.log("Error al solicitar las Reservas por Usuario:",error);
+      // if(error.response.data === "No se encontró ninguna Reserva con el ID de Usuario proporcionado"){
+      //   alert(error.response.data);
+      // }
+       console.log("Error al solicitar las Reservas por Usuario:", error);
+       Swal.fire("El usuario no tiene reservas!", "", "error");
+
+       console.log("Error al solicitar las Reservas por Usuario:",error);
     }
   };
 }
@@ -452,7 +454,7 @@ export function getReservas_Admin(usuarioId) {
       });
       //alert("Reservas del Usuario obtenidas exitosamente");
     } catch (error) {
-      alert("Error al solicitar las Reservas por Usuario:", error);
+      Swal.fire("Error al solicitar las Reservas por Usuario", "", "error");
       // console.log("Error al solicitar las Reservas por Usuario:",error);
     }
   };
@@ -489,7 +491,7 @@ export function DetailHabitaciones(id) {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.response.data.error);
+      Swal.fire(error.response.data.error, "", "error");
     }
   };
 }
@@ -538,3 +540,46 @@ export const añadirAlCarrito = (idUser, idHabitacion) => {
     }
   };
 };
+
+export function cambiarEstadoUsuario(id, nuevoEstado) {
+    console.log(id, nuevoEstado)
+    return async function () {
+      try {
+        const response = await axios.put("/update/usuarioEstado", {id, nuevoEstado});
+        alert("Cambio de estado de Usuario realizado exitosamente");
+        console.log("Respuesta del servidor:", response.data);
+       // ver si es necesario dispatch aqui "POST_USUARIO",p/q actualice estado "usuarios"
+      } catch (error) {
+        console.error("Error al enviar la consulta:", error);
+      }
+    };
+  }
+
+  export function getUsuarioById(id) {
+    return async function (dispatch) {
+      try {
+        const usuarios = await axios.get(`/usuario/${id}`);
+        return dispatch({
+          type: "GET_USUARIO_BY_ID",
+          payload: usuarios.data,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  }
+
+  export const deleteReservas = (id) => {
+    return async function (dispatch) {
+      try {
+        const response = await axios.delete(`/reservas/delete/${id}`);
+        Swal.fire("Reserva eliminada exitosamente!", "", "success");
+        dispatch({
+          type: "DELETE_RESERVA",
+          payload: response.data,
+        });
+      } catch (error) {
+        Swal.fire(error.message, "", "error");
+      }
+    };
+  };

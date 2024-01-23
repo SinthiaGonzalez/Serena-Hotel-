@@ -2,12 +2,12 @@ const { Usuario } = require('../../db')
 
 const CreateUsuario = async (req, res) => {
   try {
-    const { name, apellido, email, telefono, contraseña,isadmin } = req.body;
+    const { name, apellido, email, telefono, contraseña,isadmin,estado,imagen} = req.body;
     console.log("aqui en el createusuario", name, apellido, email)
-const isAdmin = isadmin === true || isadmin === "true";
+    const isAdmin = isadmin === true || isadmin === "true";
     const prueba = await Usuario.findOne({ where: { email: email } });
     if (prueba) {
-      return res.status(200).json({ message: "Ya existe un usuario vinculado a ese correo" })
+      return res.status(201).json({ message: "Ya existe un usuario vinculado a ese correo" })
     } else {
       const newUser = await Usuario.create({
         name,
@@ -16,6 +16,8 @@ const isAdmin = isadmin === true || isadmin === "true";
         telefono,
         contraseña,
         isadmin: isAdmin,
+        estado,
+        imagen
 
       });
       return res.status(200).json(newUser);
@@ -25,5 +27,7 @@ const isAdmin = isadmin === true || isadmin === "true";
 
   }
 };
+
+
 
 module.exports = { CreateUsuario };

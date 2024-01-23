@@ -19,20 +19,6 @@ import {
 import { ChevronDownIcon, Bars2Icon } from "@heroicons/react/24/solid";
 import AddShoppingCart from "../cardCarrito/cardAñadirCarrito";
 import { getCarrito, verificarToken } from "../../redux/Actions/actions";
-const profileMenuItems = [
-  {
-    label: "Notificaciones",
-    d: "M224 0c-17.7 0-32 14.3-32 32V51.2C119 66 64 130.6 64 208v18.8c0 47-17.3 92.4-48.5 127.6l-7.4 8.3c-8.4 9.4-10.4 22.9-5.3 34.4S19.4 416 32 416H416c12.6 0 24-7.4 29.2-18.9s3.1-25-5.3-34.4l-7.4-8.3C401.3 319.2 384 273.9 384 226.8V208c0-77.4-55-142-128-156.8V32c0-17.7-14.3-32-32-32zm45.3 493.3c12-12 18.7-28.3 18.7-45.3H224 160c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7z",
-  },
-  {
-    label: "Cerrar Sesión",
-    d: "M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z",
-  },
-];
-let imagenUsuario  = localStorage.getItem("imagen");
-imagenUsuario = imagenUsuario.replace(/^"|"$/g, '');
-let name = localStorage.getItem("name");
-name = name.replace(/^"|"$/g, '');
 
 
 function ProfileMenu() {
@@ -41,11 +27,29 @@ function ProfileMenu() {
   const navigate = useNavigate();
   const handlerSesion = (e) => {
     localStorage.removeItem("token");
+    localStorage.removeItem("name");
+    localStorage.removeItem("imagen");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("isAdmin");
     navigate("/logearse");
   };
+//const[userLoggedIn, setUserLoggedIn] = useState(false);
+const imagenUsuario = JSON.parse(localStorage.getItem("imagen"));
+const name = JSON.parse(localStorage.getItem("name"));
+
+// const verifyLogin = () => {
+//   const prueba = localStorage.getItem("token");
+//   if (prueba) setUserLoggedIn(true);
+//   else setUserLoggedIn(false);
+// }
+
+// useEffect(() => {
+//   verifyLogin();
+// }, []);
 
 
-
+  const formattedName =
+    name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
 
   return (
     <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
@@ -70,35 +74,62 @@ function ProfileMenu() {
           />
         </Button>
       </MenuHandler>
+
       <MenuList className="text-lg text-white bg-verde border-0 w-60 flex flex-col items-center p-1">
-        <p className="p-1 font-medium focus:outline-none">Perfil</p>
-        <img
-          className="h-36 w-36 object-cover rounded-full focus:outline-none"
-          src={imagenUsuario}
-          alt="https://res.cloudinary.com/de2jgnztx/image/upload/v1705619360/habitaciones/dsqhjd0wd9xqe9anigxj.png"
-        />
-        <p className="p-1 font-medium focus:outline-none">¡Hola,{name}!</p>
-        {profileMenuItems.map(({ label, d }, key) => {
-          return (
-            <MenuItem
-              key={label}
-              onClick={closeMenu}
-              className="border-0 flex flex-row items-center my-1 justify-center gap-2 rounded-xm focus:bg-naranja focus:text-white"
+        <p className="p-1 font-medium focus:outline-none text-xl my-3">
+          ¡Hola, {formattedName}!
+        </p>
+        <Link to="/clientePerfil">
+          <img
+            className="h-36 w-36 mb-3 object-cover rounded-full focus:outline-none"
+            src={imagenUsuario}
+            alt="https://res.cloudinary.com/de2jgnztx/image/upload/v1705619360/habitaciones/dsqhjd0wd9xqe9anigxj.png"
+          />
+        </Link>
+
+        <MenuItem
+          key="Mi Perfil"
+          onClick={closeMenu}
+          className="border-0 flex flex-row items-center my-1 justify-center gap-2 rounded-xm focus:bg-naranja focus:text-white"
+        >
+          <Link to="clientePerfil" className="flex items-center gap-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="16"
+              width="20"
+              viewBox="0 0 448 512"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="16"
-                width="20"
-                viewBox="0 0 448 512"
-              >
-                <path fill="#ffffff" d={d} />
-              </svg>
-              <button onClick={handlerSesion} className="font-normal">
-                {label}
-              </button>
-            </MenuItem>
-          );
-        })}
+              <path
+                fill="#ffffff"
+                d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"
+              />
+            </svg>
+            <button  className="font-normal">
+              Mi Perfil
+            </button>
+          </Link>
+        </MenuItem>
+
+        <MenuItem
+          key="Cerrar Sesión"
+          onClick={closeMenu}
+          className="border-0 flex flex-row items-center my-1 justify-center gap-2 rounded-xm focus:bg-naranja focus:text-white"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="16"
+            width="20"
+            viewBox="0 0 448 512"
+          >
+            <path
+              fill="#ffffff"
+              d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"
+            />
+          </svg>
+          <button onClick={handlerSesion} className="font-normal">
+            Cerrar Sesión
+          </button>
+        </MenuItem>
       </MenuList>
     </Menu>
   );
@@ -240,7 +271,7 @@ const NavBarHome = () => {
       </Collapse>
       <div className="relative ">
         {isCartOpen && (
-          <div className="flex flex-col justify-between h-[30] w-80 absolute top-12 right-0  bg-verde p-6 rounded-md shadow-md">
+          <div className="flex flex-col justify-between h-[30] w-[350px] absolute top-12 right-0  bg-verde p-6 rounded-md shadow-md">
             <div>
               <button
                 onClick={toggleCart}
@@ -257,7 +288,7 @@ const NavBarHome = () => {
                 </svg>
               </button>
 
-              <p className="text-white text-xm">TUS COMPRAS</p>
+              <p className="text-white text-xm mb-4 -mt-3 ">TUS COMPRAS</p>
             </div>
             <div className="flex flex-col gap-2">
               <div className="h-64 overflow-y-auto">
@@ -267,21 +298,25 @@ const NavBarHome = () => {
                 <p>Sub Total</p>
                 <p>${subtotal}</p>
               </div>
-              <Button
-                className="bg-naranja cursor-pointer"
-                size="sm"
-                color="orange"
-                variant="text"
+              <Link
+                to="/habitaciones"
+                className="bg-naranja cursor-pointer hover:scale-105 rounded-lg text-center"
               >
-                SEGUIR COMPRANDO
-              </Button>
-              <Link to="/pasareladePago">
                 <Button
-                  className="bg-naranja cursor-pointer"
+                  className="bg-naranja cursor-pointer hover:scale-105"
                   size="sm"
                   color="orange"
                   variant="text"
                 >
+                  SEGUIR COMPRANDO
+                </Button>
+              </Link>
+
+              <Link
+                to="/pasareladePago"
+                className="bg-naranja cursor-pointer hover:scale-105 rounded-lg text-center"
+              >
+                <Button size="sm" color="orange" variant="text">
                   PAGAR
                 </Button>
               </Link>

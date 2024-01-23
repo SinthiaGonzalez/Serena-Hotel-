@@ -14,18 +14,33 @@ const getReservasPorUsuarioId = async (req, res) => {
       if (reservasPorUsuarioId == 0) {
         throw new Error('No se encontró ninguna Reserva con el ID de Usuario proporcionado');
       }
+      /*
+    let fecha1 = new Date("01/01/2022");
+    let fecha2 = new Date("12/24/2022");
+    let diferencia = fecha2.getTime() - fecha1.getTime();
+    let diasDeDiferencia = diferencia / 1000 / 60 / 60 / 24;
+    console.log(diasDeDiferencia); // resultado: 357
+      */
       let objToResponse = []
       reservasPorUsuarioId.forEach(reserva => {
         console.log(reserva.fecha_entrada)
-        reserva.Habitaciones.forEach(habitacion => {
-          
+        let precioTotalReserva = 0
+        reserva.Habitaciones.forEach(habitacion => {   
+          let fecha1 = new Date(reserva.fecha_entrada);
+          let fecha2 = new Date(reserva.fecha_salida);
+          let diferencia = fecha2.getTime() - fecha1.getTime();
+          //console.log(diasDeDiferencia); // resultado: 357
+          let diasDeDiferencia = diferencia / 1000 / 60 / 60 / 24;
+          precioTotalReserva += habitacion.precio * diasDeDiferencia
+        });  
+        reserva.Habitaciones.forEach(habitacion => {   
           objToResponse.push(
           {
             "id_reserva": reserva.id,
             "nombre_habitacion": habitacion.nombre, 
             "fecha_entrada": reserva.fecha_entrada,
             "fecha_salida": reserva.fecha_salida,
-            
+            "precioTotalReserva": precioTotalReserva,
           })
         });
       });
@@ -46,3 +61,4 @@ const getReservasPorUsuarioId = async (req, res) => {
 };
 
 module.exports = { getReservasPorUsuarioId };
+

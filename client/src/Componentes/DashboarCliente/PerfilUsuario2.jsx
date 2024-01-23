@@ -81,7 +81,8 @@ export const PerfilUsuario2 = () => {
                   <td className="py-6 px-12 text-center">
                     {linea.nombre_habitacion}
                   </td>
-                  <td className="py-6 px-12 text-center">$ - </td>
+                  <td className="py-6 px-12 text-center">
+                    {linea.precioTotalReserva}</td>
                 </tr>
               ))}
             </tbody>
