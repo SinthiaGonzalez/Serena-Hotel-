@@ -49,7 +49,11 @@ const DetalledelaCompra = () => {
             <h2>Subtotal</h2>
           </div>
           <div className="w-1/2 text-end mb-2">
-            <h2>${subtotal}</h2>
+            <h2>{subtotal.toLocaleString("es-AR", {
+              style: "currency",
+              currency: "ARS",
+              minimumFractionDigits: 0,
+            })}</h2>
           </div>
         </div>
         <div className="border-b-2 border-blanco text-inter text-blanco text-xl flex mb-8">
@@ -57,7 +61,11 @@ const DetalledelaCompra = () => {
             <h2>Impuestos Iva 21%</h2>
           </div>
           <div className="w-1/2 text-end mb-2">
-            <h2>${iva}</h2>
+            <h2>{iva.toLocaleString("es-AR", {
+              style: "currency",
+              currency: "ARS",
+              minimumFractionDigits: 0,
+            })}</h2>
           </div>
         </div>
         <div className="flex mb-4 text-inter text-blanco font-bold text-2xl">
@@ -65,7 +73,11 @@ const DetalledelaCompra = () => {
             <h2>Total</h2>
           </div>
           <div className="w-1/2 text-end">
-            <h2>${total}</h2>
+            <h2>{total.toLocaleString("es-AR", {
+              style: "currency",
+              currency: "ARS",
+              minimumFractionDigits: 0,
+            })}</h2>
           </div>
         </div>
         <div className="w-full mt-12">
