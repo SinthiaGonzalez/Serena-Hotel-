@@ -7,7 +7,7 @@ import {
   faPhone,
   faLock,
 } from "@fortawesome/free-solid-svg-icons";
-import { postUsuario } from "../../redux/Actions/actions.js";
+import {postUsuario} from "../../redux/Actions/actions"
 
 const CreateUsuario = () => {
   const dispatch = useDispatch();
