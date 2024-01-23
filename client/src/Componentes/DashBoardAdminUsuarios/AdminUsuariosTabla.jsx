@@ -9,15 +9,14 @@ const AdminUsuariosTabla = () => {
   const TodosLosUsuario = useSelector((state) => state.usuarios); 
   const [paginaActual, setPaginaActual] = useState(1);
   const [itemsPerPage] = useState(5);
-
   useEffect(() => { //montado del comp.
+
     dispatch(getUsuarios());    
-   
   }, []);
 
   useEffect(() => { //actualizacion del comp.
-  console.log("Re montado del componente")
-  console.log("TodosLosUsuario LENGTH", TodosLosUsuario.length)
+    console.log("Re montado del componente")
+    console.log("TodosLosUsuario LENGTH", TodosLosUsuario.length)
   }, [TodosLosUsuario]);
 
   const handlePaginaChange = (nuevaPagina) => {
@@ -35,8 +34,8 @@ const AdminUsuariosTabla = () => {
     (paginaActual - 1) * itemsPerPage,
     paginaActual * itemsPerPage
   );
-  
-  
+
+
   return (
     <div className="flex flex-col items-center justify-center mb-8">
       <div className="border-2 border-verde h-[15%] w-[55%] rounded-3xl flex p-6 m-10">
@@ -94,19 +93,13 @@ const AdminUsuariosTabla = () => {
                 <th className="py-5 px-12 text-center">Nombre y Apellido</th>
                 <th className="py-5 px-12 text-center">Correo</th>
                 <th className="py-5 px-12 text-center">Telefono</th>
-                <th className="py-5 px-12 text-center">Estado</th>              
+                <th className="py-5 px-12 text-center">Estado</th>
               </tr>
             </thead>
-            <tbody>   
-                {UsuariosPaginados?.map((linea) => (
-                <Linea linea={linea} key={linea.id}/>  
-                ))}   
-            </tbody>
-
-            <tbody>   
-                {UsuariosPaginados?.map((linea) => (
-                <Linea linea={linea} key={linea.id}/>  
-                ))}   
+            <tbody>
+              {UsuariosPaginados?.map((linea) => (
+                <Linea linea={linea} key={linea.id} />
+              ))}
             </tbody>
           </table>
         </div>
@@ -121,6 +114,5 @@ const AdminUsuariosTabla = () => {
     </div>
   );
 };
-
 
 export default AdminUsuariosTabla;

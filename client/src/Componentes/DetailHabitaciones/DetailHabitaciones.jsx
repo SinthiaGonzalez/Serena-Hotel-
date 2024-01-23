@@ -31,7 +31,7 @@ const DetailHabitacionesComponent = () => {
   }, [habitacion]);
 
   return (
-    <div className="h-auto bg-verde">
+    <div className="h-screen bg-verde">
       <NavBarHome />
 
       <h2 className="text-4xl text-blanco text-inter text-center font-semibold my-10">

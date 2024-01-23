@@ -68,7 +68,7 @@ const {
 } = require("../handlers/HabitacionDetailHandler");
 
 const { deleteCarrito } = require("../Controladores/carritoControlador");
-const  {respuestaConfirmacionPago}  = require("../Controladores/postProductMP");
+const  {respuestaConfirmacionPago}  = require("../Controladores/RespuestaMP");
 
 
 const router = express.Router(); // importamos el metodo Router de express para poder crear rutas
