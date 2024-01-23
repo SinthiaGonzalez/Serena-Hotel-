@@ -6,10 +6,19 @@ import {
   Button,
   IconButton,
 } from "@material-tailwind/react";
+import { useNavigate } from "react-router-dom";
 
 const NavBarAdmin = () => {
   const [openNav, setOpenNav] = React.useState(false);
-
+  const navigate = useNavigate();
+  const handlerSesion = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("name");
+    localStorage.removeItem("imagen");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("isAdmin");
+    navigate("/logearse");
+  };
   React.useEffect(() => {
     window.addEventListener(
       "resize",
@@ -79,7 +88,10 @@ const NavBarAdmin = () => {
             d="M32 32c17.7 0 32 14.3 32 32V320H288V160c0-17.7 14.3-32 32-32H544c53 0 96 43 96 96V448c0 17.7-14.3 32-32 32s-32-14.3-32-32V416H352 320 64v32c0 17.7-14.3 32-32 32s-32-14.3-32-32V64C0 46.3 14.3 32 32 32zm144 96a80 80 0 1 1 0 160 80 80 0 1 1 0-160z"
           />
         </svg>
-        <a href="/admin-habitaciones" className="font-medium  flex items-center">
+        <a
+          href="/admin-habitaciones"
+          className="font-medium  flex items-center"
+        >
           HABITACIONES
         </a>
       </Typography>
@@ -143,6 +155,7 @@ const NavBarAdmin = () => {
           <Button
             size="sm"
             className="border-2 border-naranja hover:border-blanco bg-naranja hidden lg:inline-block"
+            onClick={handlerSesion}
           >
             <span>Salir</span>
           </Button>
@@ -189,11 +202,7 @@ const NavBarAdmin = () => {
         <div className="container mx-auto">
           {navList}
           <div className="flex items-center">
-            <Button
-              fullWidth
-              size="sm"
-              className="border-2 border-naranja hover:border-blanco bg-naranja"
-            >
+            <Button fullWidth size="sm" className="bg-naranja">
               <span>Salir</span>
             </Button>
           </div>
