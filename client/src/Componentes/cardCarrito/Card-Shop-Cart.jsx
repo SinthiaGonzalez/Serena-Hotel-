@@ -25,7 +25,11 @@ const ShoppingCartCard1 = ({ imagenes, nombre, precio, id }) => {
           />
           <div className="flex flex-col items-center w-1/2">
             <p className="text-white-700 text-inter text-xl font-bold">
-              ${precio}
+            {precio.toLocaleString("es-AR", {
+              style: "currency",
+              currency: "ARS",
+              minimumFractionDigits: 0,
+            })}
             </p>
             <div>
               <button
