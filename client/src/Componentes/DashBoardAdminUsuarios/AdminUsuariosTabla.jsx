@@ -2,28 +2,22 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Paginacion from "../Paginacion/Paginacion";
 import { getUsuarios } from "../../redux/Actions/actions";
-import Linea from "./LineaTablaAdminUsuarios.jsx"
-
+import  Linea  from "./LineaTablaAdminUsuarios.jsx"
 
 const AdminUsuariosTabla = () => {
   const dispatch = useDispatch();
-  const TodosLosUsuario = useSelector((state) => state.usuarios);
+  const TodosLosUsuario = useSelector((state) => state.usuarios); 
   const [paginaActual, setPaginaActual] = useState(1);
   const [itemsPerPage] = useState(5);
-
-
-
   useEffect(() => { //montado del comp.
-    dispatch(getUsuarios());
 
+    dispatch(getUsuarios());    
   }, []);
 
   useEffect(() => { //actualizacion del comp.
     console.log("Re montado del componente")
     console.log("TodosLosUsuario LENGTH", TodosLosUsuario.length)
   }, [TodosLosUsuario]);
-
-
 
   const handlePaginaChange = (nuevaPagina) => {
     setPaginaActual(nuevaPagina);
@@ -120,7 +114,5 @@ const AdminUsuariosTabla = () => {
     </div>
   );
 };
-
-
 
 export default AdminUsuariosTabla;

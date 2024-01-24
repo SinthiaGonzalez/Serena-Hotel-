@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { postUsuario } from "../../redux/actions/actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
@@ -8,6 +7,7 @@ import {
   faPhone,
   faLock,
 } from "@fortawesome/free-solid-svg-icons";
+import {postUsuario} from "../../redux/Actions/actions"
 
 const CreateUsuario = () => {
   const dispatch = useDispatch();
