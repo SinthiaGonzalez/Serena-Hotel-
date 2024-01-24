@@ -1,25 +1,44 @@
-const { Habitaciones } = require("../db");
+const { Habitaciones, Reservas } = require("../db");
+const { Op } = require("sequelize");
 
 const getOrdenamientosFiltrosHandler = async (req, res) => {
   try {
-    const { ordenarPor, direccion, filtroPersonas, filtroCuarto } = req.query;
+    const {
+      ordenarPor,
+      direccion,
+      filtroPersonas,
+      filtroCuarto,
+      fecha_entrada,
+      fecha_salida,
+    } = req.query;
+    const fechaEntrada = new Date(fecha_entrada);
+    const fechaSalida = new Date(fecha_salida);
 
-    const ordenValido = ["nombre", "precio"].includes(ordenarPor);
-    const direccionValida = ["asc", "desc"].includes(
-      direccion ? direccion.toLowerCase() : ""
+    const reservasSuperpuestas = await Reservas.findAll({
+      include: Habitaciones,
+      where: {
+        [Op.and]: [
+          {
+            fecha_entrada: {
+              [Op.lt]: fechaSalida,
+            },
+            fecha_salida: {
+              [Op.gt]: fechaEntrada,
+            },
+          },
+        ],
+      },
+    });
+
+    const habitacionesReservadas = reservasSuperpuestas.flatMap((reserva) =>
+      reserva.Habitaciones.map((habitacion) => habitacion.id)
     );
 
-    if (!ordenValido || !direccionValida) {
-      return res
-        .status(400)
-        .json({ error: "Parámetros de ordenamiento no válidos" });
-    }
+    const todasLasHabitaciones = await Habitaciones.findAll();
 
-    const consulta = {
-      order: [[ordenarPor, direccion]],
-    };
-
-    let habitacionesFiltradas = await Habitaciones.findAll(consulta);
+    let habitacionesFiltradas = todasLasHabitaciones.filter(
+      (habitacion) => !habitacionesReservadas.includes(habitacion.id)
+    );
 
     if (filtroPersonas) {
       habitacionesFiltradas = habitacionesFiltradas.filter((habitacion) => {
@@ -40,8 +59,30 @@ const getOrdenamientosFiltrosHandler = async (req, res) => {
       });
     }
 
-    console.log("Habitaciones filtradas:", habitacionesFiltradas);
-    res.status(200).json(habitacionesFiltradas);
+    // Aplica la ordenación a los resultados filtrados
+    const ordenValido = ["nombre", "precio"].includes(ordenarPor);
+    const direccionValida = ["asc", "desc"].includes(
+      direccion ? direccion.toLowerCase() : ""
+    );
+
+    if (!ordenValido || !direccionValida) {
+      return res
+        .status(400)
+        .json({ error: "Parámetros de ordenamiento no válidos" });
+    }
+
+    const consulta = {
+      order: [[ordenarPor, direccion]],
+    };
+
+    const habitacionesDisponibles = await Habitaciones.findAll({
+      where: {
+        id: habitacionesFiltradas.map((habitacion) => habitacion.id),
+      },
+      ...consulta,
+    });
+
+    res.status(200).json(habitacionesDisponibles);
   } catch (error) {
     console.error("Error:", error);
     res.status(500).json({ error: error.message });

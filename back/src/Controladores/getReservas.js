@@ -9,8 +9,6 @@ const getReservas = async (req, res) => {
     const fechaEntrada = new Date(fecha_entrada);
     const fechaSalida = new Date(fecha_salida);
 
-    console.log("Fechas convertidas:", fechaEntrada, fechaSalida);
-
     const reservasSuperpuestas = await Reservas.findAll({
       include: Habitaciones,
       where: {

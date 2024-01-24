@@ -85,8 +85,6 @@ const NavBarHome = () => {
 
   const dispatch = useDispatch();
   const token = useSelector((state) => state.token);
-  console.log("carrito", carrito);
-
   React.useEffect(() => {
     console.log("token 205"+token)   
   }, []);
