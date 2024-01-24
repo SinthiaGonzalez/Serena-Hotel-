@@ -29,7 +29,7 @@ const Habitaciones = () => {
   const dispatch = useDispatch();
   const habitacionesShop = useSelector((state) => state.habitaciones);
   const habitacionesFechas = useSelector((state) => state.habitacionesFechas);
-  // const habitacionfiltrada = useSelector((state) => state.habitacionfiltrada);
+  const habitacionfiltrada = useSelector((state) => state.habitacionfiltrada);
   const stringdelbuscar = useSelector((state) => state.string);
   const [filtrosPersonas, setFiltrosPersonas] = useState([]);
   const [filtrosCuarto, setFiltrosCuarto] = useState([]);
@@ -140,22 +140,25 @@ const Habitaciones = () => {
     );
     setMostrarSeccion(true);
   };
+  const habitacionesRenderizadas =
+    habitacionesFechas.length > 0 ? habitacionesFechas : habitacionesShop;
 
   const totalItems =
     stringdelbuscar.length > 0
-      ? habitacionesFechas.length
-      : habitacionesShop.length;
+      ? habitacionfiltrada.length
+      : habitacionesRenderizadas.length;
 
   const habitacionesActuales =
     stringdelbuscar.length > 0
-      ? habitacionesFechas.slice(
+      ? habitacionfiltrada.slice(
           (paginaActual - 1) * itemsPerPage,
           paginaActual * itemsPerPage
         )
-      : habitacionesShop.slice(
+      : habitacionesRenderizadas.slice(
           (paginaActual - 1) * itemsPerPage,
           paginaActual * itemsPerPage
         );
+  console.log("habitacionesBusqueda", habitacionfiltrada);
   console.log("todasHabitaciones", habitacionesShop);
   console.log("habitacionesFechas", habitacionesFechas);
   console.log("habitacionesActuales", habitacionesActuales);
@@ -176,7 +179,7 @@ const Habitaciones = () => {
               <h2 className="text-3xl font-bold text-blanco p-4">
                 Ordenamientos
               </h2>
-              <BuscarPorNombre />
+              {/* <BuscarPorNombre /> */}
               <div className="flex flex-col w-full p-4">
                 <h2 className="text-2xl font-bold text-blanco mb-2">Nombre</h2>
                 <Select
@@ -209,7 +212,7 @@ const Habitaciones = () => {
                 </h2>
                 <Card className="w-6/7 mx-2">
                   <List className="flex-row">
-                    {[2, 3, 4, 5, 6].map((persona) => (
+                    {[2, 3, 4, 5, 6, 8].map((persona) => (
                       <ListItem key={persona} className="p-0">
                         <label
                           htmlFor={`persona-${persona}`}
@@ -246,7 +249,7 @@ const Habitaciones = () => {
                 </h2>
                 <Card className="w-6/7 mx-2">
                   <List className="flex-row">
-                    {[1, 2, 3, 5, 6].map((cuarto) => (
+                    {[1, 2, 3, 4].map((cuarto) => (
                       <ListItem key={cuarto} className="p-0">
                         <label
                           htmlFor={`cuarto-${cuarto}`}
@@ -283,11 +286,8 @@ const Habitaciones = () => {
           )}
         </div>
         <div className="w-full mr-12">
-          {habitacionesFechas.length > 0 ? (
-            <CardsShopHabitaciones habitacionesShop={habitacionesFechas} />
-          ) : (
-            <CardsShopHabitaciones habitacionesShop={habitacionesActuales} />
-          )}
+          <CardsShopHabitaciones habitacionesShop={habitacionesActuales} />
+
           <Paginacion
             className="mt-12 w-1/2"
             active={paginaActual}

@@ -104,11 +104,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         habitacionesFechas: action.payload,
       };
-    case "GET_HABITACIONES_FECHAS":
-      return {
-        ...state,
-        habitacionesFechas: action.payload,
-      };
+
     case "GET_RESERVAS":
       return {
         ...state,
