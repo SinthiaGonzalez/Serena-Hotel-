@@ -254,7 +254,6 @@ export const getReservas = ({ fecha_entrada, fecha_salida }) => {
   };
 };
 export function updateHabitacion(habitacionData) {
-  console.log({ habitacionData });
   return async (dispatch) => {
     try {
       const response = await axios.put("/update/habitaciones", habitacionData);
@@ -294,18 +293,17 @@ export function estadoLogeo(estado) {
   };
 }
 export function deleteHabitacion(id) {
-  console.log({ id });
+  console.log('prueba',{ id });
   return async function (dispatch) {
     try {
       const response = await axios.delete(`/habitaciones/${id}`);
 
-      if (response.status === 200) {
         dispatch({
           type: "DELETE_HABITACION",
           payload: id,
         });
         Swal.fire("Habitacion eliminada exitosamente!", "", "success");
-      }
+      
     } catch (error) {
       Swal.fire(error.message,"","error");
     }

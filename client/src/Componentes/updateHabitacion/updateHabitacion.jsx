@@ -154,6 +154,7 @@ const UpdateHabitacion = () => {
           { icono: "wifi", descripcion: "Wifi" },
         ],
         descripcion: "",
+        estado: "Disponible"
       });
     } else {
       Swal.fire("Errores de validacion", errors, "error");
@@ -192,12 +193,9 @@ const UpdateHabitacion = () => {
     }
   };
 
-  const idhabitacion = habitacionesB.find(function (habitacion) {
-    return habitacion.nombre === seleccionhabitacion;
-  });
-
-  const handlerdeleteHabitacion = () => {
-    dispatch(deleteHabitacion(idhabitacion.id));
+  const handlerdeleteHabitacion = (e) => {
+    e.preventDefault();
+    dispatch(deleteHabitacion(habitacionDetail[0].id));
     dispatch(getHabitacionesbackup());
   };
 
@@ -243,7 +241,7 @@ console.log("auxilio", nuevaDataHabitacion)
         </div>
       </div>
 
-      <form className="flex flex-row gap-20 mx-2 my-10" onSubmit={handleSubmit}>
+      <form className="flex flex-row gap-20 mx-2 my-10">
         <div className="w-2/8">
           <div className="grid grid-cols-2 gap-4 ml-8">
             {nuevaDataHabitacion.imagenes.map((imagen, index) => (
@@ -431,6 +429,7 @@ console.log("auxilio", nuevaDataHabitacion)
             className="w-full mt-2  select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-blanco transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
             type="submit"
             disabled={isSubmitDisabled()}
+            onClick={handleSubmit}
           >
             Editar
           </button>
