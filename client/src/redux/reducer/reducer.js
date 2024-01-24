@@ -171,6 +171,11 @@ const reducer = (state = initialState, action) => {
           ...state,
           usuarioById: action.payload,
         }
+        case "POST_USUARIO_GOOGLE":
+          return {
+            ...state,
+            token: action.payload,
+          };
     default:
       return state;
   }
