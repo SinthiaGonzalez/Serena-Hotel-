@@ -1,11 +1,10 @@
 import axios from "axios";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 
 export function getHabitaciones() {
   return async function (dispatch) {
     try {
       const habitaciones = await axios.get("/habitaciones");
-      console.log("logdeaction", habitaciones.data);
       return dispatch({
         type: "GET_HABITACIONES",
         payload: habitaciones.data,
@@ -55,7 +54,7 @@ export function postComent(state) {
       await axios.post("/comentar", state);
       Swal.fire("Se agrego el comentario exitosamente!", "", "success");
     } catch (error) {
-      Swal.fire(error.message,"","error");
+      Swal.fire(error.message, "", "error");
     }
   };
 }
@@ -66,7 +65,7 @@ export function postUsuario(state) {
       console.log("log de action", state);
       Swal.fire("Usuario creado exitosamente!", "", "success");
     } catch (error) {
-      Swal.fire(error.message,"","error");
+      Swal.fire(error.message, "", "error");
     }
   };
 }
@@ -108,7 +107,7 @@ export function getAllcomentarios() {
         });
       }
     } catch (error) {
-      Swal.fire(error.message,"","error");
+      Swal.fire(error.message, "", "error");
     }
   };
 }
@@ -126,7 +125,7 @@ export function eliminarComentario(id) {
         Swal.fire("Comentario eliminado exitosamente!", "", "success");
       }
     } catch (error) {
-      Swal.fire(error.message,"","error");
+      Swal.fire(error.message, "", "error");
     }
   };
 }
@@ -166,7 +165,7 @@ export function crearHabitacion(habitacionData) {
       });
     } catch (error) {
       console.log(error);
-      Swal.fire(error.message,"","error");
+      Swal.fire(error.message, "", "error");
     }
   };
 }
@@ -176,11 +175,13 @@ export function getHabitacionesNombre({
   filtrosPersonas,
   filtrosCuarto,
   tipoOrdenamiento,
+  checkinDate,
+  checkoutDate,
 }) {
   return async function (dispatch) {
     try {
       const habitaciones = await axios.get(
-        `/ordenamientos&filtros?ordenarPor=${tipoOrdenamiento}&direccion=${direccion}&filtroPersonas=${filtrosPersonas}&filtroCuarto=${filtrosCuarto}`
+        `/ordenamientos&filtros?ordenarPor=${tipoOrdenamiento}&direccion=${direccion}&filtroPersonas=${filtrosPersonas}&filtroCuarto=${filtrosCuarto}&fecha_entrada=${checkinDate}&fecha_salida=${checkoutDate}`
       );
       console.log("Aquí está la respuesta de la API:", habitaciones.data);
       return dispatch({
@@ -198,11 +199,13 @@ export function getHabitacionesPrecio({
   filtrosPersonas,
   filtrosCuarto,
   tipoOrdenamiento,
+  checkinDate,
+  checkoutDate,
 }) {
   return async function (dispatch) {
     try {
       const habitaciones = await axios.get(
-        `/ordenamientos&filtros?ordenarPor=${tipoOrdenamiento}&direccion=${direccion}&filtroPersonas=${filtrosPersonas}&filtroCuarto=${filtrosCuarto}`
+        `/ordenamientos&filtros?ordenarPor=${tipoOrdenamiento}&direccion=${direccion}&filtroPersonas=${filtrosPersonas}&filtroCuarto=${filtrosCuarto}&fecha_entrada=${checkinDate}&fecha_salida=${checkoutDate}`
       );
       console.log("Aquí está la respuesta de la API:", habitaciones.data);
       return dispatch({
@@ -219,6 +222,8 @@ export function getHabitacionesFiltrosPersonas({
   direccion,
   personas,
   filtroCuarto,
+  checkinDate,
+  checkoutDate,
 }) {
   return async function (dispatch) {
     console.log(
@@ -226,30 +231,30 @@ export function getHabitacionesFiltrosPersonas({
       ordenado,
       direccion,
       personas,
-      filtroCuarto
+      filtroCuarto,
+      checkinDate,
+      checkoutDate
     );
     try {
-      if (personas) {
-        const habitaciones = await axios.get(
-          `/ordenamientos&filtros?ordenarPor=${ordenado}&direccion=${direccion}&filtroPersonas=${personas}&filtroCuarto=${filtroCuarto}`
-        );
-        console.log("filtro personas:", habitaciones.data);
-        return dispatch({
-          type: "GET_HABITACIONES_FILTROS_PERSONAS",
-          payload: habitaciones.data,
-        });
-      }
+      const habitaciones = await axios.get(
+        `/ordenamientos&filtros?ordenarPor=${ordenado}&direccion=${direccion}&filtroPersonas=${personas}&filtroCuarto=${filtroCuarto}&fecha_entrada=${checkinDate}&fecha_salida=${checkoutDate}`
+      );
+      console.log("filtro personas:", habitaciones.data);
+      return dispatch({
+        type: "GET_HABITACIONES_FILTROS_PERSONAS",
+        payload: habitaciones.data,
+      });
     } catch (error) {
       console.log(error);
     }
   };
 }
 
-export const getReservas = ({ fecha_entrada, fecha_salida }) => {
+export const getReservas = ({ checkinDate, checkoutDate }) => {
   return async function (dispatch) {
     try {
       const reservas = await axios.get(
-        `/reservas?fecha_entrada=${fecha_entrada}&fecha_salida=${fecha_salida}`
+        `/reservas?fecha_entrada=${checkinDate}&fecha_salida=${checkoutDate}`
       );
       console.log("reservas:", reservas.data);
       return dispatch({
@@ -275,7 +280,7 @@ export function updateHabitacion(habitacionData) {
       });
     } catch (error) {
       console.log(error);
-      Swal.fire(error.message,"","error");
+      Swal.fire(error.message, "", "error");
     }
   };
 }
@@ -290,7 +295,11 @@ export function getDevs() {
         payload: response.data,
       });
     } catch (error) {
-      Swal.fire(error.message,"Hubo un problema con el servidor. Comuniquese con el Administrador","error")
+      Swal.fire(
+        error.message,
+        "Hubo un problema con el servidor. Comuniquese con el Administrador",
+        "error"
+      );
       return;
     }
   };
@@ -315,7 +324,7 @@ export function deleteHabitacion(id) {
         Swal.fire("Habitacion eliminada exitosamente!", "", "success");
       }
     } catch (error) {
-      Swal.fire(error.message,"","error");
+      Swal.fire(error.message, "", "error");
     }
   };
 }
@@ -350,10 +359,11 @@ export function getUsuarios() {
 export function updateUsuario(usuarioData, id) {
   return async (dispatch) => {
     try {
-      console.log("plis",usuarioData);
+      console.log("plis", usuarioData);
       id = usuarioData.id;
       const response = await axios.put(`/update/usuarios/${id}`, usuarioData);
-      if (response.data === "No se encontro el usuario") Swal.fire(response,"","error");
+      if (response.data === "No se encontro el usuario")
+        Swal.fire(response, "", "error");
       else Swal.fire("Guardados!", "", "success");
       console.log(response.data);
       dispatch({
@@ -362,7 +372,7 @@ export function updateUsuario(usuarioData, id) {
       });
     } catch (error) {
       console.log(error);
-      Swal.fire(error.message,"","error");
+      Swal.fire(error.message, "", "error");
     }
   };
 }
@@ -373,7 +383,7 @@ export function deleteUsuario(id) {
     try {
       const response = await axios.delete(`/delete/usuarios/${id}`);
       if (response.data === "No se encontro el usuario") {
-        Swal.fire("No se encontro el usuario","","error");
+        Swal.fire("No se encontro el usuario", "", "error");
       } else {
         dispatch({
           type: "DELETE_USUARIO",
@@ -382,7 +392,7 @@ export function deleteUsuario(id) {
         Swal.fire("Usuario eliminado exitosamente!", "", "success");
       }
     } catch (error) {
-      Swal.fire(error.message,"","error");
+      Swal.fire(error.message, "", "error");
     }
   };
 }
@@ -413,7 +423,7 @@ export function verificacionLogeoUsuarioAction(infoLogeo) {
       console.log("Respuesta del servidor manual:", response.data);
     } catch (error) {
       if (error.response && error.response.status === 400) {
-         Swal.fire(error.message,"Usuario o contraseña incorrectos","error");
+        Swal.fire(error.message, "Usuario o contraseña incorrectos", "error");
       }
     }
   };
@@ -435,10 +445,10 @@ export function getReservas_usuario(usuarioId) {
       // if(error.response.data === "No se encontró ninguna Reserva con el ID de Usuario proporcionado"){
       //   alert(error.response.data);
       // }
-       console.log("Error al solicitar las Reservas por Usuario:", error);
-       Swal.fire("El usuario no tiene reservas!", "", "error");
+      console.log("Error al solicitar las Reservas por Usuario:", error);
+      Swal.fire("El usuario no tiene reservas!", "", "error");
 
-       console.log("Error al solicitar las Reservas por Usuario:",error);
+      console.log("Error al solicitar las Reservas por Usuario:", error);
     }
   };
 }
@@ -542,44 +552,47 @@ export const añadirAlCarrito = (idUser, idHabitacion) => {
 };
 
 export function cambiarEstadoUsuario(id, nuevoEstado) {
-    console.log(id, nuevoEstado)
-    return async function () {
-      try {
-        const response = await axios.put("/update/usuarioEstado", {id, nuevoEstado});
-        alert("Cambio de estado de Usuario realizado exitosamente");
-        console.log("Respuesta del servidor:", response.data);
-       // ver si es necesario dispatch aqui "POST_USUARIO",p/q actualice estado "usuarios"
-      } catch (error) {
-        console.error("Error al enviar la consulta:", error);
-      }
-    };
-  }
-
-  export function getUsuarioById(id) {
-    return async function (dispatch) {
-      try {
-        const usuarios = await axios.get(`/usuario/${id}`);
-        return dispatch({
-          type: "GET_USUARIO_BY_ID",
-          payload: usuarios.data,
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-  }
-
-  export const deleteReservas = (id) => {
-    return async function (dispatch) {
-      try {
-        const response = await axios.delete(`/reservas/delete/${id}`);
-        Swal.fire("Reserva eliminada exitosamente!", "", "success");
-        dispatch({
-          type: "DELETE_RESERVA",
-          payload: response.data,
-        });
-      } catch (error) {
-        Swal.fire(error.message, "", "error");
-      }
-    };
+  console.log(id, nuevoEstado);
+  return async function () {
+    try {
+      const response = await axios.put("/update/usuarioEstado", {
+        id,
+        nuevoEstado,
+      });
+      alert("Cambio de estado de Usuario realizado exitosamente");
+      console.log("Respuesta del servidor:", response.data);
+      // ver si es necesario dispatch aqui "POST_USUARIO",p/q actualice estado "usuarios"
+    } catch (error) {
+      console.error("Error al enviar la consulta:", error);
+    }
   };
+}
+
+export function getUsuarioById(id) {
+  return async function (dispatch) {
+    try {
+      const usuarios = await axios.get(`/usuario/${id}`);
+      return dispatch({
+        type: "GET_USUARIO_BY_ID",
+        payload: usuarios.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export const deleteReservas = (id) => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.delete(`/reservas/delete/${id}`);
+      Swal.fire("Reserva eliminada exitosamente!", "", "success");
+      dispatch({
+        type: "DELETE_RESERVA",
+        payload: response.data,
+      });
+    } catch (error) {
+      Swal.fire(error.message, "", "error");
+    }
+  };
+};

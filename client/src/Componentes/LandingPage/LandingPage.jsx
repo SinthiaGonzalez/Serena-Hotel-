@@ -13,6 +13,7 @@ import LoginCliente from "../LoginCliente/LoginCliente";
 import ScrollToTop from "../../ScrollToTop";
 
 const LandingPage = () => {
+
   return (
     <>
       <ScrollToTop />

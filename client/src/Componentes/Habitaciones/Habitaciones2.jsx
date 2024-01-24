@@ -4,6 +4,7 @@ import {
   getHabitacionesPrecio,
   getHabitacionesNombre,
   getHabitacionesFiltrosPersonas,
+  getReservas,
 } from "../../redux/Actions/actions";
 import { getHabitaciones } from "../../redux/Actions/actions";
 import NavBarHome from "../NavBarHome/NavBarHome";
@@ -20,16 +21,15 @@ import {
 } from "@material-tailwind/react";
 import Checkin from "../Filtros/filtro-Checkin";
 import Checkout from "../Filtros/filtro-Checkout";
-import { getReservas } from "../../redux/Actions/actions";
 import { format } from "date-fns";
 import BuscarPorNombre from "../ordenamientosyBusqueda/busqueda";
 import Paginacion from "../Paginacion/Paginacion";
+
 const Habitaciones = () => {
   const dispatch = useDispatch();
   const habitacionesShop = useSelector((state) => state.habitaciones);
-  const habitacionfiltrada = useSelector(
-    (state) => state.habitacionesfiltradas
-  );
+  const habitacionesFechas = useSelector((state) => state.habitacionesFechas);
+  const habitacionfiltrada = useSelector((state) => state.habitacionfiltrada);
   const stringdelbuscar = useSelector((state) => state.string);
   const [filtrosPersonas, setFiltrosPersonas] = useState([]);
   const [filtrosCuarto, setFiltrosCuarto] = useState([]);
@@ -43,8 +43,9 @@ const Habitaciones = () => {
   const [itemsPerPage] = useState(3);
 
   useEffect(() => {
+    // Aquí puedes enviar la solicitud correspondiente cuando cambian las fechas
     dispatch(getHabitaciones({ page: paginaActual, itemsPerPage }));
-  }, [dispatch, itemsPerPage]);
+  }, [dispatch, itemsPerPage, checkinDate, checkoutDate]);
 
   const handleNombreChange = (value, tipoOrdenamiento) => {
     setUltimoOrdenamiento({
@@ -57,6 +58,8 @@ const Habitaciones = () => {
         filtrosPersonas,
         tipoOrdenamiento,
         filtrosCuarto,
+        checkinDate,
+        checkoutDate,
       })
     );
     setPaginaActual(1);
@@ -77,6 +80,8 @@ const Habitaciones = () => {
         filtrosPersonas,
         tipoOrdenamiento,
         filtrosCuarto,
+        checkinDate,
+        checkoutDate,
       })
     );
     setPaginaActual(1);
@@ -91,6 +96,8 @@ const Habitaciones = () => {
         page: paginaActual,
         itemsPerPage,
         filtroCuarto: filtrosCuarto,
+        checkinDate,
+        checkoutDate,
       })
     );
     setFiltrosPersonas(nuevosFiltros || filtrosPersonas);
@@ -106,33 +113,40 @@ const Habitaciones = () => {
         filtroCuarto: nuevosFiltros2 || filtrosCuarto,
         page: paginaActual,
         itemsPerPage,
+        checkinDate,
+        checkoutDate,
       })
     );
     setFiltrosCuarto(nuevosFiltros2 || filtrosCuarto);
     setPaginaActual(1);
   };
+
   const handleCheckinChange = (selectedDate) => {
-    setCheckinDate(selectedDate);
-    console.log(format(selectedDate, "yyyy-MM-dd"));
-    setPaginaActual(1);
+    setCheckinDate(format(selectedDate, "yyyy-MM-dd"));
+    console.log("fecha checkin", selectedDate);
   };
+
+  const [mostrarSeccion, setMostrarSeccion] = useState(false);
 
   const handleCheckoutChange = (selectedDate) => {
-    setCheckoutDate(selectedDate);
+    setCheckoutDate(format(selectedDate, "yyyy-MM-dd"));
+    console.log("fecha checkout", selectedDate);
+
     dispatch(
       getReservas({
-        fecha_entrada: format(checkinDate, "yyyy-MM-dd"),
-        fecha_salida: format(selectedDate, "yyyy-MM-dd"),
+        checkinDate,
+        checkoutDate,
       })
     );
-
-    setPaginaActual(1);
+    setMostrarSeccion(true);
   };
+  const habitacionesRenderizadas =
+    habitacionesFechas.length > 0 ? habitacionesFechas : habitacionesShop;
 
   const totalItems =
     stringdelbuscar.length > 0
       ? habitacionfiltrada.length
-      : habitacionesShop.length;
+      : habitacionesRenderizadas.length;
 
   const habitacionesActuales =
     stringdelbuscar.length > 0
@@ -140,121 +154,136 @@ const Habitaciones = () => {
           (paginaActual - 1) * itemsPerPage,
           paginaActual * itemsPerPage
         )
-      : habitacionesShop.slice(
+      : habitacionesRenderizadas.slice(
           (paginaActual - 1) * itemsPerPage,
           paginaActual * itemsPerPage
         );
-
+  console.log("habitacionesBusqueda", habitacionfiltrada);
+  console.log("todasHabitaciones", habitacionesShop);
+  console.log("habitacionesFechas", habitacionesFechas);
+  console.log("habitacionesActuales", habitacionesActuales);
   return (
     <>
       <NavBarHome />
       <div className="flex flex-row bg-white py-7">
         <div className="ml-8 bg-verde w-2/5 h-full rounded-xl p-2">
-          <h2 className="text-3xl font-bold text-blanco p-4">Ordenamientos</h2>
-          <BuscarPorNombre />
-          <div className="flex flex-col w-full p-4">
-            <h2 className="text-2xl font-bold text-blanco mb-2">Nombre</h2>
-            <Select
-              className="bg-verde w-full p-2 border border-gray-300 text-blanco text-sm rounded-lg"
-              onChange={(value) => handleNombreChange(value, "nombre")}
-              style={{ fontSize: "110%" }}
-            >
-              <Option value="asc">A-Z</Option>
-              <Option value="desc">Z-A</Option>
-            </Select>
-          </div>
-
-          <div className="flex flex-col w-full p-4">
-            <h2 className="text-2xl font-bold text-blanco mb-2">Precio</h2>
-            <Select
-              className="bg-verde w-full p-2 border border-gray-300 text-blanco text-sm rounded-lg"
-              onChange={(value) => handlePrecioChange(value, "precio")}
-              style={{ fontSize: "110%" }}
-            >
-              <Option value="asc">menor precio</Option>
-              <Option value="desc">mayor precio</Option>
-            </Select>
-          </div>
+          <h2 className="text-2xl font-bold text-blanco mb-2 pl-4">
+            Selecciona las Fechas
+          </h2>
           <div>
             <Checkin onCheckinChange={handleCheckinChange} />
             <Checkout onCheckoutChange={handleCheckoutChange} />
           </div>
-          <h2 className="text-3xl font-bold text-blanco p-4">Filtros</h2>
+          {mostrarSeccion && (
+            <>
+              <h2 className="text-3xl font-bold text-blanco p-4">
+                Ordenamientos
+              </h2>
+              {/* <BuscarPorNombre /> */}
+              <div className="flex flex-col w-full p-4">
+                <h2 className="text-2xl font-bold text-blanco mb-2">Nombre</h2>
+                <Select
+                  className="bg-verde w-full p-2 border border-gray-300 text-blanco text-sm rounded-lg"
+                  onChange={(value) => handleNombreChange(value, "nombre")}
+                  style={{ fontSize: "110%" }}
+                >
+                  <Option value="asc">A-Z</Option>
+                  <Option value="desc">Z-A</Option>
+                </Select>
+              </div>
 
-          <div className="flex flex-col w-full px-4 mb-10">
-            <h2 className="text-2xl font-bold text-blanco p-4">
-              Cantidad de Personas
-            </h2>
-            <Card className="w-6/7 mx-2">
-              <List className="flex-row">
-                {[2, 3, 4, 5, 6].map((persona) => (
-                  <ListItem key={persona} className="p-0">
-                    <label
-                      htmlFor={`persona-${persona}`}
-                      className="flex w-full cursor-pointer items-center px-3 py-2"
-                    >
-                      <ListItemPrefix className="mr-3">
-                        <Checkbox
-                          id={`persona-${persona}`}
-                          ripple={false}
-                          checked={filtrosPersonas.includes(persona)}
-                          onChange={() => {
-                            const nuevosFiltros = filtrosPersonas.includes(
-                              persona
-                            )
-                              ? filtrosPersonas.filter((p) => p !== persona)
-                              : [persona];
-                            aplicarFiltrosPersonas(nuevosFiltros);
-                          }}
-                          containerProps={{
-                            className: "p-0",
-                          }}
-                        />
-                      </ListItemPrefix>
-                      <Typography color="blue-gray" className="font-medium">
-                        {persona}
-                      </Typography>
-                    </label>
-                  </ListItem>
-                ))}
-              </List>
-            </Card>
-            <h2 className="text-2xl font-bold text-blanco p-4">
-              Cantidad de Cuartos
-            </h2>
-            <Card className="w-6/7 mx-2">
-              <List className="flex-row">
-                {[1, 2, 3, 5, 6].map((cuarto) => (
-                  <ListItem key={cuarto} className="p-0">
-                    <label
-                      htmlFor={`cuarto-${cuarto}`}
-                      className="flex w-full cursor-pointer items-center px-3 py-2"
-                    >
-                      <ListItemPrefix className="mr-3">
-                        <Checkbox
-                          id={`cuarto-${cuarto}`}
-                          ripple={false}
-                          checked={filtrosCuarto.includes(cuarto)}
-                          onChange={() => {
-                            const nuevosFiltros = filtrosCuarto.includes(cuarto)
-                              ? filtrosCuarto.filter((p) => p !== cuarto)
-                              : [cuarto];
-                            aplicarFiltrosCuarto(nuevosFiltros);
-                          }}
-                          containerProps={{
-                            className: "p-0",
-                          }}
-                        />
-                      </ListItemPrefix>
-                      <Typography color="blue-gray" className="font-medium">
-                        {cuarto}
-                      </Typography>
-                    </label>
-                  </ListItem>
-                ))}
-              </List>
-            </Card>
-          </div>
+              <div className="flex flex-col w-full p-4">
+                <h2 className="text-2xl font-bold text-blanco mb-2">Precio</h2>
+                <Select
+                  className="bg-verde w-full p-2 border border-gray-300 text-blanco text-sm rounded-lg"
+                  onChange={(value) => handlePrecioChange(value, "precio")}
+                  style={{ fontSize: "110%" }}
+                >
+                  <Option value="asc">menor precio</Option>
+                  <Option value="desc">mayor precio</Option>
+                </Select>
+              </div>
+
+              <h2 className="text-3xl font-bold text-blanco p-4">Filtros</h2>
+
+              <div className="flex flex-col w-full px-4 mb-10">
+                <h2 className="text-2xl font-bold text-blanco p-4">
+                  Cantidad de Personas
+                </h2>
+                <Card className="w-6/7 mx-2">
+                  <List className="flex-row">
+                    {[2, 3, 4, 5, 6, 8].map((persona) => (
+                      <ListItem key={persona} className="p-0">
+                        <label
+                          htmlFor={`persona-${persona}`}
+                          className="flex w-full cursor-pointer items-center px-3 py-2"
+                        >
+                          <ListItemPrefix className="mr-3">
+                            <Checkbox
+                              id={`persona-${persona}`}
+                              ripple={false}
+                              checked={filtrosPersonas.includes(persona)}
+                              onChange={() => {
+                                const nuevosFiltros = filtrosPersonas.includes(
+                                  persona
+                                )
+                                  ? filtrosPersonas.filter((p) => p !== persona)
+                                  : [persona];
+                                aplicarFiltrosPersonas(nuevosFiltros);
+                              }}
+                              containerProps={{
+                                className: "p-0",
+                              }}
+                            />
+                          </ListItemPrefix>
+                          <Typography color="blue-gray" className="font-medium">
+                            {persona}
+                          </Typography>
+                        </label>
+                      </ListItem>
+                    ))}
+                  </List>
+                </Card>
+                <h2 className="text-2xl font-bold text-blanco p-4">
+                  Cantidad de Cuartos
+                </h2>
+                <Card className="w-6/7 mx-2">
+                  <List className="flex-row">
+                    {[1, 2, 3, 4].map((cuarto) => (
+                      <ListItem key={cuarto} className="p-0">
+                        <label
+                          htmlFor={`cuarto-${cuarto}`}
+                          className="flex w-full cursor-pointer items-center px-3 py-2"
+                        >
+                          <ListItemPrefix className="mr-3">
+                            <Checkbox
+                              id={`cuarto-${cuarto}`}
+                              ripple={false}
+                              checked={filtrosCuarto.includes(cuarto)}
+                              onChange={() => {
+                                const nuevosFiltros = filtrosCuarto.includes(
+                                  cuarto
+                                )
+                                  ? filtrosCuarto.filter((p) => p !== cuarto)
+                                  : [cuarto];
+                                aplicarFiltrosCuarto(nuevosFiltros);
+                              }}
+                              containerProps={{
+                                className: "p-0",
+                              }}
+                            />
+                          </ListItemPrefix>
+                          <Typography color="blue-gray" className="font-medium">
+                            {cuarto}
+                          </Typography>
+                        </label>
+                      </ListItem>
+                    ))}
+                  </List>
+                </Card>
+              </div>
+            </>
+          )}
         </div>
         <div className="w-full mr-12">
           <CardsShopHabitaciones habitacionesShop={habitacionesActuales} />
