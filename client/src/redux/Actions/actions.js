@@ -171,6 +171,12 @@ export function enviarConsulta(formData) {
     try {
       const response = await axios.post("/contactenos", formData);
       console.log("Respuesta del servidor:", response.data);
+      Swal.fire({
+        title:response.data.message, 
+        icon:"success",
+        confirmButtonColor:"#FB350C",
+        iconColor: "#FB350C"
+      });
     } catch (error) {
       console.error("Error al enviar la consulta:", error);
     }
