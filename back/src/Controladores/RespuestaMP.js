@@ -1,4 +1,5 @@
 const axios = require("axios");
+const {manejoRespuestaMP} = require('./ManejoRespuestaMP');
 const respuestaConfirmacionPago = async (req, res) => {
     const { query, body } = req;
     const topic = query.topic || query.type;
@@ -31,7 +32,7 @@ const respuestaConfirmacionPago = async (req, res) => {
   axios.get(`https://api.mercadopago.com/v1/payments/${paymentId}`, { headers })
   .then(response => {
     const { status, id } = response.data;
-
+    manejoRespuestaMP(status,id);
   })
   .catch(error => {
     console.error("Error al obtener el estado del pago:", error.response ? error.response.data : error.message);

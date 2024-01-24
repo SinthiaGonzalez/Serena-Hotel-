@@ -43,7 +43,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 // console.log(sequelize.models)
 
 // // Aca vendrian las relaciones de si son de muchos a pocos y asi de cada modelo es decir las mediatablas  abajo dejo un ejemplo de como se hace
-const { Comentario, Usuario, Carrito, Habitaciones, Reservas } =
+const { Comentario, Usuario, Carrito, Habitaciones, Reservas,Pago } =
   sequelize.models;
 
 Usuario.hasMany(Comentario, { foreignKey: "usuarioId" });
@@ -60,6 +60,10 @@ Habitaciones.belongsToMany(Reservas, { through: "ReservaHabitacion" });
 
 Usuario.belongsTo(Reservas, { foreignKey: "usuarioId" });
 Reservas.belongsTo(Usuario, { foreignKey: "usuarioId" });
+
+Usuario.hasMany(Pago, { foreignKey: "usuarioId" });
+Pago.belongsTo(Usuario, { foreignKey: "usuarioId" });
+
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize, // para importart la conexión { conn } = require('./db.js');
