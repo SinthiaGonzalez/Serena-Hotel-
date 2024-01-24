@@ -346,6 +346,7 @@ console.log("auxilio", nuevaDataHabitacion)
                       onChange={(event) => handleChangeServicio(2, event)}
                       name="select"
                       className="ml-2 p-1 rounded-md text-negro text-center w-[80px]"
+                      value={nuevaDataHabitacion.servicios[2].descripcion}
                     >
                       <option value="" selected>
                         Cama
@@ -372,7 +373,7 @@ console.log("auxilio", nuevaDataHabitacion)
                       min="0"
                       name="m2"
                       placeholder="m²"
-                      value={nuevaDataHabitacion.servicios[3].descripcion}
+                      defaultValue={nuevaDataHabitacion.servicios[3].descripcion.substring(0, nuevaDataHabitacion.servicios[3].descripcion.length - 2)}
                     />
                   }
                 </p>
