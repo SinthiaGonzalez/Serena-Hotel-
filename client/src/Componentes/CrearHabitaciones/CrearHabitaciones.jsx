@@ -239,6 +239,7 @@ const CrearHabitacion = () => {
                         <option value="1 cuartos">1</option>
                         <option value="2 cuartos">2</option>
                         <option value="3 cuartos">3</option>
+                        <option value="4 cuartos">4</option>
                       </select>
                     }{" "}
                   </p>
@@ -264,6 +265,7 @@ const CrearHabitacion = () => {
                         <option value="4 pers">4</option>
                         <option value="5 pers">5</option>
                         <option value="6 pers">6</option>
+                        <option value="8 pers">8</option>
                       </select>
                     }
                   </p>
@@ -352,7 +354,7 @@ const CrearHabitacion = () => {
                   onBlur={() => handleBlur("precio")}
                 />
               }
-              /Noche
+              / Noche
             </p>
             <p className="my-4">{touchedFields.precio && errors.precio}</p>
 

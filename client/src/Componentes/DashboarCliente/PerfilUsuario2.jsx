@@ -52,10 +52,17 @@ export const PerfilUsuario2 = () => {
   );
 
   return (
-    <div className="flex flex-col items-center justify-center mt-20">
+    <div
+      className="flex items-center justify-center bg-cover bg-center text-white text-center p-8 h-screen"
+      style={{
+        backgroundImage:
+          'url("https://i.postimg.cc/3xxjwxft/selena-hotel-1.png")',
+      }}
+    >
+    <div className="flex flex-col items-center justify-center">
       <div className="bg-verde p-6 rounded-md">
         <h2 className="text-center text-2xl font-bold my-2">
-          Historial de Reservas (Usuario)
+          Historial de Reservas
         </h2>
         <div className="p-5 rounded-md shadow-md mb-4 overflow-x-auto">
           <table className="w-full">
@@ -89,25 +96,19 @@ export const PerfilUsuario2 = () => {
           </table>
         </div>
       </div>
+      <div className="bg-blanco rounded-lg mt-4 text-center items-center justify-center">
+
       <Paginacion
         className="mt-12 w-1/2"
         active={paginaActual}
         setActive={handlePaginaChange}
         totalItems={reservasUsuario.length}
         itemsPerPage={itemsPerPage}
-      />
+        />
+        </div>
+    </div>
     </div>
   );
 };
 export default PerfilUsuario2;
-/*
 
-                <tr className="border-b">
-                  <td className="py-6 px-12 text-left">123456</td>
-                  <td className="py-6 px-12 text-left">2022-01-01</td>
-                  <td className="py-6 px-12 text-left">2022-01-10</td>
-                  <td className="py-6 px-12 text-left">Habitación 101</td>                  
-                </tr>
-
-                
-              */
