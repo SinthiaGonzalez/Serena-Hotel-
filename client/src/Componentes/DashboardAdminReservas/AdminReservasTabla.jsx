@@ -4,17 +4,13 @@ import { getReservas_Admin } from "../../redux/Actions/actions";
 import Paginacion from "../Paginacion/Paginacion";
 
 const AdminReservasTabla = () => {
-
   const dispatch = useDispatch();
   const reservasTodasAdmin = useSelector((state) => state.reservasTodasAdmin);
   const [paginaActual, setPaginaActual] = useState(1);
   const [itemsPerPage] = useState(5);
 
-
   useEffect(() => {
-    dispatch(
-      getReservas_Admin({ page: paginaActual, itemsPerPage })
-    );
+    dispatch(getReservas_Admin({ page: paginaActual, itemsPerPage }));
   }, [dispatch, paginaActual, itemsPerPage]);
 
   const handlePaginaChange = (nuevaPagina) => {
@@ -27,47 +23,67 @@ const AdminReservasTabla = () => {
   );
 
   return (
-    <div className="flex flex-col items-center justify-center mt-20">
-      <div className="bg-verde p-6 rounded-md">
-        <h2 className="text-center text-2xl font-bold my-2">
-          Historial de Reservas (Admin)
-        </h2>
-        <div className="p-5 rounded-md shadow-md mb-4 overflow-x-auto">
-          <table className="w-full">
-            <thead className="bg-white bg-opacity-15 border-b border-white border-opacity-25">
-              <tr>
-                <th className="py-5 px-12 tex-center ">Id de Reserva</th>
-                <th className="py-5 px-12 text-center">Nombre y Apellido</th>
-                <th className="py-5 px-12 text-center">Correo</th>
-                <th className="py-5 px-12 text-center">Teléfono</th>
-                <th className="py-5 px-12 text-center">Check-In</th>
-                <th className="py-5 px-12 text-center">Check-Out</th>
-                <th className="py-5 px-12 text-center">Habitación</th>
-              </tr>
-            </thead>
-            <tbody>
-              {ReservasTodasAdminPaginadas?.map((linea) => (
-                <tr className="border-b" key={linea.id_reserva}>
-                  <td className="py-6 px-12 text-center">{linea.id_reserva}</td>
-                  <td className="py-6 px-12 text-center">{linea.nombre_y_apellido}</td>
-                  <td className="py-6 px-12 text-center">{linea.email}</td>
-                  <td className="py-6 px-12 text-center">{linea.telefono}</td>
-                  <td className="py-6 px-12 text-center">{linea.fecha_entrada}</td>
-                  <td className="py-6 px-12 text-center">{linea.fecha_salida}</td>
-                  <td className="py-6 px-12 text-center">{linea.nombre_habitacion}</td>
+    <div
+      className="flex items-center justify-center bg-cover bg-center text-white text-center p-8 h-screen"
+      style={{
+        backgroundImage:
+          'url("https://i.postimg.cc/3xxjwxft/selena-hotel-1.png")',
+      }}
+    >
+      <div className="flex flex-col items-center justify-center">
+        <div className="bg-verde p-6 rounded-md">
+          <h2 className="text-center text-2xl font-bold my-2">
+            Historial de Reservas
+          </h2>
+          <div className="p-5 rounded-md shadow-md mb-4 overflow-x-auto">
+            <table className="w-full">
+              <thead className="bg-white bg-opacity-15 border-b border-white border-opacity-25">
+                <tr>
+                  <th className="py-5 px-12 tex-center ">Id de Reserva</th>
+                  <th className="py-5 px-12 text-center">Nombre y Apellido</th>
+                  <th className="py-5 px-12 text-center">Correo</th>
+                  <th className="py-5 px-12 text-center">Teléfono</th>
+                  <th className="py-5 px-12 text-center">Check-In</th>
+                  <th className="py-5 px-12 text-center">Check-Out</th>
+                  <th className="py-5 px-12 text-center">Habitación</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {ReservasTodasAdminPaginadas?.map((linea) => (
+                  <tr className="border-b" key={linea.id_reserva}>
+                    <td className="py-6 px-12 text-center">
+                      {linea.id_reserva}
+                    </td>
+                    <td className="py-6 px-12 text-center">
+                      {linea.nombre_y_apellido}
+                    </td>
+                    <td className="py-6 px-12 text-center">{linea.email}</td>
+                    <td className="py-6 px-12 text-center">{linea.telefono}</td>
+                    <td className="py-6 px-12 text-center">
+                      {linea.fecha_entrada}
+                    </td>
+                    <td className="py-6 px-12 text-center">
+                      {linea.fecha_salida}
+                    </td>
+                    <td className="py-6 px-12 text-center">
+                      {linea.nombre_habitacion}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div className="bg-blanco rounded-lg mt-4 text-center items-center justify-center">
+          <Paginacion
+            className="mt-12 w-1/2"
+            active={paginaActual}
+            setActive={handlePaginaChange}
+            totalItems={reservasTodasAdmin.length}
+            itemsPerPage={itemsPerPage}
+          />
         </div>
       </div>
-      <Paginacion
-        className="mt-12 w-1/2"
-        active={paginaActual}
-        setActive={handlePaginaChange}
-        totalItems={reservasTodasAdmin.length}
-        itemsPerPage={itemsPerPage}
-      />
     </div>
   );
 };

@@ -265,6 +265,7 @@ const CrearHabitacion = () => {
                         <option value="4 pers">4</option>
                         <option value="5 pers">5</option>
                         <option value="6 pers">6</option>
+                        <option value="8 pers">8</option>
                       </select>
                     }
                   </p>
