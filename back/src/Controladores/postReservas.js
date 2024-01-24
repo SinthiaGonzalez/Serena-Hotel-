@@ -4,7 +4,8 @@ const postReservas = async (
   fecha_entrada,
   fecha_salida,
   estado,
-  habitaciones, usuarioId
+  habitaciones,
+   usuarioId
 ) => {
   try {
     const reserva = await Reservas.create({
