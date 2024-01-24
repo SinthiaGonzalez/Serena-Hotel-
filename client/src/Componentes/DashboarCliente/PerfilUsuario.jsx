@@ -115,13 +115,13 @@ const UpdateUsuario = () => {
   }, [usuarioData]);
   return (
     <div
-      className="relative bg-cover bg-center text-white text-center p-8 h-screen"
+      className="flex items-center justify-center bg-cover bg-center text-white text-center p-8 h-screen"
       style={{
         backgroundImage:
           'url("https://i.postimg.cc/3xxjwxft/selena-hotel-1.png")',
       }}
     >
-      <div className="flex flex-col items-center justify-center h-auto bg-blanco w-2/3 rounded-lg px-20 mx-[250px] px-4 pt-3 pb-6">
+      <div className="flex flex-col items-center justify-center bg-blanco w-2/3 rounded-lg px-4 pt-3 pb-6">
         <p className="flex mt-4 mb-4 font-inter text-3xl antialiased leading-normal text-center font-bold text-gris justify-center">
           Editar Usuario
         </p>

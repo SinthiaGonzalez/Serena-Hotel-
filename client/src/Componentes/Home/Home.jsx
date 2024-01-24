@@ -1,7 +1,8 @@
 import NavBarHome from "../NavBarHome/NavBarHome";
 import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
 
-const Home = () => {
+const Home = () => { 
   return (
     <div
       className="relative bg-cover bg-center h-screen text-white text-center mb-16"
