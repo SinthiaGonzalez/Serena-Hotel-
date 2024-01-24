@@ -2,7 +2,6 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import keanu from "../../../public/keanu.jpg";
 import { useState } from "react";
 import {
   Navbar,
@@ -20,7 +19,6 @@ import { ChevronDownIcon, Bars2Icon } from "@heroicons/react/24/solid";
 import AddShoppingCart from "../cardCarrito/cardAñadirCarrito";
 import { getCarrito, verificarToken } from "../../redux/Actions/actions";
 
-
 function ProfileMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const closeMenu = () => setIsMenuOpen(false);
@@ -33,20 +31,19 @@ function ProfileMenu() {
     localStorage.removeItem("isAdmin");
     navigate("/logearse");
   };
-//const[userLoggedIn, setUserLoggedIn] = useState(false);
-const imagenUsuario = JSON.parse(localStorage.getItem("imagen"));
-const name = JSON.parse(localStorage.getItem("name"));
+  //const[userLoggedIn, setUserLoggedIn] = useState(false);
+  const imagenUsuario = JSON.parse(localStorage.getItem("imagen"));
+  const name = JSON.parse(localStorage.getItem("name"));
 
-// const verifyLogin = () => {
-//   const prueba = localStorage.getItem("token");
-//   if (prueba) setUserLoggedIn(true);
-//   else setUserLoggedIn(false);
-// }
+  // const verifyLogin = () => {
+  //   const prueba = localStorage.getItem("token");
+  //   if (prueba) setUserLoggedIn(true);
+  //   else setUserLoggedIn(false);
+  // }
 
-// useEffect(() => {
-//   verifyLogin();
-// }, []);
-
+  // useEffect(() => {
+  //   verifyLogin();
+  // }, []);
 
   const formattedName =
     name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
@@ -104,9 +101,7 @@ const name = JSON.parse(localStorage.getItem("name"));
                 d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"
               />
             </svg>
-            <button  className="font-normal">
-              Mi Perfil
-            </button>
+            <button className="font-normal">Mi Perfil</button>
           </Link>
         </MenuItem>
 
@@ -199,7 +194,6 @@ const NavBarHome = () => {
   // const esTokenValido = useVerificarTokenPerfilNav();
   const dispatch = useDispatch();
   const token = useSelector((state) => state.token);
-  console.log("carrito", carrito);
   React.useEffect(() => {
     dispatch(verificarToken());
   }, [dispatch]);

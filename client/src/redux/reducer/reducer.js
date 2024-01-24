@@ -2,6 +2,7 @@ const initialState = {
   habitaciones: [],
   habitacionesDetail: [],
   habitacionesfiltradas: [],
+  habitacionesFechas: [],
   string: "",
   usuarios: [],
   preferenceIdMP: [],
@@ -16,7 +17,7 @@ const initialState = {
   reservasUsuario: [],
   reservasTodasAdmin: [],
   token: false,
-  usuarioById:[],
+  usuarioById: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -26,7 +27,6 @@ const reducer = (state = initialState, action) => {
       const habitacionFiltrada = state.habitaciones.filter((habitacion) =>
         habitacion.nombre.toLowerCase().includes(buscar)
       );
-      console.log("habitacion filtrada", habitacionFiltrada);
       return {
         ...state,
         string: buscar,
@@ -104,11 +104,15 @@ const reducer = (state = initialState, action) => {
         ...state,
         habitaciones: action.payload,
       };
-
-    case "GET_RESERVAS":
+    case "GET_HABITACIONES_FECHAS":
       return {
         ...state,
         habitaciones: action.payload,
+      };
+    case "GET_RESERVAS":
+      return {
+        ...state,
+        habitacionesFechas: action.payload,
       };
     case "UPDATE_HABITACION":
       return {
@@ -160,17 +164,17 @@ const reducer = (state = initialState, action) => {
         ...state,
         carrito: action.payload,
       };
-      case "POST_USUARIO":
+    case "POST_USUARIO":
       return {
         ...state,
         usuarios: action.payload,
       };
-    
-      case "GET_USUARIO_BY_ID":
-        return {
-          ...state,
-          usuarioById: action.payload,
-        }
+
+    case "GET_USUARIO_BY_ID":
+      return {
+        ...state,
+        usuarioById: action.payload,
+      };
     default:
       return state;
   }
