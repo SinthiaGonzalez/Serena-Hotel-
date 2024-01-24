@@ -8,6 +8,7 @@ import {
   faLock,
 } from "@fortawesome/free-solid-svg-icons";
 import {postUsuario} from "../../redux/Actions/actions"
+import Swal from 'sweetalert2'
 
 const CreateUsuario = () => {
   const dispatch = useDispatch();
@@ -40,7 +41,7 @@ const CreateUsuario = () => {
         contraseña: "",
       });
     } catch (error) {
-      alert(error.message);
+      Swal.fire(error.message, "", "error");
     }
   };
 

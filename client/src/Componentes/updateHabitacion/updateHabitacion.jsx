@@ -1,14 +1,17 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
 import validation from "../CrearHabitaciones/validation";
 import { useDispatch, useSelector } from "react-redux";
+
 import {
   updateHabitacion,
   getHabitacionesbackup,
   deleteHabitacion,
+  DetailHabitaciones
 } from "../../redux/Actions/actions";
 import { Select, Option } from "@material-tailwind/react";
 import axios from "axios";
+import Swal from 'sweetalert2'
 
 const UpdateHabitacion = () => {
   const dispatch = useDispatch();
@@ -19,14 +22,9 @@ const UpdateHabitacion = () => {
   const [seleccionhabitacion, setSeleccionhabitacion] = useState("");
   const habitacionescKcup = useSelector((state) => state.habitacionBackUp);
 
-  const habitacionesB = habitacionescKcup.map(({ id, nombre, precio, imagenes, servicios, descripcion, estado }) => ({
+  const habitacionesB = habitacionescKcup.map(({ id, nombre }) => ({
     id,
     nombre,
-    // precio, 
-    // imagenes, 
-    // servicios, 
-    // descripcion, 
-    // estado
   }));
 
   useEffect(() => {
@@ -68,9 +66,13 @@ const UpdateHabitacion = () => {
     estado: "Disponible",
   });
 
+  const habitacionDetail = useSelector((state) => state.habitacionesDetail);
+
   const handlerselectHabitacion = (e) => {
     setSeleccionhabitacion(e);
     setNuevaDataHabitacion({ ...nuevaDataHabitacion, nombreId: e });
+    dispatch(DetailHabitaciones(e));
+    handleDefaultValues();
   };
 
   const isSubmitDisabled = () => {
@@ -154,7 +156,7 @@ const UpdateHabitacion = () => {
         descripcion: "",
       });
     } else {
-      alert("Validation errors:", errors);
+      Swal.fire("Errores de validacion", errors, "error");
     }
   };
   const handleImageCloudinary = async (e) => {
@@ -199,6 +201,22 @@ const UpdateHabitacion = () => {
     dispatch(getHabitacionesbackup());
   };
 
+   const handleDefaultValues = () => {
+    console.log('default values', habitacionDetail);
+    if (habitacionDetail){
+    setNuevaDataHabitacion({
+    nombreId: habitacionDetail[0].id,
+    nombre: habitacionDetail[0].nombre,
+    precio: habitacionDetail[0].precio,
+    imagenes: habitacionDetail[0].imagenes,
+    servicios: habitacionDetail[0].servicios,
+    descripcion: habitacionDetail[0].descripcion,
+    estado: habitacionDetail[0].estado,
+    })}
+   }
+console.log("auxilio", nuevaDataHabitacion)
+  
+
   return (
     <div className="bg-verde p-8 rounded-lg mx-20 my-16">
       <div className="flex justify-between">
@@ -215,7 +233,7 @@ const UpdateHabitacion = () => {
               <Option
                 id={id}
                 key={id}
-                value={nombre}
+                value={id}
                 className="flex items-center gap-2"
               >
                 {nombre}
@@ -264,6 +282,7 @@ const UpdateHabitacion = () => {
               type="text"
               name="nombre"
               placeholder="Nombre nuevo"
+              value={nuevaDataHabitacion.nombre} 
               onChange={handleChange}
               onBlur={() => handleBlur("nombre")}
             />
@@ -346,15 +365,16 @@ const UpdateHabitacion = () => {
                 <span className="material-symbols-outlined p-3 text-blanco ">
                   home
                 </span>
-                <p className="text-negro text-sm text-center">
+                <p className="text-negro text-sm text-center text-negro">
                   {
                     <input
                       onChange={(event) => handleChangeServicio(3, event)}
-                      className="text-center w-[80px] mr-2 p-1 rounded-md"
+                      className="text-center w-[80px] mr-2 p-1 rounded-md text-negro"
                       type="number"
                       min="0"
                       name="m2"
                       placeholder="m²"
+                      value={nuevaDataHabitacion.servicios[3].descripcion}
                     />
                   }
                 </p>
@@ -377,7 +397,7 @@ const UpdateHabitacion = () => {
           </div>
           <div className="mt-10 w-full">
             <textarea
-              className="w-full h-24 text-center pt-8"
+              className="w-full h-24 text-center pt-8 text-negro"
               name="descripcion"
               placeholder="Descripcion"
               value={nuevaDataHabitacion.descripcion}
@@ -398,6 +418,7 @@ const UpdateHabitacion = () => {
                 name="precio"
                 min="0"
                 placeholder="-"
+                value={nuevaDataHabitacion.precio}
                 onChange={handleChange}
                 onBlur={() => handleBlur("precio")}
               />

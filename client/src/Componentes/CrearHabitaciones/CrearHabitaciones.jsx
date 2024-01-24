@@ -3,6 +3,7 @@ import validation from "./validation.js";
 import { useDispatch, useSelector } from "react-redux";
 import { crearHabitacion } from "../../redux/Actions/actions";
 import axios from "axios";
+import Swal from "sweetalert2";
 const CrearHabitacion = () => {
   const dispatch = useDispatch();
   const [errors, setErrors] = useState({});
@@ -129,7 +130,7 @@ const CrearHabitacion = () => {
       dispatch(crearHabitacion(habitacionData));
       resetTouchedFields();
     } else {
-      alert("Validation errors:", errors);
+      Swal.fire("Error de validacion", "", "error");
     }
   };
 

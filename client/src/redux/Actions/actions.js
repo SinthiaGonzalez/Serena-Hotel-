@@ -534,7 +534,7 @@ export function cambiarEstadoUsuario(id, nuevoEstado) {
     return async function () {
       try {
         const response = await axios.put("/update/usuarioEstado", {id, nuevoEstado});
-        alert("Cambio de estado de Usuario realizado exitosamente");
+        Swal.fire("Cambio de estado de usuario exitoso!", "", "success");
         console.log("Respuesta del servidor:", response.data);
        // ver si es necesario dispatch aqui "POST_USUARIO",p/q actualice estado "usuarios"
       } catch (error) {

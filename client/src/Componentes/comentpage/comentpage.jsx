@@ -10,6 +10,7 @@ import Slider from "react-slick";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Swal from 'sweetalert2'
 
 const ComentPage = () => {
   const dispatch = useDispatch();
@@ -54,7 +55,7 @@ const ComentPage = () => {
       window.location.href = '/comentar'; // Redirigir a la ruta "/comentar"
     } else {
       // Si no hay un token, mostrar un alert y realizar otras acciones según sea necesario
-      alert('Necesita iniciar Sesion para dejar comentarios en la pagina');
+      Swal.fire("Necesita iniciar sesion para dejar comentarios", "", "info");
       // Puedes realizar otras acciones aquí, como redirigir a otra ruta, mostrar un modal, etc.
     }
   };
