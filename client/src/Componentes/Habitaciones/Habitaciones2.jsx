@@ -28,9 +28,8 @@ import Paginacion from "../Paginacion/Paginacion";
 const Habitaciones = () => {
   const dispatch = useDispatch();
   const habitacionesShop = useSelector((state) => state.habitaciones);
-
   const habitacionesFechas = useSelector((state) => state.habitacionesFechas);
-  const habitacionfiltrada = useSelector((state) => state.habitacionfiltrada);
+  // const habitacionfiltrada = useSelector((state) => state.habitacionfiltrada);
   const stringdelbuscar = useSelector((state) => state.string);
   const [filtrosPersonas, setFiltrosPersonas] = useState([]);
   const [filtrosCuarto, setFiltrosCuarto] = useState([]);
@@ -144,12 +143,12 @@ const Habitaciones = () => {
 
   const totalItems =
     stringdelbuscar.length > 0
-      ? habitacionfiltrada.length
+      ? habitacionesFechas.length
       : habitacionesShop.length;
 
   const habitacionesActuales =
     stringdelbuscar.length > 0
-      ? habitacionfiltrada.slice(
+      ? habitacionesFechas.slice(
           (paginaActual - 1) * itemsPerPage,
           paginaActual * itemsPerPage
         )
@@ -285,9 +284,7 @@ const Habitaciones = () => {
         </div>
         <div className="w-full mr-12">
           {habitacionesFechas.length > 0 ? (
-            <CardsShopHabitaciones
-              habitacionesShop={habitacionesActualesFechas}
-            />
+            <CardsShopHabitaciones habitacionesShop={habitacionesFechas} />
           ) : (
             <CardsShopHabitaciones habitacionesShop={habitacionesActuales} />
           )}

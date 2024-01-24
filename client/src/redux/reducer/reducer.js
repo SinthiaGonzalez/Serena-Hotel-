@@ -24,13 +24,13 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case "GET_HABITACIONES_BUSQUEDA":
       const buscar = action.payload; // string palabra a buscar
-      const habitacionFiltrada = state.habitaciones.filter((habitacion) =>
+      const habitacionFiltrada = state.habitacionesFechas.filter((habitacion) =>
         habitacion.nombre.toLowerCase().includes(buscar)
       );
       return {
         ...state,
         string: buscar,
-        habitacionesfiltradas: habitacionFiltrada,
+        habitacionesFechas: habitacionFiltrada,
       };
 
     case "GET_USUARIOS":
@@ -92,22 +92,22 @@ const reducer = (state = initialState, action) => {
     case "GET_HABITACIONES_NOMBRE":
       return {
         ...state,
-        habitaciones: action.payload,
+        habitacionesFechas: action.payload,
       };
     case "GET_HABITACIONES_PRECIO":
       return {
         ...state,
-        habitaciones: action.payload,
+        habitacionesFechas: action.payload,
       };
     case "GET_HABITACIONES_FILTROS_PERSONAS":
       return {
         ...state,
-        habitaciones: action.payload,
+        habitacionesFechas: action.payload,
       };
     case "GET_HABITACIONES_FECHAS":
       return {
         ...state,
-        habitaciones: action.payload,
+        habitacionesFechas: action.payload,
       };
     case "GET_RESERVAS":
       return {
