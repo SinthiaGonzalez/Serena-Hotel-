@@ -2,6 +2,7 @@ const initialState = {
   habitaciones: [],
   habitacionesDetail: [],
   habitacionesfiltradas: [],
+  habitacionesFechas: [],
   string: "",
   usuarios: [],
   preferenceIdMP: [],
@@ -16,21 +17,20 @@ const initialState = {
   reservasUsuario: [],
   reservasTodasAdmin: [],
   token: false,
-  usuarioById:[],
+  usuarioById: [],
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case "GET_HABITACIONES_BUSQUEDA":
       const buscar = action.payload; // string palabra a buscar
-      const habitacionFiltrada = state.habitaciones.filter((habitacion) =>
+      const habitacionFiltrada = state.habitacionesFechas.filter((habitacion) =>
         habitacion.nombre.toLowerCase().includes(buscar)
       );
-      console.log("habitacion filtrada", habitacionFiltrada);
       return {
         ...state,
         string: buscar,
-        habitacionesfiltradas: habitacionFiltrada,
+        habitacionesFechas: habitacionFiltrada,
       };
 
     case "GET_USUARIOS":
@@ -92,23 +92,23 @@ const reducer = (state = initialState, action) => {
     case "GET_HABITACIONES_NOMBRE":
       return {
         ...state,
-        habitaciones: action.payload,
+        habitacionesFechas: action.payload,
       };
     case "GET_HABITACIONES_PRECIO":
       return {
         ...state,
-        habitaciones: action.payload,
+        habitacionesFechas: action.payload,
       };
     case "GET_HABITACIONES_FILTROS_PERSONAS":
       return {
         ...state,
-        habitaciones: action.payload,
+        habitacionesFechas: action.payload,
       };
 
     case "GET_RESERVAS":
       return {
         ...state,
-        habitaciones: action.payload,
+        habitacionesFechas: action.payload,
       };
     case "UPDATE_HABITACION":
       return {
@@ -160,7 +160,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         carrito: action.payload,
       };
-      case "POST_USUARIO":
+    case "POST_USUARIO":
       return {
         ...state,
         usuarios: action.payload,
@@ -171,6 +171,11 @@ const reducer = (state = initialState, action) => {
           ...state,
           usuarioById: action.payload,
         }
+        case "POST_USUARIO_GOOGLE":
+          return {
+            ...state,
+            token: action.payload,
+          };
     default:
       return state;
   }
