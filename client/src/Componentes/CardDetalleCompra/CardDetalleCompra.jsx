@@ -30,10 +30,14 @@ const CardDetalleCompras = ({ imagenes, nombre, precio, id }) => {
       </div>
 
       <div className="p-4 flex flex-row items-center justify-between w-1/5">
-        <p className="text-white-700 font-bold text-2xl">${precio}</p>
+        <p className="text-white-700 font-bold text-2xl">{precio.toLocaleString("es-AR", {
+              style: "currency",
+              currency: "ARS",
+              minimumFractionDigits: 0,
+            })}</p>
         <div>
           <button
-            className="bg-red-500 text-white px-4 py-3 mt-2 hover:bg-red-600 transition duration-300"
+            className="bg-red-500 text-white ml-2 px-4 py-3 mt-2 hover:bg-red-600 transition duration-300"
             onClick={eliminarHabitacion}
           >
             <FontAwesomeIcon icon={faTrashAlt} />

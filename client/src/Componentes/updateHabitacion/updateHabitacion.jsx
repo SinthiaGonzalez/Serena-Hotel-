@@ -19,9 +19,14 @@ const UpdateHabitacion = () => {
   const [seleccionhabitacion, setSeleccionhabitacion] = useState("");
   const habitacionescKcup = useSelector((state) => state.habitacionBackUp);
 
-  const habitacionesB = habitacionescKcup.map(({ id, nombre }) => ({
+  const habitacionesB = habitacionescKcup.map(({ id, nombre, precio, imagenes, servicios, descripcion, estado }) => ({
     id,
     nombre,
+    // precio, 
+    // imagenes, 
+    // servicios, 
+    // descripcion, 
+    // estado
   }));
 
   useEffect(() => {
@@ -251,18 +256,18 @@ const UpdateHabitacion = () => {
           />
           <p className="my-4">{touchedFields.imagen && errors.imagen}</p>
         </div>
-
+        
         <div className="flex flex-col items-center w-4/8">
-          <div className="block font-inter text-2xl font-bold text-blanco mb-16">
+          <div className="block font-inter text-2xl text-blanco mb-16">
             <input
-              className="text-center text-negro"
+              className="text-center text-blanco font-bold"
               type="text"
               name="nombre"
               placeholder="Nombre nuevo"
               onChange={handleChange}
               onBlur={() => handleBlur("nombre")}
             />
-            <p className="my-4">{touchedFields.nombre && errors.nombre}</p>
+            <p className="my-4 text-base text-center">{touchedFields.nombre && errors.nombre}</p>
           </div>
 
           <div>
@@ -276,7 +281,7 @@ const UpdateHabitacion = () => {
                     <select
                       onChange={(event) => handleChangeServicio(0, event)}
                       name="select"
-                      className="ml-2 p-1 rounded-md text-negro text-center w-[80px]"
+                      className="ml-2 p-1 rounded-md text-blanco text-center w-[80px]"
                     >
                       <option value="" selected>
                         Cuartos
@@ -298,7 +303,7 @@ const UpdateHabitacion = () => {
                     <select
                       onChange={(event) => handleChangeServicio(1, event)}
                       name="select"
-                      className="ml-2 p-1 rounded-md text-negro text-center w-[80px]"
+                      className="ml-2 p-1 rounded-md text-blanco text-center w-[80px]"
                     >
                       <option value="" selected>
                         Personas
@@ -323,7 +328,7 @@ const UpdateHabitacion = () => {
                     <select
                       onChange={(event) => handleChangeServicio(2, event)}
                       name="select"
-                      className="ml-2 p-1 rounded-md text-negro text-center w-[80px]"
+                      className="ml-2 p-1 rounded-md text-blanco text-center w-[80px]"
                     >
                       <option value="" selected>
                         Cama
@@ -341,7 +346,7 @@ const UpdateHabitacion = () => {
                 <span className="material-symbols-outlined p-3 text-blanco ">
                   home
                 </span>
-                <p className="text-negro text-sm text-center">
+                <p className="text-blanco text-sm text-center">
                   {
                     <input
                       onChange={(event) => handleChangeServicio(3, event)}
@@ -379,7 +384,7 @@ const UpdateHabitacion = () => {
               onChange={handleChange}
               onBlur={() => handleBlur("descripcion")}
             />
-            <p>{touchedFields.descripcion && errors.descripcion}</p>
+            <p className="text-center">{touchedFields.descripcion && errors.descripcion}</p>
           </div>
         </div>
 
@@ -388,7 +393,7 @@ const UpdateHabitacion = () => {
             $
             {
               <input
-                className="text-2xl font-bold text-negro w-1/3 mx-4 text-center"
+                className="text-2xl font-bold text-blanco w-1/3 mx-4 text-center"
                 type="number"
                 name="precio"
                 min="0"

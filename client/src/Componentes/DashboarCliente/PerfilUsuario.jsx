@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
+import { updateUsuario, getUsuarioById } from "../../redux/Actions/actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
@@ -9,7 +10,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { updateUsuario } from "../../redux/Actions/actions"
 
 const UpdateUsuario = () => {
   const dispatch = useDispatch();
@@ -27,7 +27,8 @@ const UpdateUsuario = () => {
     isadmin: isAdmin,
     imagen: "",
   });
- 
+  const usuarioData = useSelector((state) => state.usuarioById);
+
   const handleChange = (e) => {
     setUser({
       ...user,
@@ -68,19 +69,20 @@ const UpdateUsuario = () => {
         imagen: "",
       });
     } catch (error) {
-      alert(error.message);
+      Swal.fire(error.message, "", "error");
     }
   };
   console.log("este", user);
 
-  const alertPrueba = () => {
+  const confirmacion = () => {
     Swal.fire({
       title: "Quieres guardar los cambios?",
       showDenyButton: true,
       confirmButtonText: "Guardar",
       denyButtonText: " No guardar",
+      confirmButtonColor: "#FB350C",
+      denyButtonColor: "#322F2C",
     }).then(async (result) => {
-      /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         handleSubmit();
       } else if (result.isDenied) {
@@ -88,6 +90,29 @@ const UpdateUsuario = () => {
       }
     });
   };
+
+  console.log(" a ver", usuarioData)
+
+  const handleDefaultValues = () => {
+    setUser({
+      id: userId,
+      name: usuarioData.name,
+      apellido: usuarioData.apellido,
+      email: usuarioData.email,
+      telefono: usuarioData.telefono,
+      contraseña: "",
+      isadmin: isAdmin,
+      imagen: usuarioData.imagen,
+    });
+  }
+
+  useEffect(() => {
+    dispatch(getUsuarioById(userId));
+  }, []);
+
+  useEffect(() => {
+    handleDefaultValues();
+  }, [usuarioData]);
   return (
     <div
       className="relative bg-cover bg-center text-white text-center p-8 h-screen"
@@ -142,7 +167,7 @@ const UpdateUsuario = () => {
                   className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
                   type="text"
                   name="name"
-                  placeholder="Nombre"
+                  placeholder="Nombre" 
                   value={user.name}
                   onChange={handleChange}
                 />
@@ -160,7 +185,7 @@ const UpdateUsuario = () => {
                   className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
                   type="text"
                   name="apellido"
-                  placeholder="Apellido"
+                  placeholder="apellido"
                   value={user.apellido}
                   onChange={handleChange}
                 />
@@ -178,7 +203,7 @@ const UpdateUsuario = () => {
                   className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
                   type="email"
                   name="email"
-                  placeholder="Email"
+                  placeholder="email"
                   value={user.email}
                   onChange={handleChange}
                 />
@@ -196,7 +221,7 @@ const UpdateUsuario = () => {
                   className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
                   type="text"
                   name="telefono"
-                  placeholder="Teléfono"
+                  placeholder="Telefono"
                   value={user.telefono}
                   onChange={handleChange}
                 />
@@ -242,7 +267,7 @@ const UpdateUsuario = () => {
           <button
             className="w-2/4 mb-4 mt-4 select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-blanco transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
             type="button"
-            onClick={alertPrueba}
+            onClick={confirmacion}
           >
             EDITAR USUARIO
           </button>
