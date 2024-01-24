@@ -16,7 +16,12 @@ const CardShopHabitaciones = ({
      // Verificar si hay un token en el localStorage
      const token = localStorage.getItem('token');
      if (!token) {
-      Swal.fire("Necesita iniciar sesion para añadir al carrito", "", "info");
+      Swal.fire({
+        title:"Necesita iniciar sesion para añadir al carrito", 
+        icon:"info",
+        confirmButtonColor:"#FB350C",
+        iconColor: "#FB350C"
+      });
      }else{ console.log("handlerAddToCart", id);
      dispatch(añadirAlCarrito(id));
      notificacion();}
@@ -30,8 +35,12 @@ const CardShopHabitaciones = ({
        window.location.href = '/pasareladePago'; 
 
      } else {
-      Swal.fire("Necesita iniciar sesion para reservar", "", "info");
-    
+      Swal.fire({
+        title:"Necesita iniciar sesion para reservar", 
+        icon:"info",
+        confirmButtonColor:"#FB350C",
+        iconColor: "#FB350C"
+      });
      }
   };
   console.log("imagen", imagenes);

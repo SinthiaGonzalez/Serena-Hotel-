@@ -55,7 +55,12 @@ const ComentPage = () => {
       window.location.href = '/comentar'; // Redirigir a la ruta "/comentar"
     } else {
       // Si no hay un token, mostrar un alert y realizar otras acciones según sea necesario
-      Swal.fire("Necesita iniciar sesion para dejar comentarios", "", "info");
+      Swal.fire({
+        title:"Necesita iniciar sesion para dejar comentarios", 
+        icon:"info",
+        confirmButtonColor:"#FB350C",
+        iconColor: "#FB350C"
+      });
       // Puedes realizar otras acciones aquí, como redirigir a otra ruta, mostrar un modal, etc.
     }
   };

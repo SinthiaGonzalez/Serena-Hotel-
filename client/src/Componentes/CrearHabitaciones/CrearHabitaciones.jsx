@@ -217,6 +217,7 @@ const CrearHabitacion = () => {
                 placeholder="Nombre"
                 onChange={handleChange}
                 onBlur={() => handleBlur("nombre")}
+                value={habitacionData.nombre}
               />
               <p className="my-4">{touchedFields.nombre && errors.nombre}</p>
             </div>
@@ -306,6 +307,7 @@ const CrearHabitacion = () => {
                         min="0"
                         name="m2"
                         placeholder="m²"
+                        defaultValue={habitacionData.servicios[3].descripcion.substring(0, habitacionData.servicios[3].descripcion.length - 2)}
                       />
                     }
                   </p>
@@ -339,23 +341,24 @@ const CrearHabitacion = () => {
             </div>
           </div>
 
-          <div className="p-6 pt-3 flex flex-col items-center gap-4 w-2/8">
-            <p className="text-2xl font-bold text-blanco w-2/3 justify-center mt-4">
-              $
-              {
-                <input
-                  className="text-2xl font-bold text-negro w-1/3 mx-4 text-center"
-                  type="number"
-                  name="precio"
-                  min="0"
-                  placeholder="-"
-                  onChange={handleChange}
-                  onBlur={() => handleBlur("precio")}
-                />
-              }
-              /Noche
-            </p>
-            <p className="my-4">{touchedFields.precio && errors.precio}</p>
+          <div className="p-6 pt-3 flex flex-col items-center gap-4 w-2/8 mt-20">
+          <p className="text-2xl font-bold text-blanco w-2/3 justify-center">
+            $
+            {
+              <input
+                className="text-2xl font-bold text-negro w-1/3 mx-4 text-center"
+                type="number"
+                name="precio"
+                min="0"
+                placeholder="-"
+                value={habitacionData.precio}
+                onChange={handleChange}
+                onBlur={() => handleBlur("precio")}
+              />
+            }
+            /Noche
+          </p>
+          <p className="my-4">{touchedFields.precio && errors.precio}</p>
 
             <button
               className="w-full mt-2 mb-4 select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-blanco transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"

@@ -86,7 +86,12 @@ const UpdateUsuario = () => {
       if (result.isConfirmed) {
         handleSubmit();
       } else if (result.isDenied) {
-        Swal.fire("No se guardaron los cambios", "", "info");
+        Swal.fire({
+          title:"No se guardaron los cambios", 
+          icon:"info",
+          confirmButtonColor:"#FB350C",
+          iconColor: "#FB350C"
+        });
       }
     });
   };

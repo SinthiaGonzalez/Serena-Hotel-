@@ -53,9 +53,19 @@ export function postComent(state) {
   return async function (dispatch) {
     try {
       await axios.post("/comentar", state);
-      Swal.fire("Se agrego el comentario exitosamente!", "", "success");
+      Swal.fire({
+        title:"Se agrego el comentario exitosamente!", 
+        icon:"success",
+        confirmButtonColor:"#FB350C",
+        iconColor: "#FB350C"
+      });
     } catch (error) {
-      Swal.fire(error.message,"","error");
+      Swal.fire({
+        title:error.message, 
+        icon:"error",
+        confirmButtonColor:"#FB350C",
+        iconColor: "#FB350C"
+      });
     }
   };
 }
@@ -64,9 +74,19 @@ export function postUsuario(state) {
     try {
       await axios.post("/usuario", state);
       console.log("log de action", state);
-      Swal.fire("Usuario creado exitosamente!", "", "success");
+      Swal.fire({
+        title:"Usuario creado exitosamente!", 
+        icon:"success",
+        confirmButtonColor:"#FB350C",
+        iconColor: "#FB350C"
+      });
     } catch (error) {
-      Swal.fire(error.message,"","error");
+      Swal.fire({
+        title:error.message, 
+        icon:"error",
+        confirmButtonColor:"#FB350C",
+        iconColor: "#FB350C"
+      });
     }
   };
 }
@@ -108,7 +128,12 @@ export function getAllcomentarios() {
         });
       }
     } catch (error) {
-      Swal.fire(error.message,"","error");
+      Swal.fire({
+        title:error.message, 
+        icon:"error",
+        confirmButtonColor:"#FB350C",
+        iconColor: "#FB350C"
+      });
     }
   };
 }
@@ -123,10 +148,20 @@ export function eliminarComentario(id) {
           type: "ELIMINAR_COMENTARIO",
           payload: id,
         });
-        Swal.fire("Comentario eliminado exitosamente!", "", "success");
+        Swal.fire({
+          title:"Comentario eliminado exitosamente!", 
+          icon:"success",
+          confirmButtonColor:"#FB350C",
+          iconColor: "#FB350C"
+        });
       }
     } catch (error) {
-      Swal.fire(error.message,"","error");
+      Swal.fire({
+        title:error.message, 
+        icon:"error",
+        confirmButtonColor:"#FB350C",
+        iconColor: "#FB350C"
+      });
     }
   };
 }
@@ -157,16 +192,44 @@ export function crearHabitacion(habitacionData) {
   console.log({ habitacionData });
   return async (dispatch) => {
     try {
-      const response = await axios.post("/post/habitaciones", habitacionData);
+        Swal.fire({
+          title: "Quieres guardar los cambios?",
+          showDenyButton: true,
+          confirmButtonText: "Guardar",
+          denyButtonText: " No guardar",
+          confirmButtonColor: "#FB350C",
+          denyButtonColor: "#322F2C",
+        }).then(async (result) => {
+          if (result.isConfirmed) {
+            const response = await axios.post("/post/habitaciones", habitacionData);
       console.log(response.data);
-      Swal.fire("Habitacion creada exitosamente!", "", "success");
+      Swal.fire({
+        title:"Habitacion creada exitosamente!", 
+        icon:"success",
+        confirmButtonColor:"#FB350C",
+        iconColor: "#FB350C"
+      });
       dispatch({
         type: "CREAR_HABITACION",
         payload: response.data,
       });
+          } else if (result.isDenied) {
+            Swal.fire({
+              title:"No se creo la habitacion", 
+              icon:"info",
+              confirmButtonColor:"#FB350C",
+              iconColor: "#FB350C"
+            });
+          }
+        });
     } catch (error) {
       console.log(error);
-      Swal.fire(error.message,"","error");
+      Swal.fire({
+        title:error.message, 
+        icon:"error",
+        confirmButtonColor:"#FB350C",
+        iconColor: "#FB350C"
+      });
     }
   };
 }
@@ -256,17 +319,44 @@ export const getReservas = ({ fecha_entrada, fecha_salida }) => {
 export function updateHabitacion(habitacionData) {
   return async (dispatch) => {
     try {
-      const response = await axios.put("/update/habitaciones", habitacionData);
-
-      console.log(response.data);
-      Swal.fire("Habitacion editada exitosamente!", "", "success");
-      dispatch({
-        type: "UPDATE_HABITACION",
-        payload: response.data,
+      Swal.fire({
+        title: "Quieres editar la habitacion?",
+        showDenyButton: true,
+        confirmButtonText: "Editar",
+        denyButtonText: " No editar",
+        confirmButtonColor: "#FB350C",
+        denyButtonColor: "#322F2C",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          const response = await axios.put("/update/habitaciones", habitacionData);
+    console.log(response.data);
+    Swal.fire({
+      title:"Habitacion editada exitosamente!", 
+      icon:"success",
+      confirmButtonColor:"#FB350C",
+      iconColor: "#FB350C"
+    });
+    dispatch({
+      type: "UPDATE_HABITACION",
+      payload: response.data,
+    });
+        } else if (result.isDenied) {
+          Swal.fire({
+            title:"No se edito la habitacion", 
+            icon:"info",
+            confirmButtonColor:"#FB350C",
+            iconColor: "#FB350C"
+          });
+        }
       });
     } catch (error) {
       console.log(error);
-      Swal.fire(error.message,"","error");
+      Swal.fire({
+        title:error.message, 
+        icon:"error",
+        confirmButtonColor:"#FB350C",
+        iconColor: "#FB350C"
+      });
     }
   };
 }
@@ -281,7 +371,13 @@ export function getDevs() {
         payload: response.data,
       });
     } catch (error) {
-      Swal.fire(error.message,"Hubo un problema con el servidor. Comuniquese con el Administrador","error")
+      Swal.fire({
+        title:error.message, 
+        text: "Hubo un problema con el servidor. Comuniquese con el Administrador",
+        icon:"error",
+        confirmButtonColor:"#FB350C",
+        iconColor: "#FB350C"
+      });
       return;
     }
   };
@@ -296,16 +392,43 @@ export function deleteHabitacion(id) {
   console.log('prueba',{ id });
   return async function (dispatch) {
     try {
-      const response = await axios.delete(`/habitaciones/${id}`);
+      Swal.fire({
+        title: "Quieres eliminar la habitacion?",
+        showDenyButton: true,
+        confirmButtonText: "Eliminar",
+        denyButtonText: " No eliminar",
+        confirmButtonColor: "#FB350C",
+        denyButtonColor: "#322F2C",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          const response = await axios.delete(`/habitaciones/${id}`);
 
         dispatch({
           type: "DELETE_HABITACION",
           payload: id,
         });
-        Swal.fire("Habitacion eliminada exitosamente!", "", "success");
-      
+        Swal.fire({
+          title:"Habitacion eliminada exitosamente!", 
+          icon:"success",
+          confirmButtonColor:"#FB350C",
+          iconColor: "#FB350C"
+        });
+        } else if (result.isDenied) {
+          Swal.fire({
+            title:"No se elimino la habitacion", 
+            icon:"info",
+            confirmButtonColor:"#FB350C",
+            iconColor: "#FB350C"
+          });
+        }
+      });
     } catch (error) {
-      Swal.fire(error.message,"","error");
+      Swal.fire({
+        title:error.message, 
+        icon:"error",
+        confirmButtonColor:"#FB350C",
+        iconColor: "#FB350C"
+      });
     }
   };
 }
@@ -343,8 +466,18 @@ export function updateUsuario(usuarioData, id) {
       console.log("plis",usuarioData);
       id = usuarioData.id;
       const response = await axios.put(`/update/usuarios/${id}`, usuarioData);
-      if (response.data === "No se encontro el usuario") Swal.fire(response,"","error");
-      else Swal.fire("Guardados!", "", "success");
+      if (response.data === "No se encontro el usuario") Swal.fire({
+        title:"No se encontro el usuario!", 
+        icon:"error",
+        confirmButtonColor:"#FB350C",
+        iconColor: "#FB350C"
+      });
+      else Swal.fire({
+        title:"Se editaron sus datos!", 
+        icon:"success",
+        confirmButtonColor:"#FB350C",
+        iconColor: "#FB350C"
+      });
       console.log(response.data);
       dispatch({
         type: "UPDATE_USUARIO",
@@ -352,7 +485,12 @@ export function updateUsuario(usuarioData, id) {
       });
     } catch (error) {
       console.log(error);
-      Swal.fire(error.message,"","error");
+      Swal.fire({
+        title:error.message, 
+        icon:"error",
+        confirmButtonColor:"#FB350C",
+        iconColor: "#FB350C"
+      });
     }
   };
 }
@@ -363,16 +501,31 @@ export function deleteUsuario(id) {
     try {
       const response = await axios.delete(`/delete/usuarios/${id}`);
       if (response.data === "No se encontro el usuario") {
-        Swal.fire("No se encontro el usuario","","error");
+        Swal.fire({
+          title:"No se encontro el usuario!", 
+          icon:"error",
+          confirmButtonColor:"#FB350C",
+          iconColor: "#FB350C"
+        });
       } else {
         dispatch({
           type: "DELETE_USUARIO",
           payload: id,
         });
-        Swal.fire("Usuario eliminado exitosamente!", "", "success");
+        Swal.fire({
+          title:"Usuario eliminado exitosamente!", 
+          icon:"success",
+          confirmButtonColor:"#FB350C",
+          iconColor: "#FB350C"
+        });
       }
     } catch (error) {
-      Swal.fire(error.message,"","error");
+      Swal.fire({
+        title:error.message, 
+        icon:"error",
+        confirmButtonColor:"#FB350C",
+        iconColor: "#FB350C"
+      });
     }
   };
 }
@@ -403,7 +556,13 @@ export function verificacionLogeoUsuarioAction(infoLogeo) {
       console.log("Respuesta del servidor manual:", response.data);
     } catch (error) {
       if (error.response && error.response.status === 400) {
-         Swal.fire(error.message,"Usuario o contraseña incorrectos","error");
+         Swal.fire({
+        title:error.message, 
+        text: "Usuario o contraseña equivocados",
+        icon:"error",
+        confirmButtonColor:"#FB350C",
+        iconColor: "#FB350C"
+      });
       }
     }
   };
@@ -426,7 +585,13 @@ export function getReservas_usuario(usuarioId) {
       //   alert(error.response.data);
       // }
        console.log("Error al solicitar las Reservas por Usuario:", error);
-       Swal.fire("El usuario no tiene reservas!", "", "error");
+        Swal.fire({
+        title:error.message, 
+        text:"El usuario no tiene reservas",
+        icon:"error",
+        confirmButtonColor:"#FB350C",
+        iconColor: "#FB350C"
+      });
 
        console.log("Error al solicitar las Reservas por Usuario:",error);
     }
@@ -444,7 +609,13 @@ export function getReservas_Admin(usuarioId) {
       });
       //alert("Reservas del Usuario obtenidas exitosamente");
     } catch (error) {
-      Swal.fire("Error al solicitar las Reservas por Usuario", "", "error");
+      Swal.fire({
+        title:error.message, 
+        text:"Error al obtener las reservas del usuario",
+        icon:"error",
+        confirmButtonColor:"#FB350C",
+        iconColor: "#FB350C"
+      });
       // console.log("Error al solicitar las Reservas por Usuario:",error);
     }
   };
@@ -481,7 +652,12 @@ export function DetailHabitaciones(id) {
         payload: response.data,
       });
     } catch (error) {
-      Swal.fire(error.response.data.error, "", "error");
+        Swal.fire({
+        title:error.response.data.error, 
+        icon:"error",
+        confirmButtonColor:"#FB350C",
+        iconColor: "#FB350C"
+      });
     }
   };
 }
@@ -532,7 +708,12 @@ export function cambiarEstadoUsuario(id, nuevoEstado) {
     return async function () {
       try {
         const response = await axios.put("/update/usuarioEstado", {id, nuevoEstado});
-        Swal.fire("Cambio de estado de usuario exitoso!", "", "success");
+        Swal.fire({
+          title:"Cambio de estado del usuario exitoso!", 
+          icon:"success",
+          confirmButtonColor:"#FB350C",
+          iconColor: "#FB350C"
+        });
         console.log("Respuesta del servidor:", response.data);
        // ver si es necesario dispatch aqui "POST_USUARIO",p/q actualice estado "usuarios"
       } catch (error) {
@@ -559,13 +740,23 @@ export function cambiarEstadoUsuario(id, nuevoEstado) {
     return async function (dispatch) {
       try {
         const response = await axios.delete(`/reservas/delete/${id}`);
-        Swal.fire("Reserva eliminada exitosamente!", "", "success");
+        Swal.fire({
+          title:"Reserva eliminada exitosamente!", 
+          icon:"success",
+          confirmButtonColor:"#FB350C",
+          iconColor: "#FB350C"
+        });
         dispatch({
           type: "DELETE_RESERVA",
           payload: response.data,
         });
       } catch (error) {
-        Swal.fire(error.message, "", "error");
+        Swal.fire({
+          title:error.message, 
+          icon:"error",
+          confirmButtonColor:"#FB350C",
+          iconColor: "#FB350C"
+        });
       }
     };
   };
