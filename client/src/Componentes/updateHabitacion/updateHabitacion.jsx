@@ -201,6 +201,7 @@ const UpdateHabitacion = () => {
 
    const handleDefaultValues = () => {
     console.log('default values', habitacionDetail);
+    habitacionDetail[0].servicios[3].descripcion=habitacionDetail[0].servicios[3].descripcion.substring(0, habitacionDetail[0].servicios[3].descripcion.length - 3)
     if (habitacionDetail){
     setNuevaDataHabitacion({
     nombreId: habitacionDetail[0].id,
@@ -299,6 +300,7 @@ console.log("auxilio", nuevaDataHabitacion)
                       onChange={(event) => handleChangeServicio(0, event)}
                       name="select"
                       className="ml-2 p-1 rounded-md text-negro text-center w-[80px]"
+                      value={nuevaDataHabitacion.servicios[0].descripcion}
                     >
                       <option value="" selected>
                         Cuartos
@@ -321,6 +323,7 @@ console.log("auxilio", nuevaDataHabitacion)
                       onChange={(event) => handleChangeServicio(1, event)}
                       name="select"
                       className="ml-2 p-1 rounded-md text-negro text-center w-[80px]"
+                      value={nuevaDataHabitacion.servicios[1].descripcion}
                     >
                       <option value="" selected>
                         Personas
@@ -373,7 +376,7 @@ console.log("auxilio", nuevaDataHabitacion)
                       min="0"
                       name="m2"
                       placeholder="m²"
-                      defaultValue={nuevaDataHabitacion.servicios[3].descripcion.substring(0, nuevaDataHabitacion.servicios[3].descripcion.length - 2)}
+                      value={nuevaDataHabitacion.servicios[3].descripcion}
                     />
                   }
                 </p>
