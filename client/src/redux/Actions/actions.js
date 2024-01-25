@@ -54,9 +54,13 @@ export function postComent(state) {
       await axios.post("/comentar", state);
       Swal.fire("Se agrego el comentario exitosamente!", "", "success");
     } catch (error) {
-      Swal.fire(error.message, "", "error");
+      if (error.response && error.response.status === 404) {
+        Swal.fire("Solo se permite un comentario por persona", "", "warning");
+      } else {
+        Swal.fire(error.message, "", "error");
     }
   };
+}
 }
 export function postUsuario(state) {
   return async function (dispatch) {

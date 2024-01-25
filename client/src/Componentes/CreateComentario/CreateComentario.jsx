@@ -49,6 +49,7 @@ const CreateComentPage = () => {
       nombre: name,
       contenido: e.target.comentarios.value,
       puntuacion: rating,
+      idUsuario: localStorage.getItem('userId')
     };
     dispatch(postComent(comentario));
     // Restablecer el estado del formulario después de enviarlo
