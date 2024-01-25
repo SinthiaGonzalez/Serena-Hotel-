@@ -46,7 +46,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 const { Comentario, Usuario, Carrito, Habitaciones, Reservas,Pago } =
   sequelize.models;
 
-Usuario.hasMany(Comentario, { foreignKey: "usuarioId" });
+Usuario.hasOne(Comentario, { foreignKey: "usuarioId" });
 Comentario.belongsTo(Usuario, { foreignKey: "usuarioId" });
 
 Usuario.hasMany(Carrito, { foreignKey: "usuarioId" });
