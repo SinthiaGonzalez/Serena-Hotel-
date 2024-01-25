@@ -54,9 +54,13 @@ export function postComent(state) {
       await axios.post("/comentar", state);
       Swal.fire("Se agrego el comentario exitosamente!", "", "success");
     } catch (error) {
-      Swal.fire(error.message, "", "error");
+      if (error.response && error.response.status === 404) {
+        Swal.fire("Solo se permite un comentario por persona", "", "warning");
+      } else {
+        Swal.fire(error.message, "", "error");
     }
   };
+}
 }
 export function postUsuario(state) {
   return async function (dispatch) {
@@ -473,7 +477,7 @@ export function verificarToken() {
   return async function (dispatch) {
     try {
       const token = localStorage.getItem("token");
-      console.log("token", token);
+
       if (token) {
         dispatch({
           type: "VERIFICARTOKEN",
@@ -593,6 +597,32 @@ export const deleteReservas = (id) => {
       });
     } catch (error) {
       Swal.fire(error.message, "", "error");
+    }
+  };
+};
+export const updateDates = ({ checkinDate, checkoutDate }) => {
+  return async function (dispatch) {
+    try {
+      return dispatch({
+        type: "UPDATE_DATES",
+        payload: { checkinDate, checkoutDate },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+export const getCheckoutDate = ({ checkinDate, checkoutDate }) => {
+  console.log("fechas", checkinDate, checkoutDate);
+  return async function (dispatch) {
+    console.log("fechas", checkinDate, checkoutDate);
+    try {
+      return dispatch({
+        type: "GET_CHECKOUT",
+        payload: { checkinDate, checkoutDate },
+      });
+    } catch (error) {
+      console.log(error);
     }
   };
 };
