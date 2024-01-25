@@ -5,6 +5,7 @@ import {
   getHabitacionesNombre,
   getHabitacionesFiltrosPersonas,
   getReservas,
+  updateDates,
 } from "../../redux/Actions/actions";
 import { getHabitaciones } from "../../redux/Actions/actions";
 import NavBarHome from "../NavBarHome/NavBarHome";
@@ -22,7 +23,7 @@ import {
 import Checkin from "../Filtros/filtro-Checkin";
 import Checkout from "../Filtros/filtro-Checkout";
 import { format } from "date-fns";
-import BuscarPorNombre from "../ordenamientosyBusqueda/busqueda";
+// import BuscarPorNombre from "../ordenamientosyBusqueda/busqueda";
 import Paginacion from "../Paginacion/Paginacion";
 
 const Habitaciones = () => {
@@ -30,6 +31,8 @@ const Habitaciones = () => {
   const habitacionesShop = useSelector((state) => state.habitaciones);
   const habitacionesFechas = useSelector((state) => state.habitacionesFechas);
   const habitacionfiltrada = useSelector((state) => state.habitacionfiltrada);
+  const fechas = useSelector((state) => state.fechas);
+
   const stringdelbuscar = useSelector((state) => state.string);
   const [filtrosPersonas, setFiltrosPersonas] = useState([]);
   const [filtrosCuarto, setFiltrosCuarto] = useState([]);
@@ -46,7 +49,7 @@ const Habitaciones = () => {
     // Aquí puedes enviar la solicitud correspondiente cuando cambian las fechas
     dispatch(getHabitaciones({ page: paginaActual, itemsPerPage }));
   }, [dispatch, itemsPerPage, checkinDate, checkoutDate]);
-
+  console.log("Estado Fechas", fechas);
   const handleNombreChange = (value, tipoOrdenamiento) => {
     setUltimoOrdenamiento({
       ordenado: tipoOrdenamiento,
@@ -123,19 +126,25 @@ const Habitaciones = () => {
 
   const handleCheckinChange = (selectedDate) => {
     setCheckinDate(format(selectedDate, "yyyy-MM-dd"));
-    console.log("fecha checkin", selectedDate);
+    // dispatch(updateDates({ checkinDate: format(selectedDate, "yyyy-MM-dd") }));
+    // console.log("fecha checkin", selectedDate);
   };
 
   const [mostrarSeccion, setMostrarSeccion] = useState(false);
 
   const handleCheckoutChange = (selectedDate) => {
     setCheckoutDate(format(selectedDate, "yyyy-MM-dd"));
-    console.log("fecha checkout", selectedDate);
-
     dispatch(
       getReservas({
         checkinDate,
         checkoutDate,
+      })
+    );
+    // console.log("fecha checkout", selectedDate);
+    dispatch(
+      updateDates({
+        checkinDate: checkinDate,
+        checkoutDate: format(selectedDate, "yyyy-MM-dd"),
       })
     );
     setMostrarSeccion(true);
@@ -158,17 +167,17 @@ const Habitaciones = () => {
           (paginaActual - 1) * itemsPerPage,
           paginaActual * itemsPerPage
         );
-  console.log("habitacionesBusqueda", habitacionfiltrada);
-  console.log("todasHabitaciones", habitacionesShop);
-  console.log("habitacionesFechas", habitacionesFechas);
-  console.log("habitacionesActuales", habitacionesActuales);
+  // console.log("habitacionesBusqueda", habitacionfiltrada);
+  // console.log("todasHabitaciones", habitacionesShop);
+  // console.log("habitacionesFechas", habitacionesFechas);
+  // console.log("habitacionesActuales", habitacionesActuales);
   return (
     <>
       <NavBarHome />
       <div className="flex flex-row bg-white py-7">
         <div className="ml-8 bg-verde w-2/5 h-full rounded-xl p-2">
           <h2 className="text-2xl font-bold text-blanco mb-2 pl-4">
-            Selecciona las Fechas
+            Seleccionar las Fechas
           </h2>
           <div>
             <Checkin onCheckinChange={handleCheckinChange} />

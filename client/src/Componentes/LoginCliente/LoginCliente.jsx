@@ -15,7 +15,8 @@ const LoginCliente = () => {
   const handleemailChange = (event) => {
     setemail(event.target.value);
   };
-
+  const isAdmin = JSON.parse(localStorage.getItem("isAdmin"));
+  console.log("LoginCliente", isAdmin);
   const handleContraseñaChange = (event) => {
     setContraseña(event.target.value);
   };
