@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { postComent } from "../../redux/Actions/actions";
 import { useVerificarToken } from "../AutenticadorToken/autenticadorToken";
+import Swal from "sweetalert2";
 
 import {
   Card,
@@ -35,27 +36,73 @@ const CreateComentPage = () => {
     console.log("Puntuación seleccionada:", value);
   };
 
-  // Información del usuario autenticado (simulada)
+  const filtroPalabrasInapropiadas = (comentario) => {
+    // Lista de palabras prohibidas
+    const palabrasProhibidas = [
+      "maldito",
+      "estúpido",
+      "idiota",
+      "imbécil",
+      "grosero",
+      "racista",
+      "sexista",
+      "vulgar",
+      "obsceno",
+      "blasfemo",
+      "agresivo",
+      "violento",
+      "odioso",
+      "despreciable",
+      "intolerante",
+      "inmoral",
+      "grotesco",
+      "provocador",
+      "despectivo",
+      "degradante",
+      "desalmado",
+      "abusivo",
+      "inmundo",
+      "horrible",
+      "asco",
+      "horroroso",
+      "repulsivo",
+      "repugnante"
+    ];;
+
+    // Verificar si el comentario contiene palabras prohibidas
+    return palabrasProhibidas.some((palabra) =>
+      comentario.toLowerCase().includes(palabra.toLowerCase())
+    );
+  };
+
+   //Información del usuario autenticado (simulada)
   const user = {
     name: name,
     image:imagenUsuario,
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+ const handleSubmit = (e) => {
+  e.preventDefault();
+
+  const comentarioUsuario = e.target.comentarios.value;
+
+  if (filtroPalabrasInapropiadas(comentarioUsuario)) {
+    Swal.fire("Comentario no permitido. Evita el uso de lenguaje inapropiado", "", "success");
+    //alert("Comentario no permitido. Evita el uso de lenguaje inapropiado.");
+  } else {
     const comentario = {
-      imagen:
-       imagenUsuario,
+      imagen: imagenUsuario,
       nombre: name,
-      contenido: e.target.comentarios.value,
+      contenido: comentarioUsuario,
       puntuacion: rating,
-      idUsuario: localStorage.getItem('userId')
+      idUsuario: localStorage.getItem("userId"),
     };
     dispatch(postComent(comentario));
+
     // Restablecer el estado del formulario después de enviarlo
     e.target.reset();
-  };
-
+  }
+};
   return (
     <div
       className="relative bg-cover bg-center h-screen text-white text-center p-10 justify-center items-center"
