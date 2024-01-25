@@ -21,6 +21,7 @@ const UpdateHabitacion = () => {
   const [isEmpty, setIsEmpty] = useState(true);
   const [seleccionhabitacion, setSeleccionhabitacion] = useState("");
   const habitacionescKcup = useSelector((state) => state.habitacionBackUp);
+  const habitacionEliminada = useSelector((state) => state.habitacionEliminada);
 
   const habitacionesB = habitacionescKcup.map(({ id, nombre }) => ({
     id,
@@ -29,7 +30,7 @@ const UpdateHabitacion = () => {
 
   useEffect(() => {
     dispatch(getHabitacionesbackup());
-  }, []);
+  }, [habitacionEliminada]);
 
   const [nuevaDataHabitacion, setNuevaDataHabitacion] = useState({
     nombreId: "",

@@ -18,6 +18,7 @@ const initialState = {
   reservasTodasAdmin: [],
   token: false,
   usuarioById: [],
+  habitacionEliminada: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -176,6 +177,11 @@ const reducer = (state = initialState, action) => {
             ...state,
             token: action.payload,
           };
+        case "DELETE_HABITACION":
+          return {
+            ...state,
+            habitacionEliminada: action.payload,
+          }
     default:
       return state;
   }

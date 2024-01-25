@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { updateUsuario, getUsuarioById } from "../../redux/Actions/actions";
+import validation from "./validation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
@@ -16,6 +17,9 @@ const UpdateUsuario = () => {
   const userId = localStorage.getItem("userId");
   const isAdmin = localStorage.getItem("isAdmin");
   console.log("aqui", userId);
+
+  const [errors, setErrors] = useState({});
+  const [touchedFields, setTouchedFields] = useState({});
 
   const [user, setUser] = useState({
     id: userId,
@@ -34,6 +38,13 @@ const UpdateUsuario = () => {
       ...user,
       [e.target.name]: e.target.value,
     });
+
+    setErrors(
+      validation({
+        ...user,
+        [e.target.name]: e.target.value,
+      })
+    )
   };
 
   const handleImageCloudinary = async (e) => {
@@ -54,10 +65,10 @@ const UpdateUsuario = () => {
   const deleteImage = () => {
     setUser({ ...user, imagen: "" });
   };
-  const handleSubmit = async (e) => {
-    try {
+ const handleSubmit = (e) => {
+    e.preventDefault();
+    if (Object.keys(errors).length === 0) {
       dispatch(updateUsuario(user));
-      // Restablecer el estado a los valores iniciales en lugar de un objeto vacío
       setUser({
         id: userId,
         name: "",
@@ -68,33 +79,37 @@ const UpdateUsuario = () => {
         isadmin: isAdmin,
         imagen: "",
       });
-    } catch (error) {
-      Swal.fire(error.message, "", "error");
+      resetTouchedFields();
+    } else {
+      Swal.fire("Error de validacion", "", "error");
     }
   };
-  console.log("este", user);
 
-  const confirmacion = () => {
-    Swal.fire({
-      title: "Quieres guardar los cambios?",
-      showDenyButton: true,
-      confirmButtonText: "Guardar",
-      denyButtonText: " No guardar",
-      confirmButtonColor: "#FB350C",
-      denyButtonColor: "#322F2C",
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        handleSubmit();
-      } else if (result.isDenied) {
-        Swal.fire({
-          title:"No se guardaron los cambios", 
-          icon:"info",
-          confirmButtonColor:"#FB350C",
-          iconColor: "#FB350C"
-        });
-      }
+  console.log("por acaaaaaaaaaaaaaaaaa",errors);
+  const handleBlur = (fieldName) => {
+    setTouchedFields({ ...touchedFields, [fieldName]: true });
+
+    // Actualiza user con el campo específico que se ha tocado
+    setUser({
+      ...user,
+      [fieldName]: user[fieldName],
+    });
+
+    // Vuelve a validar con la actualización de habitacionData
+    setErrors(validation(user));
+  };
+
+  const resetTouchedFields = () => {
+    const resetFields = {};
+    Object.keys(touchedFields).forEach((fieldName) => {
+      resetFields[fieldName] = "";
+    });
+    setUser({
+      ...user,
+      ...resetFields,
     });
   };
+  console.log("este", user);
 
   console.log(" a ver", usuarioData)
 
@@ -151,6 +166,7 @@ const UpdateUsuario = () => {
               accept="image/*"
               name="imagen"
               onChange={handleImageCloudinary}
+              onBlur={handleBlur}
             />
             <span className="material-symbols-outlined bg-verde rounded-full p-2 mb-4 absolute z-10 -mt-8 ml-8">
               Edit
@@ -175,7 +191,9 @@ const UpdateUsuario = () => {
                   placeholder="Nombre" 
                   value={user.name}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                 />
+                 <p className="my-4 text-base text-center">{ errors.name}</p>
               </div>
 
               <div className="flex flex-row h-11 bg-verde  relative rounded-lg mb-4">
@@ -193,7 +211,9 @@ const UpdateUsuario = () => {
                   placeholder="apellido"
                   value={user.apellido}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                 />
+                 <p className="my-4 text-base text-center">{ errors.apellido}</p>
               </div>
 
               <div className="flex flex-row h-11 bg-verde  relative rounded-lg mb-4">
@@ -211,7 +231,9 @@ const UpdateUsuario = () => {
                   placeholder="email"
                   value={user.email}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                 />
+                 <p className="my-4 text-base text-center">{ errors.email}</p>
               </div>
 
               <div className="flex flex-row h-11 bg-verde  relative rounded-lg mb-4">
@@ -229,7 +251,9 @@ const UpdateUsuario = () => {
                   placeholder="Telefono"
                   value={user.telefono}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                 />
+                 <p className="my-4 text-base text-center">{ errors.telefono}</p>
               </div>
 
               <div className="flex flex-row h-11 bg-verde  relative rounded-lg mb-4">
@@ -247,6 +271,7 @@ const UpdateUsuario = () => {
                   placeholder="Contraseña"
                   value={user.contraseña}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                 />
               </div>
 
@@ -265,6 +290,7 @@ const UpdateUsuario = () => {
                   placeholder="Confirmar Contraseña"
                   value={user.confirmarContraseña}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                 />
               </div>
             </label>
@@ -272,7 +298,7 @@ const UpdateUsuario = () => {
           <button
             className="w-2/4 mb-4 mt-4 select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-blanco transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
             type="button"
-            onClick={confirmacion}
+            onClick={handleSubmit}
           >
             EDITAR USUARIO
           </button>

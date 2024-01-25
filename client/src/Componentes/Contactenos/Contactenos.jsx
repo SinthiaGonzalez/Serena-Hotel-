@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { enviarConsulta } from "../../redux/Actions/actions";
+import  validation  from "./validations"
 import {
   Card,
   Input,
@@ -11,6 +12,7 @@ import {
 import NavBarHome from "../NavBarHome/NavBarHome";
 import Footer from "../Footer/Footer";
 import ScrollToTop from "../../ScrollToTop";
+import Swal from "sweetalert2";
 
 const Contactenos = () => {
   const dispatch = useDispatch();
@@ -22,23 +24,51 @@ const Contactenos = () => {
     mensaje: "",
   });
 
+  const [errors, setErrors] = useState({});
+  const [touchedFields, setTouchedFields] = useState({});
+
   const handleChange = (e) => {
     setInfoFormulario({ ...infoFormulario, [e.target.name]: e.target.value });
+    setErrors(
+      validation({...infoFormulario, [e.target.name]: e.target.value})
+    );
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(enviarConsulta(infoFormulario));
+    if (Object.keys(errors).length === 0) {
+      dispatch(enviarConsulta(infoFormulario));
+      resetTouchedFields();
+    } else {
+      Swal.fire("Error de validacion", "", "error");
+    }
+  };
 
-    // Borrar la información del formulario después de enviar
+  const handleBlur = (fieldName) => {
+    setTouchedFields({ ...touchedFields, [fieldName]: true });
+
+    // Actualiza habitacionData con el campo específico que se ha tocado
     setInfoFormulario({
-      nombre: "",
-      correo: "",
-      telefono: "",
-      mensaje: "",
+      ...infoFormulario,
+      [fieldName]: infoFormulario[fieldName],
+    });
+
+    // Vuelve a validar con la actualización de habitacionData
+    setErrors(validation(infoFormulario));
+  };
+
+  const resetTouchedFields = () => {
+    const resetFields = {};
+    Object.keys(touchedFields).forEach((fieldName) => {
+      resetFields[fieldName] = "";
+    });
+    setInfoFormulario({
+      ...infoFormulario,
+      ...resetFields,
     });
   };
 
+  console.log("por aca", errors)
   return (
     
     <div className="bg-verde">
@@ -55,7 +85,7 @@ const Contactenos = () => {
 
             <div>
               <p className="font-inter mb-6 ml-4 text-blanco">
-                Gracias por tu interés en el Hotel Serene. Si tienes alguna
+                Gracias por tu interés en el Hotel Serena. Si tienes alguna
                 pregunta o deseas obtener información sobre nuestras
                 instalaciones forestales, estaremos encantados de ayudarte.
                 Nuestro dedicado equipo está aquí para asistirte con cualquier
@@ -83,12 +113,14 @@ const Contactenos = () => {
                       placeholder="Nombre"
                       value={infoFormulario.nombre}
                       onChange={handleChange}
+                      onBlur={() => handleBlur("nombre")}
                       className="font-inter text-blanco border-t-blanco focus:border-t-blanco"
                       labelProps={{
                         className:
                           "before:content-none after:content-none font-inter text-blanco",
                       }}
                     />
+                    <p className="my-4 text-base text-center">{touchedFields.nombre && errors.nombre}</p>
 
                     <a className="font-inter font-medium text-blanco">
                       Correo:
@@ -100,11 +132,13 @@ const Contactenos = () => {
                       placeholder="Correo"
                       value={infoFormulario.correo}
                       onChange={handleChange}
+                      onBlur={() => handleBlur("correo")}
                       className="border-t-blanco focus:border-t-blanco"
                       labelProps={{
                         className: "before:content-none after:content-none",
                       }}
                     />
+                    <p className="my-4 text-base text-center">{touchedFields.correo && errors.correo}</p>
 
                     <a className="font-inter font-medium text-blanco">
                       Teléfono:
@@ -116,11 +150,13 @@ const Contactenos = () => {
                       placeholder="Teléfono"
                       value={infoFormulario.telefono}
                       onChange={handleChange}
+                      onBlur={() => handleBlur("telefono")}
                       className="border-t-blanco focus:border-t-blanco"
                       labelProps={{
                         className: "before:content-none after:content-none",
                       }}
                     />
+                    <p className="my-4 text-base text-center">{touchedFields.telefono && errors.telefono}</p>
 
                     <a className="font-inter font-medium text-blanco">
                       Mensaje:
@@ -131,11 +167,13 @@ const Contactenos = () => {
                       placeholder="Mensaje"
                       value={infoFormulario.mensaje}
                       onChange={handleChange}
+                      onBlur={() => handleBlur("mensaje")}
                       className="border-t-blanco focus:border-t-blanco"
                       labelProps={{
                         className: "before:content-none after:content-none",
                       }}
                     />
+                    <p className="my-4 text-base text-center">{touchedFields.mensaje && errors.mensaje}</p>
                   </div>
 
                   <Button type="submit" className="mt-6 bg-naranja" fullWidth>

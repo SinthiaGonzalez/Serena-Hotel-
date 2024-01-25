@@ -140,20 +140,37 @@ export function getAllcomentarios() {
 export function eliminarComentario(id) {
   return async function (dispatch) {
     try {
-      const response = await axios.delete(`/comentario/${id}`);
-      console.log("log de actions", response);
-      if (response.status === 200) {
-        dispatch({
-          type: "ELIMINAR_COMENTARIO",
-          payload: id,
-        });
-        Swal.fire({
-          title:"Comentario eliminado exitosamente!", 
-          icon:"success",
-          confirmButtonColor:"#FB350C",
-          iconColor: "#FB350C"
-        });
-      }
+      Swal.fire({
+        title: "Quieres guardar los cambios?",
+        showDenyButton: true,
+        confirmButtonText: "Guardar",
+        denyButtonText: " No guardar",
+        confirmButtonColor: "#FB350C",
+        denyButtonColor: "#322F2C",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          const response = await axios.delete(`/comentario/${id}`);
+          console.log("log de actions", response);
+          if (response.status === 200) {
+            dispatch({
+              type: "ELIMINAR_COMENTARIO",
+              payload: id,
+            });
+    Swal.fire({
+      title:"Comentario eliminado exitosamente!", 
+      icon:"success",
+      confirmButtonColor:"#FB350C",
+      iconColor: "#FB350C"
+    });
+        } else if (result.isDenied) {
+          Swal.fire({
+            title:"No se elimino el comentario", 
+            icon:"info",
+            confirmButtonColor:"#FB350C",
+            iconColor: "#FB350C"
+          });
+        }
+      }});
     } catch (error) {
       Swal.fire({
         title:error.message, 
@@ -484,7 +501,16 @@ export function updateUsuario(usuarioData, id) {
     try {
       console.log("plis", usuarioData);
       id = usuarioData.id;
-      const response = await axios.put(`/update/usuarios/${id}`, usuarioData);
+      Swal.fire({
+        title: "Quieres guardar los cambios?",
+        showDenyButton: true,
+        confirmButtonText: "Guardar",
+        denyButtonText: " No guardar",
+        confirmButtonColor: "#FB350C",
+        denyButtonColor: "#322F2C",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          const response = await axios.put(`/update/usuarios/${id}`, usuarioData);
       if (response.data === "No se encontro el usuario") Swal.fire({
         title:"No se encontro el usuario!", 
         icon:"error",
@@ -501,6 +527,15 @@ export function updateUsuario(usuarioData, id) {
       dispatch({
         type: "UPDATE_USUARIO",
         payload: response.data,
+      });
+        } else if (result.isDenied) {
+          Swal.fire({
+            title:"No se guardaron los cambios", 
+            icon:"info",
+            confirmButtonColor:"#FB350C",
+            iconColor: "#FB350C"
+          });
+        }
       });
     } catch (error) {
       console.log(error);
@@ -762,7 +797,16 @@ export function getUsuarioById(id) {
   export const deleteReservas = (id) => {
     return async function (dispatch) {
       try {
-        const response = await axios.delete(`/reservas/delete/${id}`);
+        Swal.fire({
+        title: "Quieres eliminar la reserva?",
+        showDenyButton: true,
+        confirmButtonText: "Eliminar",
+        denyButtonText: " No eliminar",
+        confirmButtonColor: "#FB350C",
+        denyButtonColor: "#322F2C",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          const response = await axios.delete(`/reservas/delete/${id}`);
         Swal.fire({
           title:"Reserva eliminada exitosamente!", 
           icon:"success",
@@ -773,6 +817,15 @@ export function getUsuarioById(id) {
           type: "DELETE_RESERVA",
           payload: response.data,
         });
+        } else if (result.isDenied) {
+          Swal.fire({
+            title:"No se elimino la reserva", 
+            icon:"info",
+            confirmButtonColor:"#FB350C",
+            iconColor: "#FB350C"
+          });
+        }
+      });
       } catch (error) {
         Swal.fire({
           title:error.message, 
