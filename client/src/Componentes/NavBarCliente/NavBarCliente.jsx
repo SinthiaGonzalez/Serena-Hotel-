@@ -75,7 +75,7 @@ const NavBarCliente = () => {
   );
 
   return (
-    <Navbar className="bg-verde opacity-85 border-0 mx-auto max-w-screen-3xl rounded-xs p-7 p-7 lg:pl-10">
+    <Navbar className="!bg-verde opacity-100 border-0 mx-auto max-w-screen-3xl rounded-xs p-7 p-7 lg:pl-10">
       <div className="container mx-auto flex items-center justify-between text-blanco">
         <Typography
           as="a"
