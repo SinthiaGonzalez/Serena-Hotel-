@@ -22,7 +22,7 @@ import {
 import Checkin from "../Filtros/filtro-Checkin";
 import Checkout from "../Filtros/filtro-Checkout";
 import { format } from "date-fns";
-import BuscarPorNombre from "../ordenamientosyBusqueda/busqueda";
+// import BuscarPorNombre from "../ordenamientosyBusqueda/busqueda";
 import Paginacion from "../Paginacion/Paginacion";
 
 const Habitaciones = () => {
@@ -168,7 +168,7 @@ const Habitaciones = () => {
       <div className="flex flex-row bg-white py-7">
         <div className="ml-8 bg-verde w-2/5 h-full rounded-xl p-2">
           <h2 className="text-2xl font-bold text-blanco mb-2 pl-4">
-            Selecciona las Fechas
+            Seleccionar las Fechas
           </h2>
           <div>
             <Checkin onCheckinChange={handleCheckinChange} />
