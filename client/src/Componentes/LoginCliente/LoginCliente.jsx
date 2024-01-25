@@ -16,13 +16,17 @@ const LoginCliente = () => {
     setemail(event.target.value);
   };
 
+  const isAdmin = JSON.parse(localStorage.getItem("isAdmin"));
+  console.log("isAdmin", isAdmin);
+  console.log("LOGINCLIENTE jx localStorage.getItem('isAdmin')"+isAdmin);
+    
   const handleContraseñaChange = (event) => {
     setContraseña(event.target.value);
   };
 
   const handleVerificarUsuario = () => {
     dispatch(verificacionLogeoUsuarioAction({ email, contraseña }));
-
+   
     navigate("/");
   };
   useVerificarToken();

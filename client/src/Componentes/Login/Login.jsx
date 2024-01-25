@@ -17,6 +17,10 @@ export default function LoginTemplate() {
     // console.log(respuesta.profileObj.givenName);
     //console.log(respuesta.profileObj.familyName);
     // Despacha la acción putUsuario para crear o actualizar el usuario en la base de datos
+    const isAdmin = JSON.parse(localStorage.getItem("isAdmin"));
+    console.log("isAdmin", isAdmin);
+    console.log("LOGINCLIENTE jx localStorage.getItem('isAdmin')"+isAdmin);
+    
     dispatch(
       postUsuarioGoogle({
         name: respuesta.profileObj.givenName,
@@ -24,6 +28,7 @@ export default function LoginTemplate() {
         email: respuesta.profileObj.email,
       })
     );
+   
     navigate("/");
   };
 
