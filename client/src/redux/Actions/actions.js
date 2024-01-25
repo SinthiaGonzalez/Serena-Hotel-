@@ -54,9 +54,13 @@ export function postComent(state) {
       await axios.post("/comentar", state);
       Swal.fire("Se agrego el comentario exitosamente!", "", "success");
     } catch (error) {
-      Swal.fire(error.message, "", "error");
+      if (error.response && error.response.status === 404) {
+        Swal.fire("Solo se permite un comentario por persona", "", "warning");
+      } else {
+        Swal.fire(error.message, "", "error");
     }
   };
+}
 }
 export function postUsuario(state) {
   return async function (dispatch) {
@@ -144,7 +148,7 @@ export function enviarConsulta(formData) {
 export function envioNotificion(formData) {
   return async function (dispatch) {
     try {
-      const response = await axios.post("/contactenos", formData);
+      const response = await axios.post("/notificaciones", formData);
       console.log("Respuesta del servidor:", response.data);
     } catch (error) {
       console.error("Error al enviar la consulta:", error);
@@ -464,7 +468,7 @@ export function getReservas_Admin(usuarioId) {
       });
       //alert("Reservas del Usuario obtenidas exitosamente");
     } catch (error) {
-      Swal.fire("Error al solicitar las Reservas por Usuario", "", "error");
+      // Swal.fire("Error al solicitar las Reservas por Usuario", "", "error");
       // console.log("Error al solicitar las Reservas por Usuario:",error);
     }
   };
@@ -473,7 +477,7 @@ export function verificarToken() {
   return async function (dispatch) {
     try {
       const token = localStorage.getItem("token");
-      console.log("token", token);
+
       if (token) {
         dispatch({
           type: "VERIFICARTOKEN",
@@ -593,6 +597,32 @@ export const deleteReservas = (id) => {
       });
     } catch (error) {
       Swal.fire(error.message, "", "error");
+    }
+  };
+};
+export const updateDates = ({ checkinDate, checkoutDate }) => {
+  return async function (dispatch) {
+    try {
+      return dispatch({
+        type: "UPDATE_DATES",
+        payload: { checkinDate, checkoutDate },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+export const getCheckoutDate = ({ checkinDate, checkoutDate }) => {
+  console.log("fechas", checkinDate, checkoutDate);
+  return async function (dispatch) {
+    console.log("fechas", checkinDate, checkoutDate);
+    try {
+      return dispatch({
+        type: "GET_CHECKOUT",
+        payload: { checkinDate, checkoutDate },
+      });
+    } catch (error) {
+      console.log(error);
     }
   };
 };

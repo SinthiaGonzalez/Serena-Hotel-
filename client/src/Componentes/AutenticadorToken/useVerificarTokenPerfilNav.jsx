@@ -6,7 +6,6 @@ export const useVerificarTokenPerfilNav = () => {
   useEffect(() => {
     // Obtener la información directamente del localStorage y convertirla a booleano
     const token = JSON.parse(localStorage.getItem("token"));
-    console.log(token);
 
     if (token) {
       // Si el token no es válido, redirigir al usuario a la página de inicio de sesión

@@ -19,7 +19,7 @@ const CardsHome = () => {
             HABITACIONES
           </span>
         </div>
-        <div className="flex flex-row items-center justify-center gap-2 hover:scale-105">
+        <div className="hidden sm:hidden md:flex md:flex-row md:items-center md:justify-center md:gap-2 md:hover:scale-105">
           <a 
           href="/habitaciones"
           className="text-xl font-medium text-negro">Ver Todo</a>

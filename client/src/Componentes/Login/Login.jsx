@@ -26,7 +26,8 @@ export default function LoginTemplate() {
     );
     navigate("/");
   };
-
+  const isAdmin = JSON.parse(localStorage.getItem("isAdmin"));
+  console.log("Login", isAdmin);
   const respuestaFallida = (error) => {
     console.log("Error en la autenticación de Google:", error);
     // Puedes agregar lógica adicional para manejar el error localmente

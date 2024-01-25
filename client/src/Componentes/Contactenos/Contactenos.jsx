@@ -40,10 +40,9 @@ const Contactenos = () => {
   };
 
   return (
-    
     <div className="bg-verde">
       <ScrollToTop />
-      <NavBarHome/>
+      <NavBarHome />
       <div className="my-10 ml-4 bg-verde">
         <div className="flex flex-col lg:flex-row items-center ml-6 mr-8">
           <div className="w-full lg:w-1/2 mt-8 mb-8 lg:mb-0 lg:mr-4">
@@ -80,14 +79,11 @@ const Contactenos = () => {
                       type="text"
                       name="nombre"
                       size="lg"
+                      color="white"
                       placeholder="Nombre"
                       value={infoFormulario.nombre}
                       onChange={handleChange}
-                      className="font-inter text-blanco border-t-blanco focus:border-t-blanco"
-                      labelProps={{
-                        className:
-                          "before:content-none after:content-none font-inter text-blanco",
-                      }}
+                      className="font-inter !text-blanco border-blanco focus:border-gris"
                     />
 
                     <a className="font-inter font-medium text-blanco">
@@ -97,13 +93,11 @@ const Contactenos = () => {
                       type="email"
                       name="correo"
                       size="lg"
+                      color="white"
                       placeholder="Correo"
                       value={infoFormulario.correo}
                       onChange={handleChange}
-                      className="border-t-blanco focus:border-t-blanco"
-                      labelProps={{
-                        className: "before:content-none after:content-none",
-                      }}
+                      className="border-blanco focus:border-gris !text-blanco"
                     />
 
                     <a className="font-inter font-medium text-blanco">
@@ -113,32 +107,29 @@ const Contactenos = () => {
                       type="tel"
                       name="telefono"
                       size="lg"
+                      color="white"
                       placeholder="Teléfono"
                       value={infoFormulario.telefono}
                       onChange={handleChange}
-                      className="border-t-blanco focus:border-t-blanco"
-                      labelProps={{
-                        className: "before:content-none after:content-none",
-                      }}
+                      className="border-blanco focus:border-gris !text-blanco"
                     />
 
                     <a className="font-inter font-medium text-blanco">
                       Mensaje:
                     </a>
+
                     <Textarea
                       type="text"
                       name="mensaje"
+                      color="orange"
                       placeholder="Mensaje"
                       value={infoFormulario.mensaje}
                       onChange={handleChange}
-                      className="border-t-blanco focus:border-t-blanco"
-                      labelProps={{
-                        className: "before:content-none after:content-none",
-                      }}
+                      className="border-blanco focus:border-gris !text-blanco"
                     />
                   </div>
 
-                  <Button type="submit" className="mt-6 bg-naranja" fullWidth>
+                  <Button type="submit" className="mt-6 bg-naranja " fullWidth>
                     Contáctenos
                   </Button>
                 </form>
@@ -155,7 +146,7 @@ const Contactenos = () => {
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };
