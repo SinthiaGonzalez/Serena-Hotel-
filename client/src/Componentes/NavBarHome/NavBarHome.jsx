@@ -1,21 +1,16 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
 import {
   Navbar,
   Collapse,
   Typography,
   Button,
-  Menu,
-  MenuHandler,
-  MenuList,
   MenuItem,
-  Avatar,
   IconButton,
 } from "@material-tailwind/react";
-import { ChevronDownIcon, Bars2Icon } from "@heroicons/react/24/solid";
+import { Bars2Icon } from "@heroicons/react/24/solid";
 import AddShoppingCart from "../cardCarrito/cardAñadirCarrito";
 import { getCarrito, verificarToken } from "../../redux/Actions/actions";
 import ProfileMenu from "./ProfileMenu";
@@ -70,7 +65,7 @@ function NavList() {
 }
 
 const NavBarHome = () => {
-  const [isNavOpen, setIsNavOpen] = React.useState(false);
+  const [isNavOpen, setIsNavOpen] = useState(false);
   const toggleIsNavOpen = () => setIsNavOpen((cur) => !cur);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const toggleCart = () => {
@@ -85,22 +80,19 @@ const NavBarHome = () => {
 
   const dispatch = useDispatch();
   const token = useSelector((state) => state.token);
-  React.useEffect(() => {
-    console.log("token 205"+token)   
-  }, []);
- 
-  React.useEffect(() => {   
+
+  useEffect(() => {
     window.addEventListener(
       "resize",
       () => window.innerWidth >= 960 && setIsNavOpen(false)
     );
-     
-    console.log("token 213 remontado comp"+token)
+
+    // console.log("token 213 remontado comp" + token);
   }, [token]);
- 
-  React.useEffect(() => {
-     dispatch(verificarToken());
-     console.log("Se desmontó el componente - token 222"+token)
+
+  useEffect(() => {
+    dispatch(verificarToken());
+    // console.log("Se desmontó el componente - token 222" + token);
   }, []);
 
   return (
@@ -155,7 +147,7 @@ const NavBarHome = () => {
               INICIAR SESIÓN
             </a>
           ) : (
-            <ProfileMenu key={token}/>
+            <ProfileMenu key={token} />
           )}
         </div>
       </div>

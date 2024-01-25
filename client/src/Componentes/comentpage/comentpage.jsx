@@ -14,7 +14,6 @@ import "slick-carousel/slick/slick-theme.css";
 const ComentPage = () => {
   const dispatch = useDispatch();
   const comentarios = useSelector((state) => state.comentarios);
-  console.log("aca los comentarios globales ",comentarios);
 
   useEffect(() => {
     dispatch(getAllcomentarios());
@@ -28,7 +27,7 @@ const ComentPage = () => {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 2, 
+    slidesToShow: 2,
     slidesToScroll: 1,
     centerMode: true, // Centrar los elementos
     centerPadding: "20px", // Ajustar el espacio entre los elementos centrados
@@ -37,38 +36,36 @@ const ComentPage = () => {
       {
         breakpoint: 1270,
         settings: {
-          centerPadding:"100px",
+          centerPadding: "100px",
           slidesToShow: 1,
           centerMode: true,
         },
       },
     ],
   };
-  
+
   const handleLinkClick = () => {
     // Verificar si hay un token en el localStorage
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
 
     // Si hay un token, permitir la navegación a la ruta "/comentar"
     if (token) {
-      window.location.href = '/comentar'; // Redirigir a la ruta "/comentar"
+      window.location.href = "/comentar"; // Redirigir a la ruta "/comentar"
     } else {
       // Si no hay un token, mostrar un alert y realizar otras acciones según sea necesario
-      alert('Necesita iniciar Sesion para dejar comentarios en la pagina');
+      alert("Necesita iniciar Sesion para dejar comentarios en la pagina");
       // Puedes realizar otras acciones aquí, como redirigir a otra ruta, mostrar un modal, etc.
     }
   };
 
-  
   return (
     <div id="comentarios" className="mt-16 mb-16 bg-verde">
-
       <div className="flex flex-col lg:flex-row items-center mb-6 ml-10">
-        
         <div className="mt-6 lg:w-5/6 lg:mr-4 items-center">
-
-        <div className="h-30 border-l-4 border-blanco text-left p-4 mb-6">
-            <span className="text-3xl text-blanco font-inter font-base block">COMENTARIOS</span>
+          <div className="h-30 border-l-4 border-blanco text-left p-4 mb-6">
+            <span className="text-3xl text-blanco font-inter font-base block">
+              COMENTARIOS
+            </span>
           </div>
         </div>
 
@@ -85,25 +82,22 @@ const ComentPage = () => {
       </div>
 
       <div className="mx-8 md:mx-10 lg:mx-14 xl:mx-28 ">
-
-      <Slider {...settings}>
-        {comentarios &&
-          comentarios.map((comentario, index) => (
-            <CardComent
-              key={index}
-              comentario={comentario}
-              onDelete={handleEliminarComentario}
+        <Slider {...settings}>
+          {comentarios &&
+            comentarios.map((comentario, index) => (
+              <CardComent
+                key={index}
+                comentario={comentario}
+                onDelete={handleEliminarComentario}
               />
-              ))}
+            ))}
         </Slider>
-
       </div>
     </div>
   );
 };
 
 export default ComentPage;
-
 
 //   return (
 //     <div style={{ backgroundColor: "#1D2828", padding: "20px" }}>
