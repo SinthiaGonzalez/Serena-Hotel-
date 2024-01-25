@@ -402,7 +402,7 @@ const UpdateHabitacion = () => {
                 onBlur={() => handleBlur("precio")}
               />
             }
-            /Noche
+            / Noche
           </p>
           <p className="my-4">{touchedFields.precio && errors.precio}</p>
 

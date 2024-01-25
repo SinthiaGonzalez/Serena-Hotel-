@@ -31,7 +31,7 @@ const DetailHabitacionesComponent = () => {
   }, [habitacion]);
 
   return (
-    <div className="h-screen bg-verde">
+    <div className="min-h-screen flex flex-col bg-verde">
       <NavBarHome />
 
       <h2 className="text-4xl text-blanco text-inter text-center font-semibold my-10">
@@ -41,10 +41,10 @@ const DetailHabitacionesComponent = () => {
       <div>
         <div>
           <div className="w-1/2 grid gap-4 mx-auto">
-            <div className="h-[450px]">
+            <div className="h-auto">
               {localActive && (
                 <img
-                  className="h-[450px] w-full rounded-lg object-cover object-center"
+                  className="h-auto w-full rounded-lg object-cover object-center"
                   src={localActive}
                   alt=""
                 />
@@ -57,13 +57,13 @@ const DetailHabitacionesComponent = () => {
                     <img
                       onClick={() => setLocalActive(imgelink)}
                       src={imgelink}
-                      className="h-24 w-full cursor-pointer rounded-lg object-cover object-center"
+                      className="h-auto max-h-28 w-full cursor-pointer rounded-lg object-cover object-center"
                       alt={`gallery-image-${index}`}
                     />
                   </div>
                 ))}
             </div>
-            <Typography className="text-blanco text-inter text-center text-xl font-base my-8">
+            <Typography className="text-blanco text-inter text-center text-lg font-base my-8">
               {habitacion?.descripcion}
             </Typography>
           </div>

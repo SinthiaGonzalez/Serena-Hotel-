@@ -18,6 +18,7 @@ const initialState = {
   reservasTodasAdmin: [],
   token: false,
   usuarioById: [],
+  fechas: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -171,6 +172,20 @@ const reducer = (state = initialState, action) => {
         ...state,
         usuarioById: action.payload,
       };
+    case "POST_USUARIO_GOOGLE":
+      return {
+        ...state,
+        token: action.payload,
+      };
+    case "UPDATE_DATES":
+      return {
+        ...state,
+        fechas: {
+          checkinDate: action.payload.checkinDate,
+          checkoutDate: action.payload.checkoutDate,
+        },
+      };
+
     default:
       return state;
   }

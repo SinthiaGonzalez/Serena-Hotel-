@@ -24,7 +24,7 @@ const Paginacion = ({ active, setActive, totalItems, itemsPerPage }) => {
   };
 
   return (
-    <div className="flex items-center justify-center mt-4 gap-4">
+    <div className="flex items-center justify-center my-2 gap-4">
       <Button
         variant="text"
         className="flex items-center gap-2"
