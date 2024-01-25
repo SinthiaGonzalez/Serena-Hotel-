@@ -23,10 +23,15 @@ const CreateUsuario = async (req, res) => {
       return res.status(200).json(newUser);
     }
   } catch (error) {
-    res.status(500).json({ error: "Error al crear el usuario en la base de datos" });
+    console.log(error.message)
+    res.status(500).json({ error: error.message });
 
   }
 };
+
+
+
+module.exports = { CreateUsuario };
 
 
 

@@ -1,11 +1,10 @@
 import axios from "axios";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 
 export function getHabitaciones() {
   return async function (dispatch) {
     try {
       const habitaciones = await axios.get("/habitaciones");
-      console.log("logdeaction", habitaciones.data);
       return dispatch({
         type: "GET_HABITACIONES",
         payload: habitaciones.data,
@@ -242,13 +241,16 @@ export function crearHabitacion(habitacionData) {
 
 export function getHabitacionesNombre({
   direccion,
-  filtros,
+  filtrosPersonas,
+  filtrosCuarto,
   tipoOrdenamiento,
+  checkinDate,
+  checkoutDate,
 }) {
   return async function (dispatch) {
     try {
       const habitaciones = await axios.get(
-        `/ordenamientos&filtros?ordenarPor=${tipoOrdenamiento}&direccion=${direccion}&filtroPersonas=${filtros}`
+        `/ordenamientos&filtros?ordenarPor=${tipoOrdenamiento}&direccion=${direccion}&filtroPersonas=${filtrosPersonas}&filtroCuarto=${filtrosCuarto}&fecha_entrada=${checkinDate}&fecha_salida=${checkoutDate}`
       );
       console.log("Aquí está la respuesta de la API:", habitaciones.data);
       return dispatch({
@@ -263,13 +265,16 @@ export function getHabitacionesNombre({
 
 export function getHabitacionesPrecio({
   direccion,
-  filtros,
+  filtrosPersonas,
+  filtrosCuarto,
   tipoOrdenamiento,
+  checkinDate,
+  checkoutDate,
 }) {
   return async function (dispatch) {
     try {
       const habitaciones = await axios.get(
-        `/ordenamientos&filtros?ordenarPor=${tipoOrdenamiento}&direccion=${direccion}&filtroPersonas=${filtros}`
+        `/ordenamientos&filtros?ordenarPor=${tipoOrdenamiento}&direccion=${direccion}&filtroPersonas=${filtrosPersonas}&filtroCuarto=${filtrosCuarto}&fecha_entrada=${checkinDate}&fecha_salida=${checkoutDate}`
       );
       console.log("Aquí está la respuesta de la API:", habitaciones.data);
       return dispatch({
@@ -285,32 +290,40 @@ export function getHabitacionesFiltrosPersonas({
   ordenado,
   direccion,
   personas,
-  tipos,
+  filtroCuarto,
+  checkinDate,
+  checkoutDate,
 }) {
   return async function (dispatch) {
-    console.log("Filtros Personas:", ordenado, direccion, personas, tipos);
+    console.log(
+      "Filtros Personas:",
+      ordenado,
+      direccion,
+      personas,
+      filtroCuarto,
+      checkinDate,
+      checkoutDate
+    );
     try {
-      if (personas) {
-        const habitaciones = await axios.get(
-          `/ordenamientos&filtros?ordenarPor=${ordenado}&direccion=${direccion}&filtroPersonas=${personas}&filtrosTipos=${tipos}`
-        );
-        console.log("filtro personas:", habitaciones.data);
-        return dispatch({
-          type: "GET_HABITACIONES_FILTROS_PERSONAS",
-          payload: habitaciones.data,
-        });
-      }
+      const habitaciones = await axios.get(
+        `/ordenamientos&filtros?ordenarPor=${ordenado}&direccion=${direccion}&filtroPersonas=${personas}&filtroCuarto=${filtroCuarto}&fecha_entrada=${checkinDate}&fecha_salida=${checkoutDate}`
+      );
+      console.log("filtro personas:", habitaciones.data);
+      return dispatch({
+        type: "GET_HABITACIONES_FILTROS_PERSONAS",
+        payload: habitaciones.data,
+      });
     } catch (error) {
       console.log(error);
     }
   };
 }
 
-export const getReservas = ({ fecha_entrada, fecha_salida }) => {
+export const getReservas = ({ checkinDate, checkoutDate }) => {
   return async function (dispatch) {
     try {
       const reservas = await axios.get(
-        `/reservas?fecha_entrada=${fecha_entrada}&fecha_salida=${fecha_salida}`
+        `/reservas?fecha_entrada=${checkinDate}&fecha_salida=${checkoutDate}`
       );
       console.log("reservas:", reservas.data);
       return dispatch({
@@ -469,7 +482,7 @@ export function getUsuarios() {
 export function updateUsuario(usuarioData, id) {
   return async (dispatch) => {
     try {
-      console.log("plis",usuarioData);
+      console.log("plis", usuarioData);
       id = usuarioData.id;
       const response = await axios.put(`/update/usuarios/${id}`, usuarioData);
       if (response.data === "No se encontro el usuario") Swal.fire({
@@ -599,7 +612,7 @@ export function getReservas_usuario(usuarioId) {
         iconColor: "#FB350C"
       });
 
-       console.log("Error al solicitar las Reservas por Usuario:",error);
+      console.log("Error al solicitar las Reservas por Usuario:", error);
     }
   };
 }
@@ -670,7 +683,9 @@ export function DetailHabitaciones(id) {
 export const getCarrito = () => {
   return async function (dispatch) {
     try {
-      const response = await axios.get("/carrito");
+      const id = JSON.parse(localStorage.getItem("userId"));
+      const response = await axios.get(`/carrito/${id}`);
+      console.log("getCarrito", response.data);
       dispatch({
         type: "GET_CARRITO",
         payload: response.data,
@@ -695,10 +710,12 @@ export const eliminarDelCarrito = (id) => {
     }
   };
 };
-export const añadirAlCarrito = (id) => {
+export const añadirAlCarrito = (idUser, idHabitacion) => {
   return async function (dispatch) {
     try {
-      const response = await axios.post(`/carrito/${id}`);
+      const data = { idUser, idHabitacion };
+      const response = await axios.post(`/carrito`, data);
+      console.log("anadirAlCarrito", response.data);
       dispatch({
         type: "AÑADIR_AL_CARRITO",
         payload: response.data,
@@ -728,19 +745,19 @@ export function cambiarEstadoUsuario(id, nuevoEstado) {
     };
   }
 
-  export function getUsuarioById(id) {
-    return async function (dispatch) {
-      try {
-        const usuarios = await axios.get(`/usuario/${id}`);
-        return dispatch({
-          type: "GET_USUARIO_BY_ID",
-          payload: usuarios.data,
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-  }
+export function getUsuarioById(id) {
+  return async function (dispatch) {
+    try {
+      const usuarios = await axios.get(`/usuario/${id}`);
+      return dispatch({
+        type: "GET_USUARIO_BY_ID",
+        payload: usuarios.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
 
   export const deleteReservas = (id) => {
     return async function (dispatch) {

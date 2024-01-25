@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { añadirAlCarrito } from "../../redux/Actions/actions";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 /* eslint-disable react/prop-types */
 const CardShopHabitaciones = ({
   id,
@@ -13,56 +13,53 @@ const CardShopHabitaciones = ({
 }) => {
   const dispatch = useDispatch();
   const handlerAddToCart = () => {
-     // Verificar si hay un token en el localStorage
-     const token = localStorage.getItem('token');
-     if (!token) {
+    const userId = JSON.parse(localStorage.getItem("userId"));
+    const idHabitacion = id;
+
+    console.log("handlerAddToCart", userId, idHabitacion);
+    dispatch(añadirAlCarrito(userId, idHabitacion));
+    const token = localStorage.getItem("token");
+    if (!token) {
       Swal.fire({
         title:"Necesita iniciar sesion para añadir al carrito", 
         icon:"info",
         confirmButtonColor:"#FB350C",
         iconColor: "#FB350C"
       });
-     }else{ console.log("handlerAddToCart", id);
-     dispatch(añadirAlCarrito(id));
-     notificacion();}
-   
+    } else {
+      console.log("handlerAddToCart", id);
+      notificacion();
+    }
   };
   const handlerReserva = () => {
-     // Verificar si hay un token en el localStorage
-     const token = localStorage.getItem('token');
-     if (token) {
+    // Verificar si hay un token en el localStorage
+    const token = localStorage.getItem("token");
+    if (token) {
       dispatch(añadirAlCarrito(id));
-       window.location.href = '/pasareladePago'; 
-
-     } else {
-      Swal.fire({
-        title:"Necesita iniciar sesion para reservar", 
-        icon:"info",
-        confirmButtonColor:"#FB350C",
-        iconColor: "#FB350C"
-      });
-     }
-  };
-  console.log("imagen", imagenes);
-const notificacion = () => {
-  const Toast = Swal.mixin({
-    toast: true,
-    position: "bottom-end",
-    showConfirmButton: false,
-    timer: 2000,
-    timerProgressBar: true,
-    background: "#1D2828",
-    color: "#fff",
-    didOpen: (toast) => {
-      toast.onmouseenter = Swal.stopTimer;
-      toast.onmouseleave = Swal.resumeTimer;
+      window.location.href = "/pasareladePago";
+    } else {
+      alert("Necesita iniciar Sesion para Reservar");
     }
-  });
-  Toast.fire({
-    icon: "success",
-    title: "Agregado al carrito"
-  });
-}
+  };
+  const notificacion = () => {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "bottom-end",
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: true,
+      background: "#1D2828",
+      color: "#fff",
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      }
+    });
+    Toast.fire({
+      icon: "success",
+      title: "Agregado al carrito"
+    });
+  }
   return (
     <>
       <div
@@ -102,7 +99,15 @@ const notificacion = () => {
         </div>
 
         <div className="p-6 pt-3 flex flex-col items-center justify-center gap-4">
-          <p className="text-2xl font-bold text-blanco">${precio}/Noche</p>
+          <p className="text-2xl font-bold text-blanco">
+            {precio.toLocaleString("es-AR", {
+              style: "currency",
+              currency: "ARS",
+              minimumFractionDigits: 0,
+            })}{" "}
+            / Noche
+          </p>
+          
           <button
             className="block w-full mb-4 select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all  focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
             type="button"

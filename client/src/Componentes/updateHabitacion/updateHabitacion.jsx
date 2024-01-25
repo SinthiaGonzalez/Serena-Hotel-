@@ -273,11 +273,11 @@ console.log("auxilio", nuevaDataHabitacion)
           />
           <p className="my-4">{touchedFields.imagen && errors.imagen}</p>
         </div>
-
+        
         <div className="flex flex-col items-center w-4/8">
-          <div className="block font-inter text-2xl font-bold text-blanco mb-16">
+          <div className="block font-inter text-2xl text-blanco mb-16">
             <input
-              className="text-center text-negro"
+              className="text-center text-blanco font-bold"
               type="text"
               name="nombre"
               placeholder="Nombre nuevo"
@@ -285,7 +285,7 @@ console.log("auxilio", nuevaDataHabitacion)
               onChange={handleChange}
               onBlur={() => handleBlur("nombre")}
             />
-            <p className="my-4">{touchedFields.nombre && errors.nombre}</p>
+            <p className="my-4 text-base text-center">{touchedFields.nombre && errors.nombre}</p>
           </div>
 
           <div>
@@ -406,7 +406,7 @@ console.log("auxilio", nuevaDataHabitacion)
               onChange={handleChange}
               onBlur={() => handleBlur("descripcion")}
             />
-            <p>{touchedFields.descripcion && errors.descripcion}</p>
+            <p className="text-center">{touchedFields.descripcion && errors.descripcion}</p>
           </div>
         </div>
 
@@ -415,7 +415,7 @@ console.log("auxilio", nuevaDataHabitacion)
             $
             {
               <input
-                className="text-2xl font-bold text-negro w-1/3 mx-4 text-center"
+                className="text-2xl font-bold text-blanco w-1/3 mx-4 text-center"
                 type="number"
                 name="precio"
                 min="0"
@@ -425,7 +425,7 @@ console.log("auxilio", nuevaDataHabitacion)
                 onBlur={() => handleBlur("precio")}
               />
             }
-            /Noche
+            / Noche
           </p>
           <p className="my-4">{touchedFields.precio && errors.precio}</p>
 
