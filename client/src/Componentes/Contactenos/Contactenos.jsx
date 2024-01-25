@@ -83,11 +83,7 @@ const Contactenos = () => {
                       placeholder="Nombre"
                       value={infoFormulario.nombre}
                       onChange={handleChange}
-                      className="font-inter text-blanco border-t-blanco focus:border-t-blanco"
-                      labelProps={{
-                        className:
-                          "before:content-none after:content-none font-inter text-blanco",
-                      }}
+                      className="font-inter !text-blanco border-blanco focus:border-gris"
                     />
 
                     <a className="font-inter font-medium text-blanco">
@@ -100,10 +96,7 @@ const Contactenos = () => {
                       placeholder="Correo"
                       value={infoFormulario.correo}
                       onChange={handleChange}
-                      className="border-t-blanco focus:border-t-blanco"
-                      labelProps={{
-                        className: "before:content-none after:content-none",
-                      }}
+                      className="border-blanco focus:border-gris !text-blanco"
                     />
 
                     <a className="font-inter font-medium text-blanco">
@@ -116,10 +109,7 @@ const Contactenos = () => {
                       placeholder="Teléfono"
                       value={infoFormulario.telefono}
                       onChange={handleChange}
-                      className="border-t-blanco focus:border-t-blanco"
-                      labelProps={{
-                        className: "before:content-none after:content-none",
-                      }}
+                      className="border-blanco focus:border-gris !text-blanco"
                     />
 
                     <a className="font-inter font-medium text-blanco">
@@ -131,10 +121,7 @@ const Contactenos = () => {
                       placeholder="Mensaje"
                       value={infoFormulario.mensaje}
                       onChange={handleChange}
-                      className="border-t-blanco focus:border-t-blanco"
-                      labelProps={{
-                        className: "before:content-none after:content-none",
-                      }}
+                      className="border-blanco focus:border-gris !text-blanco"
                     />
                   </div>
 
