@@ -102,9 +102,9 @@ router.get("/", (req, res) => {
 });
 
 router.post("/mercadopago/create_preference", CreatePreferenceMP);
-router.get("/success", (req, res) => res.send("success"));
-router.get("/failure", (req, res) => res.send("failure"));
-router.get("/pending", (req, res) => res.send("pending"));
+router.get("/success", (req, res) => res.redirect("https://serena-hotel.vercel.app/pago-exitoso"));
+router.get("/failure", (req, res) => res.redirect("https://serena-hotel.vercel.app/pago-rechazado"));
+router.get("/pending", (req, res) => res.redirect("https://serena-hotel.vercel.app/pago-pendiente"));
 router.post("/confirmaciondelpago",respuestaConfirmacionPago);
 
 
