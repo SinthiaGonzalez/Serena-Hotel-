@@ -22,7 +22,7 @@ import ResponseMP from "./Componentes/respuestademercadoPago/ResponseMP.jsx";
 import PagoExitoso from "./Componentes/RespuestaMP/Pago_Exitoso.jsx";
 import PagoPendiente from "./Componentes/RespuestaMP/Pago_Pendiente.jsx";
 import PagoRechazado from "./Componentes/RespuestaMP/Pago-Rechazado.jsx";
-import  AdminComentarios from "./Componentes/DashboardAdminComentarios/AdminComentarios.jsx";
+import AdminComentarios from "./Componentes/DashboardAdminComentarios/AdminComentarios.jsx";
 
 // Esta linea de codigo hace que por default todos los requerimientos en axios se hagan a esta ruta en el back
 // Luego nos va a servir para hacer el Deploy del front

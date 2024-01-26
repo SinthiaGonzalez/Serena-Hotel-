@@ -1,4 +1,3 @@
-import AddShoppingCart from "../cardCarrito/cardAñadirCarrito";
 import { useSelector, useDispatch } from "react-redux";
 import { createPreferenceMercadopagoId } from "../../redux/Actions/actions";
 import BotonMercadoPago from "../Boton-MercadoPago/BotonMP";
@@ -7,10 +6,9 @@ import { useEffect } from "react";
 const DetalledelaCompra = () => {
   const dispatch = useDispatch();
   const carrito = useSelector((state) => state.carrito);
-  const fechas = useSelector((state) => state.fechas);
-
+  const estadia = JSON.parse(localStorage.getItem("estadia"));
   const subtotal = carrito.reduce(
-    (total, producto) => total + producto.precio*fechas.estadia,
+    (total, producto) => total + producto.precio * estadia,
     0
   );
   const usuarioId = JSON.parse(localStorage.getItem("userId"));
