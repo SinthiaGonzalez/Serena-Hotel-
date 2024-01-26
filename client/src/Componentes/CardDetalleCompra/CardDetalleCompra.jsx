@@ -8,7 +8,13 @@ const CardDetalleCompras = ({ imagenes, nombre, precio, id }) => {
   const dispatch = useDispatch();
   const fechas = JSON.parse(localStorage.getItem("fechas"));
   console.log("fechas Card", fechas);
-
+  const checkinDate = JSON.parse(localStorage.getItem("checkinDate"));
+  const checkoutDate = JSON.parse(localStorage.getItem("checkoutDate"));
+  const diferenciaEnMilisegundos =
+    new Date(checkoutDate) - new Date(checkinDate);
+  const diferenciaEnDias = diferenciaEnMilisegundos / (1000 * 60 * 60 * 24);
+  localStorage.setItem("estadia", JSON.stringify(diferenciaEnDias));
+  const estadia = JSON.parse(localStorage.getItem("estadia"));
   const eliminarHabitacion = () => {
     dispatch(eliminarDelCarrito(id));
   };
@@ -30,13 +36,13 @@ const CardDetalleCompras = ({ imagenes, nombre, precio, id }) => {
           {nombre}
         </p>
         <p className="mb-2 text-white text-base text-center">
-          {fechas.checkinDate} - {fechas.checkoutDate}
+          {checkinDate} - {checkoutDate}
         </p>
       </div>
 
       <div className="p-4 flex flex-row items-center justify-between w-1/5">
         <p className="text-white-700 font-bold text-2xl">
-          {(precio * fechas.estadia).toLocaleString("es-AR", {
+          {(precio * estadia).toLocaleString("es-AR", {
             style: "currency",
             currency: "ARS",
             minimumFractionDigits: 0,
