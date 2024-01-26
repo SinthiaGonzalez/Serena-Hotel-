@@ -13,13 +13,13 @@ const CardsHome = () => {
 
   return (
     <>
-      <div id="habitaciones" className="px-14 pt-4 flex flex-row justify-between bg-blanco ">
-        <div className="h-30 border-l-4 border-negro text-left p-4 mb-10">
+      <div id="habitaciones" className="px-14 pt-4 bg-blanco w-full">
+        <div className="h-30 border-l-4 border-negro text-left p-6">
           <span className="text-3xl text-negro font-inter font-medium block">
             HABITACIONES
           </span>
         </div>
-        <div className="hidden sm:hidden md:flex md:flex-row md:items-center md:justify-center md:gap-2 md:hover:scale-105">
+        <div className="hidden lg:flex lg:flex-row lg:items-center lg:justify-end lg:gap-2 lg:hover:scale-105 pr-10 w-1/6 ml-auto ">
           <a 
           href="/habitaciones"
           className="text-xl font-medium text-negro">Ver Todo</a>
@@ -36,7 +36,9 @@ const CardsHome = () => {
           </svg>
         </div>
       </div>
-      <div className="pl-12 pr-6 py-10 bg-blanco mx-auto justify-center grid grid-cols-1 md:grid-cols-3 gap-2">
+
+      <div className="mt-8 items-center justify-center flex flex-col lg:flex lg:flex-row px-10 md:px-20 gap-6 lg:gap-8">
+      {/* <div className="py-10 bg-blanco items-center justify-center grid grid-cols-1 md:grid-cols-3 gap-10"> */}
         {primerasTresHabitaciones.map(
           ({ nombre, imagenes, precio, servicios, id }) => (
             <CardHome
