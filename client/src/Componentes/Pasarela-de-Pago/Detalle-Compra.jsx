@@ -8,9 +8,10 @@ const DetalledelaCompra = () => {
   const dispatch = useDispatch();
   const carrito = useSelector((state) => state.carrito);
   const fechas = useSelector((state) => state.fechas);
-
+  localStorage.setItem("fechas", JSON.stringify(fechas));
+  console.log("Fechas Detalle", fechas);
   const subtotal = carrito.reduce(
-    (total, producto) => total + producto.precio*fechas.estadia,
+    (total, producto) => total + producto.precio * fechas.estadia,
     0
   );
   const usuarioId = JSON.parse(localStorage.getItem("userId"));

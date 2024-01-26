@@ -6,8 +6,8 @@ import { useState } from "react";
 
 const CardDetalleCompras = ({ imagenes, nombre, precio, id }) => {
   const dispatch = useDispatch();
-  const fechas = useSelector((state) => state.fechas);
-  console.log("fechas",fechas)
+  const fechas = JSON.parse(localStorage.getItem("fechas"));
+  console.log("fechas Card", fechas);
 
   const eliminarHabitacion = () => {
     dispatch(eliminarDelCarrito(id));
@@ -17,7 +17,6 @@ const CardDetalleCompras = ({ imagenes, nombre, precio, id }) => {
   }
   return (
     <div className="mx-auto bg-naranja rounded-md overflow-hidden shadow-md flex mb-4 p-2">
-
       <div className="flex items-center ">
         <img
           src={imagenes[0]}
@@ -27,18 +26,22 @@ const CardDetalleCompras = ({ imagenes, nombre, precio, id }) => {
       </div>
 
       <div className="w-3/5 mt-4">
-        <p className="mb-2 text-white text-2xl font-semibold text-center">{nombre}</p>
+        <p className="mb-2 text-white text-2xl font-semibold text-center">
+          {nombre}
+        </p>
         <p className="mb-2 text-white text-base text-center">
-          {fechas.checkinDate}   -   {fechas.checkoutDate}
+          {fechas.checkinDate} - {fechas.checkoutDate}
         </p>
       </div>
 
       <div className="p-4 flex flex-row items-center justify-between w-1/5">
-        <p className="text-white-700 font-bold text-2xl">{(precio*fechas.estadia).toLocaleString("es-AR", {
-              style: "currency",
-              currency: "ARS",
-              minimumFractionDigits: 0,
-            })}</p>
+        <p className="text-white-700 font-bold text-2xl">
+          {(precio * fechas.estadia).toLocaleString("es-AR", {
+            style: "currency",
+            currency: "ARS",
+            minimumFractionDigits: 0,
+          })}
+        </p>
         <div>
           <button
             className="bg-red-500 text-white ml-2 px-4 py-3 mt-2 hover:bg-red-600 transition duration-300"
