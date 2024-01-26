@@ -113,16 +113,17 @@ const UpdateUsuario = () => {
   useEffect(() => {
     handleDefaultValues();
   }, [usuarioData]);
+
   return (
     <div
-      className="flex items-center justify-center bg-cover bg-center text-white text-center p-8 h-screen"
-      style={{
-        backgroundImage:
-          'url("https://i.postimg.cc/3xxjwxft/selena-hotel-1.png")',
-      }}
+      className="flex items-center justify-center bg-cover bg-center text-white text-center p-8"
+      // style={{
+      //   backgroundImage:
+      //     'url("https://i.postimg.cc/3xxjwxft/selena-hotel-1.png")',
+      // }}
     >
-      <div className="flex flex-col items-center justify-center bg-blanco w-2/3 rounded-lg px-4 pt-3 pb-6">
-        <p className="flex mt-4 mb-4 font-inter text-3xl antialiased leading-normal text-center font-bold text-gris justify-center">
+      <div className="flex flex-col items-center justify-center bg-verde w-2/3 h-auto rounded-lg px-4 pt-4 pb-6">
+        <p className="relative flex mt-4 mb-4 font-inter text-3xl antialiased leading-normal text-center font-bold text-blanco justify-center">
           Editar Usuario
         </p>
         <div className="relative">
@@ -147,15 +148,15 @@ const UpdateUsuario = () => {
               name="imagen"
               onChange={handleImageCloudinary}
             />
-            <span className="material-symbols-outlined bg-verde rounded-full p-2 mb-4 absolute z-10 -mt-8 ml-8">
+            <span className="material-symbols-outlined bg-gris rounded-full p-2 mb-4 absolute z-10 -mt-8 ml-8">
               Edit
             </span>
           </label>
         </div>
-        <form onSubmit={handleSubmit} className="w-2/3">
+        <form onSubmit={handleSubmit} className="relative w-2/3">
           <div className="mb-4">
             <label className="block text-gray-200 text-sm font-bold mb-2">
-              <div className="flex flex-row h-11 bg-verde  relative rounded-lg mb-4">
+              <div className="flex flex-row h-11 bg-gris  relative rounded-lg mb-4">
                 <div className="items-center">
                   <FontAwesomeIcon
                     icon={faUser}
@@ -164,7 +165,7 @@ const UpdateUsuario = () => {
                 </div>
 
                 <input
-                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
+                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-gris rounded-lg"
                   type="text"
                   name="name"
                   placeholder="Nombre" 
@@ -173,7 +174,7 @@ const UpdateUsuario = () => {
                 />
               </div>
 
-              <div className="flex flex-row h-11 bg-verde  relative rounded-lg mb-4">
+              <div className="flex flex-row h-11 bg-gris  relative rounded-lg mb-4">
                 <div className="items-center">
                   <FontAwesomeIcon
                     icon={faUser}
@@ -182,7 +183,7 @@ const UpdateUsuario = () => {
                 </div>
 
                 <input
-                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
+                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-gris rounded-lg"
                   type="text"
                   name="apellido"
                   placeholder="apellido"
@@ -191,7 +192,7 @@ const UpdateUsuario = () => {
                 />
               </div>
 
-              <div className="flex flex-row h-11 bg-verde  relative rounded-lg mb-4">
+              <div className="flex flex-row h-11 bg-gris  relative rounded-lg mb-4">
                 <div className="items-center">
                   <FontAwesomeIcon
                     icon={faEnvelope}
@@ -200,7 +201,7 @@ const UpdateUsuario = () => {
                 </div>
 
                 <input
-                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
+                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-gris rounded-lg"
                   type="email"
                   name="email"
                   placeholder="email"
@@ -209,7 +210,7 @@ const UpdateUsuario = () => {
                 />
               </div>
 
-              <div className="flex flex-row h-11 bg-verde  relative rounded-lg mb-4">
+              <div className="flex flex-row h-11 bg-gris  relative rounded-lg mb-4">
                 <div className="items-center">
                   <FontAwesomeIcon
                     icon={faPhone}
@@ -218,7 +219,7 @@ const UpdateUsuario = () => {
                 </div>
 
                 <input
-                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
+                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-gris rounded-lg"
                   type="text"
                   name="telefono"
                   placeholder="Telefono"
@@ -227,7 +228,7 @@ const UpdateUsuario = () => {
                 />
               </div>
 
-              <div className="flex flex-row h-11 bg-verde  relative rounded-lg mb-4">
+              <div className="flex flex-row h-11 bg-gris  relative rounded-lg mb-4">
                 <div className="items-center">
                   <FontAwesomeIcon
                     icon={faLock}
@@ -236,7 +237,7 @@ const UpdateUsuario = () => {
                 </div>
 
                 <input
-                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
+                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-gris rounded-lg"
                   type="password"
                   name="contraseña"
                   placeholder="Contraseña"
@@ -245,7 +246,7 @@ const UpdateUsuario = () => {
                 />
               </div>
 
-              <div className="flex flex-row h-11 bg-verde  relative rounded-lg mb-4">
+              <div className="flex flex-row h-11 bg-gris  relative rounded-lg mb-4">
                 <div className="items-center">
                   <FontAwesomeIcon
                     icon={faLock}
@@ -254,7 +255,7 @@ const UpdateUsuario = () => {
                 </div>
 
                 <input
-                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
+                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-gris rounded-lg"
                   type="password"
                   name="confirmarContraseña"
                   placeholder="Confirmar Contraseña"

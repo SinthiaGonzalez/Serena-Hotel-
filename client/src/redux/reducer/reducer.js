@@ -186,11 +186,17 @@ const reducer = (state = initialState, action) => {
       };
      
     case "UPDATE_DATES":
+      const checkinDate = action.payload.checkinDate;
+      const checkoutDate = action.payload.checkoutDate;
+      const diferenciaEnMilisegundos =
+        new Date(checkoutDate) - new Date(checkinDate);
+      const diferenciaEnDias = diferenciaEnMilisegundos / (1000 * 60 * 60 * 24);
       return {
         ...state,
         fechas: {
           checkinDate: action.payload.checkinDate,
           checkoutDate: action.payload.checkoutDate,
+          estadia: diferenciaEnDias,
         },
       };
    

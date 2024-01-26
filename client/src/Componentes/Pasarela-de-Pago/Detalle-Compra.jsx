@@ -7,8 +7,10 @@ import { useEffect } from "react";
 const DetalledelaCompra = () => {
   const dispatch = useDispatch();
   const carrito = useSelector((state) => state.carrito);
+  const fechas = useSelector((state) => state.fechas);
+
   const subtotal = carrito.reduce(
-    (total, producto) => total + producto.precio,
+    (total, producto) => total + producto.precio*fechas.estadia,
     0
   );
   const usuarioId = JSON.parse(localStorage.getItem("userId"));
@@ -22,6 +24,8 @@ const DetalledelaCompra = () => {
         quantity: 1,
         picture_url: "https://picsum.photos/200",
         userId: usuarioId,
+        fecha_entrada: "2024-04-01",
+        fecha_salida: "2024-04-12",
       })
     );
   };
@@ -43,17 +47,19 @@ const DetalledelaCompra = () => {
       <div className="mx-12 mt-16">
         <p className="text-3xl text-inter text-blanco font-bold text-center mb-28">
           TOTAL DE LA RESERVA
-          </p>
+        </p>
         <div className="border-b-2 border-blanco text-inter text-blanco text-xl flex mb-8">
           <div className="w-1/2">
             <h2>Subtotal</h2>
           </div>
           <div className="w-1/2 text-end mb-2">
-            <h2>{subtotal.toLocaleString("es-AR", {
-              style: "currency",
-              currency: "ARS",
-              minimumFractionDigits: 0,
-            })}</h2>
+            <h2>
+              {subtotal.toLocaleString("es-AR", {
+                style: "currency",
+                currency: "ARS",
+                minimumFractionDigits: 0,
+              })}
+            </h2>
           </div>
         </div>
         <div className="border-b-2 border-blanco text-inter text-blanco text-xl flex mb-8">
@@ -61,11 +67,13 @@ const DetalledelaCompra = () => {
             <h2>Impuestos Iva 21%</h2>
           </div>
           <div className="w-1/2 text-end mb-2">
-            <h2>{iva.toLocaleString("es-AR", {
-              style: "currency",
-              currency: "ARS",
-              minimumFractionDigits: 0,
-            })}</h2>
+            <h2>
+              {iva.toLocaleString("es-AR", {
+                style: "currency",
+                currency: "ARS",
+                minimumFractionDigits: 0,
+              })}
+            </h2>
           </div>
         </div>
         <div className="flex mb-4 text-inter text-blanco font-bold text-2xl">
@@ -73,11 +81,13 @@ const DetalledelaCompra = () => {
             <h2>Total</h2>
           </div>
           <div className="w-1/2 text-end">
-            <h2>{total.toLocaleString("es-AR", {
-              style: "currency",
-              currency: "ARS",
-              minimumFractionDigits: 0,
-            })}</h2>
+            <h2>
+              {total.toLocaleString("es-AR", {
+                style: "currency",
+                currency: "ARS",
+                minimumFractionDigits: 0,
+              })}
+            </h2>
           </div>
         </div>
         <div className="w-full mt-12">

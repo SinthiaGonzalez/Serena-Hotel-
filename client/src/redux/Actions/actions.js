@@ -174,7 +174,7 @@ export function enviarConsulta(formData) {
 export function envioNotificion(formData) {
   return async function (dispatch) {
     try {
-      const response = await axios.post("/contactenos", formData);
+      const response = await axios.post("/notificaciones", formData);
       console.log("Respuesta del servidor:", response.data);
     } catch (error) {
       console.error("Error al enviar la consulta:", error);
@@ -473,7 +473,7 @@ export function getReservas_Admin(usuarioId) {
       });
       //alert("Reservas del Usuario obtenidas exitosamente");
     } catch (error) {
-      Swal.fire("Error al solicitar las Reservas por Usuario", "", "error");
+      // Swal.fire("Error al solicitar las Reservas por Usuario", "", "error");
       // console.log("Error al solicitar las Reservas por Usuario:",error);
     }
   };

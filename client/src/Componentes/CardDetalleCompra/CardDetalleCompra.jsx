@@ -1,10 +1,14 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { eliminarDelCarrito } from "../../redux/Actions/actions";
+import { useState } from "react";
 
 const CardDetalleCompras = ({ imagenes, nombre, precio, id }) => {
   const dispatch = useDispatch();
+  const fechas = useSelector((state) => state.fechas);
+  console.log("fechas",fechas)
+
   const eliminarHabitacion = () => {
     dispatch(eliminarDelCarrito(id));
   };
@@ -16,7 +20,7 @@ const CardDetalleCompras = ({ imagenes, nombre, precio, id }) => {
 
       <div className="flex items-center ">
         <img
-          src={imagenes}
+          src={imagenes[0]}
           alt="imagen"
           className=" w-[200px] h-28 ml-3 object-cover rounded-md"
         />
@@ -25,12 +29,12 @@ const CardDetalleCompras = ({ imagenes, nombre, precio, id }) => {
       <div className="w-3/5 mt-4">
         <p className="mb-2 text-white text-2xl font-semibold text-center">{nombre}</p>
         <p className="mb-2 text-white text-base text-center">
-          dd/mm/aa - dd/mm/aa
+          {fechas.checkinDate}   -   {fechas.checkoutDate}
         </p>
       </div>
 
       <div className="p-4 flex flex-row items-center justify-between w-1/5">
-        <p className="text-white-700 font-bold text-2xl">{precio.toLocaleString("es-AR", {
+        <p className="text-white-700 font-bold text-2xl">{(precio*fechas.estadia).toLocaleString("es-AR", {
               style: "currency",
               currency: "ARS",
               minimumFractionDigits: 0,

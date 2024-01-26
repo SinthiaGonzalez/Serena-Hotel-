@@ -7,7 +7,7 @@ import {
   faPhone,
   faLock,
 } from "@fortawesome/free-solid-svg-icons";
-import {postUsuario} from "../../redux/Actions/actions"
+import { postUsuario } from "../../redux/Actions/actions";
 
 const CreateUsuario = () => {
   const dispatch = useDispatch();
@@ -46,23 +46,23 @@ const CreateUsuario = () => {
 
   return (
     <div
-      className="relative bg-cover bg-center text-white text-center p-8 h-screen"
+      className="flex items-center justify-center bg-cover bg-center text-white text-center p-8 h-screen"
       style={{
         backgroundImage:
           'url("https://i.postimg.cc/3xxjwxft/selena-hotel-1.png")',
       }}
     >
-      <div className="flex flex-col items-center justify-center h-auto bg-blanco w-2/3 rounded-lg px-20 mx-[250px] px-4 pt-3 pb-6">
+      <div className="flex flex-col items-center justify-center h-auto bg-blanco w-full lg:w-2/3 rounded-lg px-2 lg:px-20  pt-3 pb-6">
         <a
           href="/logearse"
-          className="font-inter text-base antialiased font-bold text-naranja text-inter hover:scale-105 w-1/6 ml-[-700px] mt-6"
+          className="volver font-inter text-base  antialiased font-bold text-naranja text-inter hover:scale-105 md:w-1/6 mt-6 pl-4 md:pl-0 mr-auto "
         >
           🡰 Volver
         </a>
         <p className="flex mt-4 font-inter text-3xl antialiased leading-normal text-center font-bold text-gris justify-center">
           Registrarse
         </p>
-        <form onSubmit={handleSubmit} className="w-2/3">
+        <form onSubmit={handleSubmit} className="px-4 lg:px-0 lg:w-2/3">
           <h2 className="text-2xl mb-4">Crear Usuario</h2>
           <div className="mb-4">
             <label className="block text-gray-200 text-sm font-bold mb-2">
@@ -75,7 +75,7 @@ const CreateUsuario = () => {
                 </div>
 
                 <input
-                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
+                  className="w-full h-11 font-inter text-center pr-12 lg:pr-24 text-base font-normal text-white bg-verde rounded-lg"
                   type="text"
                   name="name"
                   placeholder="Nombre"
@@ -93,7 +93,7 @@ const CreateUsuario = () => {
                 </div>
 
                 <input
-                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
+                  className="w-full h-11 font-inter text-center pr-12 lg:pr-24 text-base font-normal text-white bg-verde rounded-lg"
                   type="text"
                   name="apellido"
                   placeholder="Apellido"
@@ -111,7 +111,7 @@ const CreateUsuario = () => {
                 </div>
 
                 <input
-                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
+                  className="w-full h-11 font-inter text-center pr-12 lg:pr-24 text-base font-normal text-white bg-verde rounded-lg"
                   type="email"
                   name="email"
                   placeholder="Email"
@@ -129,7 +129,7 @@ const CreateUsuario = () => {
                 </div>
 
                 <input
-                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
+                  className="w-full h-11 font-inter text-center pr-12 lg:pr-24 text-base font-normal text-white bg-verde rounded-lg"
                   type="text"
                   name="telefono"
                   placeholder="Teléfono"
@@ -147,7 +147,7 @@ const CreateUsuario = () => {
                 </div>
 
                 <input
-                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
+                  className="w-full h-11 font-inter text-center pr-12 lg:pr-24 text-base font-normal text-white bg-verde rounded-lg"
                   type="password"
                   name="contraseña"
                   placeholder="Contraseña"
@@ -165,7 +165,7 @@ const CreateUsuario = () => {
                 </div>
 
                 <input
-                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
+                  className="w-full h-11 font-inter text-center pr-8 lg:pr-24 text-base font-normal text-white bg-verde rounded-lg"
                   type="password"
                   name="confirmarContraseña"
                   placeholder="Confirmar Contraseña"

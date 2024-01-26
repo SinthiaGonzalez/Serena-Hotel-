@@ -15,7 +15,7 @@ const Home = () => {
     >
       <NavBarHome />
 
-      <p className="text-8xl font-inter mt-[220px] mb-8">SERENA HOTEL</p>
+      <p className="text-8xl font-inter mt-[60px] md:mt-[220px] mb-8">SERENA HOTEL</p>
 
       <div className="flex items-center justify-center h-60">
         <div className=" transform -translate-x-1/2 bottom-1/2 w-1/2 bg-naranja h-0.5"></div>
