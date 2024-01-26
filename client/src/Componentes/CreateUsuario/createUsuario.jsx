@@ -44,6 +44,17 @@ const CreateUsuario = () => {
     }
   };
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleToggleConfirmPassword = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
+
   return (
     <div
       className="flex items-center justify-center bg-cover bg-center text-white text-center p-8 h-screen"
@@ -148,12 +159,19 @@ const CreateUsuario = () => {
 
                 <input
                   className="w-full h-11 font-inter text-center pr-12 lg:pr-24 text-base font-normal text-white bg-verde rounded-lg"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   name="contraseña"
                   placeholder="Contraseña"
                   value={user.contraseña}
                   onChange={handleChange}
                 />
+                <button
+                className="absolute material-symbols-outlined text-blanco right-4 top-3 text-center opacity-40 hover:opacity-100 transition-opacity cursor-pointer"
+                onClick={handleTogglePassword}
+                type="button"
+              >
+                {showPassword ? "visibility_off" : "visibility"}
+              </button>
               </div>
 
               <div className="flex flex-row h-11 bg-verde  relative rounded-lg mb-4">
@@ -166,12 +184,19 @@ const CreateUsuario = () => {
 
                 <input
                   className="w-full h-11 font-inter text-center pr-8 lg:pr-24 text-base font-normal text-white bg-verde rounded-lg"
-                  type="password"
+                  type={showConfirmPassword ? "text" : "password"}
                   name="confirmarContraseña"
                   placeholder="Confirmar Contraseña"
                   value={user.confirmarContraseña}
                   onChange={handleChange}
                 />
+                <button
+                className="absolute material-symbols-outlined text-blanco right-4 top-3 text-center opacity-40 hover:opacity-100 transition-opacity cursor-pointer"
+                onClick={handleToggleConfirmPassword}
+                type="button"
+              >
+                {showConfirmPassword ? "visibility_off" : "visibility"}
+              </button>
               </div>
             </label>
           </div>
