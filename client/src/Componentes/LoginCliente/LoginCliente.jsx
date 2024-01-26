@@ -1,4 +1,5 @@
-import { useDispatch } from "react-redux";
+/*COMPONENTE PARA LOGUEARSE INGRESANDO MANUALMENTE MAIL Y CONTRASEÑA*/
+import { useDispatch, useSelector } from "react-redux";
 import LoginTemplate from "../Login/Login";
 import { useState } from "react";
 import {
@@ -7,6 +8,7 @@ import {
 } from "../../redux/Actions/actions";
 import { useNavigate } from "react-router-dom";
 import { useVerificarToken } from "../AutenticadorToken/autenticadorToken";
+
 const LoginCliente = () => {
   const dispatch = useDispatch();
   const [email, setemail] = useState("");
@@ -15,18 +17,27 @@ const LoginCliente = () => {
   const handleemailChange = (event) => {
     setemail(event.target.value);
   };
-  const isAdmin = JSON.parse(localStorage.getItem("isAdmin"));
-  console.log("LoginCliente", isAdmin);
+
   const handleContraseñaChange = (event) => {
     setContraseña(event.target.value);
   };
 
   const handleVerificarUsuario = () => {
     dispatch(verificacionLogeoUsuarioAction({ email, contraseña }));
-
-    navigate("/");
+    const isAdmin = localStorage.getItem("isAdmin");
+    console.log("verificacion 33" + isAdmin);
+    if (isAdmin === "true") navigate("/admin-usuarios");
+    if (isAdmin === "false") navigate("/");
   };
+
   useVerificarToken();
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <div
       className="flex items-center justify-center bg-cover bg-center text-white text-center p-4 lg:p-8 h-full md:h-[100vh] lg:h-screen"
@@ -96,10 +107,17 @@ const LoginCliente = () => {
               <input
                 className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
                 placeholder="Contraseña"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 value={contraseña}
                 onChange={handleContraseñaChange}
               />
+              <button
+                className="absolute material-symbols-outlined text-blanco right-4 top-3 text-center opacity-40 hover:opacity-100 transition-opacity cursor-pointer"
+                onClick={handleTogglePassword}
+                type="button"
+              >
+                {showPassword ? "visibility_off" : "visibility"}
+              </button>
             </div>
           </div>
 
@@ -121,11 +139,11 @@ const LoginCliente = () => {
         <div className="block flex flex-col text-blanco w-full px-0 lg:w-[40%] bg-verde pt-[5%] lg:px-[3%] rounded-lg lg:rounded-l-none mt-4 lg:mt-0">
           <div className="p-6 pt-0">
             <h1 className="lg:ml-[20%] lg:flex mt-6 font-inter text-xl lg:text-2xl antialiased font-extrabold  leading-normal text-center lg:text-left">
-              ¿NO TIENES <br className="hidden lg:block"/> UNA CUENTA?
+              ¿NO TIENES <br className="hidden lg:block" /> UNA CUENTA?
             </h1>
             <p className="lg:ml-[20%] my-8 lg:mt-[25%] lg:mb-[30%] text-base lg:text-2xl antialiased font-extrabold text-inter text-center lg:text-left">
-              Regístrate para <br className="hidden lg:block"/> acceder a lo <br /> mejor de <br className="hidden lg:block"/> SERENA
-              HOTELS
+              Regístrate para <br className="hidden lg:block" /> acceder a lo{" "}
+              <br /> mejor de <br className="hidden lg:block" /> SERENA HOTELS
             </p>
 
             <div className="p-6 pt-0">
