@@ -4,12 +4,12 @@ import { getCarrito } from "../../redux/Actions/actions";
 import { useEffect } from "react";
 
 const AddCardDetalleCompra = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const carrito = useSelector((state) => state.carrito);
 
-  // useEffect(() => {
-  //   dispatch(getCarrito());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(getCarrito());
+  }, [dispatch]);
   
 
   return (
