@@ -44,9 +44,14 @@ const CardHome = ({ nombre, precio, imagenes, servicios, id }) => {
           ))}
         </div>
       </CardBody>
-      <CardFooter className="flex flex-row items-center gap-60 justify-between">
-        <Typography className="text-blanco font-light">
-          ${precio} / Noche
+      <CardFooter className="flex flex-row items-center gap-20 md:gap-40 justify-between">
+        <Typography className="text-blanco text-center font-light">
+        {precio.toLocaleString("es-AR", {
+              style: "currency",
+              currency: "ARS",
+              minimumFractionDigits: 0,
+            })}{" "}
+            / Noche
         </Typography>
         <Button
           size="lg"
