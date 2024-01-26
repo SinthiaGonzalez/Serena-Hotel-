@@ -1,0 +1,3 @@
+const groserias = ["mierda","coño", "carajo", "cagar", "culo", "maldita", "maldicion", "puta", "maldito", "mardicion", "mardito", "mardita", "puto", "verga", "concha", "pene", "teta", "tetas", "suicidio", "muerte", "vagina", "ano","cabrón", "cabrona", "pendejo", "pendeja", "chingar", "joder", "cállate", "jodete", "coger", "sexo", "violar", "violacion", "sexual", "penetracion", "penetrar", "cabrona", "trimardito", "cagado", "cagada"];
+
+export default groserias

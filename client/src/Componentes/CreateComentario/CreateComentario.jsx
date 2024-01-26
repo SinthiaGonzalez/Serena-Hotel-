@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { postComent } from "../../redux/Actions/actions";
 import { useVerificarToken } from "../AutenticadorToken/autenticadorToken";
-
 import {
   Card,
   CardHeader,
@@ -39,6 +38,7 @@ const CreateComentPage = () => {
   const user = {
     name: name,
     image:imagenUsuario,
+    
   };
 
   const handleSubmit = (e) => {

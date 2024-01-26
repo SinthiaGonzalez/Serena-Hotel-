@@ -1,5 +1,7 @@
 import axios from "axios";
 import Swal from "sweetalert2";
+import groserias from "../../Componentes/CreateComentario/groserias";
+import { profanity } from '@2toad/profanity';
 
 export function getHabitaciones() {
   return async function (dispatch) {
@@ -51,13 +53,23 @@ export function addToCart(id) {
 export function postComent(state) {
   return async function (dispatch) {
     try {
+      profanity.addWords(groserias);
+      if(profanity.exists(state.contenido)===true){
+        Swal.fire({
+          title:"El mensaje contiene palabras prohibidas", 
+          icon:"error",
+          confirmButtonColor:"#FB350C",
+          iconColor: "#FB350C"
+        });
+      }
+      else {
       await axios.post("/comentar", state);
       Swal.fire({
         title:"Se agrego el comentario exitosamente!", 
         icon:"success",
         confirmButtonColor:"#FB350C",
         iconColor: "#FB350C"
-      });
+      })}
     } catch (error) {
       Swal.fire({
         title:error.message, 
