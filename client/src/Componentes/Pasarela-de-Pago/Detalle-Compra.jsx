@@ -22,6 +22,8 @@ const DetalledelaCompra = () => {
         quantity: 1,
         picture_url: "https://picsum.photos/200",
         userId: usuarioId,
+        fecha_entrada: "2024-04-01",
+        fecha_salida: "2024-04-12",
       })
     );
   };
