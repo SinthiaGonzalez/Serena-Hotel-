@@ -45,10 +45,17 @@ const Habitaciones = () => {
   const [paginaActual, setPaginaActual] = useState(1);
   const [itemsPerPage] = useState(3);
 
+  // useEffect(() => {
+  //   // Aquí puedes enviar la solicitud correspondiente cuando cambian las fechas
+  //   dispatch(getHabitaciones({ page: paginaActual, itemsPerPage }));
+  // }, [dispatch, itemsPerPage, checkinDate, checkoutDate]);
+  // console.log("Estado Fechas", fechas);
+ 
   useEffect(() => {
     // Aquí puedes enviar la solicitud correspondiente cuando cambian las fechas
     dispatch(getHabitaciones({ page: paginaActual, itemsPerPage }));
   }, [dispatch, itemsPerPage, checkinDate, checkoutDate]);
+  
   console.log("Estado Fechas", fechas);
   const handleNombreChange = (value, tipoOrdenamiento) => {
     setUltimoOrdenamiento({
