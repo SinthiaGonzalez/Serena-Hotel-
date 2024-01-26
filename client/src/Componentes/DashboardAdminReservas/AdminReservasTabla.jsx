@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteReservas, envioNotificion, getReservas_Admin } from "../../redux/Actions/actions";
 import Paginacion from "../Paginacion/Paginacion";
+import { useVerificarIsAdmin } from "../AutenticadorToken/autenticadorLocalStIsAdmin";
 
 const AdminReservasTabla = () => {
+  useVerificarIsAdmin()
   const dispatch = useDispatch();
   const reservasTodasAdmin = useSelector((state) => state.reservasTodasAdmin);
   const [paginaActual, setPaginaActual] = useState(1);

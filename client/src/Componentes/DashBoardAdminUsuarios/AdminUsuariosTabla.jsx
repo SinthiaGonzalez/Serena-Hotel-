@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import Paginacion from "../Paginacion/Paginacion";
 import { getUsuarios } from "../../redux/Actions/actions";
 import Linea from "./LineaTablaAdminUsuarios.jsx";
-
+import { useVerificarIsAdmin } from "../AutenticadorToken/autenticadorLocalStIsAdmin.jsx";
 const AdminUsuariosTabla = () => {
+  useVerificarIsAdmin()
   const dispatch = useDispatch();
   const TodosLosUsuario = useSelector((state) => state.usuarios);
   const [paginaActual, setPaginaActual] = useState(1);
