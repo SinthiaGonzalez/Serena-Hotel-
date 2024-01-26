@@ -19,6 +19,7 @@ const initialState = {
   token: false,
   usuarioById: [],
   fechas: [],
+ 
 };
 
 const reducer = (state = initialState, action) => {
@@ -165,6 +166,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         usuarios: action.payload,
+        token: action.payload,   
       };
 
     case "GET_USUARIO_BY_ID":
@@ -172,11 +174,17 @@ const reducer = (state = initialState, action) => {
         ...state,
         usuarioById: action.payload,
       };
-    case "POST_USUARIO_GOOGLE":
+    case "POST_USUARIO_GOOGLE":    
       return {
         ...state,
-        token: action.payload,
+        token: action.payload,      
       };
+    case "POST_USUARIO_NOGOOGLE":    
+      return {
+        ...state,
+        token: action.payload,      
+      };
+     
     case "UPDATE_DATES":
       const checkinDate = action.payload.checkinDate;
       const checkoutDate = action.payload.checkoutDate;
@@ -191,7 +199,7 @@ const reducer = (state = initialState, action) => {
           estadia: diferenciaEnDias,
         },
       };
-
+   
     default:
       return state;
   }

@@ -1,6 +1,8 @@
 import NavBarHome from "../NavBarHome/NavBarHome";
 import { Link } from "react-router-dom";
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 const Home = () => { 
   return (
