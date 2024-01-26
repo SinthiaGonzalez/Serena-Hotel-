@@ -8,9 +8,9 @@ const BarraSobreNosotros = () => {
           filter: 'opacity(0.9)'
       }}
     >
-      <div className="flex flex-col md:flex-row items-center justify-end h-full p-4 md:p-12 lg:p-12 xl:p-12">
-        <div className="flex flex-row items-center  w-1/2 mr-[-80px]">
-          <a className="bg-naranja text-white text-center font-inter w-1/3 px-10 py-2 rounded-lg z-10 ">
+      <div className="hidden md:hidden lg:flex lg:items-center lg:justify-end lg:h-full">
+        <div className="flex flex-row items-center  w-1/2">
+        <a className="bg-naranja text-white text-center font-inter w-1/3 px-10 py-2 rounded-lg z-10 ">
             SOBRE NOSOTROS
           </a>
           <div className="md:transform md:translate-x-1/6 md:w-[500px] md:bg-naranja md:h-0.5"></div>

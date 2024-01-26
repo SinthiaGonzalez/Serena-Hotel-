@@ -8,7 +8,7 @@ import {
   Avatar,
 } from "@material-tailwind/react";
 
-const CardComent = ({ comentario, onDelete }) => {
+const AdminCardComentarios = ({ comentario, onDelete }) => {
   const StarIcon = () => {
     return (
       <svg
@@ -35,47 +35,54 @@ const CardComent = ({ comentario, onDelete }) => {
   };
 
   return (
-    <Card
-      className="max-w-[500px] h-[250px] bg-cover bg-center relative mb-12 mx-2 md:mx-16 lg:mx-4 xl:mx-2  "
-      style={{
-        backgroundImage:
-          'url("https://cf.bstatic.com/xdata/images/hotel/max1024x768/283384657.jpg?k=82f12511a23fc911e79146601860d7ae7b9839f37af39918d1312edd9d98efee&o=&hp=1")',
-      }}
-    >
+    <Card className=" flex flex-col bg-gris relative mb-4">
       <div
         className="absolute inset-0 bg-negro opacity-20 rounded-lg"
         style={{ zIndex: 1 }}
       ></div>
+
       <CardHeader
+        className="mx-10 flex items-center"
         color="transparent"
         floated={false}
         shadow={false}
-        className="mx-10 flex items-center gap-4 pt-0 pb-4"
       >
-        <Avatar
-          size={window.innerWidth < 768 ? "sm" : "lg"}
-          variant="circular"
-          src={comentario.imagen}
-          alt={comentario.nombre}
-        />
-        <div className="flex w-full flex-col gap-0.5">
-          <div className="flex items-center justify-between">
-            <Typography className="text-lg md:text-2xl font-medium text-gris font-inter">
-             {comentario.nombre}
+        <div className="flex gap-6 w-1/3">
+          <Avatar
+            size={window.innerWidth < 768 ? "sm" : "lg"}
+            variant="circular"
+            src={comentario.imagen}
+            alt={comentario.nombre}
+          />
+          <div className="flex items-center">
+            <Typography className="text-lg md:text-2xl font-medium text-blanco font-inter">
+              {comentario.nombre}
             </Typography>
-            <div className="flex items-center gap-0">
-              {renderStars(comentario.puntuacion)}
-            </div>
           </div>
         </div>
+
+        <div className="flex items-center justify-center w-1/3">
+          {renderStars(comentario.puntuacion)}
+        </div>
+
+        <div className="flex items-center justify-end w-1/3">
+          <span
+            className="material-symbols-outlined w-10 h-16 flex items-center justify-end text-blanco opacity-40 hover:opacity-100 transition-opacity cursor-pointer z-10"
+            onClick={() => onDelete(comentario.id)}
+          >
+            Delete
+          </span>
+        </div>
       </CardHeader>
-      <CardBody className="mb-6 mx-10 p-0">
-        <Typography className="text-xs md:text-base text-blanco font-medium font-inter">
+
+      <CardBody className="mx-12 pt-2 pb-8 justify-center">
+        <Typography className="text-xs md:text-base text-blanco text-center font-medium font-inter">
           &quot;{comentario.contenido}&quot;
         </Typography>
       </CardBody>
+
     </Card>
   );
 };
 
-export default CardComent;
+export default AdminCardComentarios;
