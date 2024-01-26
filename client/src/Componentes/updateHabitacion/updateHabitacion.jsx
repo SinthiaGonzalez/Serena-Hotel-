@@ -85,7 +85,11 @@ const UpdateHabitacion = () => {
 
   const handleChangeServicio = (index, event) => {
     const updatedServicios = [...nuevaDataHabitacion.servicios]; // Create a copy of the servicios array
+    if (index === 3) {
+      updatedServicios[index].descripcion = event.target.value + " m²";
+    } else {
     updatedServicios[index].descripcion = event.target.value; // Update the descripcion at the specified index
+    }
     setNuevaDataHabitacion({
       ...nuevaDataHabitacion,
       servicios: updatedServicios,
