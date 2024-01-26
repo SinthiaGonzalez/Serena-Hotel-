@@ -1,4 +1,5 @@
-import { useDispatch } from "react-redux";
+/*COMPONENTE PARA LOGUEARSE INGRESANDO MANUALMENTE MAIL Y CONTRASEÑA*/
+import { useDispatch, useSelector } from "react-redux";
 import LoginTemplate from "../Login/Login";
 import { useState } from "react";
 import {
@@ -7,6 +8,7 @@ import {
 } from "../../redux/Actions/actions";
 import { useNavigate } from "react-router-dom";
 import { useVerificarToken } from "../AutenticadorToken/autenticadorToken";
+
 const LoginCliente = () => {
   const dispatch = useDispatch();
   const [email, setemail] = useState("");
@@ -14,41 +16,45 @@ const LoginCliente = () => {
   const navigate = useNavigate();
   const handleemailChange = (event) => {
     setemail(event.target.value);
-  };
-  const isAdmin = JSON.parse(localStorage.getItem("isAdmin"));
-  console.log("LoginCliente", isAdmin);
+  }; 
+    
   const handleContraseñaChange = (event) => {
     setContraseña(event.target.value);
   };
 
   const handleVerificarUsuario = () => {
     dispatch(verificacionLogeoUsuarioAction({ email, contraseña }));
-
-    navigate("/");
+    const isAdmin = localStorage.getItem("isAdmin"); 
+    console.log("verificacion 33"+isAdmin)
+    if(isAdmin === "true") navigate("/admin-usuarios")
+    if(isAdmin === "false") navigate("/")
+   
   };
+
   useVerificarToken();
+  
   return (
     <div
-      className="flex items-center justify-center bg-cover bg-center text-white text-center p-8 h-screen"
+      className="flex items-center justify-center bg-cover bg-center text-white text-center p-4 lg:p-8 h-full md:h-[100vh] lg:h-screen"
       style={{
         backgroundImage:
           'url("https://i.postimg.cc/3xxjwxft/selena-hotel-1.png")',
       }}
     >
-      <div className="flex w-4/5">
-        <div className="flex flex-col text-gris bg-blanco shadow-md bg-clip-border justify-center w-[70%] p-2 rounded-l-lg">
+      <div className="flex-col lg:flex lg:flex-row w-full lg:w-4/5">
+        <div className="flex flex-col text-gris bg-blanco shadow-md bg-clip-border justify-center w-full lg:w-[70%] p-2 rounded-lg lg:rounded-r-none">
           <div className="flex flex-col gap-4 p-6 ">
             <a
               href="/"
-              className="ml-[8%] text-left block font-inter text-base antialiased font-bold text-naranja text-inter hover:scale-105 w-1/6"
+              className="ml-[8%] text-left block font-inter text-base antialiased font-bold text-naranja text-inter hover:scale-105 lg:w-1/6"
             >
               🡰 Volver
             </a>
-            <p className="flex mt-4 mb-10 font-inter text-3xl antialiased leading-normal text-center justify-center">
+            <p className="flex mt-2 lg:mt-4 mb-4 lg:mb-10 font-inter text-xl lg:text-3xl antialiased leading-normal text-center justify-center">
               Te damos la Bienvenida nuevamente!
             </p>
 
-            <div className="w-2/3 ml-[18%] justify-center text-center rounded-lg">
+            <div className="w-full lg:w-2/3 ml-0 lg:ml-[18%] justify-center text-center rounded-lg">
               <LoginTemplate />
             </div>
 
@@ -56,7 +62,7 @@ const LoginCliente = () => {
               ó
             </p>
 
-            <div className="flex flex-row w-2/3 bg-verde ml-[18%] relative rounded-lg">
+            <div className="flex flex-row w-full lg:w-2/3 bg-verde ml-0 lg:ml-[18%] relative rounded-lg">
               <div className="items-center">
                 <svg
                   className="w-[80px] h-11 p-2 border-r-4 border-naranja"
@@ -79,7 +85,7 @@ const LoginCliente = () => {
               />
             </div>
 
-            <div className="flex flex-row w-2/3 bg-verde ml-[18%] relative rounded-lg">
+            <div className="flex flex-row w-full lg:w-2/3 bg-verde ml-0 lg:ml-[18%] relative rounded-lg">
               <div className="items-center">
                 <svg
                   className="w-[80px] h-11 p-2 border-r-4 border-naranja"
@@ -110,7 +116,7 @@ const LoginCliente = () => {
           <div className="p-6 pt-2">
             <button
               onClick={handleVerificarUsuario}
-              className="w-2/4 mb-4 select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-blanco transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
+              className="w-3/4 lg:w-2/4 mb-4 select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-blanco transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
               type="button"
             >
               INICIAR SESIÓN
@@ -118,20 +124,20 @@ const LoginCliente = () => {
           </div>
         </div>
 
-        <div className="block flex flex-col text-blanco w-[40%] bg-verde pt-[5%] px-[3%] rounded-r-lg">
+        <div className="block flex flex-col text-blanco w-full px-0 lg:w-[40%] bg-verde pt-[5%] lg:px-[3%] rounded-lg lg:rounded-l-none mt-4 lg:mt-0">
           <div className="p-6 pt-0">
-            <h1 className="ml-[20%] flex mt-6 font-inter text-2xl antialiased font-extrabold  leading-normal text-left">
-              ¿NO TIENES <br /> UNA CUENTA?
+            <h1 className="lg:ml-[20%] lg:flex mt-6 font-inter text-xl lg:text-2xl antialiased font-extrabold  leading-normal text-center lg:text-left">
+              ¿NO TIENES <br className="hidden lg:block"/> UNA CUENTA?
             </h1>
-            <p className="ml-[20%] mt-[25%] mb-[30%] text-2xl antialiased font-extrabold text-inter text-left">
-              Regístrate para <br /> acceder a lo <br /> mejor de <br /> SERENA
+            <p className="lg:ml-[20%] my-8 lg:mt-[25%] lg:mb-[30%] text-base lg:text-2xl antialiased font-extrabold text-inter text-center lg:text-left">
+              Regístrate para <br className="hidden lg:block"/> acceder a lo <br /> mejor de <br className="hidden lg:block"/> SERENA
               HOTELS
             </p>
 
             <div className="p-6 pt-0">
               <a
                 href="/registrarse"
-                className="w-5/6 mb-4 select-none rounded-lg py-3.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-naranja transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
+                className="w-5/6 mb-0 mt-2 lg:mb-4 select-none rounded-lg py-3.5 lg:px-7 text-center align-middle font-inter text-base font-bold uppercase text-naranja transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
                 type="button"
               >
                 REGÍSTRATE AHORA
