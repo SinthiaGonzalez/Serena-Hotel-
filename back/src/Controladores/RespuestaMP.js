@@ -2,27 +2,19 @@ const axios = require("axios");
 const {manejoRespuestaMP} = require('./ManejoRespuestaMP');
 const respuestaConfirmacionPago = async (req, res) => {
     const { query, body } = req;
-    const topic = query.topic || query.type;
-    console.log("topic", topic);
-  
+    const topic = query.topic || query.type; 
     try {
       if (topic === "payment") {
         const paymentId = query.id || (body.data && body.data.id);
-        console.log("paymentId", paymentId);
+    
   
         if (!paymentId) {
           console.error("ID del pago no encontrado en req.query o req.body");
           return res.status(400).json({ error: "ID del pago no encontrado en req.query o req.body" });
         }
   
-        // Imprimir la solicitud completa
-        console.log("Solicitud completa:", req);
-  
-        // Imprimir el cuerpo de la solicitud
-        console.log("Cuerpo de la solicitud:", body);
-  
         // Configura el token de acceso en el encabezado de la solicitud
-        const accessToken = "TEST-7280768752766794-122809-47a53b66d4aff3b7fad1a49fdd6d753e-1611759187";
+        const accessToken = process.env.YOUR_ACCESS_TOKEN ;
         const headers = {
           'Authorization': `Bearer ${accessToken}`,
           'Content-Type': 'application/json',
@@ -32,7 +24,7 @@ const respuestaConfirmacionPago = async (req, res) => {
   axios.get(`https://api.mercadopago.com/v1/payments/${paymentId}`, { headers })
   .then(response => {
     const { status, id } = response.data;
-    manejoRespuestaMP(status,id);
+    manejoRespuestaMP(status,id);//falta pasarle el id del usuario y las fechas de reserva
   })
   .catch(error => {
     console.error("Error al obtener el estado del pago:", error.response ? error.response.data : error.message);
