@@ -1,4 +1,5 @@
-import { useDispatch } from "react-redux";
+/*COMPONENTE PARA LOGUEARSE INGRESANDO MANUALMENTE MAIL Y CONTRASEÑA*/
+import { useDispatch, useSelector } from "react-redux";
 import LoginTemplate from "../Login/Login";
 import { useState } from "react";
 import {
@@ -7,6 +8,7 @@ import {
 } from "../../redux/Actions/actions";
 import { useNavigate } from "react-router-dom";
 import { useVerificarToken } from "../AutenticadorToken/autenticadorToken";
+
 const LoginCliente = () => {
   const dispatch = useDispatch();
   const [email, setemail] = useState("");
@@ -14,11 +16,7 @@ const LoginCliente = () => {
   const navigate = useNavigate();
   const handleemailChange = (event) => {
     setemail(event.target.value);
-  };
-
-  const isAdmin = JSON.parse(localStorage.getItem("isAdmin"));
-  console.log("isAdmin", isAdmin);
-  console.log("LOGINCLIENTE jx localStorage.getItem('isAdmin')"+isAdmin);
+  }; 
     
   const handleContraseñaChange = (event) => {
     setContraseña(event.target.value);
@@ -26,10 +24,15 @@ const LoginCliente = () => {
 
   const handleVerificarUsuario = () => {
     dispatch(verificacionLogeoUsuarioAction({ email, contraseña }));
+    const isAdmin = localStorage.getItem("isAdmin"); 
+    console.log("verificacion 33"+isAdmin)
+    if(isAdmin === "true") navigate("/admin-usuarios")
+    if(isAdmin === "false") navigate("/")
    
-    navigate("/");
   };
+
   useVerificarToken();
+  
   return (
     <div
       className="relative bg-cover bg-center h-screen text-white text-center"
