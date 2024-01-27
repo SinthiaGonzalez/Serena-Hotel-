@@ -51,9 +51,11 @@ const CrearHabitacion = () => {
 
   const isSubmitDisabled = () => {
     // Verifica si hay algún campo obligatorio sin completar
-    return Object.values(habitacionData).some(
+    if ( errors.nombre!="" || errors.descripcion!="" || errors.servicios!="") return true;
+    else {
+      return Object.values(habitacionData).some(
       (value) => value === "" || (Array.isArray(value) && value.length === 0)
-    );
+    )}
   };
 
   const handleChangeServicio = (index, event) => {

@@ -377,7 +377,15 @@ export function updateHabitacion(habitacionData) {
       }).then(async (result) => {
         if (result.isConfirmed) {
           const response = await axios.put("/update/habitaciones", habitacionData);
-    console.log(response.data);
+          console.log(response.data);
+          if (response.data === "Ya existe un usuario con ese correo" || response.data === "No se encontro el usuario" ) {
+            Swal.fire({
+              title:response.data, 
+              icon:"error",
+              confirmButtonColor:"#FB350C",
+              iconColor: "#FB350C"
+            }); 
+          }
     Swal.fire({
       title:"Habitacion editada exitosamente!", 
       icon:"success",
@@ -450,7 +458,6 @@ export function deleteHabitacion(id) {
       }).then(async (result) => {
         if (result.isConfirmed) {
           const response = await axios.delete(`/habitaciones/${id}`);
-
         dispatch({
           type: "DELETE_HABITACION",
           payload: id,

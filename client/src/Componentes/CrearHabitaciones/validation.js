@@ -1,7 +1,7 @@
 const validation = (habitacionData) => {
   const errors = {};
 
-  if (!/^[a-zA-Z]{3,}$/.test(habitacionData.nombre)) {
+  if (!/^[a-zA-Z\s]{3,}$/.test(habitacionData.nombre)) {
     errors.nombre = "El nombre debe contener al menos 3 caracteres";
   }
     
@@ -12,7 +12,10 @@ const validation = (habitacionData) => {
   if (habitacionData.servicios.length === 0) {
     errors.servicios = "Debes elegir al menos un servicio";
   }
-
+  
+  if (habitacionData.precio <= 0) {
+    errors.precio = "El precio debe ser mayor a 0";
+  }
   return errors;
 };
 

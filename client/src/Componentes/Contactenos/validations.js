@@ -4,8 +4,8 @@ const validation = (contactData) => {
     if (!/^[a-zA-Z]{3,}$/.test(contactData.nombre)) {
       errors.nombre = "El nombre debe contener al menos 3 caracteres";
     }
-    if (!/^[a-zA-Z]{3,}@[a-zA-Z]{3,}\.com$/.test(contactData.correo)) {
-      errors.correo = "El correo debe contener al menos 6 caracteres, un '@' y terminar en '.com' ";
+    if (/^[a-zA-Z]{3,}@[a-zA-Z]{3,}\.com/.test(contactData.correo)) {
+      errors.correo = "El correo debe contener al menos 6 caracteres, un '@' e incluir '.com' ";
     }
     
     if (!/^[0-9+-]{8,}$/.test(contactData.telefono)) {

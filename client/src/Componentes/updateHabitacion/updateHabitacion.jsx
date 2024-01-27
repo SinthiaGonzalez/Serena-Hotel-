@@ -22,7 +22,8 @@ const UpdateHabitacion = () => {
   const [seleccionhabitacion, setSeleccionhabitacion] = useState("");
   const habitacionescKcup = useSelector((state) => state.habitacionBackUp);
   const habitacionEliminada = useSelector((state) => state.habitacionEliminada);
-
+  const allHabitaciones = useSelector((state) => state.nuevaHabitacion);
+  
   const habitacionesB = habitacionescKcup.map(({ id, nombre }) => ({
     id,
     nombre,
@@ -30,7 +31,7 @@ const UpdateHabitacion = () => {
 
   useEffect(() => {
     dispatch(getHabitacionesbackup());
-  }, [habitacionEliminada]);
+  }, [habitacionEliminada, allHabitaciones]);
 
   const [nuevaDataHabitacion, setNuevaDataHabitacion] = useState({
     nombreId: "",
@@ -78,10 +79,15 @@ const UpdateHabitacion = () => {
 
   const isSubmitDisabled = () => {
     // Verifica si hay algún campo obligatorio sin completar
-    return Object.values(nuevaDataHabitacion).some(
+      return Object.values(nuevaDataHabitacion).some(
       (value) => value === "" || (Array.isArray(value) && value.length === 0)
-    );
+    )
   };
+
+  const isDeleteDisabled = () => {
+    if (nuevaDataHabitacion.nombreId==="") return true;
+    else return false; 
+  }
 
   const handleChangeServicio = (index, event) => {
     const updatedServicios = [...nuevaDataHabitacion.servicios]; // Create a copy of the servicios array
@@ -446,6 +452,7 @@ console.log("auxilio", nuevaDataHabitacion)
           <button
             className="w-full  select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-blanco transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
             onClick={handlerdeleteHabitacion}
+            disabled={isDeleteDisabled()}
           >
             Eliminar
           </button>

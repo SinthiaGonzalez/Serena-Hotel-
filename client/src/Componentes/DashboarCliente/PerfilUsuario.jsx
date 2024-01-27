@@ -16,7 +16,7 @@ const UpdateUsuario = () => {
   const dispatch = useDispatch();
   const userId = localStorage.getItem("userId");
   const isAdmin = localStorage.getItem("isAdmin");
-  console.log("aqui", userId);
+  console.log("aquiiiiiiiiiiii", userId);
 
   const [errors, setErrors] = useState({});
   const [touchedFields, setTouchedFields] = useState({});
@@ -58,7 +58,6 @@ const UpdateUsuario = () => {
       data
     );
     const url = response.data.url;
-    console.log("aqui", url);
     setUser({ ...user, imagen: url });
   };
 
@@ -193,8 +192,8 @@ const UpdateUsuario = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
-                 <p className="my-4 text-base text-center">{ errors.name}</p>
               </div>
+                 <p className="my-4 text-base text-center text-naranja">{ errors.name}</p>
 
               <div className="flex flex-row h-11 bg-verde  relative rounded-lg mb-4">
                 <div className="items-center">
@@ -213,8 +212,8 @@ const UpdateUsuario = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
-                 <p className="my-4 text-base text-center">{ errors.apellido}</p>
               </div>
+                 <p className="my-4 text-base text-center text-naranja">{ errors.apellido}</p>
 
               <div className="flex flex-row h-11 bg-verde  relative rounded-lg mb-4">
                 <div className="items-center">
@@ -233,8 +232,8 @@ const UpdateUsuario = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
-                 <p className="my-4 text-base text-center">{ errors.email}</p>
               </div>
+                 <p className="my-4 text-base text-center text-naranja">{ errors.email}</p>
 
               <div className="flex flex-row h-11 bg-verde  relative rounded-lg mb-4">
                 <div className="items-center">
@@ -253,8 +252,8 @@ const UpdateUsuario = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
-                 <p className="my-4 text-base text-center">{ errors.telefono}</p>
               </div>
+                 <p className="my-4 text-base text-center text-naranja">{ errors.telefono}</p>
 
               <div className="flex flex-row h-11 bg-verde  relative rounded-lg mb-4">
                 <div className="items-center">
@@ -274,6 +273,7 @@ const UpdateUsuario = () => {
                   onBlur={handleBlur}
                 />
               </div>
+              <p className="my-4 text-base text-center text-naranja">{ errors.contraseña}</p>
 
               <div className="flex flex-row h-11 bg-verde  relative rounded-lg mb-4">
                 <div className="items-center">
@@ -293,6 +293,7 @@ const UpdateUsuario = () => {
                   onBlur={handleBlur}
                 />
               </div>
+              <p className="my-4 text-base text-center text-naranja">{ errors.confirmarContraseña}</p>
             </label>
           </div>
           <button

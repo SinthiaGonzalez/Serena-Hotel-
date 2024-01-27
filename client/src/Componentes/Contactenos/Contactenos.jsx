@@ -68,6 +68,14 @@ const Contactenos = () => {
     });
   };
 
+  const isSubmitDisabled = () => {
+    // Verifica si hay algún campo obligatorio sin completar
+    if (errors.nombre!="" || errors.correo!="" || errors.telefono!="" || errors.mensaje!="") return true;
+    else {
+    return Object.values(infoFormulario).some(
+      (value) => value === "" || (Array.isArray(value) && value.length === 0)
+    );
+  }};
   console.log("por aca", errors)
   return (
     
@@ -120,13 +128,13 @@ const Contactenos = () => {
                           "before:content-none after:content-none font-inter text-blanco",
                       }}
                     />
-                    <p className="my-4 text-base text-center">{touchedFields.nombre && errors.nombre}</p>
+                    <p className="my-4 text-base text-center text-naranja">{touchedFields.nombre && errors.nombre}</p>
 
                     <a className="font-inter font-medium text-blanco">
                       Correo:
                     </a>
                     <Input
-                      type="email"
+                      type="text"
                       name="correo"
                       size="lg"
                       placeholder="Correo"
@@ -138,7 +146,7 @@ const Contactenos = () => {
                         className: "before:content-none after:content-none",
                       }}
                     />
-                    <p className="my-4 text-base text-center">{touchedFields.correo && errors.correo}</p>
+                    <p className="my-4 text-base text-center text-naranja">{touchedFields.correo && errors.correo}</p>
 
                     <a className="font-inter font-medium text-blanco">
                       Teléfono:
@@ -156,7 +164,7 @@ const Contactenos = () => {
                         className: "before:content-none after:content-none",
                       }}
                     />
-                    <p className="my-4 text-base text-center">{touchedFields.telefono && errors.telefono}</p>
+                    <p className="my-4 text-base text-center text-naranja">{touchedFields.telefono && errors.telefono}</p>
 
                     <a className="font-inter font-medium text-blanco">
                       Mensaje:
@@ -173,10 +181,10 @@ const Contactenos = () => {
                         className: "before:content-none after:content-none",
                       }}
                     />
-                    <p className="my-4 text-base text-center">{touchedFields.mensaje && errors.mensaje}</p>
+                    <p className="my-4 text-base text-center text-naranja">{touchedFields.mensaje && errors.mensaje}</p>
                   </div>
 
-                  <Button type="submit" className="mt-6 bg-naranja" fullWidth>
+                  <Button type="submit" className="mt-6 bg-naranja" fullWidth disabled={isSubmitDisabled()}>
                     Contáctenos
                   </Button>
                 </form>
