@@ -27,8 +27,8 @@ import  AdminComentarios from "./Componentes/DashboardAdminComentarios/AdminCome
 // Esta linea de codigo hace que por default todos los requerimientos en axios se hagan a esta ruta en el back
 // Luego nos va a servir para hacer el Deploy del front
 
-//axios.defaults.baseURL = "http://localhost:3001/"; // comentarlo cuando lo suba haga el marge con
-axios.defaults.baseURL = "https://serenahotel.up.railway.app/";
+axios.defaults.baseURL = "http://localhost:3001/"; // comentarlo cuando lo suba haga el marge con
+//axios.defaults.baseURL = "https://serenahotel.up.railway.app/";
 
 const App = () => {
   return (
