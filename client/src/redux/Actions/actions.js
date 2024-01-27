@@ -101,7 +101,6 @@ export function postUsuarioGoogle(data) {
   };
 }
 export function verificacionLogeoUsuarioAction(infoLogeo) {
-  console.log(infoLogeo);
   return async function () {
     try {
       const response = await axios.post("/login", infoLogeo);
@@ -111,12 +110,12 @@ export function verificacionLogeoUsuarioAction(infoLogeo) {
       localStorage.setItem("name", JSON.stringify(name));
       localStorage.setItem("isAdmin", JSON.stringify(isAdmin));
       localStorage.setItem("imagen", JSON.stringify(imagen));
-     
+      
+      console.log("estoy en la action",response.data);
       dispatch({
         type: "POST_USUARIO_NOGOOGLE",
         payload: response.data,
       });
-      console.log("Respuesta del servidor manual:", response.data);
 
     } catch (error) {
       if (error.response && error.response.status === 400) {
@@ -431,6 +430,16 @@ export function recuperarContraseñaAction(correo) {
   return async function () {
     try {
       const response = await axios.put("/recuperarContrasena", { correo });
+      console.log("Respuesta del servidor:", response.data);
+    } catch (error) {
+      console.error("Error al enviar la consulta:", error);
+    }
+  };
+}
+export function recuperarUsuarioAction(correo) {
+  return async function () {
+    try {
+      const response = await axios.put("/recuperarUsuario", { correo });
       console.log("Respuesta del servidor:", response.data);
     } catch (error) {
       console.error("Error al enviar la consulta:", error);
