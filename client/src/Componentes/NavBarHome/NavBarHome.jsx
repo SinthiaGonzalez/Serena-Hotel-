@@ -73,8 +73,9 @@ const NavBarHome = () => {
     dispatch(getCarrito());
   };
   const carrito = useSelector((state) => state.carrito);
+  const estadia = JSON.parse(localStorage.getItem("estadia"));
   const subtotal = carrito.reduce(
-    (total, producto) => total + producto.precio,
+    (total, producto) => total + producto.precio * estadia,
     0
   );
 
@@ -182,7 +183,13 @@ const NavBarHome = () => {
               </div>
               <div className="flex flex-row justify-between">
                 <p>Sub Total</p>
-                <p>${subtotal}</p>
+                <p>
+                  {subtotal.toLocaleString("es-AR", {
+                    style: "currency",
+                    currency: "ARS",
+                    minimumFractionDigits: 0,
+                  })}
+                </p>
               </div>
               <Link
                 to="/habitaciones"

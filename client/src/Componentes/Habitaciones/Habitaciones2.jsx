@@ -50,12 +50,12 @@ const Habitaciones = () => {
   //   dispatch(getHabitaciones({ page: paginaActual, itemsPerPage }));
   // }, [dispatch, itemsPerPage, checkinDate, checkoutDate]);
   // console.log("Estado Fechas", fechas);
- 
+
   useEffect(() => {
     // Aquí puedes enviar la solicitud correspondiente cuando cambian las fechas
     dispatch(getHabitaciones({ page: paginaActual, itemsPerPage }));
   }, [dispatch, itemsPerPage, checkinDate, checkoutDate]);
-  
+
   console.log("Estado Fechas", fechas);
   const handleNombreChange = (value, tipoOrdenamiento) => {
     setUltimoOrdenamiento({
@@ -141,6 +141,7 @@ const Habitaciones = () => {
 
   const handleCheckoutChange = (selectedDate) => {
     setCheckoutDate(format(selectedDate, "yyyy-MM-dd"));
+
     dispatch(
       getReservas({
         checkinDate,
@@ -148,6 +149,12 @@ const Habitaciones = () => {
       })
     );
     // console.log("fecha checkout", selectedDate);
+    localStorage.setItem("checkinDate", JSON.stringify(checkinDate));
+    localStorage.setItem(
+      "checkoutDate",
+      JSON.stringify(format(selectedDate, "yyyy-MM-dd"))
+    );
+
     dispatch(
       updateDates({
         checkinDate: checkinDate,
