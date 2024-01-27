@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux"
-import { updateUsuario, getUsuarioById } from "../../redux/Actions/actions";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  updateUsuario,
+  getUsuarioById,
+  cambiarEstadoUsuario,
+} from "../../redux/Actions/actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
@@ -91,7 +95,7 @@ const UpdateUsuario = () => {
     });
   };
 
-  console.log(" a ver", usuarioData)
+  console.log(" a ver", usuarioData);
 
   const handleDefaultValues = () => {
     setUser({
@@ -104,7 +108,7 @@ const UpdateUsuario = () => {
       isadmin: isAdmin,
       imagen: usuarioData.imagen,
     });
-  }
+  };
 
   useEffect(() => {
     dispatch(getUsuarioById(userId));
@@ -114,6 +118,17 @@ const UpdateUsuario = () => {
     handleDefaultValues();
   }, [usuarioData]);
 
+  const handleEstadoChange = () => {
+    dispatch(cambiarEstadoUsuario(userId, "eliminar")),
+      localStorage.removeItem("token");
+    localStorage.removeItem("name");
+    localStorage.removeItem("imagen");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("isAdmin");
+    navigate("/logearse");
+    // idSelect es el id del usuario
+  };
+
   return (
     <div
       className="flex items-center justify-center bg-cover bg-center text-white text-center p-8"
@@ -122,7 +137,7 @@ const UpdateUsuario = () => {
       //     'url("https://i.postimg.cc/3xxjwxft/selena-hotel-1.png")',
       // }}
     >
-      <div className="flex flex-col items-center justify-center bg-verde w-2/3 h-auto rounded-lg px-4 pt-4 pb-6">
+      <div className="flex flex-col items-center justify-center bg-verde w-full lg:w-2/3 h-auto rounded-lg px-4 pt-4 pb-6">
         <p className="relative flex mt-4 mb-4 font-inter text-3xl antialiased leading-normal text-center font-bold text-blanco justify-center">
           Editar Usuario
         </p>
@@ -153,7 +168,7 @@ const UpdateUsuario = () => {
             </span>
           </label>
         </div>
-        <form onSubmit={handleSubmit} className="relative w-2/3">
+        <form onSubmit={handleSubmit} className="px-4 lg:px-0 md:w-2/3">
           <div className="mb-4">
             <label className="block text-gray-200 text-sm font-bold mb-2">
               <div className="flex flex-row h-11 bg-gris  relative rounded-lg mb-4">
@@ -165,10 +180,10 @@ const UpdateUsuario = () => {
                 </div>
 
                 <input
-                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-gris rounded-lg"
+                  className="w-full h-11 font-inter text-center pr-12 lg:pr-24 text-base font-normal text-white bg-gris rounded-lg"
                   type="text"
                   name="name"
-                  placeholder="Nombre" 
+                  placeholder="Nombre"
                   value={user.name}
                   onChange={handleChange}
                 />
@@ -183,7 +198,7 @@ const UpdateUsuario = () => {
                 </div>
 
                 <input
-                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-gris rounded-lg"
+                  className="w-full h-11 font-inter text-center pr-12 lg:pr-24 text-base font-normal text-white bg-gris rounded-lg"
                   type="text"
                   name="apellido"
                   placeholder="apellido"
@@ -201,7 +216,7 @@ const UpdateUsuario = () => {
                 </div>
 
                 <input
-                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-gris rounded-lg"
+                  className="w-full h-11 font-inter text-center pr-12 lg:pr-24 text-base font-normal text-white bg-gris rounded-lg"
                   type="email"
                   name="email"
                   placeholder="email"
@@ -219,7 +234,7 @@ const UpdateUsuario = () => {
                 </div>
 
                 <input
-                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-gris rounded-lg"
+                  className="w-full h-11 font-inter text-center pr-12 lg:pr-24 text-base font-normal text-white bg-gris rounded-lg"
                   type="text"
                   name="telefono"
                   placeholder="Telefono"
@@ -237,7 +252,7 @@ const UpdateUsuario = () => {
                 </div>
 
                 <input
-                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-gris rounded-lg"
+                  className="w-full h-11 font-inter text-center pr-12 lg:pr-24 text-base font-normal text-white bg-gris rounded-lg"
                   type="password"
                   name="contraseña"
                   placeholder="Contraseña"
@@ -255,7 +270,7 @@ const UpdateUsuario = () => {
                 </div>
 
                 <input
-                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-gris rounded-lg"
+                  className="w-full h-11 font-inter text-center pr-8 lg:pr-24 text-base font-normal text-white bg-gris rounded-lg"
                   type="password"
                   name="confirmarContraseña"
                   placeholder="Confirmar Contraseña"
@@ -266,11 +281,18 @@ const UpdateUsuario = () => {
             </label>
           </div>
           <button
-            className="w-2/4 mb-4 mt-4 select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-blanco transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
+            className="w-2/4 mb-4 mt-4 mx-1 select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-blanco transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
             type="button"
             onClick={confirmacion}
           >
-            EDITAR USUARIO
+            EDITAR
+          </button>
+          <button
+            className="w-2/4 mb-4 mt-4 select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-blanco transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
+            type="button"
+            onClick={handleEstadoChange}
+          >
+            ELIMINAR
           </button>
         </form>
       </div>

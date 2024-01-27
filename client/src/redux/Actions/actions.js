@@ -118,7 +118,6 @@ export function verificacionLogeoUsuarioAction(infoLogeo) {
         type: "POST_USUARIO_NOGOOGLE",
         payload: response.data,
       });
-      console.log("Respuesta del servidor manual:", response.data);
 
     } catch (error) {
       if (error.response && error.response.status === 400) {
@@ -433,6 +432,16 @@ export function recuperarContraseñaAction(correo) {
   return async function () {
     try {
       const response = await axios.put("/recuperarContrasena", { correo });
+      console.log("Respuesta del servidor:", response.data);
+    } catch (error) {
+      console.error("Error al enviar la consulta:", error);
+    }
+  };
+}
+export function recuperarUsuarioAction(correo) {
+  return async function () {
+    try {
+      const response = await axios.put("/recuperarUsuario", { correo });
       console.log("Respuesta del servidor:", response.data);
     } catch (error) {
       console.error("Error al enviar la consulta:", error);

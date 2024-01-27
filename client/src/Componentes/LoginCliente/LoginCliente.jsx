@@ -16,8 +16,8 @@ const LoginCliente = () => {
   const navigate = useNavigate();
   const handleemailChange = (event) => {
     setemail(event.target.value);
-  }; 
-    
+  };
+
   const handleContraseñaChange = (event) => {
     setContraseña(event.target.value);
   };
@@ -46,7 +46,13 @@ const LoginCliente = () => {
   };
 
   useVerificarToken();
-  
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <div
       className="flex items-center justify-center bg-cover bg-center text-white text-center p-4 lg:p-8 h-full md:h-[100vh] lg:h-screen"
@@ -116,10 +122,17 @@ const LoginCliente = () => {
               <input
                 className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
                 placeholder="Contraseña"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 value={contraseña}
                 onChange={handleContraseñaChange}
               />
+              <button
+                className="absolute material-symbols-outlined text-blanco right-4 top-3 text-center opacity-40 hover:opacity-100 transition-opacity cursor-pointer"
+                onClick={handleTogglePassword}
+                type="button"
+              >
+                {showPassword ? "visibility_off" : "visibility"}
+              </button>
             </div>
           </div>
 
@@ -141,14 +154,17 @@ const LoginCliente = () => {
         <div className="block flex flex-col text-blanco w-full px-0 lg:w-[40%] bg-verde pt-[5%] lg:px-[3%] rounded-lg lg:rounded-l-none mt-4 lg:mt-0">
           <div className="p-6 pt-0">
             <h1 className="lg:ml-[20%] lg:flex mt-6 font-inter text-xl lg:text-2xl antialiased font-extrabold  leading-normal text-center lg:text-left">
-              ¿NO TIENES <br className="hidden lg:block"/> UNA CUENTA?
+              ¿NO TIENES <br className="hidden lg:block" /> UNA CUENTA?
             </h1>
-            <p className="lg:ml-[20%] my-8 lg:mt-[25%] lg:mb-[30%] text-base lg:text-2xl antialiased font-extrabold text-inter text-center lg:text-left">
-              Regístrate para <br className="hidden lg:block"/> acceder a lo <br /> mejor de <br className="hidden lg:block"/> SERENA
-              HOTELS
+            <p className="lg:ml-[20%] my-8 lg:mt-[20%] lg:mb-[15%] text-base lg:text-2xl antialiased font-extrabold text-inter text-center lg:text-left">
+              Regístrate para <br className="hidden lg:block" /> acceder a lo{" "}
+              <br /> mejor de <br className="hidden lg:block" /> SERENA HOTELS
             </p>
+            <a href="/recuperar-usuario" className="mb-[20%] text-naranja">
+            ¿Quieres recuperar tu cuenta?
+          </a>
 
-            <div className="p-6 pt-0">
+            <div className="p-6">
               <a
                 href="/registrarse"
                 className="w-5/6 mb-0 mt-2 lg:mb-4 select-none rounded-lg py-3.5 lg:px-7 text-center align-middle font-inter text-base font-bold uppercase text-naranja transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
