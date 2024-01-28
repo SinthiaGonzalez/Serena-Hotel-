@@ -42,12 +42,12 @@ const AdminCardComentarios = ({ comentario, onDelete }) => {
       ></div>
 
       <CardHeader
-        className="mx-10 flex items-center"
+        className="mx-2 md:mx-10 lg:mt-10 flex-col lg:flex lg:flex-row items-center"
         color="transparent"
         floated={false}
         shadow={false}
       >
-        <div className="flex gap-6 w-1/3">
+        <div className="flex gap-6 lg:w-1/3 justify-center lg-justify-non">
           <Avatar
             size={window.innerWidth < 768 ? "sm" : "lg"}
             variant="circular"
@@ -61,13 +61,13 @@ const AdminCardComentarios = ({ comentario, onDelete }) => {
           </div>
         </div>
 
-        <div className="flex items-center justify-center w-1/3">
+        <div className="flex items-center justify-center lg:w-1/3 pt-3 lg:pt-0">
           {renderStars(comentario.puntuacion)}
         </div>
 
-        <div className="flex items-center justify-end w-1/3">
+        <div className="flex items-center justify-end lg:w-1/3">
           <span
-            className="material-symbols-outlined w-10 h-16 flex items-center justify-end text-blanco opacity-40 hover:opacity-100 transition-opacity cursor-pointer z-10"
+            className="-mt-24 lg:mt-0 material-symbols-outlined w-10 h-16 flex items-center justify-end text-blanco opacity-40 hover:opacity-100 transition-opacity cursor-pointer z-10"
             onClick={() => onDelete(comentario.id)}
           >
             Delete

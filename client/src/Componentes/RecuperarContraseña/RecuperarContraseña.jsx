@@ -37,7 +37,7 @@ const RecuperarContraseña = () => {
             Vamos a enviarte un email con tu nueva clave.
           </p>
 
-          <div className="flex flex-row md:w-2/3 bg-verde md:ml-[18%] relative rounded-lg mb-12">
+          <div className="flex flex-row lg:w-2/3 bg-verde lg:ml-[18%] relative rounded-lg mb-12">
             <div className="items-center">
               <svg
                 className="w-[80px] h-11 p-2 border-r-4 border-naranja"
@@ -52,7 +52,7 @@ const RecuperarContraseña = () => {
             </div>
 
             <input
-              className="w-full h-11 font-inter text-center lg:pr-24 text-base font-normal text-white bg-verde rounded-lg"
+              className="w-full h-11 font-inter text-center pr-12 lg:pr-16 xl:pr-24 text-base font-normal text-white bg-verde rounded-lg"
               placeholder="Correo"
               type="mail"
               value={correo}

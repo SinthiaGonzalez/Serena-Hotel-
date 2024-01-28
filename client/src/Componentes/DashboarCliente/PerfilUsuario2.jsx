@@ -64,7 +64,7 @@ export const PerfilUsuario2 = () => {
           <h2 className="text-center text-2xl font-bold my-2">
             Historial de Reservas
           </h2>
-          <div className="p-5 rounded-md shadow-md mb-4 overflow-x-auto">
+          <div className="p-5 rounded-md shadow-md mb-4 overflow-x-auto w-[200px] md:w-[600px] lg:w-[1000px] xl:w-full">
             <table className="w-full">
               <thead className="bg-white bg-opacity-15 border-b border-white border-opacity-25">
                 <tr>

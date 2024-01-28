@@ -169,7 +169,7 @@ const NavBarHome = () => {
       <Collapse open={isNavOpen} className="overflow-scroll">
         <NavList />
       </Collapse>
-      <div className="relative ">
+      <div className="relative">
         {isCartOpen && (
           <div className="flex flex-col justify-between h-[30] w-[350px] absolute top-12 right-0  bg-verde p-6 rounded-md shadow-md">
             <div>
