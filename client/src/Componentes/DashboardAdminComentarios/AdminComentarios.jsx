@@ -11,8 +11,10 @@ import "slick-carousel/slick/slick-theme.css";
 import AdminCardComentarios from "./AdminCardComentarios";
 import NavBarAdmin from "../NavBarAdmin/NavBarAdmin";
 import Paginacion from "../Paginacion/Paginacion";
+import { useVerificarIsAdmin } from "../AutenticadorToken/autenticadorLocalStIsAdmin";
 
 const AdminComentarios = () => {
+  useVerificarIsAdmin()
   const dispatch = useDispatch();
   const comentarios = useSelector((state) => state.comentarios);
   const itemsPerPage = 3;

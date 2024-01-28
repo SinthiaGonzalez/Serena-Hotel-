@@ -5,7 +5,10 @@ import { eliminarDelCarrito } from "../../redux/Actions/actions";
 
 const ShoppingCartCard1 = ({ imagenes, nombre, precio, id }) => {
   const dispatch = useDispatch();
+  console.log(id)
+
   const estadia = JSON.parse(localStorage.getItem("estadia"));
+  
   const eliminarHabitacion = () => {
     dispatch(eliminarDelCarrito(id));
   };

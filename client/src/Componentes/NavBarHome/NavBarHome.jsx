@@ -36,6 +36,15 @@ const navListItems = [
   },
 ];
 
+const isAdmin = localStorage.getItem("isAdmin"); 
+console.log("verificacion 31"+isAdmin)
+if(isAdmin==="true") navListItems.push({
+  label: "ADMIN DASHBOARD",
+  href: "/admin-usuarios",
+  xmlns: "http://www.w3.org/2000/svg",
+  d: "m",
+})
+
 function NavList() {
   return (
     <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
@@ -56,11 +65,15 @@ function NavList() {
             <svg xmlns={xmlns} height="16" width="20" viewBox="0 0 640 512">
               <path fill="#ffffff" d={d} />
             </svg>
-            <span className="text-white"> {label}</span>
+            <span className={`${
+              label === "ADMIN DASHBOARD" ? "text-naranja" : "text-white"
+            }`}> {label}</span>
+         
           </MenuItem>
         </Typography>
-      ))}
-    </ul>
+        ))}    
+    </ul>   
+           
   );
 }
 
@@ -80,8 +93,8 @@ const NavBarHome = () => {
   );
 
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.token);
-
+  const token = useSelector((state) => state.token); 
+  
   useEffect(() => {
     window.addEventListener(
       "resize",
@@ -156,7 +169,7 @@ const NavBarHome = () => {
       <Collapse open={isNavOpen} className="overflow-scroll">
         <NavList />
       </Collapse>
-      <div className="relative ">
+      <div className="relative">
         {isCartOpen && (
           <div className="flex flex-col justify-between h-[30] w-[350px] absolute top-12 right-0  bg-verde p-6 rounded-md shadow-md">
             <div>

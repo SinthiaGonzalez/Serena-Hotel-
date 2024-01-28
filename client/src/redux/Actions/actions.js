@@ -81,13 +81,13 @@ export function postUsuarioGoogle(data) {
       const response = await axios.post("/usuario", data);
       if (response.status === 200 || response.status === 201) {
         const response2 = await axios.post("/login", data);
-
-        const { token, userId, isAdmin, imagen, name } = response2.data;
+        const { token, userId, isAdmin, imagen, name, estado } = response2.data;
         localStorage.setItem("name", JSON.stringify(name));
         localStorage.setItem("token", JSON.stringify(token));
         localStorage.setItem("userId", JSON.stringify(userId));
         localStorage.setItem("isAdmin", JSON.stringify(isAdmin));
         localStorage.setItem("imagen", JSON.stringify(imagen));
+        localStorage.setItem("estado", JSON.stringify(estado));
         console.log("Respuesta del servidor con google XX:", response2.data);    
         console.log("Respuesta del servidor con google response.data.isAdmin:", response2.data.isAdmin);      
         dispatch({
@@ -101,17 +101,19 @@ export function postUsuarioGoogle(data) {
   };
 }
 export function verificacionLogeoUsuarioAction(infoLogeo) {
+  console.log(infoLogeo);
+
   return async function () {
     try {
       const response = await axios.post("/login", infoLogeo);
-      const { token, userId, isAdmin, imagen, name } = response.data;
+      const { token, userId, isAdmin, imagen, name, estado } = response.data;
       localStorage.setItem("token", JSON.stringify(token));
       localStorage.setItem("userId", JSON.stringify(userId));
       localStorage.setItem("name", JSON.stringify(name));
       localStorage.setItem("isAdmin", JSON.stringify(isAdmin));
       localStorage.setItem("imagen", JSON.stringify(imagen));
-      
-      console.log("estoy en la action",response.data);
+      localStorage.setItem("estado", JSON.stringify(estado));
+      console.log(response.data)
       dispatch({
         type: "POST_USUARIO_NOGOOGLE",
         payload: response.data,

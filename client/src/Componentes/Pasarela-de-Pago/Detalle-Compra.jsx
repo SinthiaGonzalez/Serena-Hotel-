@@ -32,7 +32,7 @@ const DetalledelaCompra = () => {
   }, []);
 
   return (
-    <div className="m-4 w-1/3 text text-negro bg-verde rounded-md ">
+    <div className="m-4 lg:w-1/3 text text-negro bg-verde rounded-md py-2 lg:py-0">
       {/* <div className="flex justify-center">
         <h1 className="text-2xl mt-2">Detalles de la compra</h1>
       </div>
@@ -44,7 +44,7 @@ const DetalledelaCompra = () => {
       </div> */}
       <div className="mx-12 mt-16">
         <p className="text-3xl text-inter text-blanco font-bold text-center mb-28">
-          TOTAL DE LA RESERVA
+          TOTAL DE LA COMPRA
         </p>
         <div className="border-b-2 border-blanco text-inter text-blanco text-xl flex mb-8">
           <div className="w-1/2">
