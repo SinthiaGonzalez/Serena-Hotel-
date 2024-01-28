@@ -31,7 +31,7 @@ export default function LoginTemplate() {
     //alert (estado)
     setTimeout(function(){
       estado = localStorage.getItem("estado"); 
-      alert("settime - estado" +estado);
+      // alert("settime - estado" +estado);
       if(estado==='"activo"') {
         //alert("linea 31 activo")
         const isAdmin = localStorage.getItem("isAdmin"); 
