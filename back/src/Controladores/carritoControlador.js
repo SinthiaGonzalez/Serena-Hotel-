@@ -65,7 +65,8 @@ const getCarrito = async (req, res) => {
   }
 };
 const deleteCarrito = async (req, res) => {
-  const id = req.params.id;
+  const id = req.params.id; 
+  console.log(id)
 
   try {
     const carrito = await Carrito.findOne({
@@ -81,7 +82,7 @@ const deleteCarrito = async (req, res) => {
     if (rowsDeleted === 0) {
       return res
         .status(404)
-        .json({ error: "Habitación no encontrada en el carrito." });
+        .json({ error: "Habitación no encontrada en el carrito."});
     }
 
     const habitacionesRestantes = await carrito.getHabitaciones();

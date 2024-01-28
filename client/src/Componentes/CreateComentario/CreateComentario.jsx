@@ -105,7 +105,7 @@ const CreateComentPage = () => {
 };
   return (
     <div
-      className="relative bg-cover bg-center h-screen text-white text-center p-10 justify-center items-center"
+      className="flex items-center justify-center bg-cover bg-center text-white text-center p-20 h-screen"
       style={{
         backgroundImage:
           'url("https://cf.bstatic.com/xdata/images/hotel/max1024x768/283384657.jpg?k=82f12511a23fc911e79146601860d7ae7b9839f37af39918d1312edd9d98efee&o=&hp=1")',
@@ -114,14 +114,14 @@ const CreateComentPage = () => {
       <div className="absolute inset-0 bg-negro opacity-20 rounded-lg"></div>
 
       {/* Espacio para la imagen del usuario y las estrellas */}
-      <div className="relative flex flex-col text-gris bg-none justify-center -ml-16 my-12">
-        <div className="flex flex-col gap-4 p-6 justify-center items-center">
+      <div className="relative flex flex-col text-gris bg-none items-cener justify-center lg:w-2/3">
           <a
             href="/"
-            className="text-left -ml-[600px] block font-inter text-base antialiased font-bold text-naranja text-inter hover:scale-105 w-1/6"
+            className="mr-auto block font-inter text-base antialiased font-bold text-naranja text-inter hover:scale-105 mb-8 pl-4 lg:pl-0"
           >
             🡰 Volver
           </a>
+        <div className="flex flex-col gap-4 p-6 justify-center items-center">
 
           <div className="flex flex-col">
             <div>
