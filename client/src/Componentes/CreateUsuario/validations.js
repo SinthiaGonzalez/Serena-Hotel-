@@ -16,6 +16,10 @@ const validation = (userData) => {
     if (!/^[\d+-]*$/.test(userData.telefono)) {
         errors.telefono = "Solo se pueden utilizar numeros y un simbolo "+" o un "-"";
     }
+
+    if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(userData.contraseña)) {
+      errors.contraseña="La contraseña debe tener al menos una Mayuscula, una miniscula, un digito, un caracter especial y un minimo de 8 caracteres en total"
+    }
     
     if (userData.contraseña!=userData.confirmarContraseña) {
       errors.confirmarContraseña="La contraseña no coincide con este campo"

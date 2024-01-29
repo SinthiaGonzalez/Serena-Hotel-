@@ -227,7 +227,7 @@ console.log("auxilio", nuevaDataHabitacion)
   
 
   return (
-    <div className="bg-verde p-8 rounded-lg mx-2 xl:mx-20 my-16">
+    <div className="bg-verde p-8 rounded-lg mx-4 my-16">
       <div className="flex flex-col xl:flex-row xl:justify-between">
         <h1 className="text-4xl font-bold mb-12 xl:mb-28 text-center xl:text-left">Editar Habitación</h1>
 

@@ -121,7 +121,7 @@ console.log("ayudaaaaaaaaaaaa", user)
                   onBlur={() => handleBlur("name")}
                 />
               </div>
-              <p className="my-4 text-base text-center text-naranja">{ errors.name}</p>
+              <p className="my-4 text-base text-center text-naranja">{errors.name}</p>
 
               <div className="flex flex-row h-11 bg-verde  relative rounded-lg mb-4">
                 <div className="items-center">
@@ -141,7 +141,7 @@ console.log("ayudaaaaaaaaaaaa", user)
                   onBlur={() => handleBlur("apellido")}
                 />
               </div>
-              <p className="my-4 text-base text-center text-naranja">{ errors.apellido}</p>
+              <p className="my-4 text-base text-center text-naranja">{errors.apellido}</p>
 
               <div className="flex flex-row h-11 bg-verde  relative rounded-lg mb-4">
                 <div className="items-center">
@@ -161,7 +161,7 @@ console.log("ayudaaaaaaaaaaaa", user)
                   onBlur={() => handleBlur("email")}
                 />
               </div>
-              <p className="my-4 text-base text-center text-naranja">{ errors.email}</p>
+              <p className="my-4 text-base text-center text-naranja">{errors.email}</p>
 
               <div className="flex flex-row h-11 bg-verde  relative rounded-lg mb-4">
                 <div className="items-center">
@@ -181,7 +181,7 @@ console.log("ayudaaaaaaaaaaaa", user)
                   onBlur={() => handleBlur("telefono")}
                 />
               </div>
-              <p className="my-4 text-base text-center text-naranja">{ errors.telefono}</p>
+              <p className="my-4 text-base text-center text-naranja">{errors.telefono}</p>
 
               <div className="flex flex-row h-11 bg-verde  relative rounded-lg mb-4">
                 <div className="items-center">
@@ -208,7 +208,7 @@ console.log("ayudaaaaaaaaaaaa", user)
                 {showPassword ? "visibility_off" : "visibility"}
               </button>
               </div>
-              <p className="my-4 text-base text-center text-naranja">{ errors.contraseña}</p>
+              <p className="my-4 text-base text-center text-naranja">{errors.contraseña}</p>
 
               <div className="flex flex-row h-11 bg-verde  relative rounded-lg mb-4">
                 <div className="items-center">
@@ -235,7 +235,7 @@ console.log("ayudaaaaaaaaaaaa", user)
                 {showConfirmPassword ? "visibility_off" : "visibility"}
               </button>
               </div>
-              <p className="my-4 text-base text-center text-naranja">{ errors.confirmarContraseña}</p>
+              <p className="my-4 text-base text-center text-naranja">{errors.confirmarContraseña}</p>
             </label>
           </div>
           <button

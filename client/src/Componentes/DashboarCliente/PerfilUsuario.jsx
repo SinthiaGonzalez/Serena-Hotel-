@@ -110,6 +110,7 @@ const UpdateUsuario = () => {
   console.log(" a ver", usuarioData);
 
   const handleDefaultValues = () => {
+    console.log("aca", usuarioData);
     setUser({
       id: userId,
       name: usuarioData.name,
@@ -217,7 +218,7 @@ const UpdateUsuario = () => {
                   onBlur={handleBlur}
                 />
               </div>
-                 <p className="my-4 text-base text-center text-naranja">{ errors.name}</p>
+                 <p className="my-4 text-base text-center text-naranja">{errors.name}</p>
 
               <div className="flex flex-row h-11 bg-gris  relative rounded-lg mb-4">
                 <div className="items-center">
@@ -237,7 +238,7 @@ const UpdateUsuario = () => {
                   onBlur={handleBlur}
                 />
               </div>
-                 <p className="my-4 text-base text-center text-naranja">{ errors.apellido}</p>
+                 <p className="my-4 text-base text-center text-naranja">{errors.apellido}</p>
 
               <div className="flex flex-row h-11 bg-gris  relative rounded-lg mb-4">
                 <div className="items-center">
@@ -257,7 +258,7 @@ const UpdateUsuario = () => {
                   onBlur={handleBlur}
                 />
               </div>
-                 <p className="my-4 text-base text-center text-naranja">{ errors.email}</p>
+                 <p className="my-4 text-base text-center text-naranja">{errors.email}</p>
 
               <div className="flex flex-row h-11 bg-gris  relative rounded-lg mb-4">
                 <div className="items-center">
@@ -277,7 +278,7 @@ const UpdateUsuario = () => {
                   onBlur={handleBlur}
                 />
               </div>
-                 <p className="my-4 text-base text-center text-naranja">{ errors.telefono}</p>
+                 <p className="my-4 text-base text-center text-naranja">{errors.telefono}</p>
 
               <div className="flex flex-row h-11 bg-gris  relative rounded-lg mb-4">
                 <div className="items-center">
@@ -304,7 +305,7 @@ const UpdateUsuario = () => {
                 {showPassword ? "visibility_off" : "visibility"}
               </button>
               </div>
-              <p className="my-4 text-base text-center text-naranja">{ errors.contraseña}</p>
+              <p className="my-4 text-base text-center text-naranja">{errors.contraseña}</p>
 
               <div className="flex flex-row h-11 bg-gris  relative rounded-lg mb-4">
                 <div className="items-center">
@@ -330,7 +331,7 @@ const UpdateUsuario = () => {
                 {showConfirmPassword ? "visibility_off" : "visibility"}
               </button>
               </div>
-              <p className="my-4 text-base text-center text-naranja">{ errors.confirmarContraseña}</p>
+              <p className="my-4 text-base text-center text-naranja">{errors.confirmarContraseña}</p>
             </label>
           </div>
           <button

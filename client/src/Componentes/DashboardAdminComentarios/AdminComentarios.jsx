@@ -12,6 +12,7 @@ import AdminCardComentarios from "./AdminCardComentarios";
 import NavBarAdmin from "../NavBarAdmin/NavBarAdmin";
 import Paginacion from "../Paginacion/Paginacion";
 import { useVerificarIsAdmin } from "../AutenticadorToken/autenticadorLocalStIsAdmin";
+import Swal from 'sweetalert2'
 
 const AdminComentarios = () => {
   useVerificarIsAdmin()
@@ -37,7 +38,12 @@ const AdminComentarios = () => {
       window.location.href = "/comentar"; // Redirigir a la ruta "/comentar"
     } else {
       // Si no hay un token, mostrar un alert y realizar otras acciones según sea necesario
-      alert("Necesita iniciar Sesion para dejar comentarios en la pagina");
+      Swal.fire({
+        title:"Necesita iniciar Sesion para dejar comentarios en la pagina",
+        icon:"error",
+        confirmButtonColor:"#FB350C",
+        iconColor: "#FB350C"
+      });
       // Puedes realizar otras acciones aquí, como redirigir a otra ruta, mostrar un modal, etc.
     }
   };

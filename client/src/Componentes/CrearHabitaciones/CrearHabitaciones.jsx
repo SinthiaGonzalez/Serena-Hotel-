@@ -86,7 +86,7 @@ const CrearHabitacion = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-
+    console.log("aquiiiiiiiiiiiiiiiiiiiiiii", errors)
     setHabitacionData({
       ...habitacionData,
       [name]: value,
@@ -175,7 +175,7 @@ const CrearHabitacion = () => {
     console.log("aqui2", response);
   };
   return (
-    <div className="bg-verde p-8 rounded-lg mx-2 xl:mx-20 my-16">
+    <div className="bg-verde p-8 rounded-lg mx-4 my-16">
       <div className="flex flex-col">
         <h1 className="text-4xl font-bold mb-12 xl:mb-28 text-center xl:text-left">Crear Habitación</h1>
         <form
@@ -314,7 +314,6 @@ const CrearHabitacion = () => {
                         min="0"
                         name="m2"
                         placeholder="m²"
-                        defaultValue={habitacionData.servicios[3].descripcion.substring(0, habitacionData.servicios[3].descripcion.length - 3)}
                       />
                     }
                   </p>
@@ -369,7 +368,6 @@ const CrearHabitacion = () => {
             <button
               className="w-full mt-2 mb-4 select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-blanco transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
               type="submit"
-              disabled={isSubmitDisabled()}
             >
               Crear
             </button>
