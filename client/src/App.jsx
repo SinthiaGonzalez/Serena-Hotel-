@@ -1,6 +1,5 @@
 import "./App.css";
 import LandingPage from "./Componentes/LandingPage/LandingPage.jsx";
-import ComentPage from "./Componentes/comentpage/comentpage.jsx";
 import CreateComentPage from "./Componentes/CreateComentario/CreateComentario.jsx";
 import Error404 from "./Componentes/Error 404/Error404.jsx";
 import { Route, Routes } from "react-router-dom";
@@ -28,8 +27,8 @@ import RecuperarUsuarioEliminado from "./Componentes/RecuperarUsuarioEliminado/R
 // Esta linea de codigo hace que por default todos los requerimientos en axios se hagan a esta ruta en el back
 // Luego nos va a servir para hacer el Deploy del front
 
-// axios.defaults.baseURL = "http://localhost:3001/"; // comentarlo cuando lo suba haga el marge con
-axios.defaults.baseURL = "https://serenahotel.up.railway.app/";
+axios.defaults.baseURL = "http://localhost:3001/"; // comentarlo cuando lo suba haga el marge con
+//axios.defaults.baseURL = "https://serenahotel.up.railway.app/";
 
 const App = () => {
   return (
@@ -45,7 +44,6 @@ const App = () => {
 
         <Route path="/acercadeserena" element={<AcercaDeSerena />} />
         <Route path="/contactenos" element={<Contactenos />} />
-        <Route path="/comentarios" element={<ComentPage />} />
 
         {/* Rutas de Logeo y Registrarse */}
         <Route path="/logearse" element={<LoginCliente />} />

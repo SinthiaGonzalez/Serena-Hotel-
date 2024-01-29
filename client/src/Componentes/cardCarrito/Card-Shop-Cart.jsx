@@ -2,12 +2,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 import { useDispatch } from "react-redux";
 import { eliminarDelCarrito } from "../../redux/Actions/actions";
-
 const ShoppingCartCard1 = ({ imagenes, nombre, precio, id }) => {
-  const dispatch = useDispatch();
+const dispatch = useDispatch();
 const fecha_entrada_str = localStorage.getItem("fecha_entrada");
 const fecha_salida_str = localStorage.getItem("fecha_salida");
-
 // Convierte las cadenas a objetos Date
 const fecha_entrada = new Date(fecha_entrada_str);
 const fecha_salida = new Date(fecha_salida_str);
@@ -20,7 +18,7 @@ const estadia = estadiaEnMilisegundos / (24 * 60 * 60 * 1000);
 
 if(!estadia){
   dispatch(eliminarDelCarrito(id));
-}
+} 
   const eliminarHabitacion = () => {
     dispatch(eliminarDelCarrito(id));
   };

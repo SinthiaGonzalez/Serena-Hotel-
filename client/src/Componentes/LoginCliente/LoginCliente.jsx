@@ -8,6 +8,7 @@ import {
 } from "../../redux/Actions/actions";
 import { useNavigate } from "react-router-dom";
 import { useVerificarToken } from "../AutenticadorToken/autenticadorToken";
+import Swal from "sweetalert2";
 
 const LoginCliente = () => {
   const dispatch = useDispatch();
@@ -22,13 +23,12 @@ const LoginCliente = () => {
     setContraseña(event.target.value);
   };
 
-  const handleVerificarUsuario = () => {
-    dispatch(verificacionLogeoUsuarioAction({ email, contraseña }));
+  const handleVerificarUsuario = async () => {
+    await dispatch(verificacionLogeoUsuarioAction({ email, contraseña }));
     let estado = localStorage.getItem("estado"); 
     //alert (estado)
-    setTimeout(function(){
       estado = localStorage.getItem("estado"); 
-      alert("settime - estado" +estado);
+  
       if(estado==='"activo"') {
         //alert("linea 31 activo")
         const isAdmin = localStorage.getItem("isAdmin"); 
@@ -36,14 +36,17 @@ const LoginCliente = () => {
         if(isAdmin === "true") navigate("/admin-usuarios")
         if(isAdmin === "false") navigate("/")
       }else if(estado === '"eliminar"'){
-        alert("Si desea recuperar su Cuenta, presione ACEPTAR.")
-        navigate("/contactenos") // CAMBIAR X LA NUEVA VIEW PARA RECUPERAR CTA
+       
+        Swal.fire("Su Cuenta no se encuentra activa, lo redireccionaremos para que pueda recuperarla.", "", "warning");
+        /* LINEA PARA Q SI se CAMBIA A OTRA RUTA NO ESTË LOGUEADO */
+        localStorage.removeItem("token");     
+        navigate("/recuperar-usuario") 
       }else if(estado === '"inactivo"'){
-        alert("Su Usuario se encuentra inactivo, por favor comuníquese con: serenahotel25@gmail.com. Muchas gracias.")
-      } 
-      }, 4000);
-    //const estado = localStorage.getItem("estado");     
-  };
+        Swal.fire("Su Usuario se encuentra inactivo, por favor comuníquese con serenahotel25@gmail.com ¡Muchas gracias!", "", "warning")
+       /* LINEA PARA Q SI se CAMBIA A OTRA RUTA NO ESTË LOGUEADO */
+        localStorage.removeItem("token");      
+      }  
+   };
 
   useVerificarToken();
 

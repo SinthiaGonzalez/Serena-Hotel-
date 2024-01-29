@@ -48,8 +48,8 @@ const AdminUsuariosTabla = () => {
         // }}
       >
         <div className="flex flex-col items-center justify-center mb-4">
-          <div className="border-2 border-verde bg-blanco  rounded-3xl flex w-3/4 p-6 m-10">
-            <div className="flex-1 border-r-2 border-verde flex items-center justify-center">
+          <div className="border-2 border-verde bg-blanco  rounded-3xl flex flex-col md:flex-row w-3/4 p-6 m-10">
+            <div className="flex-1 md:border-r-2 border-verde flex items-center justify-center">
               <span className="material-symbols-outlined bg-black rounded-full h-16 w-16 flex items-center justify-center text-white mr-4">
                 group
               </span>
@@ -64,12 +64,12 @@ const AdminUsuariosTabla = () => {
               </div>
             </div>
 
-            <div className="flex-1 border-r-2 border-verde flex items-center justify-center mr-4">
+            <div className="flex-1 md:border-r-2 border-verde flex items-center justify-center mr-4">
               <span className="material-symbols-outlined bg-black rounded-full h-16 w-16 flex items-center justify-center text-white mr-4">
                 Person_check
               </span>
 
-              <div>
+              <div className="py-4 lg:py-0">
                 <p className="text-verde text-center font-bold text-2xl">
                   Total activos
                 </p>
@@ -95,7 +95,7 @@ const AdminUsuariosTabla = () => {
           </div>
           <div className="bg-verde p-6 rounded-md">
             <h2 className="text-center text-2xl font-bold my-2">Usuarios</h2>
-            <div className="p-5 rounded-md shadow-md mb-4 overflow-x-auto">
+            <div className="p-5 rounded-md shadow-md mb-4 overflow-x-auto w-[200px] md:w-[600px] lg:w-[1000px] xl:w-full">
               <table className="w-full">
                 <thead className="bg-white bg-opacity-15 border-b border-white border-opacity-25">
                   <tr>
