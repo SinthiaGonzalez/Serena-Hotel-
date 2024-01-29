@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { crearHabitacion } from "../../redux/Actions/actions";
 import axios from "axios";
 import { useVerificarIsAdmin } from "../AutenticadorToken/autenticadorLocalStIsAdmin.jsx";
+import Swal from "sweetalert2";
 const CrearHabitacion = () => {
   useVerificarIsAdmin()
   const dispatch = useDispatch();
@@ -52,9 +53,11 @@ const CrearHabitacion = () => {
 
   const isSubmitDisabled = () => {
     // Verifica si hay algún campo obligatorio sin completar
-    return Object.values(habitacionData).some(
+    if ( errors.nombre!="" || errors.descripcion!="" || errors.servicios!="") return true;
+    else {
+      return Object.values(habitacionData).some(
       (value) => value === "" || (Array.isArray(value) && value.length === 0)
-    );
+    )}
   };
 
   const handleChangeServicio = (index, event) => {
@@ -83,7 +86,7 @@ const CrearHabitacion = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-
+    console.log("aquiiiiiiiiiiiiiiiiiiiiiii", errors)
     setHabitacionData({
       ...habitacionData,
       [name]: value,
@@ -131,7 +134,7 @@ const CrearHabitacion = () => {
       dispatch(crearHabitacion(habitacionData));
       resetTouchedFields();
     } else {
-      alert("Validation errors:", errors);
+      Swal.fire("Error de validacion", "", "error");
     }
   };
 
@@ -172,7 +175,7 @@ const CrearHabitacion = () => {
     console.log("aqui2", response);
   };
   return (
-    <div className="bg-verde p-8 rounded-lg mx-2 xl:mx-20 my-16">
+    <div className="bg-verde p-8 rounded-lg mx-4 my-16">
       <div className="flex flex-col">
         <h1 className="text-4xl font-bold mb-12 xl:mb-28 text-center xl:text-left">Crear Habitación</h1>
         <form
@@ -219,6 +222,7 @@ const CrearHabitacion = () => {
                 placeholder="Nombre"
                 onChange={handleChange}
                 onBlur={() => handleBlur("nombre")}
+                value={habitacionData.nombre}
               />
               <p className="my-4 text-base text-center">{touchedFields.nombre && errors.nombre}</p>
             </div>
@@ -364,7 +368,6 @@ const CrearHabitacion = () => {
             <button
               className="w-full mt-2 mb-4 select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-blanco transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
               type="submit"
-              disabled={isSubmitDisabled()}
             >
               Crear
             </button>

@@ -14,7 +14,7 @@ const updateHabitacion = async (
 
     let habitacion = await Habitaciones.findOne({
       where: {
-        nombre: nombreId,
+        id: nombreId,
       }
     });
     console.log("este", habitacion);
@@ -24,24 +24,24 @@ const updateHabitacion = async (
     }
     
     if (nombre !== "") {
-      user.nombre = nombre;
+      habitacion.nombre = nombre;
     }
     if (precio !== "") {
-      user.precio = precio;
+      habitacion.precio = precio;
     }
     if (imagenes !== "") {
-      user.imagenes = imagenes;
+      habitacion.imagenes = imagenes;
     }
     if (servicios !== "") {
-      user.servicios = servicios;
+      habitacion.servicios = servicios;
     }
   
     if (descripcion !== "") {
-      user.descripcion = descripcion;
+      habitacion.descripcion = descripcion;
     }
 
     if (estado !== "") {
-      user.estado = estado;
+      habitacion.estado = estado;
     }
     await habitacion.save();
 

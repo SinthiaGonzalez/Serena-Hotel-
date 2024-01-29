@@ -22,7 +22,12 @@ const CardShopHabitaciones = ({
 
     const token = localStorage.getItem("token");
     if (!token) {
-      alert("Necesita iniciar Sesion para añadir productos al carrito");
+      Swal.fire({
+        title:"Necesita iniciar sesion para añadir al carrito", 
+        icon:"info",
+        confirmButtonColor:"#FB350C",
+        iconColor: "#FB350C"
+      });
     } else {
       notificacion();
     }
@@ -43,18 +48,20 @@ const CardShopHabitaciones = ({
   const notificacion = () => {
     const Toast = Swal.mixin({
       toast: true,
-      position: "top-end",
+      position: "bottom-end",
       showConfirmButton: false,
-      timer: 3000,
+      timer: 2000,
       timerProgressBar: true,
+      background: "#1D2828",
+      color: "#fff",
       didOpen: (toast) => {
         toast.onmouseenter = Swal.stopTimer;
         toast.onmouseleave = Swal.resumeTimer;
-      },
+      }
     });
      Toast.fire({
       icon: "success",
-      title: "Agregado al carrito",
+      title: "Agregado al carrito"
     });
   };
 
