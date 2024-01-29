@@ -8,7 +8,7 @@ const CardsShopHabitaciones = ({ habitacionesShop }) => {
     dispatch(addToCart(id));
   };
   return (
-    <div className="flex flex-col gap-4 mx-8 w-full">
+    <div className="flex flex-col gap-4 2xl:mx-8 2xl:w-full py-8 2xl:py-0 ">
       {habitacionesShop.map(({ id, nombre, imagenes, precio, servicios }) => {
         return (
           <CardShopHabitaciones

@@ -30,8 +30,7 @@ export default function LoginTemplate() {
     let estado = localStorage.getItem("estado"); 
     //alert (estado)
       estado = localStorage.getItem("estado"); 
-      //alert("settime - estado" +estado);
-      if(estado==='"activo"') {
+        if(estado==='"activo"') {
         //alert("linea 31 activo")
         const isAdmin = localStorage.getItem("isAdmin"); 
         //alert("verificacion 33"+isAdmin+ "estado" + estado)
