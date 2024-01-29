@@ -12,7 +12,7 @@ const RecuperarContraseña = async (req, res) => {
 
   try {
     if (!correo) {
-        return res.status(400).json({ error: "Correo no proporcionado" });
+        return res.status(400).json({ error: "Correo no proporcionado!!" });
       }
 
     const usuario = await Usuario.findOne({ where: { email: correo } });

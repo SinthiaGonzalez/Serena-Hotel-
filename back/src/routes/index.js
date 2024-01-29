@@ -69,7 +69,8 @@ const {
 
 const { deleteCarrito } = require("../Controladores/carritoControlador");
 const  {respuestaConfirmacionPago}  = require("../Controladores/RespuestaMP");
-const { getUsuarioByIdHandler } = require("../handlers/HandlersUsuarios/GetHandlerUsuarios")
+const { getUsuarioByIdHandler } = require("../handlers/HandlersUsuarios/GetHandlerUsuarios");
+const { RecuperarUsuario } = require("../handlers/HandlerMailer/RecuperarContraseña/RecuperarUsuario");
 
 const router = express.Router(); // importamos el metodo Router de express para poder crear rutas
 router.post("/login", loginCreateToken);
@@ -88,6 +89,7 @@ router.post("/usuario", CreateUsuario);
 router.get("/usuarios", getHandlerUsuarios);
 router.put("/login", LoginUsuario);
 router.put("/recuperarContrasena", RecuperarContraseña);
+router.put("/recuperarUsuario", RecuperarUsuario);
 
 router.post("/desarrollador", HandlerPostDesarrollador);
 router.delete("/desarrollador/:id", EliminarDesarrolladorHandler);
@@ -102,9 +104,9 @@ router.get("/", (req, res) => {
 });
 
 router.post("/mercadopago/create_preference", CreatePreferenceMP);
-router.get("/success", (req, res) => res.send("success"));
-router.get("/failure", (req, res) => res.send("failure"));
-router.get("/pending", (req, res) => res.send("pending"));
+router.get("/success", (req, res) => res.redirect("https://serena-hotel.vercel.app/pago-exitoso"));
+router.get("/failure", (req, res) => res.redirect("https://serena-hotel.vercel.app/pago-rechazado"));
+router.get("/pending", (req, res) => res.redirect("https://serena-hotel.vercel.app/pago-pendiente"));
 router.post("/confirmaciondelpago",respuestaConfirmacionPago);
 
 

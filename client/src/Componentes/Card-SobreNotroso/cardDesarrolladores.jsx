@@ -10,7 +10,7 @@ const CardDesarrolladores = ({
   return (
     <div className="mt-8" id={id}>
       <div className="text-negro">
-        <div className="mx-12 my-4 bg-whithe min-w-64 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col items-center">
+        <div className="my-4 mx-6 md:mx-8 lg:mx-10 bg-whithe min-w-60 max-w-80 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col items-center">
           <div className=" mb-4  w-full">
             <div className="w-full">
               <img className="w-full max-h-20 rounded-sm" src={imagenFondo} />

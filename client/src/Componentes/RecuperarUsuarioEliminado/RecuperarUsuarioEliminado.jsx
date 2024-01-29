@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { recuperarContraseñaAction } from "../../redux/Actions/actions";
+import { recuperarUsuarioAction } from "../../redux/Actions/actions";
 
-const RecuperarContraseña = () => {
+const RecuperarUsuarioEliminado = () => {
   const dispatch = useDispatch();
   const [correo, setCorreo] = useState("");
 
@@ -10,8 +10,8 @@ const RecuperarContraseña = () => {
     setCorreo(event.target.value);
   };
 
-  const handleRecuperarContraseña = () => {
-    dispatch(recuperarContraseñaAction(correo));
+  const handleRecuperarUsuario = () => {
+    dispatch(recuperarUsuarioAction(correo));
   };
 
   return (
@@ -31,10 +31,10 @@ const RecuperarContraseña = () => {
             🡰 Volver
           </a>
           <p className="flex font-inter text-3xl antialiased leading-normal text-center font-bold text-gris justify-center mb-10">
-            Recuperar Contraseña
+            Recuperar Cuenta
           </p>
           <p className="font-inter mb-4">
-            Vamos a enviarte un email con tu nueva clave.
+            Vamos a enviarte un email con tu nueva clave, para que recuperes tu cuenta!
           </p>
 
           <div className="flex flex-row lg:w-2/3 bg-verde lg:ml-[18%] relative rounded-lg mb-12">
@@ -63,15 +63,15 @@ const RecuperarContraseña = () => {
 
         <div className="p-6 pt-2">
           <button
-            onClick={handleRecuperarContraseña}
+            onClick={handleRecuperarUsuario}
             className="md::w-2/4 mb-4 select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-blanco transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
             type="button"
           >
-            RECUPERAR CONTRASEÑA
+            RECUPERAR Usuario
           </button>
         </div>
       </div>
     </div>
   );
 };
-export default RecuperarContraseña;
+export default RecuperarUsuarioEliminado;

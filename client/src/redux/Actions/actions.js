@@ -80,6 +80,7 @@ export function postComent(state) {
     }
   };
 }
+}
 export function postUsuario(state) {
   return async function (dispatch) {
     try {
@@ -109,21 +110,48 @@ export function postUsuarioGoogle(data) {
       const response = await axios.post("/usuario", data);
       if (response.status === 200 || response.status === 201) {
         const response2 = await axios.post("/login", data);
-
-        const { token, userId, isAdmin, imagen, name } = response2.data;
+        const { token, userId, isAdmin, imagen, name, estado } = response2.data;
         localStorage.setItem("name", JSON.stringify(name));
         localStorage.setItem("token", JSON.stringify(token));
         localStorage.setItem("userId", JSON.stringify(userId));
         localStorage.setItem("isAdmin", JSON.stringify(isAdmin));
         localStorage.setItem("imagen", JSON.stringify(imagen));
-        console.log("Respuesta del servidor con google:", response2.data);
+        localStorage.setItem("estado", JSON.stringify(estado));
+        console.log("Respuesta del servidor con google XX:", response2.data);    
+        console.log("Respuesta del servidor con google response.data.isAdmin:", response2.data.isAdmin);      
         dispatch({
           type: "POST_USUARIO_GOOGLE",
-          payload: response2.data,
+          payload: response2.data,       
         });
       }
     } catch (error) {
       console.error("Error al crear o actualizar el usuario:", error);
+    }
+  };
+}
+export function verificacionLogeoUsuarioAction(infoLogeo) {
+  console.log(infoLogeo);
+
+  return async function () {
+    try {
+      const response = await axios.post("/login", infoLogeo);
+      const { token, userId, isAdmin, imagen, name, estado } = response.data;
+      localStorage.setItem("token", JSON.stringify(token));
+      localStorage.setItem("userId", JSON.stringify(userId));
+      localStorage.setItem("name", JSON.stringify(name));
+      localStorage.setItem("isAdmin", JSON.stringify(isAdmin));
+      localStorage.setItem("imagen", JSON.stringify(imagen));
+      localStorage.setItem("estado", JSON.stringify(estado));
+      console.log(response.data)
+      dispatch({
+        type: "POST_USUARIO_NOGOOGLE",
+        payload: response.data,
+      });
+
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        Swal.fire(error.message, "Usuario o contraseña incorrectos", "error");
+      }
     }
   };
 }
@@ -214,7 +242,7 @@ export function enviarConsulta(formData) {
 export function envioNotificion(formData) {
   return async function (dispatch) {
     try {
-      const response = await axios.post("/contactenos", formData);
+      const response = await axios.post("/notificaciones", formData);
       console.log("Respuesta del servidor:", response.data);
     } catch (error) {
       console.error("Error al enviar la consulta:", error);
@@ -613,20 +641,11 @@ export function recuperarContraseñaAction(correo) {
     }
   };
 }
-
-export function verificacionLogeoUsuarioAction(infoLogeo) {
-  console.log(infoLogeo);
+export function recuperarUsuarioAction(correo) {
   return async function () {
     try {
-      const response = await axios.post("/login", infoLogeo);
-      const { token, userId, isAdmin, imagen, name } = response.data;
-      localStorage.setItem("token", JSON.stringify(token));
-      localStorage.setItem("userId", JSON.stringify(userId));
-      localStorage.setItem("name", JSON.stringify(name));
-      localStorage.setItem("isAdmin", JSON.stringify(isAdmin));
-      localStorage.setItem("imagen", JSON.stringify(imagen));
-
-      console.log("Respuesta del servidor manual:", response.data);
+      const response = await axios.put("/recuperarUsuario", { correo });
+      console.log("Respuesta del servidor:", response.data);
     } catch (error) {
       if (error.response && error.response.status === 400) {
          Swal.fire({
@@ -697,7 +716,7 @@ export function verificarToken() {
   return async function (dispatch) {
     try {
       const token = localStorage.getItem("token");
-      console.log("token", token);
+
       if (token) {
         dispatch({
           type: "VERIFICARTOKEN",

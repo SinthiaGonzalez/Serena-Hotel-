@@ -19,7 +19,8 @@ const initialState = {
   token: false,
   usuarioById: [],
   habitacionEliminada: [],
-};
+  fechas: [],
+}
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -165,6 +166,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         usuarios: action.payload,
+        token: action.payload,   
       };
     
       case "GET_USUARIO_BY_ID":
@@ -182,6 +184,25 @@ const reducer = (state = initialState, action) => {
             ...state,
             habitacionEliminada: action.payload,
           }
+          case "POST_USUARIO_NOGOOGLE":    
+          return {
+            ...state,
+            token: action.payload,      
+          };
+        case "UPDATE_DATES":
+          const checkinDate = action.payload.checkinDate;
+          const checkoutDate = action.payload.checkoutDate;
+          const diferenciaEnMilisegundos =
+            new Date(checkoutDate) - new Date(checkinDate);
+          const diferenciaEnDias = diferenciaEnMilisegundos / (1000 * 60 * 60 * 24);
+          return {
+            ...state,
+            fechas: {
+              checkinDate: action.payload.checkinDate,
+              checkoutDate: action.payload.checkoutDate,
+              estadia: diferenciaEnDias,
+            },
+          };
     default:
       return state;
   }

@@ -53,62 +53,67 @@ export const PerfilUsuario2 = () => {
 
   return (
     <div
-      className="flex items-center justify-center bg-cover bg-center text-white text-center p-8 h-screen"
-      style={{
-        backgroundImage:
-          'url("https://i.postimg.cc/3xxjwxft/selena-hotel-1.png")',
-      }}
+      className="flex items-center justify-center bg-cover bg-center text-white text-center p-8 pt-20"
+      // style={{
+      //   backgroundImage:
+      //     'url("https://i.postimg.cc/3xxjwxft/selena-hotel-1.png")',
+      // }}
     >
-    <div className="flex flex-col items-center justify-center">
-      <div className="bg-verde p-6 rounded-md">
-        <h2 className="text-center text-2xl font-bold my-2">
-          Historial de Reservas
-        </h2>
-        <div className="p-5 rounded-md shadow-md mb-4 overflow-x-auto">
-          <table className="w-full">
-            <thead className="bg-white bg-opacity-15 border-b border-white border-opacity-25">
-              <tr>
-                <th className="py-5 px-12 tex-center ">Id de Reserva</th>
-                <th className="py-5 px-12 text-center">Check-In</th>
-                <th className="py-5 px-12 text-center">Check-Out</th>
-                <th className="py-5 px-12 text-center">Habitación</th>
-                <th className="py-5 px-12 text-center">Total ($)</th>
-              </tr>
-            </thead>
-            <tbody>
-              {ReservasUsuariosPaginadas?.map((linea) => (
-                <tr className="border-b" key={linea.id_reserva}>
-                  <td className="py-6 px-12 text-center">{linea.id_reserva}</td>
-                  <td className="py-6 px-12 text-center">
-                    {linea.fecha_entrada}
-                  </td>
-                  <td className="py-6 px-12 text-center">
-                    {linea.fecha_salida}
-                  </td>
-                  <td className="py-6 px-12 text-center">
-                    {linea.nombre_habitacion}
-                  </td>
-                  <td className="py-6 px-12 text-center">
-                    {linea.precioTotalReserva}</td>
+      <div className="flex flex-col items-center justify-center">
+        <div className="bg-verde p-6 rounded-md">
+          <h2 className="text-center text-2xl font-bold my-2">
+            Historial de Reservas
+          </h2>
+          <div className="p-5 rounded-md shadow-md mb-4 overflow-x-auto w-[200px] md:w-[600px] lg:w-[1000px] xl:w-full">
+            <table className="w-full">
+              <thead className="bg-white bg-opacity-15 border-b border-white border-opacity-25">
+                <tr>
+                  <th className="py-5 px-12 tex-center ">Id de Reserva</th>
+                  <th className="py-5 px-12 text-center">Check-In</th>
+                  <th className="py-5 px-12 text-center">Check-Out</th>
+                  <th className="py-5 px-12 text-center">Habitación</th>
+                  <th className="py-5 px-12 text-center">Total ($)</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {ReservasUsuariosPaginadas?.map((linea) => (
+                  <tr className="border-b" key={linea.id_reserva}>
+                    <td className="py-6 px-12 text-center">
+                      {linea.id_reserva}
+                    </td>
+                    <td className="py-6 px-12 text-center">
+                      {linea.fecha_entrada}
+                    </td>
+                    <td className="py-6 px-12 text-center">
+                      {linea.fecha_salida}
+                    </td>
+                    <td className="py-6 px-12 text-center">
+                      {linea.nombre_habitacion}
+                    </td>
+                    <td className="py-6 px-12 text-center">
+                      {linea.precioTotalReserva.toLocaleString("es-AR", {
+                        style: "currency",
+                        currency: "ARS",
+                        minimumFractionDigits: 0,
+                      })}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div className="bg-blanco rounded-lg mt-4 text-center items-center justify-center">
+          <Paginacion
+            className="mt-12 w-1/2"
+            active={paginaActual}
+            setActive={handlePaginaChange}
+            totalItems={reservasUsuario.length}
+            itemsPerPage={itemsPerPage}
+          />
         </div>
       </div>
-      <div className="bg-blanco rounded-lg mt-4 text-center items-center justify-center">
-
-      <Paginacion
-        className="mt-12 w-1/2"
-        active={paginaActual}
-        setActive={handlePaginaChange}
-        totalItems={reservasUsuario.length}
-        itemsPerPage={itemsPerPage}
-        />
-        </div>
-    </div>
     </div>
   );
 };
 export default PerfilUsuario2;
-

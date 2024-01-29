@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { updateUsuario, getUsuarioById } from "../../redux/Actions/actions";
+import { updateUsuario, getUsuarioById, cambiarEstadoUsuario } from "../../redux/Actions/actions";
 import validation from "./validation";
+import { useNavigate, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
@@ -13,6 +14,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 const UpdateUsuario = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const userId = localStorage.getItem("userId");
   const isAdmin = localStorage.getItem("isAdmin");
@@ -105,7 +107,7 @@ const UpdateUsuario = () => {
   };
   console.log("este", user);
 
-  console.log(" a ver", usuarioData)
+  console.log(" a ver", usuarioData);
 
   const handleDefaultValues = () => {
     setUser({
@@ -119,7 +121,7 @@ const UpdateUsuario = () => {
       imagen: usuarioData.imagen,
       confirmarContraseña: ""
     });
-  }
+  };
 
   useEffect(() => {
     dispatch(getUsuarioById(userId));
@@ -128,16 +130,28 @@ const UpdateUsuario = () => {
   useEffect(() => {
     handleDefaultValues();
   }, [usuarioData]);
+
+  const handleEstadoChange = () => {
+    dispatch(cambiarEstadoUsuario(userId, "eliminar")),
+      localStorage.removeItem("token");
+    localStorage.removeItem("name");
+    localStorage.removeItem("imagen");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("isAdmin");
+    navigate("/logearse");
+    // idSelect es el id del usuario
+  };
+
   return (
     <div
-      className="flex items-center justify-center bg-cover bg-center text-white text-center p-8 h-screen"
-      style={{
-        backgroundImage:
-          'url("https://i.postimg.cc/3xxjwxft/selena-hotel-1.png")',
-      }}
+      className="flex items-center justify-center bg-cover bg-center text-white text-center p-8"
+      // style={{
+      //   backgroundImage:
+      //     'url("https://i.postimg.cc/3xxjwxft/selena-hotel-1.png")',
+      // }}
     >
-      <div className="flex flex-col items-center justify-center bg-blanco w-2/3 rounded-lg px-4 pt-3 pb-6">
-        <p className="flex mt-4 mb-4 font-inter text-3xl antialiased leading-normal text-center font-bold text-gris justify-center">
+      <div className="flex flex-col items-center justify-center bg-verde w-full lg:w-2/3 h-auto rounded-lg px-4 pt-4 pb-6">
+        <p className="relative flex mt-4 mb-4 font-inter text-3xl antialiased leading-normal text-center font-bold text-blanco justify-center">
           Editar Usuario
         </p>
         <div className="relative">
@@ -163,15 +177,15 @@ const UpdateUsuario = () => {
               onChange={handleImageCloudinary}
               onBlur={handleBlur}
             />
-            <span className="material-symbols-outlined bg-verde rounded-full p-2 mb-4 absolute z-10 -mt-8 ml-8">
+            <span className="material-symbols-outlined bg-gris rounded-full p-2 mb-4 absolute z-10 -mt-8 ml-8">
               Edit
             </span>
           </label>
         </div>
-        <form onSubmit={handleSubmit} className="w-2/3">
+        <form onSubmit={handleSubmit} className="px-4 lg:px-0 md:w-2/3">
           <div className="mb-4">
             <label className="block text-gray-200 text-sm font-bold mb-2">
-              <div className="flex flex-row h-11 bg-verde  relative rounded-lg mb-4">
+              <div className="flex flex-row h-11 bg-gris  relative rounded-lg mb-4">
                 <div className="items-center">
                   <FontAwesomeIcon
                     icon={faUser}
@@ -180,10 +194,10 @@ const UpdateUsuario = () => {
                 </div>
 
                 <input
-                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
+                  className="w-full h-11 font-inter text-center pr-12 lg:pr-24 text-base font-normal text-white bg-gris rounded-lg"
                   type="text"
                   name="name"
-                  placeholder="Nombre" 
+                  placeholder="Nombre"
                   value={user.name}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -191,7 +205,7 @@ const UpdateUsuario = () => {
               </div>
                  <p className="my-4 text-base text-center text-naranja">{ errors.name}</p>
 
-              <div className="flex flex-row h-11 bg-verde  relative rounded-lg mb-4">
+              <div className="flex flex-row h-11 bg-gris  relative rounded-lg mb-4">
                 <div className="items-center">
                   <FontAwesomeIcon
                     icon={faUser}
@@ -200,7 +214,7 @@ const UpdateUsuario = () => {
                 </div>
 
                 <input
-                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
+                  className="w-full h-11 font-inter text-center pr-12 lg:pr-24 text-base font-normal text-white bg-gris rounded-lg"
                   type="text"
                   name="apellido"
                   placeholder="apellido"
@@ -211,7 +225,7 @@ const UpdateUsuario = () => {
               </div>
                  <p className="my-4 text-base text-center text-naranja">{ errors.apellido}</p>
 
-              <div className="flex flex-row h-11 bg-verde  relative rounded-lg mb-4">
+              <div className="flex flex-row h-11 bg-gris  relative rounded-lg mb-4">
                 <div className="items-center">
                   <FontAwesomeIcon
                     icon={faEnvelope}
@@ -220,7 +234,7 @@ const UpdateUsuario = () => {
                 </div>
 
                 <input
-                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
+                  className="w-full h-11 font-inter text-center pr-12 lg:pr-24 text-base font-normal text-white bg-gris rounded-lg"
                   type="email"
                   name="email"
                   placeholder="email"
@@ -231,7 +245,7 @@ const UpdateUsuario = () => {
               </div>
                  <p className="my-4 text-base text-center text-naranja">{ errors.email}</p>
 
-              <div className="flex flex-row h-11 bg-verde  relative rounded-lg mb-4">
+              <div className="flex flex-row h-11 bg-gris  relative rounded-lg mb-4">
                 <div className="items-center">
                   <FontAwesomeIcon
                     icon={faPhone}
@@ -240,7 +254,7 @@ const UpdateUsuario = () => {
                 </div>
 
                 <input
-                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
+                  className="w-full h-11 font-inter text-center pr-12 lg:pr-24 text-base font-normal text-white bg-gris rounded-lg"
                   type="text"
                   name="telefono"
                   placeholder="Telefono"
@@ -251,7 +265,7 @@ const UpdateUsuario = () => {
               </div>
                  <p className="my-4 text-base text-center text-naranja">{ errors.telefono}</p>
 
-              <div className="flex flex-row h-11 bg-verde  relative rounded-lg mb-4">
+              <div className="flex flex-row h-11 bg-gris  relative rounded-lg mb-4">
                 <div className="items-center">
                   <FontAwesomeIcon
                     icon={faLock}
@@ -260,7 +274,7 @@ const UpdateUsuario = () => {
                 </div>
 
                 <input
-                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
+                  className="w-full h-11 font-inter text-center pr-12 lg:pr-24 text-base font-normal text-white bg-gris rounded-lg"
                   type="password"
                   name="contraseña"
                   placeholder="Contraseña"
@@ -270,7 +284,7 @@ const UpdateUsuario = () => {
               </div>
               <p className="my-4 text-base text-center text-naranja">{ errors.contraseña}</p>
 
-              <div className="flex flex-row h-11 bg-verde  relative rounded-lg mb-4">
+              <div className="flex flex-row h-11 bg-gris  relative rounded-lg mb-4">
                 <div className="items-center">
                   <FontAwesomeIcon
                     icon={faLock}
@@ -279,7 +293,7 @@ const UpdateUsuario = () => {
                 </div>
 
                 <input
-                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
+                  className="w-full h-11 font-inter text-center pr-8 lg:pr-24 text-base font-normal text-white bg-gris rounded-lg"
                   type="password"
                   name="confirmarContraseña"
                   placeholder="Confirmar Contraseña"
@@ -291,11 +305,18 @@ const UpdateUsuario = () => {
             </label>
           </div>
           <button
-            className="w-2/4 mb-4 mt-4 select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-blanco transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
+            className="w-2/4 mb-4 mt-4 mx-1 select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-blanco transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
             type="button"
             onClick={handleSubmit}
           >
-            EDITAR USUARIO
+            EDITAR
+          </button>
+          <button
+            className="w-2/4 mb-4 mt-4 select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-blanco transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
+            type="button"
+            onClick={handleEstadoChange}
+          >
+            ELIMINAR
           </button>
         </form>
       </div>

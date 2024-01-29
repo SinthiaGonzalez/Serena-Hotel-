@@ -36,7 +36,7 @@ const CardComent = ({ comentario, onDelete }) => {
 
   return (
     <Card
-      className="w-[500px] h-[200px] bg-cover bg-center relative mb-12"
+      className="max-w-[500px] h-[250px] bg-cover bg-center relative mb-12 mx-2 md:mx-16 lg:mx-4 xl:mx-2  "
       style={{
         backgroundImage:
           'url("https://cf.bstatic.com/xdata/images/hotel/max1024x768/283384657.jpg?k=82f12511a23fc911e79146601860d7ae7b9839f37af39918d1312edd9d98efee&o=&hp=1")',
@@ -69,7 +69,7 @@ const CardComent = ({ comentario, onDelete }) => {
           </div>
         </div>
       </CardHeader>
-      <CardBody className="mb-6 mx-12 p-0">
+      <CardBody className="mb-6 mx-10 p-0">
         <Typography className="text-xs md:text-base text-blanco font-medium font-inter">
           &quot;{comentario.contenido}&quot;
         </Typography>

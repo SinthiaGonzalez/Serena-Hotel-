@@ -3,8 +3,10 @@ import validation from "./validation.js";
 import { useDispatch, useSelector } from "react-redux";
 import { crearHabitacion } from "../../redux/Actions/actions";
 import axios from "axios";
+import { useVerificarIsAdmin } from "../AutenticadorToken/autenticadorLocalStIsAdmin.jsx";
 import Swal from "sweetalert2";
 const CrearHabitacion = () => {
+  useVerificarIsAdmin()
   const dispatch = useDispatch();
   const [errors, setErrors] = useState({});
   const [submitDisabled, setSubmitDisabled] = useState(true);

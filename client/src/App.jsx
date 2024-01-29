@@ -1,6 +1,5 @@
 import "./App.css";
 import LandingPage from "./Componentes/LandingPage/LandingPage.jsx";
-import ComentPage from "./Componentes/comentpage/comentpage.jsx";
 import CreateComentPage from "./Componentes/CreateComentario/CreateComentario.jsx";
 import Error404 from "./Componentes/Error 404/Error404.jsx";
 import { Route, Routes } from "react-router-dom";
@@ -22,13 +21,14 @@ import ResponseMP from "./Componentes/respuestademercadoPago/ResponseMP.jsx";
 import PagoExitoso from "./Componentes/RespuestaMP/Pago_Exitoso.jsx";
 import PagoPendiente from "./Componentes/RespuestaMP/Pago_Pendiente.jsx";
 import PagoRechazado from "./Componentes/RespuestaMP/Pago-Rechazado.jsx";
+import  AdminComentarios from "./Componentes/DashboardAdminComentarios/AdminComentarios.jsx";
+import RecuperarUsuarioEliminado from "./Componentes/RecuperarUsuarioEliminado/RecuperarUsuarioEliminado.jsx";
 import GraficosAdmin from "./Componentes/DashBoarAdmin/DashBoarAdmin.jsx";
-
 // Esta linea de codigo hace que por default todos los requerimientos en axios se hagan a esta ruta en el back
 // Luego nos va a servir para hacer el Deploy del front
 
-axios.defaults.baseURL = "http://localhost:3001/"; // comentarlo cuando lo suba haga el marge
-//axios.defaults.baseURL = "https://serenahotel.up.railway.app/";
+// axios.defaults.baseURL = "http://localhost:3001/"; // comentarlo cuando lo suba haga el marge con
+axios.defaults.baseURL = "https://serenahotel.up.railway.app/";
 
 const App = () => {
   return (
@@ -44,12 +44,12 @@ const App = () => {
 
         <Route path="/acercadeserena" element={<AcercaDeSerena />} />
         <Route path="/contactenos" element={<Contactenos />} />
-        <Route path="/comentarios" element={<ComentPage />} />
 
         {/* Rutas de Logeo y Registrarse */}
         <Route path="/logearse" element={<LoginCliente />} />
         <Route path="/registrarse" element={<CreateUsuario />} />
         <Route path="/recuperar-contraseña" element={<RecuperarContraseña />} />
+        <Route path="/recuperar-usuario" element={<RecuperarUsuarioEliminado />} />
 
         {/* Rutas Dashboard Administrador */}
         <Route path="/admin-reservas" element={<DashBoarAdminReservas />} />
@@ -58,8 +58,9 @@ const App = () => {
           path="/admin-habitaciones"
           element={<DashBoarAdminHabitaciones />}
         />
-         <Route path="/admin-finanzas" element={<GraficosAdmin/>} />
-
+        <Route path="/admin-comentarios" element={<AdminComentarios />} />
+        <Route path="/admin-finanzas" element={<GraficosAdmin/>} />
+        
         {/* Rutas Dashboard Usuario */}
         <Route path="/clienteReservas" element={<DashBoardClienteReservas />} />
         <Route path="/clientePerfil" element={<DashBoardClientePerfil />} />

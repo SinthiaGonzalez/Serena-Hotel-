@@ -1,21 +1,16 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
 import {
   Navbar,
   Collapse,
   Typography,
   Button,
-  Menu,
-  MenuHandler,
-  MenuList,
   MenuItem,
-  Avatar,
   IconButton,
 } from "@material-tailwind/react";
-import { ChevronDownIcon, Bars2Icon } from "@heroicons/react/24/solid";
+import { Bars2Icon } from "@heroicons/react/24/solid";
 import AddShoppingCart from "../cardCarrito/cardAñadirCarrito";
 import { getCarrito, verificarToken } from "../../redux/Actions/actions";
 import ProfileMenu from "./ProfileMenu";
@@ -41,6 +36,15 @@ const navListItems = [
   },
 ];
 
+// const isAdmin = localStorage.getItem("isAdmin"); 
+// console.log("verificacion 31"+isAdmin)
+// if(isAdmin==="true") navListItems.push({
+//   label: "ADMIN DASHBOARD",
+//   href: "/admin-usuarios",
+//   xmlns: "http://www.w3.org/2000/svg",
+//   d: "m",
+// })
+
 function NavList() {
   return (
     <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
@@ -61,16 +65,18 @@ function NavList() {
             <svg xmlns={xmlns} height="16" width="20" viewBox="0 0 640 512">
               <path fill="#ffffff" d={d} />
             </svg>
-            <span className="text-white"> {label}</span>
+            <span className= "text-white"> {label}</span>
+         
           </MenuItem>
         </Typography>
-      ))}
-    </ul>
+        ))}    
+    </ul>   
+           
   );
 }
 
 const NavBarHome = () => {
-  const [isNavOpen, setIsNavOpen] = React.useState(false);
+  const [isNavOpen, setIsNavOpen] = useState(false);
   const toggleIsNavOpen = () => setIsNavOpen((cur) => !cur);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const toggleCart = () => {
@@ -78,29 +84,27 @@ const NavBarHome = () => {
     dispatch(getCarrito());
   };
   const carrito = useSelector((state) => state.carrito);
+  const estadia = JSON.parse(localStorage.getItem("estadia"));
   const subtotal = carrito.reduce(
-    (total, producto) => total + producto.precio,
+    (total, producto) => total + producto.precio * estadia,
     0
   );
 
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.token);
-  React.useEffect(() => {
-    console.log("token 205"+token)   
-  }, []);
- 
-  React.useEffect(() => {   
+  const token = useSelector((state) => state.token); 
+  
+  useEffect(() => {
     window.addEventListener(
       "resize",
       () => window.innerWidth >= 960 && setIsNavOpen(false)
     );
-     
-    console.log("token 213 remontado comp"+token)
+
+    // console.log("token 213 remontado comp" + token);
   }, [token]);
- 
-  React.useEffect(() => {
-     dispatch(verificarToken());
-     console.log("Se desmontó el componente - token 222"+token)
+
+  useEffect(() => {
+    dispatch(verificarToken());
+    // console.log("Se desmontó el componente - token 222" + token);
   }, []);
 
   return (
@@ -155,7 +159,7 @@ const NavBarHome = () => {
               INICIAR SESIÓN
             </a>
           ) : (
-            <ProfileMenu key={token}/>
+            <ProfileMenu key={token} />
           )}
         </div>
       </div>
@@ -163,7 +167,7 @@ const NavBarHome = () => {
       <Collapse open={isNavOpen} className="overflow-scroll">
         <NavList />
       </Collapse>
-      <div className="relative ">
+      <div className="relative">
         {isCartOpen && (
           <div className="flex flex-col justify-between h-[30] w-[350px] absolute top-12 right-0  bg-verde p-6 rounded-md shadow-md">
             <div>
@@ -190,7 +194,13 @@ const NavBarHome = () => {
               </div>
               <div className="flex flex-row justify-between">
                 <p>Sub Total</p>
-                <p>${subtotal}</p>
+                <p>
+                  {subtotal.toLocaleString("es-AR", {
+                    style: "currency",
+                    currency: "ARS",
+                    minimumFractionDigits: 0,
+                  })}
+                </p>
               </div>
               <Link
                 to="/habitaciones"

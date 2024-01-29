@@ -70,7 +70,10 @@ const RenderCardDesarrolladores = () => {
   // ];
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 px-28 bg-white  ml-5 mr-5 md:ml-5 md:mr-5 lg:ml-10 lg:mr-10 xl:ml-28 xl:mr-28">
+    <div className="bg-white px-14
+    sm:grid sm:grid-cols-1 sm:px-10 
+    md:grid md:grid-cols-2 md:mx-5 md:px-8
+    lg:grid lg:grid-cols-3 lg:px-20">
       {developers.map((developer) => (
         <CardDesarrolladores
           key={developer.id}

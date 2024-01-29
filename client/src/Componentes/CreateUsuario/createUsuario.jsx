@@ -67,27 +67,39 @@ const handleChange = (e) => {
   const resetTouchedFields = () => {
     setTouchedFields({});
   };
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleToggleConfirmPassword = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
+
 console.log("por aca", errors);
 console.log("ayudaaaaaaaaaaaa", user)
   return (
     <div
-      className="relative bg-cover bg-center text-white text-center p-8 h-screen"
+      className="flex items-center justify-center bg-cover bg-center text-white text-center p-8 h-screen"
       style={{
         backgroundImage:
           'url("https://i.postimg.cc/3xxjwxft/selena-hotel-1.png")',
       }}
     >
-      <div className="flex flex-col items-center justify-center h-auto bg-blanco w-2/3 rounded-lg px-20 mx-[250px] px-4 pt-3 pb-6">
+      <div className="flex flex-col items-center justify-center h-auto bg-blanco w-full lg:w-2/3 rounded-lg px-2 lg:px-20  pt-3 pb-6">
         <a
           href="/logearse"
-          className="font-inter text-base antialiased font-bold text-naranja text-inter hover:scale-105 w-1/6 ml-[-700px] mt-6"
+          className="volver font-inter text-base  antialiased font-bold text-naranja text-inter hover:scale-105 md:w-1/6 mt-6 pl-4 md:pl-0 mr-auto "
         >
           🡰 Volver
         </a>
         <p className="flex mt-4 font-inter text-3xl antialiased leading-normal text-center font-bold text-gris justify-center">
           Registrarse
         </p>
-        <form onSubmit={handleSubmit} className="w-2/3">
+        <form onSubmit={handleSubmit} className="px-4 lg:px-0 lg:w-2/3">
           <h2 className="text-2xl mb-4">Crear Usuario</h2>
           <div className="mb-4">
             <label className="block text-gray-200 text-sm font-bold mb-2">
@@ -100,7 +112,7 @@ console.log("ayudaaaaaaaaaaaa", user)
                 </div>
 
                 <input
-                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
+                  className="w-full h-11 font-inter text-center pr-12 lg:pr-24 text-base font-normal text-white bg-verde rounded-lg"
                   type="text"
                   name="name"
                   placeholder="Nombre"
@@ -120,7 +132,7 @@ console.log("ayudaaaaaaaaaaaa", user)
                 </div>
 
                 <input
-                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
+                  className="w-full h-11 font-inter text-center pr-12 lg:pr-24 text-base font-normal text-white bg-verde rounded-lg"
                   type="text"
                   name="apellido"
                   placeholder="Apellido"
@@ -140,7 +152,7 @@ console.log("ayudaaaaaaaaaaaa", user)
                 </div>
 
                 <input
-                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
+                  className="w-full h-11 font-inter text-center pr-12 lg:pr-24 text-base font-normal text-white bg-verde rounded-lg"
                   type="email"
                   name="email"
                   placeholder="Email"
@@ -160,7 +172,7 @@ console.log("ayudaaaaaaaaaaaa", user)
                 </div>
 
                 <input
-                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
+                  className="w-full h-11 font-inter text-center pr-12 lg:pr-24 text-base font-normal text-white bg-verde rounded-lg"
                   type="text"
                   name="telefono"
                   placeholder="Teléfono"
@@ -180,14 +192,21 @@ console.log("ayudaaaaaaaaaaaa", user)
                 </div>
 
                 <input
-                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
-                  type="password"
+                  className="w-full h-11 font-inter text-center pr-12 lg:pr-24 text-base font-normal text-white bg-verde rounded-lg"
+                  type={showPassword ? "text" : "password"}
                   name="contraseña"
                   placeholder="Contraseña"
                   value={user.contraseña}
                   onChange={handleChange}
                   onBlur={() => handleBlur("contraseña")}
                 />
+                 <button
+                className="absolute material-symbols-outlined text-blanco right-4 top-3 text-center opacity-40 hover:opacity-100 transition-opacity cursor-pointer"
+                onClick={handleTogglePassword}
+                type="button"
+              >
+                {showPassword ? "visibility_off" : "visibility"}
+              </button>
               </div>
               <p className="my-4 text-base text-center text-naranja">{ errors.contraseña}</p>
 
@@ -200,8 +219,8 @@ console.log("ayudaaaaaaaaaaaa", user)
                 </div>
 
                 <input
-                  className="w-full h-11 font-inter text-center pr-24 text-base font-normal text-white bg-verde rounded-lg"
-                  type="password"
+                  className="w-full h-11 font-inter text-center pr-8 lg:pr-24 text-base font-normal text-white bg-verde rounded-lg"
+                  type={showConfirmPassword ? "text" : "password"}
                   name="confirmarContraseña"
                   placeholder="Confirmar Contraseña"
                   value={user.confirmarContraseña}
@@ -209,6 +228,13 @@ console.log("ayudaaaaaaaaaaaa", user)
                   onBlur={() => handleBlur("confirmarContraseña")}
                 />
               </div>
+              <button
+                className="absolute material-symbols-outlined text-blanco right-4 top-3 text-center opacity-40 hover:opacity-100 transition-opacity cursor-pointer"
+                onClick={handleToggleConfirmPassword}
+                type="button"
+              >
+                {showConfirmPassword ? "visibility_off" : "visibility"}
+              </button>
               <p className="my-4 text-base text-center text-naranja">{ errors.confirmarContraseña}</p>
             </label>
           </div>
