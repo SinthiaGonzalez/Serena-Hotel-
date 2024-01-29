@@ -429,12 +429,12 @@ export function deleteUsuario(id) {
 }
 
 export function recuperarContraseñaAction(correo) {
-  return async function () {
+  return async function (dispatch) {
     try {
       const response = await axios.put("/recuperarContrasena", { correo });
-      console.log("Respuesta del servidor:", response.data);
+      Swal.fire(response.data.message,"", "sucess");    
     } catch (error) {
-      console.error("Error al enviar la consulta:", error);
+      Swal.fire(error.response.data.error,"", "warning");
     }
   };
 }
@@ -442,9 +442,9 @@ export function recuperarUsuarioAction(correo) {
   return async function () {
     try {
       const response = await axios.put("/recuperarUsuario", { correo });
-      console.log("Respuesta del servidor:", response.data);
+      Swal.fire(response.data.message,"", "sucess");    
     } catch (error) {
-      console.error("Error al enviar la consulta:", error);
+      Swal.fire(error.response.data.error,"", "warning");
     }
   };
 }
