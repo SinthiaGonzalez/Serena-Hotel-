@@ -10,4 +10,4 @@ const DashBoarAdminUpdate = () => {
     </>
   );
 };
-export default DashBoarAdminUpdate;
+export default DashBoarAdminUpdate; 
