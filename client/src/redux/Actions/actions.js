@@ -286,11 +286,11 @@ export function getHabitacionesFiltrosPersonas({
   };
 }
 
-export const getReservas = ({ checkinDate, checkoutDate }) => {
+export const getReservas = ({ fechaEntrada, fechaSalida }) => {
   return async function (dispatch) {
     try {
       const reservas = await axios.get(
-        `/reservas?fecha_entrada=${checkinDate}&fecha_salida=${checkoutDate}`
+        `/reservas?fecha_entrada=${fechaEntrada}&fecha_salida=${fechaSalida}`
       );
       console.log("reservas:", reservas.data);
       return dispatch({
@@ -641,6 +641,32 @@ export const getCheckoutDate = ({ checkinDate, checkoutDate }) => {
       return dispatch({
         type: "GET_CHECKOUT",
         payload: { checkinDate, checkoutDate },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const fecha_entrada = (checkinDate) => {
+  return async function (dispatch) {
+    try {
+      return dispatch({
+        type: "FECHA_ENTRADA",
+        payload: checkinDate,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const fecha_salida = (checkoutDate) => {
+  return async function (dispatch) {
+    try {
+      return dispatch({
+        type: "FECHA_SALIDA",
+        payload: checkoutDate,
       });
     } catch (error) {
       console.log(error);

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import {
   getHabitacionesPrecio,
   getHabitacionesNombre,
@@ -22,16 +22,17 @@ import {
 } from "@material-tailwind/react";
 import Checkin from "../Filtros/filtro-Checkin";
 import Checkout from "../Filtros/filtro-Checkout";
-import { format } from "date-fns";
+import { format, set } from "date-fns";
 // import BuscarPorNombre from "../ordenamientosyBusqueda/busqueda";
 import Paginacion from "../Paginacion/Paginacion";
-
+import {fecha_entrada,fecha_salida,} from "../../redux/Actions/actions"
 const Habitaciones = () => {
   const dispatch = useDispatch();
   const habitacionesShop = useSelector((state) => state.habitaciones);
   const habitacionesFechas = useSelector((state) => state.habitacionesFechas);
   const habitacionfiltrada = useSelector((state) => state.habitacionfiltrada);
-  const fechas = useSelector((state) => state.fechas);
+  const fechaEntrada = useSelector((state) => state.fecha_entrada);
+  const fechaSalida = useSelector((state) => state.fecha_salida);
 
   const stringdelbuscar = useSelector((state) => state.string);
   const [filtrosPersonas, setFiltrosPersonas] = useState([]);
@@ -40,23 +41,11 @@ const Habitaciones = () => {
     ordenado: "nombre",
     direccion: "asc",
   });
-  const [checkinDate, setCheckinDate] = useState(new Date());
-  const [checkoutDate, setCheckoutDate] = useState(new Date());
+  const [checkinDate, setCheckinDate] = useState(null);
+  const [checkoutDate, setCheckoutDate] = useState(null);
   const [paginaActual, setPaginaActual] = useState(1);
   const [itemsPerPage] = useState(3);
 
-  // useEffect(() => {
-  //   // Aquí puedes enviar la solicitud correspondiente cuando cambian las fechas
-  //   dispatch(getHabitaciones({ page: paginaActual, itemsPerPage }));
-  // }, [dispatch, itemsPerPage, checkinDate, checkoutDate]);
-  // console.log("Estado Fechas", fechas);
-
-  useEffect(() => {
-    // Aquí puedes enviar la solicitud correspondiente cuando cambian las fechas
-    dispatch(getHabitaciones({ page: paginaActual, itemsPerPage }));
-  }, [dispatch, itemsPerPage, checkinDate, checkoutDate]);
-
-  console.log("Estado Fechas", fechas);
   const handleNombreChange = (value, tipoOrdenamiento) => {
     setUltimoOrdenamiento({
       ordenado: tipoOrdenamiento,
@@ -132,40 +121,51 @@ const Habitaciones = () => {
   };
 
   const handleCheckinChange = (selectedDate) => {
-    setCheckinDate(format(selectedDate, "yyyy-MM-dd"));
-    // dispatch(updateDates({ checkinDate: format(selectedDate, "yyyy-MM-dd") }));
-    // console.log("fecha checkin", selectedDate);
+  
+    const isValidDate = selectedDate instanceof Date && !isNaN(selectedDate);
+    console.log("isValidDate entrada", isValidDate);
+    if (isValidDate) {
+      setCheckinDate(format(selectedDate, "yyyy-MM-dd"));
+      dispatch(fecha_entrada(format(selectedDate, "yyyy-MM-dd")));
+    } else {
+      dispatch(fecha_entrada(null));
+      setMostrarSeccion(false);
+    }
   };
 
   const [mostrarSeccion, setMostrarSeccion] = useState(false);
 
+
   const handleCheckoutChange = (selectedDate) => {
-    setCheckoutDate(format(selectedDate, "yyyy-MM-dd"));
-
-    dispatch(
-      getReservas({
-        checkinDate,
-        checkoutDate,
-      })
-    );
-    // console.log("fecha checkout", selectedDate);
-    localStorage.setItem("checkinDate", JSON.stringify(checkinDate));
-    localStorage.setItem(
-      "checkoutDate",
-      JSON.stringify(format(selectedDate, "yyyy-MM-dd"))
-    );
-
-    dispatch(
-      updateDates({
-        checkinDate: checkinDate,
-        checkoutDate: format(selectedDate, "yyyy-MM-dd"),
-      })
-    );
-    setMostrarSeccion(true);
+    const isValidDate = selectedDate instanceof Date && !isNaN(selectedDate);
+    console.log("isValidDate salida", isValidDate);  
+    if (isValidDate) {
+      setCheckoutDate(format(selectedDate, "yyyy-MM-dd"));
+      dispatch(fecha_salida(format(selectedDate, "yyyy-MM-dd")));
+ setMostrarSeccion(true);
+    } else {
+      dispatch(fecha_salida(null));
+      setMostrarSeccion(false);
+    }
   };
-  const habitacionesRenderizadas =
-    habitacionesFechas.length > 0 ? habitacionesFechas : habitacionesShop;
+  useEffect(() => {
+    const fetchData = async () => {
+      if (fechaEntrada && fechaSalida) {
+        // Ambas fechas están seleccionadas, hacer dispatch de getReservas
+        await dispatch(getReservas({ fechaEntrada, fechaSalida }));
+      } else {
+        // Al menos una de las fechas no está seleccionada, hacer dispatch de getHabitaciones
+        await dispatch(getHabitaciones({ page: paginaActual, itemsPerPage }));
 
+      }
+    };
+  
+    fetchData();
+  }, [ dispatch,fechaEntrada, checkoutDate, paginaActual, itemsPerPage ]);
+
+
+  const habitacionesRenderizadas = mostrarSeccion ? habitacionesFechas : habitacionesShop;
+  //habitacioneshop es el esatdo global de habitaciones y habitacionesfechas es el estado global habitacionesFechas
   const totalItems =
     stringdelbuscar.length > 0
       ? habitacionfiltrada.length
@@ -174,13 +174,13 @@ const Habitaciones = () => {
   const habitacionesActuales =
     stringdelbuscar.length > 0
       ? habitacionfiltrada.slice(
-          (paginaActual - 1) * itemsPerPage,
-          paginaActual * itemsPerPage
-        )
+        (paginaActual - 1) * itemsPerPage,
+        paginaActual * itemsPerPage
+      )
       : habitacionesRenderizadas.slice(
-          (paginaActual - 1) * itemsPerPage,
-          paginaActual * itemsPerPage
-        );
+        (paginaActual - 1) * itemsPerPage,
+        paginaActual * itemsPerPage
+      );
   // console.log("habitacionesBusqueda", habitacionfiltrada);
   // console.log("todasHabitaciones", habitacionesShop);
   // console.log("habitacionesFechas", habitacionesFechas);
