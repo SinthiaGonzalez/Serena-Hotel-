@@ -12,13 +12,13 @@ export default function LoginTemplate() {
   const navigate = useNavigate();
   useVerificarToken();
 
-  const respuestaExitosa = (respuesta) => {  
+  const respuestaExitosa = async (respuesta) => {  
     //console.log(respuesta);
     // console.log(respuesta.profileObj.givenName);
     //console.log(respuesta.profileObj.familyName);
     // Despacha la acción putUsuario para crear o actualizar el usuario en la base de datos
 
-    dispatch(
+    await dispatch(
       postUsuarioGoogle({
         name: respuesta.profileObj.givenName,
         apellido: respuesta.profileObj.familyName,
@@ -29,10 +29,8 @@ export default function LoginTemplate() {
 
     let estado = localStorage.getItem("estado"); 
     //alert (estado)
-    setTimeout(function(){
       estado = localStorage.getItem("estado"); 
-      // alert("settime - estado" +estado);
-      if(estado==='"activo"') {
+        if(estado==='"activo"') {
         //alert("linea 31 activo")
         const isAdmin = localStorage.getItem("isAdmin"); 
         //alert("verificacion 33"+isAdmin+ "estado" + estado)
@@ -40,11 +38,14 @@ export default function LoginTemplate() {
         if(isAdmin === "false") navigate("/")
       }else if(estado === '"eliminar"'){
         alert("Si desea recuperar su Cuenta, presione ACEPTAR.")
-        navigate("/contactenos") // CAMBIAR X LA NUEVA VIEW PARA RECUPERAR CTA
+        /* LINEA PARA Q SI se CAMBIA A OTRA RUTA NO ESTË LOGUEADO */
+        localStorage.removeItem("token");     
+        navigate("/recuperar-usuario") 
       }else if(estado === '"inactivo"'){
         alert("Su Usuario se encuentra inactivo, por favor comuníquese con: serenahotel25@gmail.com. Muchas gracias.")
-      } 
-      }, 4000);
+       /* LINEA PARA Q SI se CAMBIA A OTRA RUTA NO ESTË LOGUEADO */
+        localStorage.removeItem("token");      
+      }    
   };
 
   const respuestaFallida = (error) => {

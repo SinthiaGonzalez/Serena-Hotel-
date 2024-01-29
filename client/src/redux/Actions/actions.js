@@ -65,9 +65,14 @@ export function postComent(state) {
 export function postUsuario(state) {
   return async function (dispatch) {
     try {
-      await axios.post("/usuario", state);
+      const response = await axios.post("/usuario", state);
       console.log("log de action", state);
+      if (response.status === 200 ){
       Swal.fire("Usuario creado exitosamente!", "", "success");
+      }
+      if (response.status === 201 ){
+        Swal.fire("Ya existe una Cuenta registrada con ese correo electrónico.", "", "error");
+        }
     } catch (error) {
       Swal.fire(error.message, "", "error");
     }
