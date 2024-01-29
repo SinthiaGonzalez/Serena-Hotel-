@@ -80,7 +80,6 @@ export function postComent(state) {
     }
   };
 }
-}
 export function postUsuario(state) {
   return async function (dispatch) {
     try {
@@ -132,7 +131,7 @@ export function postUsuarioGoogle(data) {
 export function verificacionLogeoUsuarioAction(infoLogeo) {
   console.log(infoLogeo);
 
-  return async function () {
+  return async function (dispatch) {
     try {
       const response = await axios.post("/login", infoLogeo);
       const { token, userId, isAdmin, imagen, name, estado } = response.data;
@@ -871,6 +870,18 @@ export function getUsuarioById(id) {
           confirmButtonColor:"#FB350C",
           iconColor: "#FB350C"
         });
+      }
+    };
+  };
+  export const updateDates = ({ checkinDate, checkoutDate }) => {
+    return async function (dispatch) {
+      try {
+        return dispatch({
+          type: "UPDATE_DATES",
+          payload: { checkinDate, checkoutDate },
+        });
+      } catch (error) {
+        console.log(error);
       }
     };
   };

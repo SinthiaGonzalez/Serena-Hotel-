@@ -227,7 +227,6 @@ console.log("ayudaaaaaaaaaaaa", user)
                   onChange={handleChange}
                   onBlur={() => handleBlur("confirmarContraseña")}
                 />
-              </div>
               <button
                 className="absolute material-symbols-outlined text-blanco right-4 top-3 text-center opacity-40 hover:opacity-100 transition-opacity cursor-pointer"
                 onClick={handleToggleConfirmPassword}
@@ -235,6 +234,7 @@ console.log("ayudaaaaaaaaaaaa", user)
               >
                 {showConfirmPassword ? "visibility_off" : "visibility"}
               </button>
+              </div>
               <p className="my-4 text-base text-center text-naranja">{ errors.confirmarContraseña}</p>
             </label>
           </div>

@@ -123,6 +123,8 @@ const UpdateUsuario = () => {
     });
   };
 
+
+
   useEffect(() => {
     dispatch(getUsuarioById(userId));
   }, []);
@@ -140,6 +142,18 @@ const UpdateUsuario = () => {
     localStorage.removeItem("isAdmin");
     navigate("/logearse");
     // idSelect es el id del usuario
+  };
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const handleToggleConfirmPassword = () => {
+    setShowConfirmPassword(!showPassword);
   };
 
   return (
@@ -275,12 +289,20 @@ const UpdateUsuario = () => {
 
                 <input
                   className="w-full h-11 font-inter text-center pr-12 lg:pr-24 text-base font-normal text-white bg-gris rounded-lg"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   name="contraseña"
                   placeholder="Contraseña"
+                  value={user.contraseña}
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
+              <button
+                className="absolute material-symbols-outlined text-blanco right-4 top-3 text-center opacity-40 hover:opacity-100 transition-opacity cursor-pointer"
+                onClick={handleTogglePassword}
+                type="button"
+              >
+                {showPassword ? "visibility_off" : "visibility"}
+              </button>
               </div>
               <p className="my-4 text-base text-center text-naranja">{ errors.contraseña}</p>
 
@@ -294,12 +316,19 @@ const UpdateUsuario = () => {
 
                 <input
                   className="w-full h-11 font-inter text-center pr-8 lg:pr-24 text-base font-normal text-white bg-gris rounded-lg"
-                  type="password"
+                  type={showConfirmPassword ? "text" : "password"}
                   name="confirmarContraseña"
                   placeholder="Confirmar Contraseña"
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
+                              <button
+                className="absolute material-symbols-outlined text-blanco right-4 top-3 text-center opacity-40 hover:opacity-100 transition-opacity cursor-pointer"
+                onClick={handleToggleConfirmPassword}
+                type="button"
+              >
+                {showConfirmPassword ? "visibility_off" : "visibility"}
+              </button>
               </div>
               <p className="my-4 text-base text-center text-naranja">{ errors.confirmarContraseña}</p>
             </label>
