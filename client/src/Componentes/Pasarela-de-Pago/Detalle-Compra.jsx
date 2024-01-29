@@ -1,12 +1,23 @@
 import { useSelector, useDispatch } from "react-redux";
 import { createPreferenceMercadopagoId } from "../../redux/Actions/actions";
 import BotonMercadoPago from "../Boton-MercadoPago/BotonMP";
-import { useEffect } from "react";
+import { useEffect,useState} from "react";
 
 const DetalledelaCompra = () => {
+  const preferenceIdMP = useSelector((state) => state.preferenceIdMP);
   const dispatch = useDispatch();
   const carrito = useSelector((state) => state.carrito);
-  const estadia = JSON.parse(localStorage.getItem("estadia"));
+  const fechaEntrada = JSON.parse(localStorage.getItem("fecha_entrada"));
+  const fechaSalida = JSON.parse(localStorage.getItem("fecha_salida"));
+  const fecha_entrada_str = localStorage.getItem("fecha_entrada");
+  const fecha_salida_str = localStorage.getItem("fecha_salida");
+  // Convierte las cadenas a objetos Date
+  const fecha_entrada = new Date(fecha_entrada_str);
+  const fecha_salida = new Date(fecha_salida_str); 
+  // Realiza la resta
+  const estadiaEnMilisegundos = fecha_salida - fecha_entrada;
+  // Convierte la diferencia a días
+  const estadia = estadiaEnMilisegundos / (24 * 60 * 60 * 1000);
   const subtotal = carrito.reduce(
     (total, producto) => total + producto.precio * estadia,
     0
@@ -22,26 +33,27 @@ const DetalledelaCompra = () => {
         quantity: 1,
         picture_url: "https://picsum.photos/200",
         userId: usuarioId,
-        fecha_entrada: "2024-04-01",
-        fecha_salida: "2024-04-12",
+        fecha_entrada: fechaEntrada,
+        fecha_salida: fechaSalida,
       })
     );
   };
   useEffect(() => {
     handlerpostMP();
-  }, []);
+  }, [carrito]);
+  const [mostrarBotonLimpiar, setMostrarBotonLimpiar] = useState(true);
+
+  const handleLimpiarFechas = () => {
+    setTimeout(() => {
+      localStorage.removeItem("fecha_entrada");
+      localStorage.removeItem("fecha_salida");
+      setFechas({ fechaEntrada: null, fechaSalida: null });
+    }, 3000);
+    setMostrarBotonLimpiar(false);
+  };
 
   return (
     <div className="m-4 w-1/3 text text-negro bg-verde rounded-md ">
-      {/* <div className="flex justify-center">
-        <h1 className="text-2xl mt-2">Detalles de la compra</h1>
-      </div>
-
-      <div className="m-4 h-1/2 overflow-y-auto gap-4">
-        <div className="m-2">
-          <AddShoppingCart />
-        </div>
-      </div> */}
       <div className="mx-12 mt-16">
         <p className="text-3xl text-inter text-blanco font-bold text-center mb-28">
           TOTAL DE LA RESERVA
@@ -88,8 +100,17 @@ const DetalledelaCompra = () => {
             </h2>
           </div>
         </div>
-        <div className="w-full mt-12">
-          <BotonMercadoPago />
+        <div>
+        {mostrarBotonLimpiar ? (
+          <button
+            className=" w-full bg-naranja text-blanco py-2 px-4 rounded-md mt-4"
+            onClick={handleLimpiarFechas}
+          >
+           Pagar
+          </button>
+        ) : (
+          <BotonMercadoPago id={preferenceIdMP} />
+        )}
         </div>
       </div>
     </div>

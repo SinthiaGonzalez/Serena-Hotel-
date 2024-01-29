@@ -19,6 +19,8 @@ const initialState = {
   token: false,
   usuarioById: [],
   fechas: [],
+  fecha_entrada: "",
+  fecha_salida: "",
  
 };
 
@@ -199,7 +201,26 @@ const reducer = (state = initialState, action) => {
           estadia: diferenciaEnDias,
         },
       };
-   
+      case "FECHA_ENTRADA":
+  const newState = {
+    ...state,
+    fecha_entrada: action.payload
+  };
+
+  // Guardar la fecha en el localStorage
+  localStorage.setItem("fecha_entrada", JSON.stringify(action.payload));
+
+  return newState;
+
+   case "FECHA_SALIDA":
+        const newsalidastate ={
+          ...state,
+          fecha_salida: action.payload
+        };
+        localStorage.setItem("fecha_salida", JSON.stringify(action.payload));
+
+        return newsalidastate;
+
     default:
       return state;
   }
