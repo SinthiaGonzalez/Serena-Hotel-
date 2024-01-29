@@ -530,8 +530,8 @@ export function updateUsuario(usuarioData, id) {
       }).then(async (result) => {
         if (result.isConfirmed) {
           const response = await axios.put(`/update/usuarios/${id}`, usuarioData);
-      if (response.data === "No se encontro el usuario") Swal.fire({
-        title:"No se encontro el usuario!", 
+      if (response.data === "No se encontro el usuario" || response.data === "Ya existe un usuario con ese correo" ) Swal.fire({
+        title:response.data, 
         icon:"error",
         confirmButtonColor:"#FB350C",
         iconColor: "#FB350C"

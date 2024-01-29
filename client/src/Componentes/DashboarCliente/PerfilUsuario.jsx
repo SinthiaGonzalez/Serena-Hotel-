@@ -30,21 +30,15 @@ const UpdateUsuario = () => {
     contraseña: "",
     isadmin: isAdmin,
     imagen: "",
+    confirmarContraseña: "",
   });
   const usuarioData = useSelector((state) => state.usuarioById);
 
   const handleChange = (e) => {
-    setUser({
-      ...user,
-      [e.target.name]: e.target.value,
-    });
-
+    setUser({ ...user, [e.target.name]: e.target.value });
     setErrors(
-      validation({
-        ...user,
-        [e.target.name]: e.target.value,
-      })
-    )
+    validation({...user, [e.target.name]: e.target.value})
+    );
   };
 
   const handleImageCloudinary = async (e) => {
@@ -77,6 +71,7 @@ const UpdateUsuario = () => {
         contraseña: "",
         isadmin: isAdmin,
         imagen: "",
+        confirmarContraseña: ""
       });
       resetTouchedFields();
     } else {
@@ -88,7 +83,7 @@ const UpdateUsuario = () => {
   const handleBlur = (fieldName) => {
     setTouchedFields({ ...touchedFields, [fieldName]: true });
 
-    // Actualiza user con el campo específico que se ha tocado
+    // Actualiza habitacionData con el campo específico que se ha tocado
     setUser({
       ...user,
       [fieldName]: user[fieldName],
@@ -122,6 +117,7 @@ const UpdateUsuario = () => {
       contraseña: "",
       isadmin: isAdmin,
       imagen: usuarioData.imagen,
+      confirmarContraseña: ""
     });
   }
 
@@ -268,7 +264,6 @@ const UpdateUsuario = () => {
                   type="password"
                   name="contraseña"
                   placeholder="Contraseña"
-                  value={user.contraseña}
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
@@ -288,7 +283,6 @@ const UpdateUsuario = () => {
                   type="password"
                   name="confirmarContraseña"
                   placeholder="Confirmar Contraseña"
-                  value={user.confirmarContraseña}
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
