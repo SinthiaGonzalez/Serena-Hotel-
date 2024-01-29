@@ -22,13 +22,12 @@ const LoginCliente = () => {
     setContraseña(event.target.value);
   };
 
-  const handleVerificarUsuario = () => {
-    dispatch(verificacionLogeoUsuarioAction({ email, contraseña }));
+  const handleVerificarUsuario = async () => {
+    await dispatch(verificacionLogeoUsuarioAction({ email, contraseña }));
     let estado = localStorage.getItem("estado"); 
     //alert (estado)
-    setTimeout(function(){
       estado = localStorage.getItem("estado"); 
-      alert("settime - estado" +estado);
+      //alert("settime - estado" +estado);
       if(estado==='"activo"') {
         //alert("linea 31 activo")
         const isAdmin = localStorage.getItem("isAdmin"); 
@@ -36,14 +35,18 @@ const LoginCliente = () => {
         if(isAdmin === "true") navigate("/admin-usuarios")
         if(isAdmin === "false") navigate("/")
       }else if(estado === '"eliminar"'){
+        //Swal.fire("Si desea recuperar su Cuenta, presione ACEPTAR.", "warning");
         alert("Si desea recuperar su Cuenta, presione ACEPTAR.")
-        navigate("/contactenos") // CAMBIAR X LA NUEVA VIEW PARA RECUPERAR CTA
+        /* LINEA PARA Q SI se CAMBIA A OTRA RUTA NO ESTË LOGUEADO */
+        localStorage.removeItem("token");     
+        navigate("/recuperar-usuario") 
       }else if(estado === '"inactivo"'){
+        //Swal.fire("Su Usuario se encuentra inactivo, por favor comuníquese con: serenahotel25@gmail.com. Muchas gracias.", "warning");
         alert("Su Usuario se encuentra inactivo, por favor comuníquese con: serenahotel25@gmail.com. Muchas gracias.")
-      } 
-      }, 4000);
-    //const estado = localStorage.getItem("estado");     
-  };
+       /* LINEA PARA Q SI se CAMBIA A OTRA RUTA NO ESTË LOGUEADO */
+        localStorage.removeItem("token");      
+      }  
+   };
 
   useVerificarToken();
 
