@@ -6,15 +6,22 @@ import { useState } from "react";
 
 const CardDetalleCompras = ({ imagenes, nombre, precio, id }) => {
   const dispatch = useDispatch();
-  const fechas = JSON.parse(localStorage.getItem("fechas"));
-  console.log("fechas Card", fechas);
-  const checkinDate = JSON.parse(localStorage.getItem("checkinDate"));
-  const checkoutDate = JSON.parse(localStorage.getItem("checkoutDate"));
-  const diferenciaEnMilisegundos =
-    new Date(checkoutDate) - new Date(checkinDate);
-  const diferenciaEnDias = diferenciaEnMilisegundos / (1000 * 60 * 60 * 24);
-  localStorage.setItem("estadia", JSON.stringify(diferenciaEnDias));
-  const estadia = JSON.parse(localStorage.getItem("estadia"));
+
+  const fechaEntrada = JSON.parse(localStorage.getItem("fecha_entrada"));
+  const fechaSalida = JSON.parse(localStorage.getItem("fecha_salida"));
+  const fecha_entrada_str = localStorage.getItem("fecha_entrada");
+  const fecha_salida_str = localStorage.getItem("fecha_salida");
+  
+  // Convierte las cadenas a objetos Date
+  const fecha_entrada = new Date(fecha_entrada_str);
+  const fecha_salida = new Date(fecha_salida_str);
+  
+  // Realiza la resta
+  const estadiaEnMilisegundos = fecha_salida - fecha_entrada;
+  
+  // Convierte la diferencia a días
+  const estadia = estadiaEnMilisegundos / (24 * 60 * 60 * 1000);
+  
   const eliminarHabitacion = () => {
     dispatch(eliminarDelCarrito(id));
   };
@@ -36,7 +43,7 @@ const CardDetalleCompras = ({ imagenes, nombre, precio, id }) => {
           {nombre}
         </p>
         <p className="mb-2 text-white text-base text-center">
-          {checkinDate} - {checkoutDate}
+          {fechaEntrada} / {fechaSalida}
         </p>
       </div>
 

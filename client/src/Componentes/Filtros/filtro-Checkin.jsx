@@ -7,15 +7,24 @@ import {
 import { format } from "date-fns";
 import { DayPicker } from "react-day-picker";
 import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
-import { useState } from "react";
+import { useState,useEffect} from "react";
 
 const Checkin = ({ onCheckinChange }) => {
-  const [checkin, setCheckin] = useState(new Date());
+  const [checkin, setCheckin] = useState(null);
 
   const handleCheckinChange = (selectedDate) => {
-    setCheckin(selectedDate);
-    onCheckinChange(selectedDate);
+    // Verificar si la fecha seleccionada es válida
+    const isValidDate = selectedDate instanceof Date && !isNaN(selectedDate);
+
+    if (isValidDate) {
+      setCheckin(selectedDate);
+      onCheckinChange(selectedDate);
+    } else {
+      setCheckin(null);  // Puedes establecer el checkin a null o alguna otra acción según tus necesidades
+      onCheckinChange(null);  // Puedes pasar null u otra acción según tus necesidades
+    }
   };
+  
   return (
     <div className="p-4 ">
       <Popover placement="bottom">
@@ -35,6 +44,7 @@ const Checkin = ({ onCheckinChange }) => {
             selected={checkin}
             onSelect={handleCheckinChange}
             showOutsideDays
+            defaultSelected={checkin}
             className="border-0 "
             classNames={{
               caption: "flex justify-center py-2 mb-4 relative items-center",

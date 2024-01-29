@@ -20,7 +20,10 @@ const initialState = {
   usuarioById: [],
   habitacionEliminada: [],
   fechas: [],
-}
+  fecha_entrada: "",
+  fecha_salida: "",
+ 
+};
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -168,41 +171,61 @@ const reducer = (state = initialState, action) => {
         usuarios: action.payload,
         token: action.payload,   
       };
-    
-      case "GET_USUARIO_BY_ID":
-        return {
+
+    case "GET_USUARIO_BY_ID":
+      return {
+        ...state,
+        usuarioById: action.payload,
+      };
+    case "POST_USUARIO_GOOGLE":    
+      return {
+        ...state,
+        token: action.payload,      
+      };
+    case "POST_USUARIO_NOGOOGLE":    
+      return {
+        ...state,
+        token: action.payload,      
+      };
+     
+    case "UPDATE_DATES":
+      const checkinDate = action.payload.checkinDate;
+      const checkoutDate = action.payload.checkoutDate;
+      const diferenciaEnMilisegundos =
+        new Date(checkoutDate) - new Date(checkinDate);
+      const diferenciaEnDias = diferenciaEnMilisegundos / (1000 * 60 * 60 * 24);
+      return {
+        ...state,
+        fechas: {
+          checkinDate: action.payload.checkinDate,
+          checkoutDate: action.payload.checkoutDate,
+          estadia: diferenciaEnDias,
+        },
+      };
+      case "FECHA_ENTRADA":
+  const newState = {
+    ...state,
+    fecha_entrada: action.payload
+  };
+
+  // Guardar la fecha en el localStorage
+  localStorage.setItem("fecha_entrada", JSON.stringify(action.payload));
+
+  return newState;
+
+   case "FECHA_SALIDA":
+        const newsalidastate ={
           ...state,
-          usuarioById: action.payload,
-        }
-        case "POST_USUARIO_GOOGLE":
-          return {
-            ...state,
-            token: action.payload,
-          };
+          fecha_salida: action.payload
+        };
+        localStorage.setItem("fecha_salida", JSON.stringify(action.payload));
+
+        return newsalidastate;
         case "DELETE_HABITACION":
           return {
             ...state,
             habitacionEliminada: action.payload,
           }
-          case "POST_USUARIO_NOGOOGLE":    
-          return {
-            ...state,
-            token: action.payload,      
-          };
-        case "UPDATE_DATES":
-          const checkinDate = action.payload.checkinDate;
-          const checkoutDate = action.payload.checkoutDate;
-          const diferenciaEnMilisegundos =
-            new Date(checkoutDate) - new Date(checkinDate);
-          const diferenciaEnDias = diferenciaEnMilisegundos / (1000 * 60 * 60 * 24);
-          return {
-            ...state,
-            fechas: {
-              checkinDate: action.payload.checkinDate,
-              checkoutDate: action.payload.checkoutDate,
-              estadia: diferenciaEnDias,
-            },
-          };
     default:
       return state;
   }

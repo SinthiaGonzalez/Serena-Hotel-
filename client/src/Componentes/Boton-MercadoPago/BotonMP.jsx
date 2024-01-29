@@ -1,16 +1,20 @@
-import { useSelector } from "react-redux";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
-initMercadoPago("TEST-2b768ecd-5730-478d-a83c-0dd708098ca3");
+initMercadoPago("TEST-2b768ecd-5730-478d-a83c-0dd708098ca3", {locale: "es-AR"});
 
-const BotonMercadoPago = () => {
-  const preferenceIdMP = useSelector((state) => state.preferenceIdMP);
-
+const BotonMercadoPago = (preferenceIdMP) => {
+  const {id} =preferenceIdMP
+const idpref =id.id
+if(!idpref){
+  return null
+}else{
   return (
     <div>
       <Wallet
-        initialization={{ preferenceId: preferenceIdMP.id, locale: "es-AR" }}
+        initialization={{ preferenceId:idpref, locale: "es-AR" }}
+
       />
     </div>
   );
+}
 };
 export default BotonMercadoPago;
