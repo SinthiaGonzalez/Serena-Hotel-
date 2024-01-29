@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  updateUsuario,
-  getUsuarioById,
-  cambiarEstadoUsuario,
-} from "../../redux/Actions/actions";
+import { useDispatch, useSelector } from "react-redux"
+import { updateUsuario, getUsuarioById, cambiarEstadoUsuario } from "../../redux/Actions/actions";
+import validation from "./validation";
+import { useNavigate, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
@@ -16,10 +14,14 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 const UpdateUsuario = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const userId = localStorage.getItem("userId");
   const isAdmin = localStorage.getItem("isAdmin");
-  console.log("aqui", userId);
+  console.log("aquiiiiiiiiiiii", userId);
+
+  const [errors, setErrors] = useState({});
+  const [touchedFields, setTouchedFields] = useState({});
 
   const [user, setUser] = useState({
     id: userId,
@@ -30,14 +32,15 @@ const UpdateUsuario = () => {
     contraseña: "",
     isadmin: isAdmin,
     imagen: "",
+    confirmarContraseña: "",
   });
   const usuarioData = useSelector((state) => state.usuarioById);
 
   const handleChange = (e) => {
-    setUser({
-      ...user,
-      [e.target.name]: e.target.value,
-    });
+    setUser({ ...user, [e.target.name]: e.target.value });
+    setErrors(
+    validation({...user, [e.target.name]: e.target.value})
+    );
   };
 
   const handleImageCloudinary = async (e) => {
@@ -51,17 +54,16 @@ const UpdateUsuario = () => {
       data
     );
     const url = response.data.url;
-    console.log("aqui", url);
     setUser({ ...user, imagen: url });
   };
 
   const deleteImage = () => {
     setUser({ ...user, imagen: "" });
   };
-  const handleSubmit = async (e) => {
-    try {
+ const handleSubmit = (e) => {
+    e.preventDefault();
+    if (Object.keys(errors).length === 0) {
       dispatch(updateUsuario(user));
-      // Restablecer el estado a los valores iniciales en lugar de un objeto vacío
       setUser({
         id: userId,
         name: "",
@@ -71,33 +73,44 @@ const UpdateUsuario = () => {
         contraseña: "",
         isadmin: isAdmin,
         imagen: "",
+        confirmarContraseña: ""
       });
-    } catch (error) {
-      Swal.fire(error.message, "", "error");
+      resetTouchedFields();
+    } else {
+      Swal.fire("Error de validacion", "", "error");
     }
   };
-  console.log("este", user);
 
-  const confirmacion = () => {
-    Swal.fire({
-      title: "Quieres guardar los cambios?",
-      showDenyButton: true,
-      confirmButtonText: "Guardar",
-      denyButtonText: " No guardar",
-      confirmButtonColor: "#FB350C",
-      denyButtonColor: "#322F2C",
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        handleSubmit();
-      } else if (result.isDenied) {
-        Swal.fire("No se guardaron los cambios", "", "info");
-      }
+  console.log("por acaaaaaaaaaaaaaaaaa",errors);
+  const handleBlur = (fieldName) => {
+    setTouchedFields({ ...touchedFields, [fieldName]: true });
+
+    // Actualiza habitacionData con el campo específico que se ha tocado
+    setUser({
+      ...user,
+      [fieldName]: user[fieldName],
+    });
+
+    // Vuelve a validar con la actualización de habitacionData
+    setErrors(validation(user));
+  };
+
+  const resetTouchedFields = () => {
+    const resetFields = {};
+    Object.keys(touchedFields).forEach((fieldName) => {
+      resetFields[fieldName] = "";
+    });
+    setUser({
+      ...user,
+      ...resetFields,
     });
   };
+  console.log("este", user);
 
   console.log(" a ver", usuarioData);
 
   const handleDefaultValues = () => {
+    console.log("aca", usuarioData);
     setUser({
       id: userId,
       name: usuarioData.name,
@@ -107,8 +120,11 @@ const UpdateUsuario = () => {
       contraseña: "",
       isadmin: isAdmin,
       imagen: usuarioData.imagen,
+      confirmarContraseña: ""
     });
   };
+
+
 
   useEffect(() => {
     dispatch(getUsuarioById(userId));
@@ -127,6 +143,18 @@ const UpdateUsuario = () => {
     localStorage.removeItem("isAdmin");
     navigate("/logearse");
     // idSelect es el id del usuario
+  };
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const handleToggleConfirmPassword = () => {
+    setShowConfirmPassword(!showPassword);
   };
 
   return (
@@ -162,6 +190,7 @@ const UpdateUsuario = () => {
               accept="image/*"
               name="imagen"
               onChange={handleImageCloudinary}
+              onBlur={handleBlur}
             />
             <span className="material-symbols-outlined bg-gris rounded-full p-2 mb-4 absolute z-10 -mt-8 ml-8">
               Edit
@@ -186,8 +215,10 @@ const UpdateUsuario = () => {
                   placeholder="Nombre"
                   value={user.name}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                 />
               </div>
+                 <p className="my-4 text-base text-center text-naranja">{errors.name}</p>
 
               <div className="flex flex-row h-11 bg-gris  relative rounded-lg mb-4">
                 <div className="items-center">
@@ -204,8 +235,10 @@ const UpdateUsuario = () => {
                   placeholder="apellido"
                   value={user.apellido}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                 />
               </div>
+                 <p className="my-4 text-base text-center text-naranja">{errors.apellido}</p>
 
               <div className="flex flex-row h-11 bg-gris  relative rounded-lg mb-4">
                 <div className="items-center">
@@ -222,8 +255,10 @@ const UpdateUsuario = () => {
                   placeholder="email"
                   value={user.email}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                 />
               </div>
+                 <p className="my-4 text-base text-center text-naranja">{errors.email}</p>
 
               <div className="flex flex-row h-11 bg-gris  relative rounded-lg mb-4">
                 <div className="items-center">
@@ -240,8 +275,10 @@ const UpdateUsuario = () => {
                   placeholder="Telefono"
                   value={user.telefono}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                 />
               </div>
+                 <p className="my-4 text-base text-center text-naranja">{errors.telefono}</p>
 
               <div className="flex flex-row h-11 bg-gris  relative rounded-lg mb-4">
                 <div className="items-center">
@@ -253,13 +290,22 @@ const UpdateUsuario = () => {
 
                 <input
                   className="w-full h-11 font-inter text-center pr-12 lg:pr-24 text-base font-normal text-white bg-gris rounded-lg"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   name="contraseña"
                   placeholder="Contraseña"
                   value={user.contraseña}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                 />
+              <button
+                className="absolute material-symbols-outlined text-blanco right-4 top-3 text-center opacity-40 hover:opacity-100 transition-opacity cursor-pointer"
+                onClick={handleTogglePassword}
+                type="button"
+              >
+                {showPassword ? "visibility_off" : "visibility"}
+              </button>
               </div>
+              <p className="my-4 text-base text-center text-naranja">{errors.contraseña}</p>
 
               <div className="flex flex-row h-11 bg-gris  relative rounded-lg mb-4">
                 <div className="items-center">
@@ -271,19 +317,27 @@ const UpdateUsuario = () => {
 
                 <input
                   className="w-full h-11 font-inter text-center pr-8 lg:pr-24 text-base font-normal text-white bg-gris rounded-lg"
-                  type="password"
+                  type={showConfirmPassword ? "text" : "password"}
                   name="confirmarContraseña"
                   placeholder="Confirmar Contraseña"
-                  value={user.confirmarContraseña}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                 />
+                              <button
+                className="absolute material-symbols-outlined text-blanco right-4 top-3 text-center opacity-40 hover:opacity-100 transition-opacity cursor-pointer"
+                onClick={handleToggleConfirmPassword}
+                type="button"
+              >
+                {showConfirmPassword ? "visibility_off" : "visibility"}
+              </button>
               </div>
+              <p className="my-4 text-base text-center text-naranja">{errors.confirmarContraseña}</p>
             </label>
           </div>
           <button
             className="w-2/4 mb-4 mt-4 mx-1 select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-blanco transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
             type="button"
-            onClick={confirmacion}
+            onClick={handleSubmit}
           >
             EDITAR
           </button>

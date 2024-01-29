@@ -18,6 +18,7 @@ const initialState = {
   reservasTodasAdmin: [],
   token: false,
   usuarioById: [],
+  habitacionEliminada: [],
   fechas: [],
   fecha_entrada: "",
   fecha_salida: "",
@@ -220,7 +221,11 @@ const reducer = (state = initialState, action) => {
         localStorage.setItem("fecha_salida", JSON.stringify(action.payload));
 
         return newsalidastate;
-
+        case "DELETE_HABITACION":
+          return {
+            ...state,
+            habitacionEliminada: action.payload,
+          }
     default:
       return state;
   }

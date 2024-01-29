@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { postUsuarioGoogle } from "../../redux/Actions/actions";
 import { useNavigate } from "react-router-dom";
 import { useVerificarToken } from "../AutenticadorToken/autenticadorToken.jsx";
+import Swal from "sweetalert2";
 export default function LoginTemplate() {
   const { onSuccess, onFailure, clientId } = useGoogle();
   const dispatch = useDispatch();
@@ -37,12 +38,22 @@ export default function LoginTemplate() {
         if(isAdmin === "true") navigate("/admin-usuarios")
         if(isAdmin === "false") navigate("/")
       }else if(estado === '"eliminar"'){
-        alert("Si desea recuperar su Cuenta, presione ACEPTAR.")
+        Swal.fire({
+          title:"Si desea recuperar su Cuenta, presione ACEPTAR.",
+          icon:"error",
+          confirmButtonColor:"#FB350C",
+          iconColor: "#FB350C"
+        });
         /* LINEA PARA Q SI se CAMBIA A OTRA RUTA NO ESTË LOGUEADO */
         localStorage.removeItem("token");     
         navigate("/recuperar-usuario") 
       }else if(estado === '"inactivo"'){
-        alert("Su Usuario se encuentra inactivo, por favor comuníquese con: serenahotel25@gmail.com. Muchas gracias.")
+       Swal.fire({
+          title:"Su Usuario se encuentra inactivo, por favor comuníquese con: serenahotel25@gmail.com. Muchas gracias.",
+          icon:"error",
+          confirmButtonColor:"#FB350C",
+          iconColor: "#FB350C"
+        });
        /* LINEA PARA Q SI se CAMBIA A OTRA RUTA NO ESTË LOGUEADO */
         localStorage.removeItem("token");      
       }    

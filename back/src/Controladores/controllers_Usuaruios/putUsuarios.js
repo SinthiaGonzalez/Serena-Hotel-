@@ -6,6 +6,9 @@ const updateUsuario = async (id, name, apellido, email, telefono, contraseña, i
 
 
   let user = await Usuario.findByPk(id);
+  let verificarCorreo = await Usuario.findAll({ where: { email: email } });
+  if (verificarCorreo.length >= 2 ) return "Ya existe un usuario con ese correo"
+  if (verificarCorreo.length === 1 && verificarCorreo[0].id!=id) return "Ya existe un usuario con ese correo"
   if (!user) return "No se encontro el usuario"
 
   if (name !== "") {
