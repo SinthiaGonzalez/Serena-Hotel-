@@ -8,6 +8,7 @@ import {
 } from "../../redux/Actions/actions";
 import { useNavigate } from "react-router-dom";
 import { useVerificarToken } from "../AutenticadorToken/autenticadorToken";
+import Swal from "sweetalert2";
 
 const LoginCliente = () => {
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ const LoginCliente = () => {
     //alert (estado)
     setTimeout(function(){
       estado = localStorage.getItem("estado"); 
-      alert("settime - estado" +estado);
+      // alert("settime - estado" +estado);
       if(estado==='"activo"') {
         //alert("linea 31 activo")
         const isAdmin = localStorage.getItem("isAdmin"); 
@@ -36,10 +37,10 @@ const LoginCliente = () => {
         if(isAdmin === "true") navigate("/admin-usuarios")
         if(isAdmin === "false") navigate("/")
       }else if(estado === '"eliminar"'){
-        alert("Si desea recuperar su Cuenta, presione ACEPTAR.")
-        navigate("/contactenos") // CAMBIAR X LA NUEVA VIEW PARA RECUPERAR CTA
+        Swal.fire("Su cuenta no se encuentra activa, lo redireccionaremos para que la pueda recuperar.")
+        navigate("/recuperar-usuario") // CAMBIAR X LA NUEVA VIEW PARA RECUPERAR CTA
       }else if(estado === '"inactivo"'){
-        alert("Su Usuario se encuentra inactivo, por favor comuníquese con: serenahotel25@gmail.com. Muchas gracias.")
+        Swal.fire("Su usuario se encuentra INACTIVO, por favor comuníquese con serenahotel25@gmail.com Muchas gracias!")
       } 
       }, 4000);
     //const estado = localStorage.getItem("estado");     
