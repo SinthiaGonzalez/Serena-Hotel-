@@ -83,23 +83,35 @@ export function postComent(state) {
 export function postUsuario(state) {
   return async function (dispatch) {
     try {
-      await axios.post("/usuario", state);
+      const response = await axios.post("/usuario", state);
       console.log("log de action", state);
+      if (response.status === 200 ){
+      
       Swal.fire({
         title:"Usuario creado exitosamente!", 
         icon:"success",
         confirmButtonColor:"#FB350C",
         iconColor: "#FB350C"
       });
-    } catch (error) {
+    } 
+    if (response.status === 201 ){
+      Swal.fire({
+        title:"Ya existe una Cuenta registrada con ese correo electrónico!", 
+        icon:"info",
+        confirmButtonColor:"#FB350C",
+        iconColor: "#FB350C"
+      });
+  }}
+    catch (error) {
       Swal.fire({
         title:error.message, 
         icon:"error",
         confirmButtonColor:"#FB350C",
         iconColor: "#FB350C"
       });
-    }
-  };
+     }
+    
+  }
 }
 
 export function postUsuarioGoogle(data) {
@@ -631,12 +643,12 @@ export function deleteUsuario(id) {
 }
 
 export function recuperarContraseñaAction(correo) {
-  return async function () {
+  return async function (dispatch) {
     try {
       const response = await axios.put("/recuperarContrasena", { correo });
-      console.log("Respuesta del servidor:", response.data);
+      Swal.fire(response.data.message,"", "sucess");    
     } catch (error) {
-      console.error("Error al enviar la consulta:", error);
+      Swal.fire(error.response.data.error,"", "warning");
     }
   };
 }
@@ -644,7 +656,7 @@ export function recuperarUsuarioAction(correo) {
   return async function () {
     try {
       const response = await axios.put("/recuperarUsuario", { correo });
-      console.log("Respuesta del servidor:", response.data);
+      Swal.fire(response.data.message,"", "sucess");    
     } catch (error) {
       if (error.response && error.response.status === 400) {
          Swal.fire({
@@ -885,3 +897,19 @@ export function getUsuarioById(id) {
       }
     };
   };
+
+  export const getCheckoutDate = ({ checkinDate, checkoutDate }) => {
+    console.log("fechas", checkinDate, checkoutDate);
+    return async function (dispatch) {
+      console.log("fechas", checkinDate, checkoutDate);
+      try {
+        return dispatch({
+          type: "GET_CHECKOUT",
+          payload: { checkinDate, checkoutDate },
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  };
+  
