@@ -98,8 +98,8 @@ const GraficosAdmin = () => {
       >
       </Line>
       </div> */}
-      <div>
-      <Doughnut
+      <div className="w-50 h-[30rem] ">
+      <Doughnut className="w-50 h-[30rem] mt-5"
       data={{
         labels: nombresHabitaciones,
         datasets: [
