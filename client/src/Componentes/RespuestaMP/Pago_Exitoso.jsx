@@ -10,9 +10,9 @@ const PagoExitoso = () => {
   const userId = JSON.parse(localStorage.getItem("userId"));
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getReservas_usuario(userId));
-    dispatch(getUsuarioById(userId));
+  useEffect(async () => {
+    await dispatch(getReservas_usuario(userId));
+    await dispatch(getUsuarioById(userId));
   }, []);
 
   const usuario = useSelector((state) => state.usuarioById);
@@ -21,9 +21,9 @@ const PagoExitoso = () => {
   const reservas_usuario = useSelector((state) => state.reservasUsuario);
   const ultimaReserva = reservas_usuario.length - 1;
 
-  useEffect(() => {
+  useEffect(async() => {
     if (reservas_usuario.length > 0 && ultimaReserva >= 0) {
-      dispatch(
+      await dispatch(
         envioNotificion({
           destinatario: idMail,
           asunto: `Confirmacón Reserva N° ${reservas_usuario[ultimaReserva].id_reserva}`,
