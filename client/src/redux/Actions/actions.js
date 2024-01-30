@@ -136,7 +136,7 @@ export function postUsuarioGoogle(data) {
         });
       }
     } catch (error) {
-      console.error("Error al crear o actualizar el usuario:", error);
+      Swal.fire("Error al crear o actualizar el usuario", "", "error");
     }
   };
 }
@@ -714,7 +714,7 @@ export function getReservas_Admin(usuarioId) {
     } catch (error) {
       Swal.fire({
         title:error.message, 
-        text:"Error al obtener las reservas del usuario",
+        text:"Error al obtener las reservas",
         icon:"error",
         confirmButtonColor:"#FB350C",
         iconColor: "#FB350C"
