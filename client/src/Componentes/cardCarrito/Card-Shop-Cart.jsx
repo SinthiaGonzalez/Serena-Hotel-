@@ -18,9 +18,6 @@ const estadiaEnMilisegundos = fecha_salida - fecha_entrada;
 // Convierte la diferencia a días
 const estadia = estadiaEnMilisegundos / (24 * 60 * 60 * 1000);
 
-if(!estadia){
-  dispatch(eliminarDelCarrito(id));
-}
   const eliminarHabitacion = () => {
     dispatch(eliminarDelCarrito(id));
   };

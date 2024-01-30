@@ -1,8 +1,16 @@
+import {
+  Popover,
+  PopoverHandler,
+  PopoverContent,
+  Button,
+} from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { useState } from "react";
 import { añadirAlCarrito } from "../../redux/Actions/actions";
 import Swal from "sweetalert2";
-/* eslint-disable react/prop-types */
+
+
 const CardShopHabitaciones = ({
   id,
   imagenes,
@@ -11,113 +19,191 @@ const CardShopHabitaciones = ({
   servicios,
   tipo,
 }) => {
+
   const dispatch = useDispatch();
+  const fecha_entrada = JSON.parse(localStorage.getItem("fecha_entrada"));
+  const fecha_salida = JSON.parse(localStorage.getItem("fecha_salida"));
+
+  const fechaEntrada = new Date(fecha_entrada);
+  const fechaSalida = new Date(fecha_salida);
+  // Realiza la resta
+const estadiaEnMilisegundos = fechaSalida - fechaEntrada;
+
+// Convierte la diferencia a días
+const estadia = estadiaEnMilisegundos / (24 * 60 * 60 * 1000);
+  const [mostrarpopover, setMostrarpopover] = useState(false);
+ 
   const handlerAddToCart = () => {
     const userId = JSON.parse(localStorage.getItem("userId"));
     const idHabitacion = id;
-
-    console.log("handlerAddToCart", userId, idHabitacion);
-    dispatch(añadirAlCarrito(userId, idHabitacion));
     const token = localStorage.getItem("token");
     if (!token) {
       alert("Necesita iniciar Sesion para añadir productos al carrito");
     } else {
-      console.log("handlerAddToCart", id);
-      notificacion();
+      if(!estadia || estadia <= 0){
+        setMostrarpopover(true);
+     
+      }else{
+        setMostrarpopover(false);
+        dispatch(añadirAlCarrito(userId, idHabitacion));
+        notificacion();
+      }
+     
     }
   };
   const handlerReserva = () => {
-    // Verificar si hay un token en el localStorage
+    const userId = JSON.parse(localStorage.getItem("userId"));
+    const idHabitacion = id;
     const token = localStorage.getItem("token");
-    if (token) {
-      dispatch(añadirAlCarrito(id));
-      window.location.href = "/pasareladePago";
+   
+    if (!token) {
+      alert("Necesita iniciar Sesion para hacer una reserva");
     } else {
-      alert("Necesita iniciar Sesion para Reservar");
+      if (!estadia || estadia <= 0) {
+        setMostrarpopover(true);
+      } else {
+        dispatch(añadirAlCarrito(userId, idHabitacion));
+        window.location.href = "/pasareladePago";
+        console.log("mostrar popover", mostrarpopover);
+        setMostrarpopover(false);
+        
+      }
     }
   };
-  const notificacion = () => {
-    const Toast = Swal.mixin({
-      toast: true,
-      position: "top-end",
-      showConfirmButton: false,
-      timer: 3000,
-      timerProgressBar: true,
-      didOpen: (toast) => {
-        toast.onmouseenter = Swal.stopTimer;
-        toast.onmouseleave = Swal.resumeTimer;
-      },
-    });
-    Toast.fire({
-      icon: "success",
-      title: "Agregado al carrito",
-    });
-  };
-  return (
-    <>
-      <div
-        key={id}
-        className="flex w-full h-60 flex-row items-center justify-between rounded-xl bg-verde bg-clip-border text-blanco"
-      >
-        <div className="h-44 mx-8 my-8 w-60 overflow-hidden text-white  rounded-xl bg-verde bg-clip-border  hover:scale-105">
-          <Link to={`/habitacion/${id}`}>
-            <img
-              className="w-full h-full object-cover"
-              src={imagenes[0]}
-              alt={nombre}
-            />
-          </Link>
-        </div>
 
-        <div className="flex flex-col items-center justify-center gap-6">
-          <Link
-            to={`/habitacion/${id}`}
-            className="block font-sans text-2xl antialiased font-bold leading-snug tracking-normal text-blanco hover:scale-105"
-          >
-            {nombre}
-          </Link>
-          <h5 className="block font-sans text-xl antialiased font-bold leading-snug tracking-normal text-blanco">
-            {tipo}
-          </h5>
-          <div className="flex flex-row gap-4">
-            {servicios.map(({ icono, descripcion }, index) => (
-              <div key={`${icono}-${descripcion}-${index}`}>
-                <span className="material-symbols-outlined cursor-pointer rounded-full border border-verde bg-gray-900/5 p-3 text-blanco transition-colors hover:border-blanco hover:bg-gray-900/10 hover:!opacity-100 group-hover:opacity-70">
-                  {icono}
-                </span>
-                <p className="text-blanco text-sm text-center">{descripcion}</p>
-              </div>
-            ))}
+    const notificacion = () => {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        },
+      });
+      Toast.fire({
+        icon: "success",
+        title: "Agregado al carrito",
+      });
+    };
+    return (
+      <>
+        <div
+          key={id}
+          className="flex w-full h-60 flex-row items-center justify-between rounded-xl bg-verde bg-clip-border text-blanco"
+        >
+          <div className="h-44 mx-8 my-8 w-60 overflow-hidden text-white  rounded-xl bg-verde bg-clip-border  hover:scale-105">
+            <Link to={`/habitacion/${id}`}>
+              <img
+                className="w-full h-full object-cover"
+                src={imagenes[0]}
+                alt={nombre}
+              />
+            </Link>
+          </div>
+
+          <div className="flex flex-col items-center justify-center gap-6">
+            <Link
+              to={`/habitacion/${id}`}
+              className="block font-sans text-2xl antialiased font-bold leading-snug tracking-normal text-blanco hover:scale-105"
+            >
+              {nombre}
+            </Link>
+            <h5 className="block font-sans text-xl antialiased font-bold leading-snug tracking-normal text-blanco">
+              {tipo}
+            </h5>
+            <div className="flex flex-row gap-4">
+              {servicios.map(({ icono, descripcion }, index) => (
+                <div key={`${icono}-${descripcion}-${index}`}>
+                  <span className="material-symbols-outlined cursor-pointer rounded-full border border-verde bg-gray-900/5 p-3 text-blanco transition-colors hover:border-blanco hover:bg-gray-900/10 hover:!opacity-100 group-hover:opacity-70">
+                    {icono}
+                  </span>
+                  <p className="text-blanco text-sm text-center">{descripcion}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="p-6 pt-3 flex flex-col items-center justify-center gap-4">
+            <p className="text-2xl font-bold text-blanco">
+              {precio.toLocaleString("es-AR", {
+                style: "currency",
+                currency: "ARS",
+                minimumFractionDigits: 0,
+              })}{" "}
+              / Noche
+            </p>
+            <div>
+            {mostrarpopover ? (
+                <Popover
+                  animate={{
+                    mount: { scale: 1, y: 0 },
+                    unmount: { scale: 0, y: 25 },
+                  }}
+                >
+                  <PopoverHandler>
+                    <Button
+                      className="block w-full select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all  focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
+                      type="button"
+                      onClick={handlerAddToCart}
+                    >
+                      AÑADIR AL CARRITO
+                    </Button>
+                  </PopoverHandler>
+                  <PopoverContent>
+                    Seleccione fechas válidas antes de añadir al carrito.
+                  </PopoverContent>
+                </Popover>
+              ) : (
+                <Button
+                  className="block w-full select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all  focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
+                  type="button"
+                  onClick={handlerAddToCart}
+                >
+                  AÑADIR AL CARRITO
+                </Button>
+              )}
+            </div>
+
+           
+              {mostrarpopover ? (
+                <Popover
+                  animate={{
+                    mount: { scale: 1, y: 0 },
+                    unmount: { scale: 0, y: 25 },
+                  }}
+                >
+                  <PopoverHandler>
+                    <Button
+                      className="block w-full select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all  focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
+                      type="button"
+                      onClick={handlerReserva}
+                    >
+                      RESERVAR
+                    </Button>
+                  </PopoverHandler>
+                  <PopoverContent>
+                    Seleccione fechas válidas antes de hacer una reserva.
+                  </PopoverContent>
+                </Popover>
+              ) : (
+                <Button
+                  className="block w-full select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all  focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
+                  type="button"
+                  onClick={handlerReserva}
+                >
+                  RESERVAR
+                </Button>
+              )}
+           
           </div>
         </div>
-
-        <div className="p-6 pt-3 flex flex-col items-center justify-center gap-4">
-          <p className="text-2xl font-bold text-blanco">
-            {precio.toLocaleString("es-AR", {
-              style: "currency",
-              currency: "ARS",
-              minimumFractionDigits: 0,
-            })}{" "}
-            / Noche
-          </p>
-
-          <button
-            className="block w-full mb-4 select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all  focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
-            type="button"
-            onClick={handlerAddToCart}
-          >
-            AÑADIR AL CARRITO
-          </button>
-          <button
-            className="block w-full select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all  focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
-            type="button"
-            onClick={handlerReserva}
-          >
-            RESERVAR
-          </button>
-        </div>
-      </div>
-    </>
-  );
+      </>
+    );
+  
 };
+
+
 export default CardShopHabitaciones;

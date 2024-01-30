@@ -25,7 +25,7 @@ import Checkout from "../Filtros/filtro-Checkout";
 import { format, set } from "date-fns";
 // import BuscarPorNombre from "../ordenamientosyBusqueda/busqueda";
 import Paginacion from "../Paginacion/Paginacion";
-import {fecha_entrada,fecha_salida,} from "../../redux/Actions/actions"
+import { fecha_entrada, fecha_salida, } from "../../redux/Actions/actions"
 const Habitaciones = () => {
   const dispatch = useDispatch();
   const habitacionesShop = useSelector((state) => state.habitaciones);
@@ -121,9 +121,8 @@ const Habitaciones = () => {
   };
 
   const handleCheckinChange = (selectedDate) => {
-  
+
     const isValidDate = selectedDate instanceof Date && !isNaN(selectedDate);
-    console.log("isValidDate entrada", isValidDate);
     if (isValidDate) {
       setCheckinDate(format(selectedDate, "yyyy-MM-dd"));
       dispatch(fecha_entrada(format(selectedDate, "yyyy-MM-dd")));
@@ -138,11 +137,11 @@ const Habitaciones = () => {
 
   const handleCheckoutChange = (selectedDate) => {
     const isValidDate = selectedDate instanceof Date && !isNaN(selectedDate);
-    console.log("isValidDate salida", isValidDate);  
+    console.log("isValidDate salida", isValidDate);
     if (isValidDate) {
       setCheckoutDate(format(selectedDate, "yyyy-MM-dd"));
       dispatch(fecha_salida(format(selectedDate, "yyyy-MM-dd")));
- setMostrarSeccion(true);
+      setMostrarSeccion(true);
     } else {
       dispatch(fecha_salida(null));
       setMostrarSeccion(false);
@@ -153,15 +152,18 @@ const Habitaciones = () => {
       if (fechaEntrada && fechaSalida) {
         // Ambas fechas están seleccionadas, hacer dispatch de getReservas
         await dispatch(getReservas({ fechaEntrada, fechaSalida }));
+        setMostrarSeccion(true);
+
       } else {
         // Al menos una de las fechas no está seleccionada, hacer dispatch de getHabitaciones
         await dispatch(getHabitaciones({ page: paginaActual, itemsPerPage }));
+        setMostrarSeccion(false);
 
       }
     };
-  
+
     fetchData();
-  }, [ dispatch,fechaEntrada, checkoutDate, paginaActual, itemsPerPage ]);
+  }, [dispatch, fechaEntrada, checkoutDate, paginaActual, itemsPerPage]);
 
 
   const habitacionesRenderizadas = mostrarSeccion ? habitacionesFechas : habitacionesShop;
