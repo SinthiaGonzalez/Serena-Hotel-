@@ -1,43 +1,43 @@
-import { useEffect } from "react";
-import {
-  envioNotificion,
-  getReservas_usuario,
-  getUsuarioById,
-} from "../../redux/Actions/actions";
-import { useDispatch, useSelector } from "react-redux";
+// import { useEffect } from "react";
+// import {
+//   envioNotificion,
+//   getReservas_usuario,
+//   getUsuarioById,
+// } from "../../redux/Actions/actions";
+// import { useDispatch, useSelector } from "react-redux";
 
 const PagoExitoso = () => {
-  const userId = JSON.parse(localStorage.getItem("userId"));
-  const dispatch = useDispatch();
+  // const userId = JSON.parse(localStorage.getItem("userId"));
+  // const dispatch = useDispatch();
 
-  useEffect(async () => {
-    await dispatch(getReservas_usuario(userId));
-    await dispatch(getUsuarioById(userId));
-  }, []);
+  // useEffect( () => {
+  //    dispatch(getReservas_usuario(userId));
+  //    dispatch(getUsuarioById(userId));
+  // }, []);
 
-  const usuario = useSelector((state) => state.usuarioById);
-  const idMail = usuario.email;
+  // const usuario = useSelector((state) => state.usuarioById);
+  // const idMail = usuario.email;
 
-  const reservas_usuario = useSelector((state) => state.reservasUsuario);
-  const ultimaReserva = reservas_usuario.length - 1;
+  // const reservas_usuario = useSelector((state) => state.reservasUsuario);
+  // const ultimaReserva = reservas_usuario.length - 1;
 
-  useEffect(async() => {
-    if (reservas_usuario.length > 0 && ultimaReserva >= 0) {
-      await dispatch(
-        envioNotificion({
-          destinatario: idMail,
-          asunto: `Confirmacón Reserva N° ${reservas_usuario[ultimaReserva].id_reserva}`,
-          mensaje: `<p>Queremos informarle que la reserva <strong>N° ${reservas_usuario[ultimaReserva].id_reserva}</strong> para las fechas desde <strong>${reservas_usuario[ultimaReserva].fecha_entrada}</strong> al <strong>${reservas_usuario[ultimaReserva].fecha_salida}</strong>, ha sido confirmada.</p>
-        <p>Para más información, contáctenos a través de nuestro correo <a href="mailto:serenahotel25@gmail.com">serenahotel25@gmail.com</a>.</p>
-        <br/>
-        <br/>
-        <p>Equipo Serena Hotel.</p>`,
-        })
-      );
-    } else {
-      console.error("No hay reservas o índice de reserva inválido");
-    }
-  }, [ultimaReserva, dispatch]);
+  // useEffect(() => {
+  //   if (reservas_usuario.length > 0 && ultimaReserva >= 0) {
+  //      dispatch(
+  //       envioNotificion({
+  //         destinatario: idMail,
+  //         asunto: `Confirmacón Reserva N° ${reservas_usuario[ultimaReserva].id_reserva}`,
+  //         mensaje: `<p>Queremos informarle que la reserva <strong>N° ${reservas_usuario[ultimaReserva].id_reserva}</strong> para las fechas desde <strong>${reservas_usuario[ultimaReserva].fecha_entrada}</strong> al <strong>${reservas_usuario[ultimaReserva].fecha_salida}</strong>, ha sido confirmada.</p>
+  //       <p>Para más información, contáctenos a través de nuestro correo <a href="mailto:serenahotel25@gmail.com">serenahotel25@gmail.com</a>.</p>
+  //       <br/>
+  //       <br/>
+  //       <p>Equipo Serena Hotel.</p>`,
+  //       })
+  //     );
+  //   } else {
+  //     console.error("No hay reservas o índice de reserva inválido");
+  //   }
+  // }, [ultimaReserva, dispatch]);
 
   return (
     <div
