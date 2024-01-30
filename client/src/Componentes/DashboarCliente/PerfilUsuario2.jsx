@@ -37,9 +37,11 @@ export const PerfilUsuario2 = () => {
 
   useEffect(() => {
     console.log("se montó el componente Reservas por Cliente - Perfilusuario2");
-    dispatch(
-      getReservas_usuario(idUsuario, { page: paginaActual, itemsPerPage })
-    );
+    if (idUsuario) {
+      dispatch(
+        getReservas_usuario(idUsuario, { page: paginaActual, itemsPerPage })
+      );
+    }
   }, [dispatch, idUsuario, paginaActual, itemsPerPage]);
 
   const handlePaginaChange = (nuevaPagina) => {
