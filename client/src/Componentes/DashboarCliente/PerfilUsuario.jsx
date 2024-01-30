@@ -11,7 +11,7 @@ import {
   faLock,
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import Swal from "sweetalert2";
+import Swal from "sweetalert2"; 
 
 const UpdateUsuario = () => {
   const navigate = useNavigate();
