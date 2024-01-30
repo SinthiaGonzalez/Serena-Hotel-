@@ -1,4 +1,44 @@
+// import { useEffect } from "react";
+// import {
+//   envioNotificion,
+//   getReservas_usuario,
+//   getUsuarioById,
+// } from "../../redux/Actions/actions";
+// import { useDispatch, useSelector } from "react-redux";
+
 const PagoExitoso = () => {
+  // const userId = JSON.parse(localStorage.getItem("userId"));
+  // const dispatch = useDispatch();
+
+  // useEffect( () => {
+  //    dispatch(getReservas_usuario(userId));
+  //    dispatch(getUsuarioById(userId));
+  // }, []);
+
+  // const usuario = useSelector((state) => state.usuarioById);
+  // const idMail = usuario.email;
+
+  // const reservas_usuario = useSelector((state) => state.reservasUsuario);
+  // const ultimaReserva = reservas_usuario.length - 1;
+
+  // useEffect(() => {
+  //   if (reservas_usuario.length > 0 && ultimaReserva >= 0) {
+  //      dispatch(
+  //       envioNotificion({
+  //         destinatario: idMail,
+  //         asunto: `Confirmacón Reserva N° ${reservas_usuario[ultimaReserva].id_reserva}`,
+  //         mensaje: `<p>Queremos informarle que la reserva <strong>N° ${reservas_usuario[ultimaReserva].id_reserva}</strong> para las fechas desde <strong>${reservas_usuario[ultimaReserva].fecha_entrada}</strong> al <strong>${reservas_usuario[ultimaReserva].fecha_salida}</strong>, ha sido confirmada.</p>
+  //       <p>Para más información, contáctenos a través de nuestro correo <a href="mailto:serenahotel25@gmail.com">serenahotel25@gmail.com</a>.</p>
+  //       <br/>
+  //       <br/>
+  //       <p>Equipo Serena Hotel.</p>`,
+  //       })
+  //     );
+  //   } else {
+  //     console.error("No hay reservas o índice de reserva inválido");
+  //   }
+  // }, [ultimaReserva, dispatch]);
+
   return (
     <div
       className="flex items-center justify-center bg-cover bg-center text-white text-center p-8 h-screen"
@@ -8,7 +48,7 @@ const PagoExitoso = () => {
       }}
     >
       <div className="flex flex-col items-center lg:h-auto bg-blanco lg:w-2/3 rounded-lg px-4 pt-3 py-20">
-      <a
+        <a
           href="/"
           className=" font-inter text-base antialiased font-bold text-naranja text-inter hover:scale-105 md:w-1/6 mt-6 pl-4 md:pl-0 mr-auto "
         >
@@ -33,4 +73,3 @@ const PagoExitoso = () => {
 };
 
 export default PagoExitoso;
-
