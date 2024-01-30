@@ -29,16 +29,16 @@ const CardDetalleCompras = ({ imagenes, nombre, precio, id }) => {
     return <div>loading...</div>;
   }
   return (
-    <div className="mx-auto bg-naranja rounded-md overflow-hidden shadow-md flex mb-4 p-2">
-      <div className="flex items-center ">
+    <div className="mx-auto bg-naranja rounded-md overflow-hidden shadow-md flex mb-4 p-2 flex-col md:felx md:flex-row justify-center">
+      <div className="flex items-center justify-center px-4">
         <img
           src={imagenes[0]}
           alt="imagen"
-          className=" w-[200px] h-28 ml-3 object-cover rounded-md"
+          className=" w-[200px] h-28 object-cover rounded-md"
         />
       </div>
 
-      <div className="w-3/5 mt-4">
+      <div className="lg:w-3/5 mt-4 px-2">
         <p className="mb-2 text-white text-2xl font-semibold text-center">
           {nombre}
         </p>
@@ -47,7 +47,7 @@ const CardDetalleCompras = ({ imagenes, nombre, precio, id }) => {
         </p>
       </div>
 
-      <div className="p-4 flex flex-row items-center justify-between w-1/5">
+      <div className="p-4 flex flex-col items-center justify-center lg:justify-between lg:w-1/5">
         <p className="text-white-700 font-bold text-2xl">
           {(precio * estadia).toLocaleString("es-AR", {
             style: "currency",
@@ -57,13 +57,14 @@ const CardDetalleCompras = ({ imagenes, nombre, precio, id }) => {
         </p>
         <div>
           <button
-            className="bg-red-500 text-white ml-2 px-4 py-3 mt-2 hover:bg-red-600 transition duration-300"
+            className="bg-red-500 text-white ml-2 px-12 py-3 mt-2 hover:bg-red-600 transition duration-300"
             onClick={eliminarHabitacion}
           >
             <FontAwesomeIcon icon={faTrashAlt} />
           </button>
         </div>
       </div>
+
     </div>
   );
 };

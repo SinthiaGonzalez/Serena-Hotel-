@@ -1,14 +1,16 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
 import validation from "../CrearHabitaciones/validation";
 import { useDispatch, useSelector } from "react-redux";
 import {
   updateHabitacion,
   getHabitacionesbackup,
   deleteHabitacion,
+  DetailHabitaciones
 } from "../../redux/Actions/actions";
 import { Select, Option } from "@material-tailwind/react";
 import axios from "axios";
+import Swal from 'sweetalert2'
 
 const UpdateHabitacion = () => {
   const dispatch = useDispatch();
@@ -18,20 +20,17 @@ const UpdateHabitacion = () => {
   const [isEmpty, setIsEmpty] = useState(true);
   const [seleccionhabitacion, setSeleccionhabitacion] = useState("");
   const habitacionescKcup = useSelector((state) => state.habitacionBackUp);
-
-  const habitacionesB = habitacionescKcup.map(({ id, nombre, precio, imagenes, servicios, descripcion, estado }) => ({
+  const habitacionEliminada = useSelector((state) => state.habitacionEliminada);
+  const allHabitaciones = useSelector((state) => state.nuevaHabitacion);
+  
+  const habitacionesB = habitacionescKcup.map(({ id, nombre }) => ({
     id,
     nombre,
-    // precio, 
-    // imagenes, 
-    // servicios, 
-    // descripcion, 
-    // estado
   }));
 
   useEffect(() => {
     dispatch(getHabitacionesbackup());
-  }, []);
+  }, [habitacionEliminada, allHabitaciones]);
 
   const [nuevaDataHabitacion, setNuevaDataHabitacion] = useState({
     nombreId: "",
@@ -68,21 +67,34 @@ const UpdateHabitacion = () => {
     estado: "Disponible",
   });
 
+  const habitacionDetail = useSelector((state) => state.habitacionesDetail);
+
   const handlerselectHabitacion = (e) => {
     setSeleccionhabitacion(e);
     setNuevaDataHabitacion({ ...nuevaDataHabitacion, nombreId: e });
+    dispatch(DetailHabitaciones(e));
+    handleDefaultValues();
   };
 
   const isSubmitDisabled = () => {
     // Verifica si hay algún campo obligatorio sin completar
-    return Object.values(nuevaDataHabitacion).some(
+      return Object.values(nuevaDataHabitacion).some(
       (value) => value === "" || (Array.isArray(value) && value.length === 0)
-    );
+    )
   };
+
+  const isDeleteDisabled = () => {
+    if (nuevaDataHabitacion.nombreId==="") return true;
+    else return false; 
+  }
 
   const handleChangeServicio = (index, event) => {
     const updatedServicios = [...nuevaDataHabitacion.servicios]; // Create a copy of the servicios array
+    if (index === 3) {
+      updatedServicios[index].descripcion = event.target.value + " m²";
+    } else {
     updatedServicios[index].descripcion = event.target.value; // Update the descripcion at the specified index
+    }
     setNuevaDataHabitacion({
       ...nuevaDataHabitacion,
       servicios: updatedServicios,
@@ -152,9 +164,10 @@ const UpdateHabitacion = () => {
           { icono: "wifi", descripcion: "Wifi" },
         ],
         descripcion: "",
+        estado: "Disponible"
       });
     } else {
-      alert("Validation errors:", errors);
+      Swal.fire("Errores de validacion", errors, "error");
     }
   };
   const handleImageCloudinary = async (e) => {
@@ -190,21 +203,35 @@ const UpdateHabitacion = () => {
     }
   };
 
-  const idhabitacion = habitacionesB.find(function (habitacion) {
-    return habitacion.nombre === seleccionhabitacion;
-  });
-
-  const handlerdeleteHabitacion = () => {
-    dispatch(deleteHabitacion(idhabitacion.id));
+  const handlerdeleteHabitacion = (e) => {
+    e.preventDefault();
+    dispatch(deleteHabitacion(habitacionDetail[0].id));
     dispatch(getHabitacionesbackup());
   };
 
-  return (
-    <div className="bg-verde p-8 rounded-lg mx-20 my-16">
-      <div className="flex justify-between">
-        <h1 className="text-4xl font-bold mb-28">Editar Habitación</h1>
+   const handleDefaultValues = () => {
+    console.log('default values', habitacionDetail);
+    habitacionDetail[0].servicios[3].descripcion=habitacionDetail[0].servicios[3].descripcion.substring(0, habitacionDetail[0].servicios[3].descripcion.length - 3)
+    if (habitacionDetail){
+    setNuevaDataHabitacion({
+    nombreId: habitacionDetail[0].id,
+    nombre: habitacionDetail[0].nombre,
+    precio: habitacionDetail[0].precio,
+    imagenes: habitacionDetail[0].imagenes,
+    servicios: habitacionDetail[0].servicios,
+    descripcion: habitacionDetail[0].descripcion,
+    estado: habitacionDetail[0].estado,
+    })}
+   }
+console.log("auxilio", nuevaDataHabitacion)
+  
 
-        <div className="w-1/2">
+  return (
+    <div className="bg-verde p-8 rounded-lg mx-4 my-16">
+      <div className="flex flex-col xl:flex-row xl:justify-between">
+        <h1 className="text-4xl font-bold mb-12 xl:mb-28 text-center xl:text-left">Editar Habitación</h1>
+
+        <div className="xl:w-1/2 justify-center">
           <Select
             selected={seleccionhabitacion}
             onChange={handlerselectHabitacion}
@@ -215,7 +242,7 @@ const UpdateHabitacion = () => {
               <Option
                 id={id}
                 key={id}
-                value={nombre}
+                value={id}
                 className="flex items-center gap-2"
               >
                 {nombre}
@@ -225,18 +252,18 @@ const UpdateHabitacion = () => {
         </div>
       </div>
 
-      <form className="flex flex-row gap-20 mx-2 my-10" onSubmit={handleSubmit}>
-        <div className="w-2/8">
-          <div className="grid grid-cols-2 gap-4 ml-8">
+      <form className="flex flex-col 2xl:flex-row gap-20 mx-2 my-10" onSubmit={handleSubmit}>
+        <div className="w-2/8 ">
+          <div className="grid grid-cols-2 gap-4 lg:mx-40 2xl:mx-auto 2xl:ml-8 justify-center">
             {nuevaDataHabitacion.imagenes.map((imagen, index) => (
-              <div key={index} className="relative">
+              <div key={index} className="relative mx-auto">
                 <img
-                  className="h-36 w-36 object-cover rounded-xl mb-4"
+                  className="h-36 w-36 object-cover rounded-2xl mb-4"
                   src={imagen}
                   alt={`Imagen ${index}`}
                 />
                 <button
-                  className="material-symbols-outlined absolute w-36 h-36 top-0 left-0 right-0 bottom-0 text-white opacity-0 hover:opacity-90 transition-opacity"
+                  className="material-symbols-outlined absolute w-36 h-36 top-0 left-0 right-0 bottom-0 text-blanco opacity-50 hover:opacity-90 transition-opacity"
                   onClick={() => handleImageRemove(index)}
                 >
                   Delete
@@ -245,7 +272,7 @@ const UpdateHabitacion = () => {
             ))}
           </div>
           <input
-            className="mt-2 w-full text-center text-blanco"
+            className="mt-2 max-w-full ml-12 md:ml-60 lg:ml-80 2xl:ml-20 text-blanco"
             type="file"
             accept="image/*"
             name="imagen"
@@ -264,6 +291,7 @@ const UpdateHabitacion = () => {
               type="text"
               name="nombre"
               placeholder="Nombre nuevo"
+              value={nuevaDataHabitacion.nombre} 
               onChange={handleChange}
               onBlur={() => handleBlur("nombre")}
             />
@@ -271,8 +299,8 @@ const UpdateHabitacion = () => {
           </div>
 
           <div>
-            <div className="flex flex-row gap-4">
-              <div className="flex flex-col items-center w-1/6">
+            <div className="grid grid-cols-3 2xl:flex 2xl:flex-row gap-4 mb-10 xl:mb-0">
+              <div className="flex flex-col items-center xl:w-1/6">
                 <span className="material-symbols-outlined p-3 text-blanco ">
                   sensor_door
                 </span>
@@ -281,7 +309,8 @@ const UpdateHabitacion = () => {
                     <select
                       onChange={(event) => handleChangeServicio(0, event)}
                       name="select"
-                      className="ml-2 p-1 rounded-md text-blanco text-center w-[80px]"
+                      className="ml-2 p-1 rounded-md text-negro text-center w-[80px]"
+                      value={nuevaDataHabitacion.servicios[0].descripcion}
                     >
                       <option value="" selected>
                         Cuartos
@@ -294,7 +323,7 @@ const UpdateHabitacion = () => {
                 </p>
               </div>
 
-              <div className="flex flex-col items-center w-1/6">
+              <div className="flex flex-col items-center 2xl:w-1/6">
                 <span className="material-symbols-outlined p-3 text-blanco ">
                   person
                 </span>
@@ -303,7 +332,8 @@ const UpdateHabitacion = () => {
                     <select
                       onChange={(event) => handleChangeServicio(1, event)}
                       name="select"
-                      className="ml-2 p-1 rounded-md text-blanco text-center w-[80px]"
+                      className="ml-2 p-1 rounded-md text-negro text-center w-[80px]"
+                      value={nuevaDataHabitacion.servicios[1].descripcion}
                     >
                       <option value="" selected>
                         Personas
@@ -319,7 +349,7 @@ const UpdateHabitacion = () => {
                 </p>
               </div>
 
-              <div className="flex flex-col items-center w-1/6">
+              <div className="flex flex-col items-center 2xl:w-1/6">
                 <span className="material-symbols-outlined p-3 text-blanco">
                   bed
                 </span>
@@ -328,7 +358,8 @@ const UpdateHabitacion = () => {
                     <select
                       onChange={(event) => handleChangeServicio(2, event)}
                       name="select"
-                      className="ml-2 p-1 rounded-md text-blanco text-center w-[80px]"
+                      className="ml-2 p-1 rounded-md text-negro text-center w-[80px]"
+                      value={nuevaDataHabitacion.servicios[2].descripcion}
                     >
                       <option value="" selected>
                         Cama
@@ -342,32 +373,33 @@ const UpdateHabitacion = () => {
                 </p>
               </div>
 
-              <div className="flex flex-col items-center w-1/6">
+              <div className="flex flex-col items-center 2xl:w-1/6">
                 <span className="material-symbols-outlined p-3 text-blanco ">
                   home
                 </span>
-                <p className="text-blanco text-sm text-center">
+                <p className="text-negro text-sm text-center text-negro">
                   {
                     <input
                       onChange={(event) => handleChangeServicio(3, event)}
-                      className="text-center w-[80px] mr-2 p-1 rounded-md"
+                      className="text-center w-[80px] mr-2 p-1 rounded-md text-negro"
                       type="number"
                       min="0"
                       name="m2"
                       placeholder="m²"
+                      value={nuevaDataHabitacion.servicios[3].descripcion}
                     />
                   }
                 </p>
               </div>
 
-              <div className="flex flex-col items-center w-1/5">
+              <div className="flex flex-col items-center 2xl:w-1/5">
                 <span className="material-symbols-outlined p-3 text-blanco ">
                   local_bar
                 </span>
                 <p className="text-blanco text-sm text-center">Minibar</p>
               </div>
 
-              <div className="flex flex-col items-center">
+              <div className="flex flex-col items-center 2xl:w-1/5">
                 <span className="material-symbols-outlined p-3 text-blanco ">
                   wifi
                 </span>
@@ -377,7 +409,7 @@ const UpdateHabitacion = () => {
           </div>
           <div className="mt-10 w-full">
             <textarea
-              className="w-full h-24 text-center pt-8"
+              className="w-full h-24 text-center pt-8 text-negro"
               name="descripcion"
               placeholder="Descripcion"
               value={nuevaDataHabitacion.descripcion}
@@ -388,8 +420,8 @@ const UpdateHabitacion = () => {
           </div>
         </div>
 
-        <div className="p-6 pt-3 flex flex-col items-center gap-4 w-2/8 mt-20">
-          <p className="text-2xl font-bold text-blanco w-2/3 justify-center">
+        <div className="p-6 flex flex-col items-center gap-4 w-2/8 2xl:pt-3 2xl:mt-20">
+          <p className="text-2xl font-bold text-blanco xl:w-2/3 justify-center">
             $
             {
               <input
@@ -398,6 +430,7 @@ const UpdateHabitacion = () => {
                 name="precio"
                 min="0"
                 placeholder="-"
+                value={nuevaDataHabitacion.precio}
                 onChange={handleChange}
                 onBlur={() => handleBlur("precio")}
               />
@@ -410,6 +443,7 @@ const UpdateHabitacion = () => {
             className="w-full mt-2  select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-blanco transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
             type="submit"
             disabled={isSubmitDisabled()}
+            onClick={handleSubmit}
           >
             Editar
           </button>
@@ -417,10 +451,11 @@ const UpdateHabitacion = () => {
           <button
             className="w-full  select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-inter text-base font-bold uppercase text-blanco transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
             onClick={handlerdeleteHabitacion}
+            disabled={isDeleteDisabled()}
           >
             Eliminar
           </button>
-          <p>Seleccione la habitación a eliminar</p>
+          <p className="text-center">Seleccione la habitación a eliminar</p>
         </div>
         <div className="flex justify-center"></div>
       </form>

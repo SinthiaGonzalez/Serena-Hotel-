@@ -38,7 +38,12 @@ const estadia = estadiaEnMilisegundos / (24 * 60 * 60 * 1000);
     const idHabitacion = id;
     const token = localStorage.getItem("token");
     if (!token) {
-      alert("Necesita iniciar Sesion para añadir productos al carrito");
+      Swal.fire({
+        title:"Necesita iniciar sesion para añadir al carrito", 
+        icon:"info",
+        confirmButtonColor:"#FB350C",
+        iconColor: "#FB350C"
+      });
     } else {
       if(!estadia || estadia <= 0){
         setMostrarpopover(true);
@@ -51,6 +56,7 @@ const estadia = estadiaEnMilisegundos / (24 * 60 * 60 * 1000);
      
     }
   };
+
   const handlerReserva = () => {
     const userId = JSON.parse(localStorage.getItem("userId"));
     const idHabitacion = id;

@@ -190,8 +190,8 @@ const Habitaciones = () => {
   return (
     <>
       <NavBarHome />
-      <div className="flex flex-row bg-white py-7">
-        <div className="ml-8 bg-verde w-2/5 h-full rounded-xl p-2">
+      <div className="flex flex-col 2xl:flex-row bg-white px-2 2xl:px-0 py-7">
+        <div className="2xl:ml-8 bg-verde 2xl:w-2/5 h-full rounded-2xl p-2">
           <h2 className="text-2xl font-bold text-blanco mb-2 pl-4">
             Seleccionar las Fechas
           </h2>
@@ -236,7 +236,7 @@ const Habitaciones = () => {
                   Cantidad de Personas
                 </h2>
                 <Card className="w-6/7 mx-2">
-                  <List className="flex-row">
+                  <List className="grid grid-cols-3 md:flex md:flex-row">
                     {[2, 3, 4, 5, 6, 8].map((persona) => (
                       <ListItem key={persona} className="p-0">
                         <label

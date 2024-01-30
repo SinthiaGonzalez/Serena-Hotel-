@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import validation from "./validations";
 import {
   faUser,
   faEnvelope,
   faPhone,
   faLock,
 } from "@fortawesome/free-solid-svg-icons";
-import { postUsuario } from "../../redux/Actions/actions";
+import {postUsuario} from "../../redux/Actions/actions"
+import Swal from 'sweetalert2'
 
 const CreateUsuario = () => {
   const dispatch = useDispatch();
+  const [errors, setErrors] = useState({});
+  const [touchedFields, setTouchedFields] = useState({});
 
   const [user, setUser] = useState({
     name: "",
@@ -18,30 +22,51 @@ const CreateUsuario = () => {
     email: "",
     telefono: "",
     contraseña: "",
+    confirmarContraseña: "",
   });
 
-  const handleChange = (e) => {
+const handleChange = (e) => {
     setUser({
       ...user,
       [e.target.name]: e.target.value,
     });
+
+    setErrors(
+      validation({
+        ...user,
+        [e.target.name]: e.target.value,
+      })
+    )
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await dispatch(postUsuario(user));
-      // Restablecer el estado a los valores iniciales en lugar de un objeto vacío
-      setUser({
-        name: "",
-        apellido: "",
-        email: "",
-        telefono: "",
-        contraseña: "",
-      });
+      if (Object.keys(errors).length === 0) {
+        await dispatch(postUsuario(user));
+        setUser({
+          name: "",
+          apellido: "",
+          email: "",
+          telefono: "",
+          contraseña: "",
+          confirmarContraseña: "",
+        });
+        resetTouchedFields();
+      } else {
+        Swal.fire("Error de validacion", "", "error");
+      }
     } catch (error) {
-      alert(error.message);
+      Swal.fire(error.message, "", "error");
     }
+  };
+
+  const handleBlur = (fieldName) => {
+    setTouchedFields({ ...touchedFields, [fieldName]: true });
+  };
+
+  const resetTouchedFields = () => {
+    setTouchedFields({});
   };
 
   const [showPassword, setShowPassword] = useState(false);
@@ -55,6 +80,8 @@ const CreateUsuario = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
+console.log("por aca", errors);
+console.log("ayudaaaaaaaaaaaa", user)
   return (
     <div
       className="flex items-center justify-center bg-cover bg-center text-white text-center p-8 h-screen"
@@ -92,8 +119,10 @@ const CreateUsuario = () => {
                   placeholder="Nombre"
                   value={user.name}
                   onChange={handleChange}
+                  onBlur={() => handleBlur("name")}
                 />
               </div>
+              <p className="my-4 text-base text-center text-naranja">{errors.name}</p>
 
               <div className="flex flex-row h-11 bg-verde  relative rounded-lg mb-4">
                 <div className="items-center">
@@ -110,8 +139,10 @@ const CreateUsuario = () => {
                   placeholder="Apellido"
                   value={user.apellido}
                   onChange={handleChange}
+                  onBlur={() => handleBlur("apellido")}
                 />
               </div>
+              <p className="my-4 text-base text-center text-naranja">{errors.apellido}</p>
 
               <div className="flex flex-row h-11 bg-verde  relative rounded-lg mb-4">
                 <div className="items-center">
@@ -128,8 +159,10 @@ const CreateUsuario = () => {
                   placeholder="Email"
                   value={user.email}
                   onChange={handleChange}
+                  onBlur={() => handleBlur("email")}
                 />
               </div>
+              <p className="my-4 text-base text-center text-naranja">{errors.email}</p>
 
               <div className="flex flex-row h-11 bg-verde  relative rounded-lg mb-4">
                 <div className="items-center">
@@ -146,8 +179,10 @@ const CreateUsuario = () => {
                   placeholder="Teléfono"
                   value={user.telefono}
                   onChange={handleChange}
+                  onBlur={() => handleBlur("telefono")}
                 />
               </div>
+              <p className="my-4 text-base text-center text-naranja">{errors.telefono}</p>
 
               <div className="flex flex-row h-11 bg-verde  relative rounded-lg mb-4">
                 <div className="items-center">
@@ -164,8 +199,9 @@ const CreateUsuario = () => {
                   placeholder="Contraseña"
                   value={user.contraseña}
                   onChange={handleChange}
+                  onBlur={() => handleBlur("contraseña")}
                 />
-                <button
+                 <button
                 className="absolute material-symbols-outlined text-blanco right-4 top-3 text-center opacity-40 hover:opacity-100 transition-opacity cursor-pointer"
                 onClick={handleTogglePassword}
                 type="button"
@@ -173,6 +209,7 @@ const CreateUsuario = () => {
                 {showPassword ? "visibility_off" : "visibility"}
               </button>
               </div>
+              <p className="my-4 text-base text-center text-naranja">{errors.contraseña}</p>
 
               <div className="flex flex-row h-11 bg-verde  relative rounded-lg mb-4">
                 <div className="items-center">
@@ -189,8 +226,9 @@ const CreateUsuario = () => {
                   placeholder="Confirmar Contraseña"
                   value={user.confirmarContraseña}
                   onChange={handleChange}
+                  onBlur={() => handleBlur("confirmarContraseña")}
                 />
-                <button
+              <button
                 className="absolute material-symbols-outlined text-blanco right-4 top-3 text-center opacity-40 hover:opacity-100 transition-opacity cursor-pointer"
                 onClick={handleToggleConfirmPassword}
                 type="button"
@@ -198,6 +236,7 @@ const CreateUsuario = () => {
                 {showConfirmPassword ? "visibility_off" : "visibility"}
               </button>
               </div>
+              <p className="my-4 text-base text-center text-naranja">{errors.confirmarContraseña}</p>
             </label>
           </div>
           <button
