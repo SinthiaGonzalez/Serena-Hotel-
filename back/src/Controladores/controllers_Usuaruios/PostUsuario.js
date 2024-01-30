@@ -7,7 +7,7 @@ const CreateUsuario = async (req, res) => {
     const isAdmin = isadmin === true || isadmin === "true";
     const prueba = await Usuario.findOne({ where: { email: email } });
     if (prueba) {
-      return res.status(400).json({ message: "Ya existe un usuario vinculado a ese correo" })
+      return res.status(201).json({ message: "Ya existe un usuario vinculado a ese correo" })
     } else {
       const newUser = await Usuario.create({
         name,
