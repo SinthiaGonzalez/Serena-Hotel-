@@ -151,7 +151,7 @@ const estadia = estadiaEnMilisegundos / (24 * 60 * 60 * 1000);
                 >
                   <PopoverHandler>
                     <Button
-                      className="block w-full select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all  focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
+                      className="absolute block w-full select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all  focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco overflow-hidden relative-none"
                       type="button"
                       onClick={handlerAddToCart}
                     >
@@ -163,13 +163,13 @@ const estadia = estadiaEnMilisegundos / (24 * 60 * 60 * 1000);
                   </PopoverContent>
                 </Popover>
               ) : (
-                <Button
+                <button
                   className="block w-full select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all  focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
                   type="button"
                   onClick={handlerAddToCart}
                 >
                   AÑADIR AL CARRITO
-                </Button>
+                </button>
               )}
             </div>
 
