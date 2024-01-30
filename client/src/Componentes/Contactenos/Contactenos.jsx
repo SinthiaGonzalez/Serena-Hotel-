@@ -73,7 +73,7 @@ const isSubmitDisabled = () => {
   if(Object.keys(errors).length === 0) return false;
   else return true;
   };
-
+  
   console.log("por aca", errors)
   return (
     <div className="bg-verde">
