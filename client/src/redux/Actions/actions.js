@@ -141,7 +141,7 @@ export function postUsuarioGoogle(data) {
   };
 }
 export function verificacionLogeoUsuarioAction(infoLogeo) {
-  console.log(infoLogeo);
+//  console.log(infoLogeo);
 
   return async function (dispatch) {
     try {
