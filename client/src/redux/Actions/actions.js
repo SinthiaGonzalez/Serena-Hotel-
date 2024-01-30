@@ -798,8 +798,7 @@ export const añadirAlCarrito = (idUser, idHabitacion) => {
   return async function (dispatch) {
     try {
       const data = { idUser, idHabitacion };
-      const response = await axios.post(`/carrito`, data);
-      console.log("anadirAlCarrito", response.data);
+      const response = await axios.post(`/carrito`, data); 
       dispatch({
         type: "AÑADIR_AL_CARRITO",
         payload: response.data,
