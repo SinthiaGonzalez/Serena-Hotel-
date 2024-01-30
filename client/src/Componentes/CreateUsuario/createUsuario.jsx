@@ -22,6 +22,7 @@ const CreateUsuario = () => {
     email: "",
     telefono: "",
     contraseña: "",
+    confirmarContraseña: "",
   });
 
 const handleChange = (e) => {
