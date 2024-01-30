@@ -2,21 +2,21 @@ const validation = (userData) => {
     const errors = {};
   
     if(userData.name==="")  console.log("prueba"); 
-    else { if (!/^[a-zA-Z\s]{3,}$/.test(userData.name)) {
-       errors.name = "El nombre debe contener al menos 3 caracteres";}
+    else { if (!/^[a-zA-Z](?:\s?[a-zA-Z])*$/.test(userData.name)) {
+       errors.name = "El nombre debe contener al menos 3 caracteres y solo un espacio";}
      } 
 
      if(userData.apellido==="")  console.log("prueba"); 
-    else {if (!/^[a-zA-Z\s]{3,}$/.test(userData.apellido)) {
-        errors.apellido = "El nombre debe contener al menos 3 caracteres";
+    else {if (!/^[a-zA-Z](?:\s?[a-zA-Z])*$/.test(userData.apellido)) {
+        errors.apellido = "El nombre debe contener al menos 3 caracteres y solo un espacio";
     }}
     if(userData.email==="")  console.log("prueba");
     else {if (!/@.*\.com/.test(userData.email)) {
       errors.email = "El correo debe contener al menos 6 caracteres, un '@' e incluir '.com' ";
     }}
     if(userData.telefono==="")  console.log("prueba");
-    else {if (!/^[\d+-]*$/.test(userData.telefono)) {
-        errors.telefono = "Solo se pueden utilizar numeros y un simbolo "+" o un "-"";
+    else {if (!/^[0-9]*[+]?[0-9]*$/.test(userData.telefono)) {
+      errors.telefono = "Solo se pueden utilizar numeros y un simbolo '+' o un '-'";
     }}
 
     if(userData.contraseña==="")  console.log("prueba");
