@@ -68,14 +68,12 @@ const Contactenos = () => {
     });
   };
 
-  const isSubmitDisabled = () => {
+const isSubmitDisabled = () => {
     // Verifica si hay algún campo obligatorio sin completar
-    if (errors.nombre!="" || errors.correo!="" || errors.telefono!="" || errors.mensaje!="") return true;
-    else {
-    return Object.values(infoFormulario).some(
-      (value) => value === "" || (Array.isArray(value) && value.length === 0)
-    );
-  }};
+  if(Object.keys(errors).length === 0) return false;
+  else return true;
+  };
+
   console.log("por aca", errors)
   return (
     <div className="bg-verde">
