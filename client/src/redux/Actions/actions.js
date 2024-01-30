@@ -72,7 +72,7 @@ export function postComent(state) {
       })}
     } catch (error) {
       Swal.fire({
-        title:error.message, 
+        title:"solo se permite un comentario por usuario", 
         icon:"error",
         confirmButtonColor:"#FB350C",
         iconColor: "#FB350C"
@@ -136,12 +136,12 @@ export function postUsuarioGoogle(data) {
         });
       }
     } catch (error) {
-      console.error("Error al crear o actualizar el usuario:", error);
+      Swal.fire("Error al crear o actualizar el usuario", "", "error");
     }
   };
 }
 export function verificacionLogeoUsuarioAction(infoLogeo) {
-  console.log(infoLogeo);
+//  console.log(infoLogeo);
 
   return async function (dispatch) {
     try {
@@ -714,7 +714,7 @@ export function getReservas_Admin(usuarioId) {
     } catch (error) {
       Swal.fire({
         title:error.message, 
-        text:"Error al obtener las reservas del usuario",
+        text:"Error al obtener las reservas",
         icon:"error",
         confirmButtonColor:"#FB350C",
         iconColor: "#FB350C"
