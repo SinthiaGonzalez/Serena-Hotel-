@@ -386,7 +386,7 @@ console.log("auxilio", nuevaDataHabitacion)
                       min="0"
                       name="m2"
                       placeholder="m²"
-                      value={nuevaDataHabitacion.servicios[3].descripcion}
+                      defaultValue={nuevaDataHabitacion.servicios[3].descripcion}
                     />
                   }
                 </p>
