@@ -72,7 +72,7 @@ export function postComent(state) {
       })}
     } catch (error) {
       Swal.fire({
-        title:error.message, 
+        title:"solo se permite un comentario por usuario", 
         icon:"error",
         confirmButtonColor:"#FB350C",
         iconColor: "#FB350C"
