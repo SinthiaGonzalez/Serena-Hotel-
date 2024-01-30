@@ -1,36 +1,36 @@
-import{useEffect} from 'react';
-import {getReservas_usuario,getUsuarioById} from '../../redux/Actions/actions';
-import {useDispatch,useSelector} from 'react-redux';
+// import{useEffect} from 'react';
+// import {getReservas_usuario,getUsuarioById} from '../../redux/Actions/actions';
+// import {useDispatch,useSelector} from 'react-redux';
 
 const PagoExitoso = () => {
- const userId = JSON.parse(localStorage.getItem('userId'));
- const dispatch = useDispatch();
- const usuario = useSelector((state) => state.usuarioById);
- const reservas_usuario = useSelector((state) => state.reservasUsuario);
- const idMail = usuario.email
- const ultimareserva = reservas_usuario[reservas_usuario.length-1]
+//  const userId = JSON.parse(localStorage.getItem('userId'));
+//  const dispatch = useDispatch();
+//  const usuario = useSelector((state) => state.usuarioById);
+//  const reservas_usuario = useSelector((state) => state.reservasUsuario);
+//  const idMail = usuario.email
+//  const ultimareserva = reservas_usuario[reservas_usuario.length-1]
 
 
-useEffect ( ()=>{
- dispatch(getReservas_usuario(userId))
+// useEffect ( ()=>{
+//  dispatch(getReservas_usuario(userId))
 
-dispatch(getUsuarioById(userId))
+// dispatch(getUsuarioById(userId))
 
-if(idMail && reservas_usuario[ultimareserva]){
-  dispatch(envioNotificion({
-    destinatario: idMail,
-    asunto: `Confirmacón Reserva N° ${reservas_usuario[ultimareserva].id_reserva}`,
-    mensaje:`<p>Queremos informarle que la reserva <strong>N° ${reservas_usuario[ultimareserva].id_reserva}</strong> para las fechas desde <strong>${reservas_usuario[ultimareserva].fecha_entrada}</strong> al <strong>${reservas_usuario[ultimareserva].fecha_salida
-    }</strong>, ha sido confirmada.</p>
-    <p>Para más información, contáctenos a través de nuestro correo <a href="mailto:serenahotel25@gmail.com">serenahotel25@gmail.com</a>.</p>
-    <br/>
-    <br/>
-    <p>Equipo Serena Hotel.<p>`
-  }
-  ))
-}
+// if(idMail && reservas_usuario[ultimareserva]){
+//   dispatch(envioNotificion({
+//     destinatario: idMail,
+//     asunto: `Confirmacón Reserva N° ${reservas_usuario[ultimareserva].id_reserva}`,
+//     mensaje:`<p>Queremos informarle que la reserva <strong>N° ${reservas_usuario[ultimareserva].id_reserva}</strong> para las fechas desde <strong>${reservas_usuario[ultimareserva].fecha_entrada}</strong> al <strong>${reservas_usuario[ultimareserva].fecha_salida
+//     }</strong>, ha sido confirmada.</p>
+//     <p>Para más información, contáctenos a través de nuestro correo <a href="mailto:serenahotel25@gmail.com">serenahotel25@gmail.com</a>.</p>
+//     <br/>
+//     <br/>
+//     <p>Equipo Serena Hotel.<p>`
+//   }
+//   ))
+// }
 
-},[])
+// },[])
 
   return (
     <div
