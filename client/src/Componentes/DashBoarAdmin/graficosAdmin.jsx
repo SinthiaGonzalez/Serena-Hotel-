@@ -45,60 +45,9 @@ const GraficosAdmin = () => {
     handleDataGrafico()
   }, [reservas])
 
-  console.log("acaaaaaaaaaaaa", reservas)
-  console.log("plis", nombresHabitaciones, preciosHabitaciones, colors)
   return (
     <div>
-      {/* <div>
-      <Bar
-      data={{
-        labels: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dec"],
-        datasets: [
-            {
-                label: "Ganancias",
-                data: [100,200,300,400,500,600,700,800,900,1000,1100,1200],
-                backgroundColor: [
-                  "#FB350C",
-                ]
-            }
-        ]
-        
-      }}
-      options={{
-        plugins: {
-          title:{
-            text: "Ganancias",
-          }
-        }
-      }}
-      >
-      </Bar>
-      </div> */}
-      {/* <div>
-      <Line
-      data={{
-        labels: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dec"],
-        datasets: [
-            {
-                label: "Ganancias",
-                data: [100,200,300,400,500,600,700,800,900,1000,1100,1200],
-                backgroundColor: [
-                  "#FB350C",
-                ]
-            }
-        ]
-      }}
-      options={{
-        plugins: {
-          title:{
-            text: "Ganancias",
-          }
-        }
-      }}
-      >
-      </Line>
-      </div> */}
-      <div className="w-50 h-[30rem] ">
+      <div className="w-50 h-[30rem]">
       <Doughnut className="w-50 h-[30rem] mt-5"
       data={{
         labels: nombresHabitaciones,
@@ -114,7 +63,12 @@ const GraficosAdmin = () => {
         radius: "100%",
         plugins: {
           title:{
-            text: "Ganancias",
+            text: "|GANANCIAS",
+            font: {
+              size: 30, 
+              weight: 'bold',
+            },
+            padding: 20,
           }
         }
       }}
