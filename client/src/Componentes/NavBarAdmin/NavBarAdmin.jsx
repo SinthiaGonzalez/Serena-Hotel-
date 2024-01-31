@@ -117,28 +117,27 @@ const NavBarAdmin = () => {
           COMENTARIOS
         </a>
       </Typography>
-      {/* 
+      
       <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="text-blanco h-12 hover:bg-naranja rounded-xl flex items-center gap-x-2 p-2 font-medium"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          height="16"
-          width="14"
-          viewBox="0 0 448 512"
-        >
-          <path
-            fill="#ffffff"
-            d="M224 0c-17.7 0-32 14.3-32 32V51.2C119 66 64 130.6 64 208v18.8c0 47-17.3 92.4-48.5 127.6l-7.4 8.3c-8.4 9.4-10.4 22.9-5.3 34.4S19.4 416 32 416H416c12.6 0 24-7.4 29.2-18.9s3.1-25-5.3-34.4l-7.4-8.3C401.3 319.2 384 273.9 384 226.8V208c0-77.4-55-142-128-156.8V32c0-17.7-14.3-32-32-32zm45.3 493.3c12-12 18.7-28.3 18.7-45.3H224 160c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7z"
-          />
-        </svg>
-        <a href="#" className="font-medium flex items-center">
-          NOTIFICACIONES
-        </a>
-      </Typography> */}
+  as="li"
+  variant="small"
+  color="blue-gray"
+  className="text-blanco h-12 hover:bg-naranja rounded-xl flex items-center gap-x-2 p-2 font-medium"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 576 512"
+    height="17"
+    width="20"
+  >
+    <path fill="#ffffff" d="M304 240V16.6c0-9 7-16.6 16-16.6C443.7 0 544 100.3 544 224c0 9-7.6 16-16.6 16H304zM32 272C32 150.7 122.1 50.3 239 34.3c9.2-1.3 17 6.1 17 15.4V288L412.5 444.5c6.7 6.7 6.2 17.7-1.5 23.1C371.8 495.6 323.8 512 272 512C139.5 512 32 404.6 32 272zm526.4 16c9.3 0 16.6 7.8 15.4 17c-7.7 55.9-34.6 105.6-73.9 142.3c-6 5.6-15.4 5.2-21.2-.7L320 288H558.4z"/>
+  </svg>
+
+  <a href="/admin-finanzas" className="font-medium flex items-center">
+    FINANZAS
+  </a>
+</Typography>
+
     </ul>
   );
 
