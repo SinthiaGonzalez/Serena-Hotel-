@@ -60,12 +60,12 @@ const CreatePreferenceMP = async (req, res) => {
         failure: `${process.env.URL_NGROK_TEMPORAL}/failure`,
         pending: `${process.env.URL_NGROK_TEMPORAL}/pending`,
       },
-      webhooks: [
-        {
-          url: `${process.env.URL_NGROK_TEMPORAL}/confirmaciondelpago`,
-        },
-      ],
-      auto_return: "approved",
+      // webhooks: [
+      //   {
+      //     url: `${process.env.URL_NGROK_TEMPORAL}/confirmaciondelpago`,
+      //   },
+      // ],
+      // auto_return: "approved",
     };
 
     const preference = new Preference(client);
