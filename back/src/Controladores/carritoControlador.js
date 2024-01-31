@@ -45,7 +45,6 @@ const addHabitacionToCarrito = async (req, res) => {
 const getCarrito = async (req, res) => {
   try {
     const { id } = req.params;
-    console.log("id", id);
 
     const carrito = await Carrito.findOne({
       where: { usuarioId: id },
@@ -65,27 +64,29 @@ const getCarrito = async (req, res) => {
   }
 };
 const deleteCarrito = async (req, res) => {
-  const id = req.params.id; 
-  console.log(id)
-
+  const { id, userId } = req.query;
+  console.log("userId", userId, "id", id);
   try {
-    const carrito = await Carrito.findOne({
+    const carritoUsuario = await Carrito.findOne({
+      where: { usuarioId: userId },
       include: [{ model: Habitaciones, through: "CarritoHabitacion" }],
     });
 
-    if (!carrito) {
-      return res.status(404).json({ error: "Carrito no encontrado." });
+    if (!carritoUsuario) {
+      return res
+        .status(404)
+        .json({ error: "Carrito no encontrado para este usuario." });
     }
 
-    const rowsDeleted = await carrito.removeHabitaciones([id]);
+    const rowsDeleted = await carritoUsuario.removeHabitaciones(id);
 
     if (rowsDeleted === 0) {
       return res
         .status(404)
-        .json({ error: "Habitación no encontrada en el carrito."});
+        .json({ error: "Habitación no encontrada en el carrito." });
     }
 
-    const habitacionesRestantes = await carrito.getHabitaciones();
+    const habitacionesRestantes = await carritoUsuario.getHabitaciones();
 
     res.status(200).json(habitacionesRestantes);
   } catch (error) {

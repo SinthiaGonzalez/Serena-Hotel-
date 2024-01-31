@@ -36,7 +36,7 @@ const navListItems = [
   },
 ];
 
-// const isAdmin = localStorage.getItem("isAdmin"); 
+// const isAdmin = localStorage.getItem("isAdmin");
 // console.log("verificacion 31"+isAdmin)
 // if(isAdmin==="true") navListItems.push({
 //   label: "ADMIN DASHBOARD",
@@ -65,13 +65,11 @@ function NavList() {
             <svg xmlns={xmlns} height="16" width="20" viewBox="0 0 640 512">
               <path fill="#ffffff" d={d} />
             </svg>
-            <span className= "text-white"> {label}</span>
-         
+            <span className="text-white"> {label}</span>
           </MenuItem>
         </Typography>
-        ))}    
-    </ul>   
-           
+      ))}
+    </ul>
   );
 }
 
@@ -84,15 +82,22 @@ const NavBarHome = () => {
     dispatch(getCarrito());
   };
   const carrito = useSelector((state) => state.carrito);
-  const estadia = JSON.parse(localStorage.getItem("estadia"));
+  const fechaEntrada = JSON.parse(localStorage.getItem("fecha_entrada"));
+  const fechaSalida = JSON.parse(localStorage.getItem("fecha_salida"));
+  const fecha_entrada_str = localStorage.getItem("fecha_entrada");
+  const fecha_salida_str = localStorage.getItem("fecha_salida");
+  const fecha_entrada = new Date(fecha_entrada_str);
+  const fecha_salida = new Date(fecha_salida_str);
+  const estadiaEnMilisegundos = fecha_salida - fecha_entrada;
+  const estadia = estadiaEnMilisegundos / (24 * 60 * 60 * 1000);
   const subtotal = carrito.reduce(
     (total, producto) => total + producto.precio * estadia,
     0
   );
 
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.token); 
-  
+  const token = useSelector((state) => state.token);
+
   useEffect(() => {
     window.addEventListener(
       "resize",

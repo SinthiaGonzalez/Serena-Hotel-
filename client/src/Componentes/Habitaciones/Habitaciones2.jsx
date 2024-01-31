@@ -25,7 +25,7 @@ import Checkout from "../Filtros/filtro-Checkout";
 import { format, set } from "date-fns";
 // import BuscarPorNombre from "../ordenamientosyBusqueda/busqueda";
 import Paginacion from "../Paginacion/Paginacion";
-import { fecha_entrada, fecha_salida, } from "../../redux/Actions/actions"
+import { fecha_entrada, fecha_salida } from "../../redux/Actions/actions";
 const Habitaciones = () => {
   const dispatch = useDispatch();
   const habitacionesShop = useSelector((state) => state.habitaciones);
@@ -121,7 +121,6 @@ const Habitaciones = () => {
   };
 
   const handleCheckinChange = (selectedDate) => {
-
     const isValidDate = selectedDate instanceof Date && !isNaN(selectedDate);
     if (isValidDate) {
       setCheckinDate(format(selectedDate, "yyyy-MM-dd"));
@@ -134,10 +133,8 @@ const Habitaciones = () => {
 
   const [mostrarSeccion, setMostrarSeccion] = useState(false);
 
-
   const handleCheckoutChange = (selectedDate) => {
     const isValidDate = selectedDate instanceof Date && !isNaN(selectedDate);
-    console.log("isValidDate salida", isValidDate);
     if (isValidDate) {
       setCheckoutDate(format(selectedDate, "yyyy-MM-dd"));
       dispatch(fecha_salida(format(selectedDate, "yyyy-MM-dd")));
@@ -153,20 +150,19 @@ const Habitaciones = () => {
         // Ambas fechas están seleccionadas, hacer dispatch de getReservas
         await dispatch(getReservas({ fechaEntrada, fechaSalida }));
         setMostrarSeccion(true);
-
       } else {
         // Al menos una de las fechas no está seleccionada, hacer dispatch de getHabitaciones
         await dispatch(getHabitaciones({ page: paginaActual, itemsPerPage }));
         setMostrarSeccion(false);
-
       }
     };
 
     fetchData();
   }, [dispatch, fechaEntrada, checkoutDate, paginaActual, itemsPerPage]);
 
-
-  const habitacionesRenderizadas = mostrarSeccion ? habitacionesFechas : habitacionesShop;
+  const habitacionesRenderizadas = mostrarSeccion
+    ? habitacionesFechas
+    : habitacionesShop;
   //habitacioneshop es el esatdo global de habitaciones y habitacionesfechas es el estado global habitacionesFechas
   const totalItems =
     stringdelbuscar.length > 0
@@ -176,13 +172,13 @@ const Habitaciones = () => {
   const habitacionesActuales =
     stringdelbuscar.length > 0
       ? habitacionfiltrada.slice(
-        (paginaActual - 1) * itemsPerPage,
-        paginaActual * itemsPerPage
-      )
+          (paginaActual - 1) * itemsPerPage,
+          paginaActual * itemsPerPage
+        )
       : habitacionesRenderizadas.slice(
-        (paginaActual - 1) * itemsPerPage,
-        paginaActual * itemsPerPage
-      );
+          (paginaActual - 1) * itemsPerPage,
+          paginaActual * itemsPerPage
+        );
   // console.log("habitacionesBusqueda", habitacionfiltrada);
   // console.log("todasHabitaciones", habitacionesShop);
   // console.log("habitacionesFechas", habitacionesFechas);
