@@ -71,7 +71,7 @@ const deleteCarrito = async (req, res) => {
       where: { usuarioId: userId },
       include: [{ model: Habitaciones, through: "CarritoHabitacion" }],
     });
-
+    console.log(carritoUsuario);
     if (!carritoUsuario) {
       return res
         .status(404)
