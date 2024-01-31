@@ -3,21 +3,24 @@ import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 import { useDispatch } from "react-redux";
 import { eliminarDelCarrito } from "../../redux/Actions/actions";
 const ShoppingCartCard1 = ({ imagenes, nombre, precio, id }) => {
-const dispatch = useDispatch();
-const fecha_entrada_str = localStorage.getItem("fecha_entrada");
-const fecha_salida_str = localStorage.getItem("fecha_salida");
-// Convierte las cadenas a objetos Date
-const fecha_entrada = new Date(fecha_entrada_str);
-const fecha_salida = new Date(fecha_salida_str);
+  const dispatch = useDispatch();
+  const fecha_entrada_str = localStorage.getItem("fecha_entrada");
+  const fecha_salida_str = localStorage.getItem("fecha_salida");
+  // Convierte las cadenas a objetos Date
+  const fecha_entrada = new Date(fecha_entrada_str);
+  const fecha_salida = new Date(fecha_salida_str);
 
-// Realiza la resta
-const estadiaEnMilisegundos = fecha_salida - fecha_entrada;
+  // Realiza la resta
+  const estadiaEnMilisegundos = fecha_salida - fecha_entrada;
 
-// Convierte la diferencia a días
-const estadia = estadiaEnMilisegundos / (24 * 60 * 60 * 1000);
+  // Convierte la diferencia a días
+  const estadia = estadiaEnMilisegundos / (24 * 60 * 60 * 1000);
 
   const eliminarHabitacion = () => {
-    dispatch(eliminarDelCarrito(id));
+    const userId = JSON.parse(localStorage.getItem("userId"));
+    if (id && userId) {
+      dispatch(eliminarDelCarrito(id, userId));
+    }
   };
   if (!imagenes || !nombre || !precio) {
     return <div>loading...</div>;

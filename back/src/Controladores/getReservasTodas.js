@@ -1,6 +1,7 @@
 const { Reservas, Habitaciones, Usuario } = require("../db.js");
 
 const getReservasTodas = async (req, res) => {
+  console.log("entre a reservas")
   try {
     const reservas = await Reservas.findAll({
       include: Habitaciones
@@ -17,7 +18,19 @@ const getReservasTodas = async (req, res) => {
         throw new Error('No se encontraron los datos del Usuario correspondiente a esta Reserva');
       }
 
-      return reserva.Habitaciones.map((habitacion) => ({
+      let precioTotalReserva = 0
+        reserva.Habitaciones.forEach(habitacion => {   
+          let fecha1 = new Date(reserva.fecha_entrada);
+          let fecha2 = new Date(reserva.fecha_salida);
+          let diferencia = fecha2.getTime() - fecha1.getTime();
+          //console.log(diasDeDiferencia); // resultado: 357
+          let diasDeDiferencia = diferencia / 1000 / 60 / 60 / 24;
+          precioTotalReserva += habitacion.precio * diasDeDiferencia
+        });  
+
+
+      return reserva.Habitaciones.map((habitacion) => (
+        {
         nombre_y_apellido: usuario_data.name + " " + usuario_data.apellido,
         email: usuario_data.email,
         telefono: usuario_data.telefono,
@@ -26,6 +39,7 @@ const getReservasTodas = async (req, res) => {
         fecha_entrada: reserva.fecha_entrada,
         fecha_salida: reserva.fecha_salida,
         estado_habitacion: habitacion.estado,
+        precio: precioTotalReserva,
       }));
     }));
 

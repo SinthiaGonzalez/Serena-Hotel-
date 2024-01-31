@@ -1,20 +1,17 @@
-// import { useEffect } from "react";
-// import {
-//   envioNotificion,
-//   getReservas_usuario,
-//   getUsuarioById,
-// } from "../../redux/Actions/actions";
-// import { useDispatch, useSelector } from "react-redux";
-
+// import{useEffect} from 'react';
+// import {getReservas_usuario,getUsuarioById} from '../../redux/Actions/actions';
+// import {useDispatch,useSelector} from 'react-redux';
 const PagoExitoso = () => {
-  // const userId = JSON.parse(localStorage.getItem("userId"));
-  // const dispatch = useDispatch();
-
+//  const userId = JSON.parse(localStorage.getItem('userId'));
+//  const dispatch = useDispatch();
+//  const usuario = useSelector((state) => state.usuarioById);
+//  const reservas_usuario = useSelector((state) => state.reservasUsuario);
+//  const idMail = usuario.email
+//  const ultimareserva = reservas_usuario[reservas_usuario.length-1]
   // useEffect( () => {
   //    dispatch(getReservas_usuario(userId));
   //    dispatch(getUsuarioById(userId));
   // }, []);
-
   // const usuario = useSelector((state) => state.usuarioById);
   // const idMail = usuario.email;
 
@@ -38,6 +35,7 @@ const PagoExitoso = () => {
   //     console.error("No hay reservas o índice de reserva inválido");
   //   }
   // }, [ultimaReserva, dispatch]);
+
 
   return (
     <div

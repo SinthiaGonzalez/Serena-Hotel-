@@ -22,7 +22,10 @@ const {
 } = require("../Controladores/carritoControlador");
 const { postHabitacionHandler } = require("../handlers/HabitacionHandler");
 const { eliminarHabitacionHandler } = require("../handlers/HabitacionHandler");
-const { postReservasHandler, deleteReservasHandler } = require("../handlers/ReservasHandler");
+const {
+  postReservasHandler,
+  deleteReservasHandler,
+} = require("../handlers/ReservasHandler");
 const { getReservas } = require("../Controladores/getReservas");
 const {
   getReservasPorUsuarioId,
@@ -51,7 +54,8 @@ const {
 } = require("../handlers/HandlersUsuarios/GetHandlerUsuarios");
 const { updateHabitacionHandler } = require("../handlers/HabitacionHandler");
 const {
-  putUsuarioHandler, putUsuarioEstadoHandler
+  putUsuarioHandler,
+  putUsuarioEstadoHandler,
 } = require("../handlers/HandlersUsuarios/PutAndDeleteUsuarios");
 const {
   deleteUsuarioHandler,
@@ -68,9 +72,13 @@ const {
 } = require("../handlers/HabitacionDetailHandler");
 
 const { deleteCarrito } = require("../Controladores/carritoControlador");
-const  {respuestaConfirmacionPago}  = require("../Controladores/RespuestaMP");
-const { getUsuarioByIdHandler } = require("../handlers/HandlersUsuarios/GetHandlerUsuarios");
-const { RecuperarUsuario } = require("../handlers/HandlerMailer/RecuperarContraseña/RecuperarUsuario");
+const { respuestaConfirmacionPago } = require("../Controladores/RespuestaMP");
+const {
+  getUsuarioByIdHandler,
+} = require("../handlers/HandlersUsuarios/GetHandlerUsuarios");
+const {
+  RecuperarUsuario,
+} = require("../handlers/HandlerMailer/RecuperarContraseña/RecuperarUsuario");
 
 const router = express.Router(); // importamos el metodo Router de express para poder crear rutas
 router.post("/login", loginCreateToken);
@@ -84,7 +92,7 @@ router.get("/verify", verifyToken, (req, res) => {
   res.status(200).json({ message: "acceso correcto", userId, isAdmin });
 });
 
-router.get("/usuario/:id", getUsuarioByIdHandler)
+router.get("/usuario/:id", getUsuarioByIdHandler);
 router.post("/usuario", CreateUsuario);
 router.get("/usuarios", getHandlerUsuarios);
 router.put("/login", LoginUsuario);
@@ -104,11 +112,16 @@ router.get("/", (req, res) => {
 });
 
 router.post("/mercadopago/create_preference", CreatePreferenceMP);
-router.get("/success", (req, res) => res.redirect("https://serena-hotel.vercel.app/pago-exitoso"));
-router.get("/failure", (req, res) => res.redirect("https://serena-hotel.vercel.app/pago-rechazado"));
-router.get("/pending", (req, res) => res.redirect("https://serena-hotel.vercel.app/pago-pendiente"));
-router.post("/confirmaciondelpago",respuestaConfirmacionPago);
-
+router.get("/success", (req, res) =>
+  res.redirect("https://serena-hotel.vercel.app/pago-exitoso")
+);
+router.get("/failure", (req, res) =>
+  res.redirect("https://serena-hotel.vercel.app/pago-rechazado")
+);
+router.get("/pending", (req, res) =>
+  res.redirect("https://serena-hotel.vercel.app/pago-pendiente")
+);
+router.post("/confirmaciondelpago", respuestaConfirmacionPago);
 
 router.get("/habitaciones", getHabitacionHandler);
 router.get("/habitaciones/:id", HanlderHabitacionDetail);
@@ -118,14 +131,14 @@ router.post("/notificaciones", EnvioMailNotificaciones);
 
 router.post("/post/habitaciones", postHabitacionHandler);
 router.delete("/habitaciones/:id", eliminarHabitacionHandler);
-router.delete("/carrito/:id", deleteCarrito);
+router.delete("/carrito", deleteCarrito);
 router.post("/carrito", addHabitacionToCarrito);
 router.get("/carrito/:id", getCarrito);
 router.post("/reservas", postReservasHandler);
 router.get("/reservas", getReservas);
 router.get("/reservas-por-usuario", getReservasPorUsuarioId); //trae por ID de usuario o todas (/reservas-por-usuario | http://localhost:3001/reservas-por-usuario?id=5)
 router.get("/reservas-todas", getReservasTodas);
-router.delete("/reservas/delete/:id", deleteReservasHandler)
+router.delete("/reservas/delete/:id", deleteReservasHandler);
 
 router.get("/ordenamientos&filtros", getOrdenamientosFiltrosHandler);
 

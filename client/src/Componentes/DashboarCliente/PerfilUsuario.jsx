@@ -105,8 +105,7 @@ const UpdateUsuario = () => {
       ...resetFields,
     });
   };
-  console.log("este", user);
-
+ 
   console.log(" a ver", usuarioData);
 
   const handleDefaultValues = () => {
