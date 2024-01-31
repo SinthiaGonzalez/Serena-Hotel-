@@ -72,11 +72,10 @@ export function postComent(state) {
       }
     } catch (error) {
       Swal.fire({
-        title: "solo se permite un comentario por usuario",
+        title: "Solo se permite un comentario por usuario",
         icon: "error",
         confirmButtonColor: "#FB350C",
         iconColor: "#FB350C",
-
       });
     }
   };
@@ -143,7 +142,7 @@ export function postUsuarioGoogle(data) {
   };
 }
 export function verificacionLogeoUsuarioAction(infoLogeo) {
-//  console.log(infoLogeo);
+  //  console.log(infoLogeo);
 
   return async function (dispatch) {
     try {
@@ -663,7 +662,7 @@ export function recuperarContraseñaAction(correo) {
   return async function (dispatch) {
     try {
       const response = await axios.put("/recuperarContrasena", { correo });
-      Swal.fire(response.data.message, "", "sucess");
+      Swal.fire(response.data.message, "", "success");
     } catch (error) {
       Swal.fire(error.response.data.error, "", "warning");
     }
@@ -673,7 +672,7 @@ export function recuperarUsuarioAction(correo) {
   return async function () {
     try {
       const response = await axios.put("/recuperarUsuario", { correo });
-      Swal.fire(response.data.message, "", "sucess");
+      Swal.fire(response.data.message, "", "success");
     } catch (error) {
       if (error.response && error.response.status === 400) {
         Swal.fire({
@@ -735,7 +734,6 @@ export function getReservas_Admin(usuarioId) {
         icon: "error",
         confirmButtonColor: "#FB350C",
         iconColor: "#FB350C",
-
       });
       // console.log("Error al solicitar las Reservas por Usuario:",error);
     }
@@ -942,7 +940,6 @@ export const fecha_entrada = (checkinDate) => {
       console.log(error);
     }
   };
-
 };
 
 export const fecha_salida = (checkoutDate) => {
@@ -957,4 +954,3 @@ export const fecha_salida = (checkoutDate) => {
     }
   };
 };
-

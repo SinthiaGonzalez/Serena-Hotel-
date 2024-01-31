@@ -26,7 +26,7 @@ const RecuperarContraseña = () => {
         <div className="flex flex-col gap-4 p-6 mt-8 ">
           <a
             href="/logearse"
-            class="font-inter text-base  antialiased font-bold text-naranja text-inter hover:scale-105 md:w-1/6 lg:mt-6 pl-4 mb-8 md:pl-0 mr-auto"
+            className="font-inter text-base  antialiased font-bold text-naranja text-inter hover:scale-105 md:w-1/6 lg:mt-6 pl-4 mb-8 md:pl-0 mr-auto"
           >
             🡰 Volver
           </a>

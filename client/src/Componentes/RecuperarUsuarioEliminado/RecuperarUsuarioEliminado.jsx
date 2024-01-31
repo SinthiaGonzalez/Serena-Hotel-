@@ -26,7 +26,7 @@ const RecuperarUsuarioEliminado = () => {
         <div className="flex flex-col gap-4 p-6 mt-8 ">
           <a
             href="/logearse"
-            class="font-inter text-base  antialiased font-bold text-naranja text-inter hover:scale-105 md:w-1/6 lg:mt-6 pl-4 mb-8 md:pl-0 mr-auto"
+            className="font-inter text-base  antialiased font-bold text-naranja text-inter hover:scale-105 md:w-1/6 lg:mt-6 pl-4 mb-8 md:pl-0 mr-auto"
           >
             🡰 Volver
           </a>
@@ -34,7 +34,8 @@ const RecuperarUsuarioEliminado = () => {
             Recuperar Cuenta
           </p>
           <p className="font-inter mb-4">
-            Vamos a enviarte un email con tu nueva clave, para que recuperes tu cuenta!
+            Vamos a enviarte un email con tu nueva clave, para que recuperes tu
+            cuenta!
           </p>
 
           <div className="flex flex-row lg:w-2/3 bg-verde lg:ml-[18%] relative rounded-lg mb-12">

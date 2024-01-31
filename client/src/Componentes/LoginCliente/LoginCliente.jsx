@@ -25,28 +25,35 @@ const LoginCliente = () => {
 
   const handleVerificarUsuario = async () => {
     await dispatch(verificacionLogeoUsuarioAction({ email, contraseña }));
-    let estado = localStorage.getItem("estado"); 
+    let estado = localStorage.getItem("estado");
     //alert (estado)
-      estado = localStorage.getItem("estado"); 
-  
-      if(estado==='"activo"') {
-        //alert("linea 31 activo")
-        const isAdmin = localStorage.getItem("isAdmin"); 
-        //alert("verificacion 33"+isAdmin+ "estado" + estado)
-        if(isAdmin === "true") navigate("/admin-usuarios")
-        if(isAdmin === "false") navigate("/")
-      }else if(estado === '"eliminar"'){
-       
-        Swal.fire("Su Cuenta no se encuentra activa, lo redireccionaremos para que pueda recuperarla.", "", "warning");
-        /* LINEA PARA Q SI se CAMBIA A OTRA RUTA NO ESTË LOGUEADO */
-        localStorage.removeItem("token");     
-        navigate("/recuperar-usuario") 
-      }else if(estado === '"inactivo"'){
-        Swal.fire("Su Usuario se encuentra inactivo, por favor comuníquese con serenahotel25@gmail.com ¡Muchas gracias!", "", "warning")
-       /* LINEA PARA Q SI se CAMBIA A OTRA RUTA NO ESTË LOGUEADO */
-        localStorage.removeItem("token");      
-      }  
-   };
+    estado = localStorage.getItem("estado");
+
+    if (estado === '"activo"') {
+      //alert("linea 31 activo")
+      const isAdmin = localStorage.getItem("isAdmin");
+      //alert("verificacion 33"+isAdmin+ "estado" + estado)
+      if (isAdmin === "true") navigate("/admin-usuarios");
+      if (isAdmin === "false") navigate("/");
+    } else if (estado === '"eliminar"') {
+      Swal.fire(
+        "Su cuenta no se encuentra activa, lo redireccionaremos para que pueda recuperarla.",
+        "",
+        "warning"
+      );
+      /* LINEA PARA Q SI se CAMBIA A OTRA RUTA NO ESTË LOGUEADO */
+      localStorage.removeItem("token");
+      navigate("/recuperar-usuario");
+    } else if (estado === '"inactivo"') {
+      Swal.fire(
+        "Su cuenta se encuentra inactiva, por favor comuníquese con serenahotel25@gmail.com ¡Muchas gracias!",
+        "",
+        "warning"
+      );
+      /* LINEA PARA Q SI se CAMBIA A OTRA RUTA NO ESTË LOGUEADO */
+      localStorage.removeItem("token");
+    }
+  };
 
   useVerificarToken();
 
@@ -164,8 +171,8 @@ const LoginCliente = () => {
               <br /> mejor de <br className="hidden lg:block" /> SERENA HOTELS
             </p>
             <a href="/recuperar-usuario" className="mb-[20%] text-naranja">
-            ¿Quieres recuperar tu cuenta?
-          </a>
+              ¿Quieres recuperar tu cuenta?
+            </a>
 
             <div className="p-6">
               <a

@@ -58,7 +58,12 @@ const CardShopHabitaciones = ({
     const token = localStorage.getItem("token");
 
     if (!token) {
-      alert("Necesita iniciar Sesion para hacer una reserva");
+      Swal.fire({
+        title: "Necesita iniciar sesion para reservar",
+        icon: "info",
+        confirmButtonColor: "#FB350C",
+        iconColor: "#FB350C",
+      });
     } else {
       if (!estadia || estadia <= 0) {
         setMostrarpopover(true);
@@ -78,7 +83,7 @@ const CardShopHabitaciones = ({
       showConfirmButton: false,
       timer: 2000,
       timerProgressBar: true,
-      background: "#1D2828",
+      background: "#3E4747",
       color: "#fff",
       didOpen: (toast) => {
         toast.onmouseenter = Swal.stopTimer;
