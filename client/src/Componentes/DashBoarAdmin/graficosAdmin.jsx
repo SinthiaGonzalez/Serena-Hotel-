@@ -1,13 +1,14 @@
+
 import { Chart as ChartJS, defaults } from "chart.js/auto";
 import { Bar, Doughnut, Line } from "react-chartjs-2";
 import { useDispatch, useSelector } from "react-redux";
+
 import { useEffect, useState } from "react";
 import { getReservas_Admin } from "../../redux/Actions/actions";
 import { useVerificarIsAdmin } from "../AutenticadorToken/autenticadorLocalStIsAdmin";
 
 defaults.maintainAspectRatio = false;
 defaults.responsive = true;
-
 defaults.plugins.title.display = true;
 defaults.plugins.title.align = "start";
 defaults.plugins.title.size = 2000;
@@ -18,6 +19,7 @@ const GraficosAdmin = () => {
   const reservas = useSelector((state) => state.reservasTodasAdmin);
   const [nombresHabitaciones, setNombresHabitaciones] = useState([]);
   const [preciosHabitaciones, setPreciosHabitaciones] = useState([]);
+
   const uniqueNombres = new Set(nombresHabitaciones);
   const uniquePrecios = new Set(preciosHabitaciones);
   const colors = [];
@@ -28,6 +30,7 @@ const GraficosAdmin = () => {
       setNombresHabitaciones([...uniqueNombres]);
       setPreciosHabitaciones([...uniquePrecios]);
     });
+
   };
 
   for (let i = 0; i < preciosHabitaciones.length; i++) {
@@ -82,6 +85,7 @@ const GraficosAdmin = () => {
             </div>
           </div>
         </div>
+
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 const validation = (contactData) => {
+
   const errors = {};
 
   if (!/^[a-zA-Z](?:\s?[a-zA-Z])*$/.test(contactData.nombre)) {
@@ -22,3 +23,4 @@ const validation = (contactData) => {
 };
 
 export default validation;
+

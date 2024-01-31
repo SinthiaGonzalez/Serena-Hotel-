@@ -2,7 +2,6 @@ import {
   Popover,
   PopoverHandler,
   PopoverContent,
-  Button,
 } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";

@@ -5,8 +5,13 @@ const DashBoarAdmin = () => {
   useVerificarToken();
   return (
     <>
+
       <NavBarAdmin />
+      <div>
       <GraficosAdmin />
+      </div>
+      
+     
     </>
   );
 };
