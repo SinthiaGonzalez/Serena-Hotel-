@@ -3,7 +3,6 @@ import ShoppingCartCard1 from "./Card-Shop-Cart";
 
 const AddShoppingCart = () => {
   const carrito = useSelector((state) => state.carrito);
-  console.log(carrito)
 
   return (
     <div>

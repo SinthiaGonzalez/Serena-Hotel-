@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { enviarConsulta } from "../../redux/Actions/actions";
-import  validation  from "./validations"
+import validation from "./validations";
 import {
   Card,
   Input,
@@ -30,7 +30,7 @@ const Contactenos = () => {
   const handleChange = (e) => {
     setInfoFormulario({ ...infoFormulario, [e.target.name]: e.target.value });
     setErrors(
-      validation({...infoFormulario, [e.target.name]: e.target.value})
+      validation({ ...infoFormulario, [e.target.name]: e.target.value })
     );
   };
 
@@ -68,13 +68,12 @@ const Contactenos = () => {
     });
   };
 
-const isSubmitDisabled = () => {
+  const isSubmitDisabled = () => {
     // Verifica si hay algún campo obligatorio sin completar
-  if(Object.keys(errors).length === 0) return false;
-  else return true;
+    if (Object.keys(errors).length === 0) return false;
+    else return true;
   };
 
-  console.log("por aca", errors)
   return (
     <div className="bg-verde">
       <ScrollToTop />
@@ -126,7 +125,9 @@ const isSubmitDisabled = () => {
                           "before:content-none after:content-none font-inter text-blanco",
                       }}
                     />
-                    <p className="my-4 text-base text-center text-naranja">{touchedFields.nombre && errors.nombre}</p>
+                    <p className="my-4 text-base text-center text-naranja">
+                      {touchedFields.nombre && errors.nombre}
+                    </p>
 
                     <a className="font-inter font-medium text-blanco">
                       Correo:
@@ -145,7 +146,9 @@ const isSubmitDisabled = () => {
                         className: "before:content-none after:content-none",
                       }}
                     />
-                    <p className="my-4 text-base text-center text-naranja">{touchedFields.correo && errors.correo}</p>
+                    <p className="my-4 text-base text-center text-naranja">
+                      {touchedFields.correo && errors.correo}
+                    </p>
 
                     <a className="font-inter font-medium text-blanco">
                       Teléfono:
@@ -164,7 +167,9 @@ const isSubmitDisabled = () => {
                         className: "before:content-none after:content-none",
                       }}
                     />
-                    <p className="my-4 text-base text-center text-naranja">{touchedFields.telefono && errors.telefono}</p>
+                    <p className="my-4 text-base text-center text-naranja">
+                      {touchedFields.telefono && errors.telefono}
+                    </p>
 
                     <a className="font-inter font-medium text-blanco">
                       Mensaje:
@@ -183,10 +188,17 @@ const isSubmitDisabled = () => {
                         className: "before:content-none after:content-none",
                       }}
                     />
-                    <p className="my-4 text-base text-center text-naranja">{touchedFields.mensaje && errors.mensaje}</p>
+                    <p className="my-4 text-base text-center text-naranja">
+                      {touchedFields.mensaje && errors.mensaje}
+                    </p>
                   </div>
 
-                  <Button type="submit" className="mt-6 bg-naranja" fullWidth disabled={isSubmitDisabled()}>
+                  <Button
+                    type="submit"
+                    className="mt-6 bg-naranja"
+                    fullWidth
+                    disabled={isSubmitDisabled()}
+                  >
                     Contáctenos
                   </Button>
                 </form>

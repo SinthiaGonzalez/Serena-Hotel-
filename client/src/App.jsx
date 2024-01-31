@@ -21,7 +21,7 @@ import ResponseMP from "./Componentes/respuestademercadoPago/ResponseMP.jsx";
 import PagoExitoso from "./Componentes/RespuestaMP/Pago_Exitoso.jsx";
 import PagoPendiente from "./Componentes/RespuestaMP/Pago_Pendiente.jsx";
 import PagoRechazado from "./Componentes/RespuestaMP/Pago-Rechazado.jsx";
-import  AdminComentarios from "./Componentes/DashboardAdminComentarios/AdminComentarios.jsx";
+import AdminComentarios from "./Componentes/DashboardAdminComentarios/AdminComentarios.jsx";
 import RecuperarUsuarioEliminado from "./Componentes/RecuperarUsuarioEliminado/RecuperarUsuarioEliminado.jsx";
 import GraficosAdmin from "./Componentes/DashBoarAdmin/DashBoarAdmin.jsx";
 // Esta linea de codigo hace que por default todos los requerimientos en axios se hagan a esta ruta en el back
@@ -49,7 +49,10 @@ const App = () => {
         <Route path="/logearse" element={<LoginCliente />} />
         <Route path="/registrarse" element={<CreateUsuario />} />
         <Route path="/recuperar-contraseña" element={<RecuperarContraseña />} />
-        <Route path="/recuperar-usuario" element={<RecuperarUsuarioEliminado />} />
+        <Route
+          path="/recuperar-usuario"
+          element={<RecuperarUsuarioEliminado />}
+        />
 
         {/* Rutas Dashboard Administrador */}
         <Route path="/admin-reservas" element={<DashBoarAdminReservas />} />
@@ -59,8 +62,8 @@ const App = () => {
           element={<DashBoarAdminHabitaciones />}
         />
         <Route path="/admin-comentarios" element={<AdminComentarios />} />
-        <Route path="/admin-finanzas" element={<GraficosAdmin/>} />
-        
+        <Route path="/admin-finanzas" element={<GraficosAdmin />} />
+
         {/* Rutas Dashboard Usuario */}
         <Route path="/clienteReservas" element={<DashBoardClienteReservas />} />
         <Route path="/clientePerfil" element={<DashBoardClientePerfil />} />

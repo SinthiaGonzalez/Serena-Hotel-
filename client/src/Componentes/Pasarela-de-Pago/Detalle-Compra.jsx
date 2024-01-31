@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { createPreferenceMercadopagoId } from "../../redux/Actions/actions";
 import BotonMercadoPago from "../Boton-MercadoPago/BotonMP";
-import { useEffect,useState} from "react";
+import { useEffect, useState } from "react";
 
 const DetalledelaCompra = () => {
   const preferenceIdMP = useSelector((state) => state.preferenceIdMP);
@@ -13,7 +13,7 @@ const DetalledelaCompra = () => {
   const fecha_salida_str = localStorage.getItem("fecha_salida");
   // Convierte las cadenas a objetos Date
   const fecha_entrada = new Date(fecha_entrada_str);
-  const fecha_salida = new Date(fecha_salida_str); 
+  const fecha_salida = new Date(fecha_salida_str);
   // Realiza la resta
   const estadiaEnMilisegundos = fecha_salida - fecha_entrada;
   // Convierte la diferencia a días
@@ -53,7 +53,7 @@ const DetalledelaCompra = () => {
   };
 
   return (
-    <div className="m-4 w-1/3 text text-negro bg-verde rounded-md ">
+    <div className="m-4 lg:w-1/3 py-6 text text-negro bg-verde rounded-md ">
       <div className="mx-12 mt-16">
         <p className="text-3xl text-inter text-blanco font-bold text-center mb-28">
           TOTAL DE LA COMPRA
@@ -101,16 +101,16 @@ const DetalledelaCompra = () => {
           </div>
         </div>
         <div>
-        {mostrarBotonLimpiar ? (
-          <button
-            className=" w-full bg-naranja text-blanco py-2 px-4 rounded-md mt-4"
-            onClick={handleLimpiarFechas}
-          >
-           Pagar
-          </button>
-        ) : (
-          <BotonMercadoPago id={preferenceIdMP} />
-        )}
+          {mostrarBotonLimpiar ? (
+            <button
+              className=" w-full bg-naranja text-blanco py-2 px-4 rounded-md mt-4"
+              onClick={handleLimpiarFechas}
+            >
+              Pagar
+            </button>
+          ) : (
+            <BotonMercadoPago id={preferenceIdMP} />
+          )}
         </div>
       </div>
     </div>

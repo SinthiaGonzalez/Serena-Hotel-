@@ -1,7 +1,7 @@
 import axios from "axios";
 import Swal from "sweetalert2";
 import groserias from "../../Componentes/CreateComentario/groserias";
-import { profanity } from '@2toad/profanity';
+import { profanity } from "@2toad/profanity";
 
 export function getHabitaciones() {
   return async function (dispatch) {
@@ -54,28 +54,28 @@ export function postComent(state) {
   return async function (dispatch) {
     try {
       profanity.addWords(groserias);
-      if(profanity.exists(state.contenido)===true){
+      if (profanity.exists(state.contenido) === true) {
         Swal.fire({
-          title:"El mensaje contiene palabras prohibidas", 
-          icon:"error",
-          confirmButtonColor:"#FB350C",
-          iconColor: "#FB350C"
+          title: "El mensaje contiene palabras prohibidas",
+          icon: "error",
+          confirmButtonColor: "#FB350C",
+          iconColor: "#FB350C",
+        });
+      } else {
+        await axios.post("/comentar", state);
+        Swal.fire({
+          title: "Se agrego el comentario exitosamente!",
+          icon: "success",
+          confirmButtonColor: "#FB350C",
+          iconColor: "#FB350C",
         });
       }
-      else {
-      await axios.post("/comentar", state);
-      Swal.fire({
-        title:"Se agrego el comentario exitosamente!", 
-        icon:"success",
-        confirmButtonColor:"#FB350C",
-        iconColor: "#FB350C"
-      })}
     } catch (error) {
       Swal.fire({
-        title:"solo se permite un comentario por usuario", 
-        icon:"error",
-        confirmButtonColor:"#FB350C",
-        iconColor: "#FB350C"
+        title: "solo se permite un comentario por usuario",
+        icon: "error",
+        confirmButtonColor: "#FB350C",
+        iconColor: "#FB350C",
       });
     }
   };
@@ -85,33 +85,31 @@ export function postUsuario(state) {
     try {
       const response = await axios.post("/usuario", state);
       console.log("log de action", state);
-      if (response.status === 200 ){
-      
+      if (response.status === 200) {
+        Swal.fire({
+          title: "Usuario creado exitosamente!",
+          icon: "success",
+          confirmButtonColor: "#FB350C",
+          iconColor: "#FB350C",
+        });
+      }
+      if (response.status === 201) {
+        Swal.fire({
+          title: "Ya existe una Cuenta registrada con ese correo electrónico!",
+          icon: "info",
+          confirmButtonColor: "#FB350C",
+          iconColor: "#FB350C",
+        });
+      }
+    } catch (error) {
       Swal.fire({
-        title:"Usuario creado exitosamente!", 
-        icon:"success",
-        confirmButtonColor:"#FB350C",
-        iconColor: "#FB350C"
+        title: error.message,
+        icon: "error",
+        confirmButtonColor: "#FB350C",
+        iconColor: "#FB350C",
       });
-    } 
-    if (response.status === 201 ){
-      Swal.fire({
-        title:"Ya existe una Cuenta registrada con ese correo electrónico!", 
-        icon:"info",
-        confirmButtonColor:"#FB350C",
-        iconColor: "#FB350C"
-      });
-  }}
-    catch (error) {
-      Swal.fire({
-        title:error.message, 
-        icon:"error",
-        confirmButtonColor:"#FB350C",
-        iconColor: "#FB350C"
-      });
-     }
-    
-  }
+    }
+  };
 }
 
 export function postUsuarioGoogle(data) {
@@ -128,11 +126,14 @@ export function postUsuarioGoogle(data) {
         localStorage.setItem("isAdmin", JSON.stringify(isAdmin));
         localStorage.setItem("imagen", JSON.stringify(imagen));
         localStorage.setItem("estado", JSON.stringify(estado));
-        console.log("Respuesta del servidor con google XX:", response2.data);    
-        console.log("Respuesta del servidor con google response.data.isAdmin:", response2.data.isAdmin);      
+        console.log("Respuesta del servidor con google XX:", response2.data);
+        console.log(
+          "Respuesta del servidor con google response.data.isAdmin:",
+          response2.data.isAdmin
+        );
         dispatch({
           type: "POST_USUARIO_GOOGLE",
-          payload: response2.data,       
+          payload: response2.data,
         });
       }
     } catch (error) {
@@ -153,12 +154,11 @@ export function verificacionLogeoUsuarioAction(infoLogeo) {
       localStorage.setItem("isAdmin", JSON.stringify(isAdmin));
       localStorage.setItem("imagen", JSON.stringify(imagen));
       localStorage.setItem("estado", JSON.stringify(estado));
-      console.log(response.data)
+      console.log(response.data);
       dispatch({
         type: "POST_USUARIO_NOGOOGLE",
         payload: response.data,
       });
-
     } catch (error) {
       if (error.response && error.response.status === 400) {
         Swal.fire(error.message, "Usuario o contraseña incorrectos", "error");
@@ -179,10 +179,10 @@ export function getAllcomentarios() {
       }
     } catch (error) {
       Swal.fire({
-        title:error.message, 
-        icon:"error",
-        confirmButtonColor:"#FB350C",
-        iconColor: "#FB350C"
+        title: error.message,
+        icon: "error",
+        confirmButtonColor: "#FB350C",
+        iconColor: "#FB350C",
       });
     }
   };
@@ -207,27 +207,28 @@ export function eliminarComentario(id) {
               type: "ELIMINAR_COMENTARIO",
               payload: id,
             });
-    Swal.fire({
-      title:"Comentario eliminado exitosamente!", 
-      icon:"success",
-      confirmButtonColor:"#FB350C",
-      iconColor: "#FB350C"
-    });
-        } else if (result.isDenied) {
-          Swal.fire({
-            title:"No se elimino el comentario", 
-            icon:"info",
-            confirmButtonColor:"#FB350C",
-            iconColor: "#FB350C"
-          });
+            Swal.fire({
+              title: "Comentario eliminado exitosamente!",
+              icon: "success",
+              confirmButtonColor: "#FB350C",
+              iconColor: "#FB350C",
+            });
+          } else if (result.isDenied) {
+            Swal.fire({
+              title: "No se elimino el comentario",
+              icon: "info",
+              confirmButtonColor: "#FB350C",
+              iconColor: "#FB350C",
+            });
+          }
         }
-      }});
+      });
     } catch (error) {
       Swal.fire({
-        title:error.message, 
-        icon:"error",
-        confirmButtonColor:"#FB350C",
-        iconColor: "#FB350C"
+        title: error.message,
+        icon: "error",
+        confirmButtonColor: "#FB350C",
+        iconColor: "#FB350C",
       });
     }
   };
@@ -239,10 +240,10 @@ export function enviarConsulta(formData) {
       const response = await axios.post("/contactenos", formData);
       console.log("Respuesta del servidor:", response.data);
       Swal.fire({
-        title:response.data.message, 
-        icon:"success",
-        confirmButtonColor:"#FB350C",
-        iconColor: "#FB350C"
+        title: response.data.message,
+        icon: "success",
+        confirmButtonColor: "#FB350C",
+        iconColor: "#FB350C",
       });
     } catch (error) {
       console.error("Error al enviar la consulta:", error);
@@ -265,43 +266,46 @@ export function crearHabitacion(habitacionData) {
   console.log({ habitacionData });
   return async (dispatch) => {
     try {
-        Swal.fire({
-          title: "Quieres guardar los cambios?",
-          showDenyButton: true,
-          confirmButtonText: "Guardar",
-          denyButtonText: " No guardar",
-          confirmButtonColor: "#FB350C",
-          denyButtonColor: "#322F2C",
-        }).then(async (result) => {
-          if (result.isConfirmed) {
-            const response = await axios.post("/post/habitaciones", habitacionData);
-      console.log(response.data);
       Swal.fire({
-        title:"Habitacion creada exitosamente!", 
-        icon:"success",
-        confirmButtonColor:"#FB350C",
-        iconColor: "#FB350C"
+        title: "Quieres guardar los cambios?",
+        showDenyButton: true,
+        confirmButtonText: "Guardar",
+        denyButtonText: " No guardar",
+        confirmButtonColor: "#FB350C",
+        denyButtonColor: "#322F2C",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          const response = await axios.post(
+            "/post/habitaciones",
+            habitacionData
+          );
+          console.log(response.data);
+          Swal.fire({
+            title: "Habitacion creada exitosamente!",
+            icon: "success",
+            confirmButtonColor: "#FB350C",
+            iconColor: "#FB350C",
+          });
+          dispatch({
+            type: "CREAR_HABITACION",
+            payload: response.data,
+          });
+        } else if (result.isDenied) {
+          Swal.fire({
+            title: "No se creo la habitacion",
+            icon: "info",
+            confirmButtonColor: "#FB350C",
+            iconColor: "#FB350C",
+          });
+        }
       });
-      dispatch({
-        type: "CREAR_HABITACION",
-        payload: response.data,
-      });
-          } else if (result.isDenied) {
-            Swal.fire({
-              title:"No se creo la habitacion", 
-              icon:"info",
-              confirmButtonColor:"#FB350C",
-              iconColor: "#FB350C"
-            });
-          }
-        });
     } catch (error) {
       console.log(error);
       Swal.fire({
-        title:error.message, 
-        icon:"error",
-        confirmButtonColor:"#FB350C",
-        iconColor: "#FB350C"
+        title: error.message,
+        icon: "error",
+        confirmButtonColor: "#FB350C",
+        iconColor: "#FB350C",
       });
     }
   };
@@ -393,7 +397,6 @@ export const getReservas = ({ fechaEntrada, fechaSalida }) => {
       const reservas = await axios.get(
         `/reservas?fecha_entrada=${fechaEntrada}&fecha_salida=${fechaSalida}`
       );
-      console.log("reservas:", reservas.data);
       return dispatch({
         type: "GET_RESERVAS",
         payload: reservas.data,
@@ -415,42 +418,48 @@ export function updateHabitacion(habitacionData) {
         denyButtonColor: "#322F2C",
       }).then(async (result) => {
         if (result.isConfirmed) {
-          const response = await axios.put("/update/habitaciones", habitacionData);
+          const response = await axios.put(
+            "/update/habitaciones",
+            habitacionData
+          );
           console.log(response.data);
-          if (response.data === "Ya existe un usuario con ese correo" || response.data === "No se encontro el usuario" ) {
+          if (
+            response.data === "Ya existe un usuario con ese correo" ||
+            response.data === "No se encontro el usuario"
+          ) {
             Swal.fire({
-              title:response.data, 
-              icon:"error",
-              confirmButtonColor:"#FB350C",
-              iconColor: "#FB350C"
-            }); 
+              title: response.data,
+              icon: "error",
+              confirmButtonColor: "#FB350C",
+              iconColor: "#FB350C",
+            });
           }
-    Swal.fire({
-      title:"Habitacion editada exitosamente!", 
-      icon:"success",
-      confirmButtonColor:"#FB350C",
-      iconColor: "#FB350C"
-    });
-    dispatch({
-      type: "UPDATE_HABITACION",
-      payload: response.data,
-    });
+          Swal.fire({
+            title: "Habitacion editada exitosamente!",
+            icon: "success",
+            confirmButtonColor: "#FB350C",
+            iconColor: "#FB350C",
+          });
+          dispatch({
+            type: "UPDATE_HABITACION",
+            payload: response.data,
+          });
         } else if (result.isDenied) {
           Swal.fire({
-            title:"No se edito la habitacion", 
-            icon:"info",
-            confirmButtonColor:"#FB350C",
-            iconColor: "#FB350C"
+            title: "No se edito la habitacion",
+            icon: "info",
+            confirmButtonColor: "#FB350C",
+            iconColor: "#FB350C",
           });
         }
       });
     } catch (error) {
       console.log(error);
       Swal.fire({
-        title:error.message, 
-        icon:"error",
-        confirmButtonColor:"#FB350C",
-        iconColor: "#FB350C"
+        title: error.message,
+        icon: "error",
+        confirmButtonColor: "#FB350C",
+        iconColor: "#FB350C",
       });
     }
   };
@@ -460,18 +469,17 @@ export function getDevs() {
   return async function (dispatch) {
     try {
       const response = await axios("/desarrolladores");
-      console.log("linea 135", response.data);
       return dispatch({
         type: "GET_DEVS",
         payload: response.data,
       });
     } catch (error) {
       Swal.fire({
-        title:error.message, 
+        title: error.message,
         text: "Hubo un problema con el servidor. Comuniquese con el Administrador",
-        icon:"error",
-        confirmButtonColor:"#FB350C",
-        iconColor: "#FB350C"
+        icon: "error",
+        confirmButtonColor: "#FB350C",
+        iconColor: "#FB350C",
       });
       return;
     }
@@ -484,7 +492,7 @@ export function estadoLogeo(estado) {
   };
 }
 export function deleteHabitacion(id) {
-  console.log('prueba',{ id });
+  console.log("prueba", { id });
   return async function (dispatch) {
     try {
       Swal.fire({
@@ -497,31 +505,31 @@ export function deleteHabitacion(id) {
       }).then(async (result) => {
         if (result.isConfirmed) {
           const response = await axios.delete(`/habitaciones/${id}`);
-        dispatch({
-          type: "DELETE_HABITACION",
-          payload: id,
-        });
-        Swal.fire({
-          title:"Habitacion eliminada exitosamente!", 
-          icon:"success",
-          confirmButtonColor:"#FB350C",
-          iconColor: "#FB350C"
-        });
+          dispatch({
+            type: "DELETE_HABITACION",
+            payload: id,
+          });
+          Swal.fire({
+            title: "Habitacion eliminada exitosamente!",
+            icon: "success",
+            confirmButtonColor: "#FB350C",
+            iconColor: "#FB350C",
+          });
         } else if (result.isDenied) {
           Swal.fire({
-            title:"No se elimino la habitacion", 
-            icon:"info",
-            confirmButtonColor:"#FB350C",
-            iconColor: "#FB350C"
+            title: "No se elimino la habitacion",
+            icon: "info",
+            confirmButtonColor: "#FB350C",
+            iconColor: "#FB350C",
           });
         }
       });
     } catch (error) {
       Swal.fire({
-        title:error.message, 
-        icon:"error",
-        confirmButtonColor:"#FB350C",
-        iconColor: "#FB350C"
+        title: error.message,
+        icon: "error",
+        confirmButtonColor: "#FB350C",
+        iconColor: "#FB350C",
       });
     }
   };
@@ -568,40 +576,48 @@ export function updateUsuario(usuarioData, id) {
         denyButtonColor: "#322F2C",
       }).then(async (result) => {
         if (result.isConfirmed) {
-          const response = await axios.put(`/update/usuarios/${id}`, usuarioData);
-      if (response.data === "No se encontro el usuario" || response.data === "Ya existe un usuario con ese correo" ) Swal.fire({
-        title:response.data, 
-        icon:"error",
-        confirmButtonColor:"#FB350C",
-        iconColor: "#FB350C"
-      });
-      else Swal.fire({
-        title:"Se editaron sus datos!", 
-        icon:"success",
-        confirmButtonColor:"#FB350C",
-        iconColor: "#FB350C"
-      });
-      console.log(response.data);
-      dispatch({
-        type: "UPDATE_USUARIO",
-        payload: response.data,
-      });
+          const response = await axios.put(
+            `/update/usuarios/${id}`,
+            usuarioData
+          );
+          if (
+            response.data === "No se encontro el usuario" ||
+            response.data === "Ya existe un usuario con ese correo"
+          )
+            Swal.fire({
+              title: response.data,
+              icon: "error",
+              confirmButtonColor: "#FB350C",
+              iconColor: "#FB350C",
+            });
+          else
+            Swal.fire({
+              title: "Se editaron sus datos!",
+              icon: "success",
+              confirmButtonColor: "#FB350C",
+              iconColor: "#FB350C",
+            });
+          console.log(response.data);
+          dispatch({
+            type: "UPDATE_USUARIO",
+            payload: response.data,
+          });
         } else if (result.isDenied) {
           Swal.fire({
-            title:"No se guardaron los cambios", 
-            icon:"info",
-            confirmButtonColor:"#FB350C",
-            iconColor: "#FB350C"
+            title: "No se guardaron los cambios",
+            icon: "info",
+            confirmButtonColor: "#FB350C",
+            iconColor: "#FB350C",
           });
         }
       });
     } catch (error) {
       console.log(error);
       Swal.fire({
-        title:error.message, 
-        icon:"error",
-        confirmButtonColor:"#FB350C",
-        iconColor: "#FB350C"
+        title: error.message,
+        icon: "error",
+        confirmButtonColor: "#FB350C",
+        iconColor: "#FB350C",
       });
     }
   };
@@ -614,10 +630,10 @@ export function deleteUsuario(id) {
       const response = await axios.delete(`/delete/usuarios/${id}`);
       if (response.data === "No se encontro el usuario") {
         Swal.fire({
-          title:"No se encontro el usuario!", 
-          icon:"error",
-          confirmButtonColor:"#FB350C",
-          iconColor: "#FB350C"
+          title: "No se encontro el usuario!",
+          icon: "error",
+          confirmButtonColor: "#FB350C",
+          iconColor: "#FB350C",
         });
       } else {
         dispatch({
@@ -625,18 +641,18 @@ export function deleteUsuario(id) {
           payload: id,
         });
         Swal.fire({
-          title:"Usuario eliminado exitosamente!", 
-          icon:"success",
-          confirmButtonColor:"#FB350C",
-          iconColor: "#FB350C"
+          title: "Usuario eliminado exitosamente!",
+          icon: "success",
+          confirmButtonColor: "#FB350C",
+          iconColor: "#FB350C",
         });
       }
     } catch (error) {
       Swal.fire({
-        title:error.message, 
-        icon:"error",
-        confirmButtonColor:"#FB350C",
-        iconColor: "#FB350C"
+        title: error.message,
+        icon: "error",
+        confirmButtonColor: "#FB350C",
+        iconColor: "#FB350C",
       });
     }
   };
@@ -646,9 +662,9 @@ export function recuperarContraseñaAction(correo) {
   return async function (dispatch) {
     try {
       const response = await axios.put("/recuperarContrasena", { correo });
-      Swal.fire(response.data.message,"", "sucess");    
+      Swal.fire(response.data.message, "", "sucess");
     } catch (error) {
-      Swal.fire(error.response.data.error,"", "warning");
+      Swal.fire(error.response.data.error, "", "warning");
     }
   };
 }
@@ -656,16 +672,16 @@ export function recuperarUsuarioAction(correo) {
   return async function () {
     try {
       const response = await axios.put("/recuperarUsuario", { correo });
-      Swal.fire(response.data.message,"", "sucess");    
+      Swal.fire(response.data.message, "", "sucess");
     } catch (error) {
       if (error.response && error.response.status === 400) {
-         Swal.fire({
-        title:error.message, 
-        text: "Usuario o contraseña equivocados",
-        icon:"error",
-        confirmButtonColor:"#FB350C",
-        iconColor: "#FB350C"
-      });
+        Swal.fire({
+          title: error.message,
+          text: "Usuario o contraseña equivocados",
+          icon: "error",
+          confirmButtonColor: "#FB350C",
+          iconColor: "#FB350C",
+        });
       }
     }
   };
@@ -687,13 +703,13 @@ export function getReservas_usuario(usuarioId) {
       // if(error.response.data === "No se encontró ninguna Reserva con el ID de Usuario proporcionado"){
       //   alert(error.response.data);
       // }
-       console.log("Error al solicitar las Reservas por Usuario:", error);
-        Swal.fire({
-        title:error.message, 
-        text:"El usuario no tiene reservas",
-        icon:"error",
-        confirmButtonColor:"#FB350C",
-        iconColor: "#FB350C"
+      console.log("Error al solicitar las Reservas por Usuario:", error);
+      Swal.fire({
+        title: error.message,
+        text: "El usuario no tiene reservas",
+        icon: "error",
+        confirmButtonColor: "#FB350C",
+        iconColor: "#FB350C",
       });
 
       console.log("Error al solicitar las Reservas por Usuario:", error);
@@ -713,11 +729,11 @@ export function getReservas_Admin(usuarioId) {
       //alert("Reservas del Usuario obtenidas exitosamente");
     } catch (error) {
       Swal.fire({
-        title:error.message, 
-        text:"Error al obtener las reservas del usuario",
-        icon:"error",
-        confirmButtonColor:"#FB350C",
-        iconColor: "#FB350C"
+        title: error.message,
+        text: "Error al obtener las reservas del usuario",
+        icon: "error",
+        confirmButtonColor: "#FB350C",
+        iconColor: "#FB350C",
       });
       // console.log("Error al solicitar las Reservas por Usuario:",error);
     }
@@ -755,11 +771,11 @@ export function DetailHabitaciones(id) {
         payload: response.data,
       });
     } catch (error) {
-        Swal.fire({
-        title:error.response.data.error, 
-        icon:"error",
-        confirmButtonColor:"#FB350C",
-        iconColor: "#FB350C"
+      Swal.fire({
+        title: error.response.data.error,
+        icon: "error",
+        confirmButtonColor: "#FB350C",
+        iconColor: "#FB350C",
       });
     }
   };
@@ -769,7 +785,6 @@ export const getCarrito = () => {
     try {
       const id = JSON.parse(localStorage.getItem("userId"));
       const response = await axios.get(`/carrito/${id}`);
-      console.log("getCarrito", response.data);
       dispatch({
         type: "GET_CARRITO",
         payload: response.data,
@@ -780,10 +795,10 @@ export const getCarrito = () => {
   };
 };
 
-export const eliminarDelCarrito = (id) => {
+export const eliminarDelCarrito = (id, userId) => {
   return async function (dispatch) {
     try {
-      const response = await axios.delete(`/carrito/${id}`);
+      const response = await axios.delete(`/carrito?id=${id}&userId=${userId}`);
       console.log("eliminarDelCarrito", response.data);
       dispatch({
         type: "DELETE_CARRITO",
@@ -798,7 +813,7 @@ export const añadirAlCarrito = (idUser, idHabitacion) => {
   return async function (dispatch) {
     try {
       const data = { idUser, idHabitacion };
-      const response = await axios.post(`/carrito`, data); 
+      const response = await axios.post(`/carrito`, data);
       dispatch({
         type: "AÑADIR_AL_CARRITO",
         payload: response.data,
@@ -810,23 +825,26 @@ export const añadirAlCarrito = (idUser, idHabitacion) => {
 };
 
 export function cambiarEstadoUsuario(id, nuevoEstado) {
-    console.log(id, nuevoEstado)
-    return async function () {
-      try {
-        const response = await axios.put("/update/usuarioEstado", {id, nuevoEstado});
-        Swal.fire({
-          title:"Cambio de estado del usuario exitoso!", 
-          icon:"success",
-          confirmButtonColor:"#FB350C",
-          iconColor: "#FB350C"
-        });
-        console.log("Respuesta del servidor:", response.data);
-       // ver si es necesario dispatch aqui "POST_USUARIO",p/q actualice estado "usuarios"
-      } catch (error) {
-        console.error("Error al enviar la consulta:", error);
-      }
-    };
-  }
+  console.log(id, nuevoEstado);
+  return async function () {
+    try {
+      const response = await axios.put("/update/usuarioEstado", {
+        id,
+        nuevoEstado,
+      });
+      Swal.fire({
+        title: "Cambio de estado del usuario exitoso!",
+        icon: "success",
+        confirmButtonColor: "#FB350C",
+        iconColor: "#FB350C",
+      });
+      console.log("Respuesta del servidor:", response.data);
+      // ver si es necesario dispatch aqui "POST_USUARIO",p/q actualice estado "usuarios"
+    } catch (error) {
+      console.error("Error al enviar la consulta:", error);
+    }
+  };
+}
 
 export function getUsuarioById(id) {
   return async function (dispatch) {
@@ -842,10 +860,10 @@ export function getUsuarioById(id) {
   };
 }
 
-  export const deleteReservas = (id) => {
-    return async function (dispatch) {
-      try {
-        Swal.fire({
+export const deleteReservas = (id) => {
+  return async function (dispatch) {
+    try {
+      Swal.fire({
         title: "Quieres eliminar la reserva?",
         showDenyButton: true,
         confirmButtonText: "Eliminar",
@@ -855,85 +873,84 @@ export function getUsuarioById(id) {
       }).then(async (result) => {
         if (result.isConfirmed) {
           const response = await axios.delete(`/reservas/delete/${id}`);
-        Swal.fire({
-          title:"Reserva eliminada exitosamente!", 
-          icon:"success",
-          confirmButtonColor:"#FB350C",
-          iconColor: "#FB350C"
-        });
-        dispatch({
-          type: "DELETE_RESERVA",
-          payload: response.data,
-        });
+          Swal.fire({
+            title: "Reserva eliminada exitosamente!",
+            icon: "success",
+            confirmButtonColor: "#FB350C",
+            iconColor: "#FB350C",
+          });
+          dispatch({
+            type: "DELETE_RESERVA",
+            payload: response.data,
+          });
         } else if (result.isDenied) {
           Swal.fire({
-            title:"No se elimino la reserva", 
-            icon:"info",
-            confirmButtonColor:"#FB350C",
-            iconColor: "#FB350C"
+            title: "No se elimino la reserva",
+            icon: "info",
+            confirmButtonColor: "#FB350C",
+            iconColor: "#FB350C",
           });
         }
       });
-      } catch (error) {
-        Swal.fire({
-          title:error.message, 
-          icon:"error",
-          confirmButtonColor:"#FB350C",
-          iconColor: "#FB350C"
-        });
-      }
-    };
+    } catch (error) {
+      Swal.fire({
+        title: error.message,
+        icon: "error",
+        confirmButtonColor: "#FB350C",
+        iconColor: "#FB350C",
+      });
+    }
   };
-  export const updateDates = ({ checkinDate, checkoutDate }) => {
-    return async function (dispatch) {
-      try {
-        return dispatch({
-          type: "UPDATE_DATES",
-          payload: { checkinDate, checkoutDate },
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
+};
+export const updateDates = ({ checkinDate, checkoutDate }) => {
+  return async function (dispatch) {
+    try {
+      return dispatch({
+        type: "UPDATE_DATES",
+        payload: { checkinDate, checkoutDate },
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
+};
 
-  export const getCheckoutDate = ({ checkinDate, checkoutDate }) => {
+export const getCheckoutDate = ({ checkinDate, checkoutDate }) => {
+  console.log("fechas", checkinDate, checkoutDate);
+  return async function (dispatch) {
     console.log("fechas", checkinDate, checkoutDate);
-    return async function (dispatch) {
-      console.log("fechas", checkinDate, checkoutDate);
-      try {
-        return dispatch({
-          type: "GET_CHECKOUT",
-          payload: { checkinDate, checkoutDate },
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
+    try {
+      return dispatch({
+        type: "GET_CHECKOUT",
+        payload: { checkinDate, checkoutDate },
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
-  export const fecha_entrada = (checkinDate) => {
-    return async function (dispatch) {
-      try {
-        return dispatch({
-          type: "FECHA_ENTRADA",
-          payload: checkinDate,
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
+};
+export const fecha_entrada = (checkinDate) => {
+  return async function (dispatch) {
+    try {
+      return dispatch({
+        type: "FECHA_ENTRADA",
+        payload: checkinDate,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
-  
-  export const fecha_salida = (checkoutDate) => {
-    return async function (dispatch) {
-      try {
-        return dispatch({
-          type: "FECHA_SALIDA",
-          payload: checkoutDate,
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
+};
+
+export const fecha_salida = (checkoutDate) => {
+  return async function (dispatch) {
+    try {
+      return dispatch({
+        type: "FECHA_SALIDA",
+        payload: checkoutDate,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
-    
+};
