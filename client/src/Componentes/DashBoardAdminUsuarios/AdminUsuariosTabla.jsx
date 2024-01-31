@@ -5,41 +5,30 @@ import { getUsuarios } from "../../redux/Actions/actions";
 import Linea from "./LineaTablaAdminUsuarios.jsx";
 import { useVerificarIsAdmin } from "../AutenticadorToken/autenticadorLocalStIsAdmin.jsx";
 const AdminUsuariosTabla = () => {
-  useVerificarIsAdmin()
+  useVerificarIsAdmin();
   const dispatch = useDispatch();
   const TodosLosUsuario = useSelector((state) => state.usuarios);
   const [paginaActual, setPaginaActual] = useState(1);
   const [itemsPerPage] = useState(5);
-  useEffect(() => {
-    //montado del comp.
-
-    dispatch(getUsuarios());
-  }, []);
-
-  useEffect(() => {
-    //actualizacion del comp.
-    console.log("Re montado del componente");
-    console.log("TodosLosUsuario LENGTH", TodosLosUsuario.length);
-  }, [TodosLosUsuario]);
-
-  const handlePaginaChange = (nuevaPagina) => {
-    setPaginaActual(nuevaPagina);
-  };
-
   const totalActivos = TodosLosUsuario.filter(
     (usuario) => usuario.estado === "activo"
   ).length;
   const totalInactivos = TodosLosUsuario.filter(
     (usuario) => usuario.estado === "inactivo"
   ).length;
+  useEffect(() => {
+    dispatch(getUsuarios());
+  }, [TodosLosUsuario, totalActivos, totalInactivos, dispatch]);
+  const handlePaginaChange = (nuevaPagina) => {
+    setPaginaActual(nuevaPagina);
+  };
 
   const UsuariosPaginados = TodosLosUsuario.slice(
     (paginaActual - 1) * itemsPerPage,
     paginaActual * itemsPerPage
   );
-
   return (
-    <div >
+    <div>
       <div
         className="flex items-center justify-center bg-cover bg-center text-white text-center p-8 "
         // style={{

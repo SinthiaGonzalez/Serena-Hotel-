@@ -13,7 +13,7 @@ export default function LoginTemplate() {
   const navigate = useNavigate();
   useVerificarToken();
 
-  const respuestaExitosa = async (respuesta) => {  
+  const respuestaExitosa = async (respuesta) => {
     //console.log(respuesta);
     // console.log(respuesta.profileObj.givenName);
     //console.log(respuesta.profileObj.familyName);
@@ -23,40 +23,41 @@ export default function LoginTemplate() {
       postUsuarioGoogle({
         name: respuesta.profileObj.givenName,
         apellido: respuesta.profileObj.familyName,
-        email: respuesta.profileObj.email,         
-      })    
-    );  
+        email: respuesta.profileObj.email,
+      })
+    );
     //navigate("/");
 
-    let estado = localStorage.getItem("estado"); 
+    let estado = localStorage.getItem("estado");
     //alert (estado)
-      estado = localStorage.getItem("estado"); 
-        if(estado==='"activo"') {
-        //alert("linea 31 activo")
-        const isAdmin = localStorage.getItem("isAdmin"); 
-        //alert("verificacion 33"+isAdmin+ "estado" + estado)
-        if(isAdmin === "true") navigate("/admin-usuarios")
-        if(isAdmin === "false") navigate("/")
-      }else if(estado === '"eliminar"'){
-        Swal.fire({
-          title:"Si desea recuperar su Cuenta, presione ACEPTAR.",
-          icon:"error",
-          confirmButtonColor:"#FB350C",
-          iconColor: "#FB350C"
-        });
-        /* LINEA PARA Q SI se CAMBIA A OTRA RUTA NO ESTË LOGUEADO */
-        localStorage.removeItem("token");     
-        navigate("/recuperar-usuario") 
-      }else if(estado === '"inactivo"'){
-       Swal.fire({
-          title:"Su Usuario se encuentra inactivo, por favor comuníquese con: serenahotel25@gmail.com. Muchas gracias.",
-          icon:"error",
-          confirmButtonColor:"#FB350C",
-          iconColor: "#FB350C"
-        });
-       /* LINEA PARA Q SI se CAMBIA A OTRA RUTA NO ESTË LOGUEADO */
-        localStorage.removeItem("token");      
-      }    
+    estado = localStorage.getItem("estado");
+    if (estado === '"activo"') {
+      //alert("linea 31 activo")
+      const isAdmin = localStorage.getItem("isAdmin");
+      //alert("verificacion 33"+isAdmin+ "estado" + estado)
+      if (isAdmin === "true") navigate("/admin-usuarios");
+      if (isAdmin === "false") navigate("/");
+    } else if (estado === '"eliminar"') {
+      Swal.fire({
+        title: "Si desea recuperar su cuenta, presione ACEPTAR.",
+        icon: "error",
+        confirmButtonColor: "#FB350C",
+        iconColor: "#FB350C",
+      });
+      /* LINEA PARA Q SI se CAMBIA A OTRA RUTA NO ESTË LOGUEADO */
+      localStorage.removeItem("token");
+      navigate("/recuperar-usuario");
+    } else if (estado === '"inactivo"') {
+      Swal.fire({
+        title:
+          "Su cuenta se encuentra inactiva, por favor comuníquese con: serenahotel25@gmail.com. Muchas gracias.",
+        icon: "error",
+        confirmButtonColor: "#FB350C",
+        iconColor: "#FB350C",
+      });
+      /* LINEA PARA Q SI se CAMBIA A OTRA RUTA NO ESTË LOGUEADO */
+      localStorage.removeItem("token");
+    }
   };
 
   const respuestaFallida = (error) => {

@@ -68,13 +68,12 @@ const Contactenos = () => {
     });
   };
 
-const isSubmitDisabled = () => {
+  const isSubmitDisabled = () => {
     // Verifica si hay algún campo obligatorio sin completar
 
     if (Object.keys(errors).length === 0) return false;
     else return true;
   };
-
 
   return (
     <div className="bg-verde">
@@ -189,6 +188,7 @@ const isSubmitDisabled = () => {
                       labelProps={{
                         className: "before:content-none after:content-none",
                       }}
+                      style={{ color: "white" }}
                     />
                     <p className="my-4 text-base text-center text-naranja">
                       {touchedFields.mensaje && errors.mensaje}

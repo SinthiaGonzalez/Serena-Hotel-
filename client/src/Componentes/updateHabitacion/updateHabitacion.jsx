@@ -1,16 +1,16 @@
 import React from "react";
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import validation from "../CrearHabitaciones/validation";
 import { useDispatch, useSelector } from "react-redux";
 import {
   updateHabitacion,
   getHabitacionesbackup,
   deleteHabitacion,
-  DetailHabitaciones
+  DetailHabitaciones,
 } from "../../redux/Actions/actions";
 import { Select, Option } from "@material-tailwind/react";
 import axios from "axios";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 
 const UpdateHabitacion = () => {
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ const UpdateHabitacion = () => {
   const habitacionescKcup = useSelector((state) => state.habitacionBackUp);
   const habitacionEliminada = useSelector((state) => state.habitacionEliminada);
   const allHabitaciones = useSelector((state) => state.nuevaHabitacion);
-  
+
   const habitacionesB = habitacionescKcup.map(({ id, nombre }) => ({
     id,
     nombre,
@@ -78,22 +78,22 @@ const UpdateHabitacion = () => {
 
   const isSubmitDisabled = () => {
     // Verifica si hay algún campo obligatorio sin completar
-      return Object.values(nuevaDataHabitacion).some(
+    return Object.values(nuevaDataHabitacion).some(
       (value) => value === "" || (Array.isArray(value) && value.length === 0)
-    )
+    );
   };
 
   const isDeleteDisabled = () => {
-    if (nuevaDataHabitacion.nombreId==="") return true;
-    else return false; 
-  }
+    if (nuevaDataHabitacion.nombreId === "") return true;
+    else return false;
+  };
 
   const handleChangeServicio = (index, event) => {
     const updatedServicios = [...nuevaDataHabitacion.servicios]; // Create a copy of the servicios array
     if (index === 3) {
       updatedServicios[index].descripcion = event.target.value + " m²";
     } else {
-    updatedServicios[index].descripcion = event.target.value; // Update the descripcion at the specified index
+      updatedServicios[index].descripcion = event.target.value; // Update the descripcion at the specified index
     }
     setNuevaDataHabitacion({
       ...nuevaDataHabitacion,
@@ -164,7 +164,7 @@ const UpdateHabitacion = () => {
           { icono: "wifi", descripcion: "Wifi" },
         ],
         descripcion: "",
-        estado: "Disponible"
+        estado: "Disponible",
       });
     } else {
       Swal.fire("Errores de validacion", errors, "error");
@@ -209,27 +209,33 @@ const UpdateHabitacion = () => {
     dispatch(getHabitacionesbackup());
   };
 
-   const handleDefaultValues = () => {
-    console.log('default values', habitacionDetail);
-    habitacionDetail[0].servicios[3].descripcion=habitacionDetail[0].servicios[3].descripcion.substring(0, habitacionDetail[0].servicios[3].descripcion.length - 3)
-    if (habitacionDetail){
-    setNuevaDataHabitacion({
-    nombreId: habitacionDetail[0].id,
-    nombre: habitacionDetail[0].nombre,
-    precio: habitacionDetail[0].precio,
-    imagenes: habitacionDetail[0].imagenes,
-    servicios: habitacionDetail[0].servicios,
-    descripcion: habitacionDetail[0].descripcion,
-    estado: habitacionDetail[0].estado,
-    })}
-   }
-console.log("auxilio", nuevaDataHabitacion)
-  
+  const handleDefaultValues = () => {
+    console.log("default values", habitacionDetail);
+    habitacionDetail[0].servicios[3].descripcion =
+      habitacionDetail[0].servicios[3].descripcion.substring(
+        0,
+        habitacionDetail[0].servicios[3].descripcion.length - 3
+      );
+    if (habitacionDetail) {
+      setNuevaDataHabitacion({
+        nombreId: habitacionDetail[0].id,
+        nombre: habitacionDetail[0].nombre,
+        precio: habitacionDetail[0].precio,
+        imagenes: habitacionDetail[0].imagenes,
+        servicios: habitacionDetail[0].servicios,
+        descripcion: habitacionDetail[0].descripcion,
+        estado: habitacionDetail[0].estado,
+      });
+    }
+  };
+  console.log("auxilio", nuevaDataHabitacion);
 
   return (
     <div className="bg-verde p-8 rounded-lg mx-4 my-16">
       <div className="flex flex-col xl:flex-row xl:justify-between">
-        <h1 className="text-4xl font-bold mb-12 xl:mb-28 text-center xl:text-left">Editar Habitación</h1>
+        <h1 className="text-4xl font-bold mb-12 xl:mb-28 text-center xl:text-left">
+          Editar Habitación
+        </h1>
 
         <div className="xl:w-1/2 justify-center">
           <Select
@@ -237,6 +243,7 @@ console.log("auxilio", nuevaDataHabitacion)
             onChange={handlerselectHabitacion}
             size="lg"
             label="Selecciona la habitacion a Editar"
+            className="text-blanco"
           >
             {habitacionesB.map(({ id, nombre }) => (
               <Option
@@ -252,7 +259,10 @@ console.log("auxilio", nuevaDataHabitacion)
         </div>
       </div>
 
-      <form className="flex flex-col 2xl:flex-row gap-20 mx-2 my-10" onSubmit={handleSubmit}>
+      <form
+        className="flex flex-col 2xl:flex-row gap-20 mx-2 my-10"
+        onSubmit={handleSubmit}
+      >
         <div className="w-2/8 ">
           <div className="grid grid-cols-2 gap-4 lg:mx-40 2xl:mx-auto 2xl:ml-8 justify-center">
             {nuevaDataHabitacion.imagenes.map((imagen, index) => (
@@ -283,7 +293,7 @@ console.log("auxilio", nuevaDataHabitacion)
           />
           <p className="my-4">{touchedFields.imagen && errors.imagen}</p>
         </div>
-        
+
         <div className="flex flex-col items-center w-4/8">
           <div className="block font-inter text-2xl text-blanco mb-16">
             <input
@@ -291,11 +301,13 @@ console.log("auxilio", nuevaDataHabitacion)
               type="text"
               name="nombre"
               placeholder="Nombre nuevo"
-              value={nuevaDataHabitacion.nombre} 
+              value={nuevaDataHabitacion.nombre}
               onChange={handleChange}
               onBlur={() => handleBlur("nombre")}
             />
-            <p className="my-4 text-base text-center">{touchedFields.nombre && errors.nombre}</p>
+            <p className="my-4 text-base text-center">
+              {touchedFields.nombre && errors.nombre}
+            </p>
           </div>
 
           <div>
@@ -309,7 +321,7 @@ console.log("auxilio", nuevaDataHabitacion)
                     <select
                       onChange={(event) => handleChangeServicio(0, event)}
                       name="select"
-                      className="ml-2 p-1 rounded-md text-negro text-center w-[80px]"
+                      className="ml-2 p-1 rounded-md text-blanco text-center w-[80px]"
                       value={nuevaDataHabitacion.servicios[0].descripcion}
                     >
                       <option value="" selected>
@@ -332,7 +344,7 @@ console.log("auxilio", nuevaDataHabitacion)
                     <select
                       onChange={(event) => handleChangeServicio(1, event)}
                       name="select"
-                      className="ml-2 p-1 rounded-md text-negro text-center w-[80px]"
+                      className="ml-2 p-1 rounded-md text-blanco text-center w-[80px]"
                       value={nuevaDataHabitacion.servicios[1].descripcion}
                     >
                       <option value="" selected>
@@ -343,7 +355,7 @@ console.log("auxilio", nuevaDataHabitacion)
                       <option value="3 pers">3</option>
                       <option value="4 pers">4</option>
                       <option value="5 pers">5</option>
-                      <option value="6 pers">6</option> 
+                      <option value="6 pers">6</option>
                     </select>
                   }
                 </p>
@@ -358,7 +370,7 @@ console.log("auxilio", nuevaDataHabitacion)
                     <select
                       onChange={(event) => handleChangeServicio(2, event)}
                       name="select"
-                      className="ml-2 p-1 rounded-md text-negro text-center w-[80px]"
+                      className="ml-2 p-1 rounded-md text-blanco text-center w-[80px]"
                       value={nuevaDataHabitacion.servicios[2].descripcion}
                     >
                       <option value="" selected>
@@ -381,12 +393,14 @@ console.log("auxilio", nuevaDataHabitacion)
                   {
                     <input
                       onChange={(event) => handleChangeServicio(3, event)}
-                      className="text-center w-[80px] mr-2 p-1 rounded-md text-negro"
+                      className="text-center w-[80px] mr-2 p-1 rounded-md text-blanco"
                       type="number"
                       min="0"
                       name="m2"
                       placeholder="m²"
-                      defaultValue={nuevaDataHabitacion.servicios[3].descripcion}
+                      defaultValue={
+                        nuevaDataHabitacion.servicios[3].descripcion
+                      }
                     />
                   }
                 </p>
@@ -409,14 +423,16 @@ console.log("auxilio", nuevaDataHabitacion)
           </div>
           <div className="mt-10 w-full">
             <textarea
-              className="w-full h-24 text-center pt-8 text-negro"
+              className="w-full h-24 text-center pt-8 text-blanco"
               name="descripcion"
               placeholder="Descripcion"
               value={nuevaDataHabitacion.descripcion}
               onChange={handleChange}
               onBlur={() => handleBlur("descripcion")}
             />
-            <p className="text-center">{touchedFields.descripcion && errors.descripcion}</p>
+            <p className="text-center">
+              {touchedFields.descripcion && errors.descripcion}
+            </p>
           </div>
         </div>
 
