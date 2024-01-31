@@ -2,7 +2,6 @@ import {
   Popover,
   PopoverHandler,
   PopoverContent,
-  Button,
 } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -84,13 +83,28 @@ const CardShopHabitaciones = ({
       didOpen: (toast) => {
         toast.onmouseenter = Swal.stopTimer;
         toast.onmouseleave = Swal.resumeTimer;
-      },
+      }
     });
-    Toast.fire({
+     Toast.fire({
       icon: "success",
-      title: "Agregado al carrito",
+      title: "Agregado al carrito"
     });
   };
+    return (
+      <>
+        <div
+          key={id}
+          className="flex w-full h-60 flex-row items-center justify-between rounded-xl bg-verde bg-clip-border text-blanco"
+        >
+          <div className="h-44 mx-8 my-8 w-60 overflow-hidden text-white  rounded-xl bg-verde bg-clip-border  hover:scale-105">
+            <Link to={`/habitacion/${id}`}>
+              <img
+                className="w-full h-full object-cover"
+                src={imagenes[0]}
+                alt={nombre}
+              />
+            </Link>
+          </div>
 
   return (
     <>
@@ -141,6 +155,7 @@ const CardShopHabitaciones = ({
           </p>
           <div>
             {mostrarpopover ? (
+
               <Popover
                 animate={{
                   mount: { scale: 1, y: 0 },
@@ -180,11 +195,13 @@ const CardShopHabitaciones = ({
             >
               <PopoverHandler>
                 <Button
+
                   className="block w-full select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all  focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
                   type="button"
                   onClick={handlerReserva}
                 >
                   RESERVAR
+
                 </Button>
               </PopoverHandler>
               <PopoverContent>
@@ -200,6 +217,7 @@ const CardShopHabitaciones = ({
               RESERVAR
             </Button>
           )}
+
         </div>
       </div>
     </>

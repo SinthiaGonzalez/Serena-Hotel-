@@ -76,6 +76,7 @@ export function postComent(state) {
         icon: "error",
         confirmButtonColor: "#FB350C",
         iconColor: "#FB350C",
+
       });
     }
   };
@@ -137,12 +138,12 @@ export function postUsuarioGoogle(data) {
         });
       }
     } catch (error) {
-      console.error("Error al crear o actualizar el usuario:", error);
+      Swal.fire("Error al crear o actualizar el usuario", "", "error");
     }
   };
 }
 export function verificacionLogeoUsuarioAction(infoLogeo) {
-  console.log(infoLogeo);
+//  console.log(infoLogeo);
 
   return async function (dispatch) {
     try {
@@ -734,6 +735,7 @@ export function getReservas_Admin(usuarioId) {
         icon: "error",
         confirmButtonColor: "#FB350C",
         iconColor: "#FB350C",
+
       });
       // console.log("Error al solicitar las Reservas por Usuario:",error);
     }
@@ -940,6 +942,7 @@ export const fecha_entrada = (checkinDate) => {
       console.log(error);
     }
   };
+
 };
 
 export const fecha_salida = (checkoutDate) => {
@@ -954,3 +957,4 @@ export const fecha_salida = (checkoutDate) => {
     }
   };
 };
+
