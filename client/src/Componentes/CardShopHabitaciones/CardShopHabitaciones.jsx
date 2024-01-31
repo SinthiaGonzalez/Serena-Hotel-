@@ -83,6 +83,7 @@ const CardShopHabitaciones = ({
       didOpen: (toast) => {
         toast.onmouseenter = Swal.stopTimer;
         toast.onmouseleave = Swal.resumeTimer;
+
       },
     });
     Toast.fire({
@@ -90,6 +91,7 @@ const CardShopHabitaciones = ({
       title: "Agregado al carrito",
     });
   };
+
 
   return (
     <>
@@ -204,5 +206,6 @@ const CardShopHabitaciones = ({
     </>
   );
 };
+
 
 export default CardShopHabitaciones;
