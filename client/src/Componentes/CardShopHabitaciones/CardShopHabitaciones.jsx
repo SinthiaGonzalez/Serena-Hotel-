@@ -179,26 +179,26 @@ const CardShopHabitaciones = ({
               }}
             >
               <PopoverHandler>
-                <Button
+                <button
                   className="block w-full select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all  focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
                   type="button"
                   onClick={handlerReserva}
                 >
                   RESERVAR
-                </Button>
+                </button>
               </PopoverHandler>
               <PopoverContent>
                 Seleccione fechas válidas antes de hacer una reserva.
               </PopoverContent>
             </Popover>
           ) : (
-            <Button
+            <button
               className="block w-full select-none rounded-lg bg-naranja py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all  focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none border-2 border-naranja hover:border-blanco"
               type="button"
               onClick={handlerReserva}
             >
               RESERVAR
-            </Button>
+            </button>
           )}
         </div>
       </div>
