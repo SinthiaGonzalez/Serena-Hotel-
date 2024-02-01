@@ -29,7 +29,7 @@ const respuestaConfirmacionPago = async (req, res) => {
         })
         .then((response) => {
           const { status, id, external_reference } = response.data;
-          manejoRespuestaMP(status, id, external_reference); //falta pasarle el id del usuario y las fechas de reserva
+          manejoRespuestaMP(status, id, external_reference);
         })
         .catch((error) => {
           console.error(
@@ -38,7 +38,7 @@ const respuestaConfirmacionPago = async (req, res) => {
           );
         });
 
-      res.status(200).send("OK");
+      return res.status(200).send("OK");
     } else {
       res.status(400).json({ error: "Topic no válido" });
     }
