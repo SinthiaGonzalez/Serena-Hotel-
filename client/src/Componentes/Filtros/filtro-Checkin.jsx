@@ -7,7 +7,8 @@ import {
 import { format } from "date-fns";
 import { DayPicker } from "react-day-picker";
 import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { subDays } from "date-fns";
 
 const Checkin = ({ onCheckinChange }) => {
   const [checkin, setCheckin] = useState(null);
@@ -23,6 +24,11 @@ const Checkin = ({ onCheckinChange }) => {
       setCheckin(null); // Puedes establecer el checkin a null o alguna otra acción según tus necesidades
       onCheckinChange(null); // Puedes pasar null u otra acción según tus necesidades
     }
+  };
+
+  const isDateDisabled = (date) => {
+    // Deshabilitar fechas anteriores al día de hoy
+    return date < subDays(new Date(), 1);
   };
 
   return (
@@ -45,6 +51,7 @@ const Checkin = ({ onCheckinChange }) => {
             onSelect={handleCheckinChange}
             showOutsideDays
             defaultSelected={checkin}
+            disabled={isDateDisabled}
             className="border-0 "
             classNames={{
               caption: "flex justify-center py-2 mb-4 relative items-center",
