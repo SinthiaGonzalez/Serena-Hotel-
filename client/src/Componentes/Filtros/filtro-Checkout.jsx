@@ -8,14 +8,24 @@ import {
 import { format } from "date-fns";
 import { DayPicker } from "react-day-picker";
 import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
+import { useSelector } from "react-redux";
 
 const Checkout = ({ onCheckoutChange }) => {
+  const checkin = useSelector((state) => state.fecha_entrada);
+
+  const formattedCheckin = new Date(checkin);
 
   const [checkout, setCheckout] = useState(null);
+  console.log("checkout", checkout);
+
   const handleCheckoutChange = (selectedDate) => {
+    if (checkin && selectedDate < checkin) {
+      return;
+    }
     setCheckout(selectedDate);
     onCheckoutChange(selectedDate);
-  }; 
+  };
+
   return (
     <div className="p-4">
       <Popover placement="bottom">
@@ -36,6 +46,7 @@ const Checkout = ({ onCheckoutChange }) => {
             onSelect={handleCheckoutChange}
             showOutsideDays
             className="border-0"
+            disabled={(date) => date < formattedCheckin}
             classNames={{
               caption: "flex justify-center py-2 mb-4 relative items-center",
               caption_label: "text-sm font-medium text-verde-900",
