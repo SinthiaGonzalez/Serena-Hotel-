@@ -15,7 +15,8 @@ const respuestaConfirmacionPago = async (req, res) => {
       }
 
       // Configura el token de acceso en el encabezado de la solicitud
-      const accessToken = process.env.YOUR_ACCESS_TOKEN;
+      const accessToken =
+        "APP_USR-7280768752766794-122809-ca1be86a4bec57c675e7d576e6313452-1611759187";
       const headers = {
         Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
