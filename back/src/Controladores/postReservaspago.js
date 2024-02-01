@@ -1,5 +1,4 @@
-const { Reservas, Habitaciones } = require("../db");
-const {Usuarioauxiliar} = require('../db.js');
+const { Reservas, Habitaciones,Carrito } = require("../db");
 const postReservasPagos = async (
   fecha_entrada,
   fecha_salida,
@@ -30,19 +29,17 @@ const postReservasPagos = async (
     );
 
     await reserva.addHabitaciones(habitacionesInstancias);
-
-     // Elimina todos los registros en Usuarioauxiliar
-     await Usuarioauxiliar.destroy({
-      where: {},
-      truncate: true,
-    });
  
 
     const reservaConHabitaciones = {
       ...reserva.toJSON(),
       habitaciones: habitacionesReserva,
     };
-
+ const destroycarritouserid = await Carrito.destroy({
+  where: {
+    usuarioId: usuarioId,
+  },
+ })
     return reservaConHabitaciones;
   } catch (error) {
     return { error: error.message };

@@ -1,17 +1,19 @@
+const { stat } = require("fs");
 const {Pago} = require("../db");
 const {buscarHabitacionenCarritoUsuario } = require("./BuscaHabitacionenCarritoUsuario");
-const {Usuarioauxiliar} = require('../db.js');
-const manejoRespuestaMP = async (status,id) => {
+const manejoRespuestaMP = async (status,id,external_reference) => {
+    // console.log("external_reference en el manejo de respuesta",external_reference);
 const statusPago = status;
 const idPago = id;
-const usuarioauxiliar = await Usuarioauxiliar.findAll();
-const idUsuario = usuarioauxiliar[0].dataValues.iduser;
-
+const external_reference1 = JSON.parse(external_reference);
+const idusuario = external_reference1.idusuario;
+const fecha_entrada = external_reference1.fecha_entrada;
+const fecha_salida = external_reference1.fecha_salida;
 
 try{
     const pagoExistente = await Pago.findOne({
         where: {
-            usuarioId: idUsuario,
+            usuarioId: idusuario,
             id_mp: idPago
 
         }
@@ -21,21 +23,14 @@ try{
         const pago = await Pago.create({
             id_mp: idPago,
             estado: statusPago,
-            usuarioId: idUsuario
+            usuarioId: idusuario
         });
+        console.log("Pago creado",pago);
     }else{
         console.log("El pago ya existe, no se realiza ninguna modificación");
     }
     if(statusPago==="approved"){
-buscarHabitacionenCarritoUsuario(statusPago);
-        ;}else {
-            // Bloque de código para el caso de pago no aprobado
-            console.log("No se ha realizado el pago");
-            // Elimina todos los registros en Usuarioauxiliar
-            await Usuarioauxiliar.destroy({
-                where: {},
-                truncate: true,
-            });
+buscarHabitacionenCarritoUsuario(statusPago,idusuario,fecha_entrada,fecha_salida);
         }
 
 }catch(error){

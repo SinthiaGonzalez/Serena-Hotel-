@@ -26,17 +26,20 @@ const DetalledelaCompra = () => {
   const iva = subtotal * 0.21;
   const total = subtotal + iva;
   const handlerpostMP = () => {
-    dispatch(
-      createPreferenceMercadopagoId({
-        title: "Serena Hotel",
-        price: total,
-        quantity: 1,
-        picture_url: "https://picsum.photos/200",
-        userId: usuarioId,
-        fecha_entrada: fechaEntrada,
-        fecha_salida: fechaSalida,
-      })
-    );
+    if(total && usuarioId && fechaEntrada && fechaSalida){
+      dispatch(
+        createPreferenceMercadopagoId({
+          title: "Serena Hotel",
+          price: total,
+          quantity: 1,
+          picture_url: "https://picsum.photos/200",
+          userId: usuarioId,
+          fecha_entrada: fechaEntrada,
+          fecha_salida: fechaSalida,
+        })
+      );
+    }
+   
   };
   useEffect(() => {
     handlerpostMP();
@@ -47,7 +50,6 @@ const DetalledelaCompra = () => {
     setTimeout(() => {
       localStorage.removeItem("fecha_entrada");
       localStorage.removeItem("fecha_salida");
-      setFechas({ fechaEntrada: null, fechaSalida: null });
     }, 3000);
     setMostrarBotonLimpiar(false);
   };

@@ -19,7 +19,7 @@ server.use(cookieParser());
 server.use(morgan('dev'));
 // aqui abajo se configura el cors para que no de error de cors en el front end //* seguridad 
 server.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3001',"http://localhost:5173"); // solicitudes solo desde esta url
+  res.header('Access-Control-Allow-Origin', "*"); // solicitudes solo desde esta url
   res.header('Access-Control-Allow-Credentials', 'true'); // credenciales
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept'); //origin es la url de donde viene la solicitud, x-requested-with es el tipo de solicitud, content-type es el tipo de contenido que se esta enviando, accept es el tipo de contenido que acepta el servidor
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE'); // metodos que acepta el servidor

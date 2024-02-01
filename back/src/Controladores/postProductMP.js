@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
-const { Usuarioauxiliar } = require("../db.js");
 require("dotenv").config();
+
 const { MercadoPagoConfig, Preference } = require("mercadopago");
 
 const CreatePreferenceMP = async (req, res) => {
@@ -11,41 +11,11 @@ const CreatePreferenceMP = async (req, res) => {
   const fecha_entrada = req.body.fecha_entrada;
   const fecha_salida = req.body.fecha_salida;
 
-  if (idusuario && fecha_entrada && fecha_salida) {
-    try {
-      const usuarioExistente = await Usuarioauxiliar.findOne({
-        where: { iduser: idusuario },
-      });
-
-      if (usuarioExistente) {
-        // El usuario ya existe, maneja la lógica según tus requisitos
-        await Usuarioauxiliar.update(
-          {
-            fecha_entrada: fecha_entrada,
-            fecha_salida: fecha_salida,
-          },
-          {
-            where: {
-              iduser: idusuario,
-            },
-          }
-        );
-      } else {
-        // El usuario no existe, puedes proceder a crearlo
-        await Usuarioauxiliar.create({
-          iduser: idusuario,
-          fecha_entrada: fecha_entrada,
-          fecha_salida: fecha_salida,
-        });
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      // Puedes manejar el error de alguna manera aquí, como registrar el error o enviar una respuesta de error genérica.
-    }
-  }
-
+  if(!idusuario || !fecha_entrada || !fecha_salida) return res.status(400).send("Faltan datos para crear la preferencia");
+  console.log("idusuario en el postproductmp",idusuario);
   try {
     const body = {
+       external_reference: {idusuario:idusuario,fecha_entrada:fecha_entrada,fecha_salida:fecha_salida},
       items: [
         {
           title: req.body.title,
@@ -60,14 +30,8 @@ const CreatePreferenceMP = async (req, res) => {
         failure: `${process.env.URL_NGROK_TEMPORAL}/failure`,
         pending: `${process.env.URL_NGROK_TEMPORAL}/pending`,
       },
-      webhooks: [
-        {
-          url: `${process.env.URL_NGROK_TEMPORAL}/confirmaciondelpago`,
-        },
-      ],
-      auto_return: "approved",
+     notification_url: `${process.env.URL_NGROK_TEMPORAL}/confirmaciondelpago`,
     };
-
     const preference = new Preference(client);
     const result = await preference.create({ body });
     res.json({ id: result.id });
