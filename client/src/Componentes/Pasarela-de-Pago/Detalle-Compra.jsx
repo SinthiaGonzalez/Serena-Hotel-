@@ -47,7 +47,6 @@ const DetalledelaCompra = () => {
     setTimeout(() => {
       localStorage.removeItem("fecha_entrada");
       localStorage.removeItem("fecha_salida");
-      setFechas({ fechaEntrada: null, fechaSalida: null });
     }, 3000);
     setMostrarBotonLimpiar(false);
   };

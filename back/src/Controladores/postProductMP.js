@@ -4,7 +4,8 @@ const { MercadoPagoConfig, Preference } = require("mercadopago");
 
 const CreatePreferenceMP = async (req, res) => {
   const client = new MercadoPagoConfig({
-    accessToken: process.env.YOUR_ACCESS_TOKEN,
+    accessToken:
+      "APP_USR-7280768752766794-122809-ca1be86a4bec57c675e7d576e6313452-1611759187",
   });
   const idusuario = req.body.userId;
   const fecha_entrada = req.body.fecha_entrada;
