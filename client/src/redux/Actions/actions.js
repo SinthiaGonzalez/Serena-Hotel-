@@ -142,7 +142,7 @@ export function postUsuarioGoogle(data) {
   };
 }
 export function verificacionLogeoUsuarioAction(infoLogeo) {
-  //  console.log(infoLogeo);
+
 
   return async function (dispatch) {
     try {
@@ -735,7 +735,7 @@ export function getReservas_Admin(usuarioId) {
         confirmButtonColor: "#FB350C",
         iconColor: "#FB350C",
       });
-      // console.log("Error al solicitar las Reservas por Usuario:",error);
+      
     }
   };
 }
