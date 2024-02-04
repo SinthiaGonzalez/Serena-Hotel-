@@ -11,7 +11,7 @@ import {
   faLock,
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import Swal from "sweetalert2"; 
+import Swal from "sweetalert2";
 
 const UpdateUsuario = () => {
   const navigate = useNavigate();
@@ -39,7 +39,7 @@ const UpdateUsuario = () => {
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
     setErrors(
-    validation({...user, [e.target.name]: e.target.value})
+      validation({ ...user, [e.target.name]: e.target.value })
     );
   };
 
@@ -60,7 +60,7 @@ const UpdateUsuario = () => {
   const deleteImage = () => {
     setUser({ ...user, imagen: "" });
   };
- const handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (Object.keys(errors).length === 0) {
       dispatch(updateUsuario(user));
@@ -81,7 +81,7 @@ const UpdateUsuario = () => {
     }
   };
 
-  console.log("por acaaaaaaaaaaaaaaaaa",errors);
+  console.log("por acaaaaaaaaaaaaaaaaa", errors);
   const handleBlur = (fieldName) => {
     setTouchedFields({ ...touchedFields, [fieldName]: true });
 
@@ -105,7 +105,7 @@ const UpdateUsuario = () => {
       ...resetFields,
     });
   };
- 
+
   console.log(" a ver", usuarioData);
 
   const handleDefaultValues = () => {
@@ -134,14 +134,38 @@ const UpdateUsuario = () => {
   }, [usuarioData]);
 
   const handleEstadoChange = () => {
-    dispatch(cambiarEstadoUsuario(userId, "eliminar")),
-      localStorage.removeItem("token");
-    localStorage.removeItem("name");
-    localStorage.removeItem("imagen");
-    localStorage.removeItem("userId");
-    localStorage.removeItem("isAdmin");
-    navigate("/logearse");
-    // idSelect es el id del usuario
+    Swal.fire({
+      title: "Quieres eliminar tu usuario?",
+      showDenyButton: true,
+      confirmButtonText: "Eliminar",
+      denyButtonText: " No eliminar",
+      confirmButtonColor: "#FB350C",
+      denyButtonColor: "#322F2C",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        dispatch(cambiarEstadoUsuario(userId, "eliminar")),
+        localStorage.removeItem("token");
+        localStorage.removeItem("name");
+        localStorage.removeItem("imagen");
+        localStorage.removeItem("userId");
+        localStorage.removeItem("isAdmin");
+        navigate("/logearse");
+        // idSelect es el id del usuario
+        Swal.fire({
+          title: "Cambio de estado del usuario exitoso!",
+          icon: "success",
+          confirmButtonColor: "#FB350C",
+          iconColor: "#FB350C"
+        });
+      } else if (result.isDenied) {
+        Swal.fire({
+          title: "No se elimino la cuenta",
+          icon: "info",
+          confirmButtonColor: "#FB350C",
+          iconColor: "#FB350C"
+        });
+      }
+    });
   };
 
   const [showPassword, setShowPassword] = useState(false);
@@ -159,10 +183,10 @@ const UpdateUsuario = () => {
   return (
     <div
       className="flex items-center justify-center bg-cover bg-center text-white text-center p-8"
-      // style={{
-      //   backgroundImage:
-      //     'url("https://i.postimg.cc/3xxjwxft/selena-hotel-1.png")',
-      // }}
+    // style={{
+    //   backgroundImage:
+    //     'url("https://i.postimg.cc/3xxjwxft/selena-hotel-1.png")',
+    // }}
     >
       <div className="flex flex-col items-center justify-center bg-verde w-full lg:w-2/3 h-auto rounded-lg px-4 pt-4 pb-6">
         <p className="relative flex mt-4 mb-4 font-inter text-3xl antialiased leading-normal text-center font-bold text-blanco justify-center">
@@ -217,7 +241,7 @@ const UpdateUsuario = () => {
                   onBlur={handleBlur}
                 />
               </div>
-                 <p className="my-4 text-base text-center text-naranja">{errors.name}</p>
+              <p className="my-4 text-base text-center text-naranja">{errors.name}</p>
 
               <div className="flex flex-row h-11 bg-gris  relative rounded-lg mb-4">
                 <div className="items-center">
@@ -237,7 +261,7 @@ const UpdateUsuario = () => {
                   onBlur={handleBlur}
                 />
               </div>
-                 <p className="my-4 text-base text-center text-naranja">{errors.apellido}</p>
+              <p className="my-4 text-base text-center text-naranja">{errors.apellido}</p>
 
               <div className="flex flex-row h-11 bg-gris  relative rounded-lg mb-4">
                 <div className="items-center">
@@ -257,7 +281,7 @@ const UpdateUsuario = () => {
                   onBlur={handleBlur}
                 />
               </div>
-                 <p className="my-4 text-base text-center text-naranja">{errors.email}</p>
+              <p className="my-4 text-base text-center text-naranja">{errors.email}</p>
 
               <div className="flex flex-row h-11 bg-gris  relative rounded-lg mb-4">
                 <div className="items-center">
@@ -277,7 +301,7 @@ const UpdateUsuario = () => {
                   onBlur={handleBlur}
                 />
               </div>
-                 <p className="my-4 text-base text-center text-naranja">{errors.telefono}</p>
+              <p className="my-4 text-base text-center text-naranja">{errors.telefono}</p>
 
               <div className="flex flex-row h-11 bg-gris  relative rounded-lg mb-4">
                 <div className="items-center">
@@ -296,13 +320,13 @@ const UpdateUsuario = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
-              <button
-                className="absolute material-symbols-outlined text-blanco right-4 top-3 text-center opacity-40 hover:opacity-100 transition-opacity cursor-pointer"
-                onClick={handleTogglePassword}
-                type="button"
-              >
-                {showPassword ? "visibility_off" : "visibility"}
-              </button>
+                <button
+                  className="absolute material-symbols-outlined text-blanco right-4 top-3 text-center opacity-40 hover:opacity-100 transition-opacity cursor-pointer"
+                  onClick={handleTogglePassword}
+                  type="button"
+                >
+                  {showPassword ? "visibility_off" : "visibility"}
+                </button>
               </div>
               <p className="my-4 text-base text-center text-naranja">{errors.contraseña}</p>
 
@@ -322,13 +346,13 @@ const UpdateUsuario = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
-                              <button
-                className="absolute material-symbols-outlined text-blanco right-4 top-3 text-center opacity-40 hover:opacity-100 transition-opacity cursor-pointer"
-                onClick={handleToggleConfirmPassword}
-                type="button"
-              >
-                {showConfirmPassword ? "visibility_off" : "visibility"}
-              </button>
+                <button
+                  className="absolute material-symbols-outlined text-blanco right-4 top-3 text-center opacity-40 hover:opacity-100 transition-opacity cursor-pointer"
+                  onClick={handleToggleConfirmPassword}
+                  type="button"
+                >
+                  {showConfirmPassword ? "visibility_off" : "visibility"}
+                </button>
               </div>
               <p className="my-4 text-base text-center text-naranja">{errors.confirmarContraseña}</p>
             </label>
